@@ -1,8 +1,8 @@
-package lt.tieto.angular_spring_rest_demo.item.repository;
+package lt.tieto.msi2016.item.repository;
 
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
-import lt.tieto.angular_spring_rest_demo.utils.repository.BaseRepository;
-import lt.tieto.angular_spring_rest_demo.item.repository.model.ItemDb;
+import lt.tieto.msi2016.utils.repository.BaseRepository;
+import lt.tieto.msi2016.item.repository.model.ItemDb;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 

@@ -116,6 +116,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: username
+            indexName: idx_authorities_username
             tableName: authorities
 
   - changeSet:

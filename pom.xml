@@ -19,7 +19,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <spring.data.jdbc.repository>0.5.0</spring.data.jdbc.repository>
-        <h2.version>1.4.192</h2.version>
+        <mysql-connector-java.version>5.1.38</mysql-connector-java.version>
         <spring.oauth.version>2.0.10.RELEASE</spring.oauth.version>
     </properties>
 
@@ -130,9 +130,10 @@
             <artifactId>liquibase-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+            <version>${mysql-connector-java.version}</version>
         </dependency>
     </dependencies>
 

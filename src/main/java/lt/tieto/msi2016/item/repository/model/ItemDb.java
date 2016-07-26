@@ -1,6 +1,6 @@
-package lt.tieto.angular_spring_rest_demo.item.repository.model;
+package lt.tieto.msi2016.item.repository.model;
 
-import lt.tieto.angular_spring_rest_demo.utils.repository.model.DbModel;
+import lt.tieto.msi2016.utils.repository.model.DbModel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class ItemDb extends DbModel {

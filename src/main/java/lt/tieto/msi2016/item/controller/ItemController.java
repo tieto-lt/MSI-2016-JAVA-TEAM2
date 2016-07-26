@@ -1,11 +1,11 @@
-package lt.tieto.angular_spring_rest_demo.item.controller;
+package lt.tieto.msi2016.item.controller;
 
 import javax.validation.Valid;
 import java.util.List;
 
-import lt.tieto.angular_spring_rest_demo.utils.controller.BaseController;
-import lt.tieto.angular_spring_rest_demo.item.model.Item;
-import lt.tieto.angular_spring_rest_demo.item.service.ItemService;
+import lt.tieto.msi2016.utils.controller.BaseController;
+import lt.tieto.msi2016.item.model.Item;
+import lt.tieto.msi2016.item.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

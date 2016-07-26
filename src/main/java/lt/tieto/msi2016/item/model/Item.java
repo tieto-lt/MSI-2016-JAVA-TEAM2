@@ -1,4 +1,4 @@
-package lt.tieto.angular_spring_rest_demo.item.model;
+package lt.tieto.msi2016.item.model;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

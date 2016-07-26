@@ -1,12 +1,12 @@
-package lt.tieto.angular_spring_rest_demo.item.service;
+package lt.tieto.msi2016.item.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lt.tieto.angular_spring_rest_demo.utils.exception.DataNotFoundException;
-import lt.tieto.angular_spring_rest_demo.item.model.Item;
-import lt.tieto.angular_spring_rest_demo.item.repository.ItemRepository;
-import lt.tieto.angular_spring_rest_demo.item.repository.model.ItemDb;
+import lt.tieto.msi2016.utils.exception.DataNotFoundException;
+import lt.tieto.msi2016.item.model.Item;
+import lt.tieto.msi2016.item.repository.ItemRepository;
+import lt.tieto.msi2016.item.repository.model.ItemDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,9 +1,9 @@
-package lt.tieto.angular_spring_rest_demo.utils.controller;
+package lt.tieto.msi2016.utils.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lt.tieto.angular_spring_rest_demo.utils.exception.DataNotFoundException;
+import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

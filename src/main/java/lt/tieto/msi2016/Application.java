@@ -1,4 +1,4 @@
-package lt.tieto.angular_spring_rest_demo;
+package lt.tieto.msi2016;
 
 
 import org.springframework.boot.SpringApplication;

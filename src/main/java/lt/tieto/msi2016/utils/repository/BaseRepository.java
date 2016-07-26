@@ -1,4 +1,4 @@
-package lt.tieto.angular_spring_rest_demo.utils.repository;
+package lt.tieto.msi2016.utils.repository;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.nurkiewicz.jdbcrepository.JdbcRepository;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
-import lt.tieto.angular_spring_rest_demo.utils.repository.model.DbModel;
+import lt.tieto.msi2016.utils.repository.model.DbModel;
 import org.springframework.jdbc.core.RowMapper;
 
 public abstract class BaseRepository<E extends DbModel> extends JdbcRepository<E, Long> {
