@@ -10,9 +10,9 @@
     </parent>
 
     <groupId>lt.tieto</groupId>
-    <artifactId>angular-spring-rest-demo</artifactId>
+    <artifactId>msi2016</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>
@@ -24,7 +24,7 @@
     </properties>
 
     <build>
-        <finalName>angular-spring-rest-demo</finalName>
+        <finalName>msi2016</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
