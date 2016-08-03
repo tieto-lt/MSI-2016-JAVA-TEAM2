@@ -18,7 +18,7 @@ public class CreateUserController extends BaseController {
     @Resource
     private UserService userServiceImpl;
 
-    @RequestMapping( method = RequestMethod.POST, consumes = accepts)
+    @RequestMapping(path = "/users", method = RequestMethod.POST, consumes = accepts)
     public void createUser(final User user) {
         userServiceImpl.createUser(user);
     }
