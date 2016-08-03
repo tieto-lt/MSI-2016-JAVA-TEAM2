@@ -18,7 +18,7 @@ public class User {
     private String name;
 
     @NotNull
-    @Pattern(regexp="\\*@\\*")
+    @Pattern(regexp="\\*@\\*.\\*")
     private String email;
 
     @NotNull
