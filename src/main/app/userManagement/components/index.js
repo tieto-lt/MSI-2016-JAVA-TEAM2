@@ -1,0 +1,1 @@
+require('newUser/newUser-component');
