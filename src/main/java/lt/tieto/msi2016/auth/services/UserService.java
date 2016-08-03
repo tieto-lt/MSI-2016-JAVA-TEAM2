@@ -1,7 +1,16 @@
 package lt.tieto.msi2016.auth.services;
 
-/**
- * Created by localadmin on 16.8.3.
- */
+
+import lt.tieto.msi2016.auth.model.User;
+
 public interface UserService {
+
+    /**
+     * Creates user entry in database from {@param user}
+     *
+     * @param user
+     */
+   void createUser(User user);
+
+
 }
