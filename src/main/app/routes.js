@@ -37,9 +37,12 @@ module.config(function($stateProvider, $urlRouterProvider) {
       url: "/items/:id",
       template: "<item-details></item-details>"
     })
-    .state('root.RegistrationForm', {
-      url: "/RegistrationForm",
-      template: "<registration-form></registration-form>"
+    .state('root.newUser', {
+      url: "/newUser",
+      template: "<new-user></new-user>",
+      data: {
+        isPublic: true
+      }
     });
 });
 

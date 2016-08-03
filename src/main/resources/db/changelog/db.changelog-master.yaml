@@ -83,14 +83,29 @@ databaseChangeLog:
                   name: username
                   type: varchar(45)
                   constraints:
-                    primaryKey: true
                     nullable: false
+                    unique: true
               - column:
                   name: password
                   type: varchar(60)
               - column:
                   name: enabled
                   type: boolean
+              - column:
+                 name: id
+                 type: int
+                 autoIncrement: true
+                 constraints:
+                   primaryKey: true
+              - column:
+                 name: name
+                 type: varchar(90)
+              - column:
+                 name: email
+                 type: varchar(255)
+              - column:
+                 name: phone
+                 type: varchar(60)
 
   - changeSet:
       id: 5

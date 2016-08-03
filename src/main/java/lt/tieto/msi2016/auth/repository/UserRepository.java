@@ -18,11 +18,12 @@ public class UserRepository extends BaseRepository<UserDb> {
     private JdbcTemplate jdbcTemplate;
 
     public UserRepository() {
-        super(ROW_MAPPER, ROW_UNMAPPER, "users", "username");
+        super(ROW_MAPPER, ROW_UNMAPPER, "users", "id");
     }
 
     private static final RowMapper<UserDb> ROW_MAPPER = (rs, rowNum) -> {
         UserDb user = new UserDb();
+        user.setId(rs.getLong("id"));
         user.setUserName(rs.getString("username"));
         user.setPassword(rs.getString("password"));
         user.setName(rs.getString("name"));
@@ -36,7 +37,8 @@ public class UserRepository extends BaseRepository<UserDb> {
             "password", userDb.getPassword(),
             "name", userDb.getName(),
             "email", userDb.getEmail(),
-            "phone", userDb.getPhone()
+            "phone", userDb.getPhone(),
+            "id", userDb.getId()
     );
 
     public boolean exists(String username) {
