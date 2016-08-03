@@ -149,6 +149,9 @@ databaseChangeLog:
       id: 7
       author: tieto
       changes:
+         - dropForeignKeyConstraint:
+            baseTableName: authorities
+            constraintName: fk_username_auth
          - dropColumn:
             columnName: username
             tableName: authorities
