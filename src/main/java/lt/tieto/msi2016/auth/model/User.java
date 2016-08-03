@@ -8,6 +8,8 @@ public class User {
 
     private Long id;
 
+    @NotNull
+    @Size(min=6)
     private String userName;
 
     @NotNull
