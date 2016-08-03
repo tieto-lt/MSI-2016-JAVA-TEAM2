@@ -1,18 +1,25 @@
 package lt.tieto.msi2016.auth.model;
 
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class CreateUser {
 
+    @NotNull
     private String userName;
 
+    @NotNull
     private String password;
 
-    private String confirmPassword;
-
+    @NotNull
     private String name;
 
+    @NotNull
+    @Pattern(regexp="\\*@\\*")
     private String email;
 
+    @NotNull
     private String phone;
 
     public String getUserName() {
@@ -29,14 +36,6 @@ public class CreateUser {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
     public String getName() {
