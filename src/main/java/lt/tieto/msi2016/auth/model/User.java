@@ -1,13 +1,11 @@
 package lt.tieto.msi2016.auth.model;
 
 
-public class CreateUser {
+public class User {
 
     private String userName;
 
     private String password;
-
-    private String confirmPassword;
 
     private String name;
 
@@ -29,14 +27,6 @@ public class CreateUser {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
     public String getName() {
