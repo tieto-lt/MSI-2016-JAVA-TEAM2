@@ -1,9 +1,10 @@
-package lt.tieto.msi2016.auth.model;
+package lt.tieto.msi2016.auth.repository.model;
 
+import lt.tieto.msi2016.utils.repository.model.DbModel;
 
-public class User {
+public class UserDb extends DbModel{
 
-    private Long id;
+    private Long user;
 
     private String userName;
 
@@ -54,4 +55,6 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+
 }
