@@ -8,11 +8,8 @@
 
 <div class="container">
     <h3>Registration form</h3>
-    <logout></logout>
     <div class="msi-content" ui-view ng-cloak></div>
 </div>
-
-
 
 <div class="form-group row">
   <label for="example-text-input" class="col-xs-2 col-form-label">Username</label>
@@ -54,23 +51,6 @@
 <div class="form-group row">
 <button type="button" class="btn btn-secondary">Register</button>
 </div>
-
-<script>
-  angular.module('formExample', [])
-    .controller('ExampleController', ['$scope', function($scope) {
-      $scope.master = {};
-
-      $scope.update = function(user) {
-        $scope.master = angular.copy(user);
-      };
-
-      $scope.reset = function() {
-        $scope.user = angular.copy($scope.master);
-      };
-
-      $scope.reset();
-    }]);
-</script>
 
 
 </body>
