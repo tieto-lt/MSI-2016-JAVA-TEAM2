@@ -12,5 +12,13 @@ public interface UserService {
      */
    void createUser(User user);
 
+    /**
+     * Inserts username and authority to table authorities
+     *
+     * @param user
+     * @param authority
+     */
+    void insertUserAuthority(String user,String authority);
+
 
 }

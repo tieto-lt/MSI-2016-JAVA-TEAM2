@@ -13,6 +13,8 @@ public class UserDb extends DbModel{
 
     private String email;
 
+    private Integer enabled;
+
     private String phone;
 
     public static UserDb valueOf(User user){
@@ -66,5 +68,11 @@ public class UserDb extends DbModel{
         this.phone = phone;
     }
 
+    public Integer getEnabled() {
+        return enabled;
+    }
 
+    public void setEnabled(Integer enabled) {
+        this.enabled = enabled;
+    }
 }

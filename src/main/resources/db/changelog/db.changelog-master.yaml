@@ -122,6 +122,7 @@ databaseChangeLog:
                   type: varchar(45)
 
         - addForeignKeyConstraint:
+            onDelete: CASCADE
             baseColumnNames: username
             baseTableName: authorities
             constraintName: fk_username_auth

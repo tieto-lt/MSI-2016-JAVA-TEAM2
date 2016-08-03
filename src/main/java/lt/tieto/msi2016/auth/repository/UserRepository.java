@@ -38,11 +38,12 @@ public class UserRepository extends BaseRepository<UserDb> {
             "name", userDb.getName(),
             "email", userDb.getEmail(),
             "phone", userDb.getPhone(),
-            "id", userDb.getId()
+            "id", userDb.getId(),
+            "enabled",userDb.getEnabled()
     );
 
     public boolean exists(String username) {
-        List<Map<String, Object>> result = jdbcTemplate.queryForList("select id from users where username = :username", username);
+        List<Map<String, Object>> result = jdbcTemplate.queryForList("select id from users where username = ?", username);
         return !result.isEmpty();
     }
 
