@@ -35,13 +35,13 @@
 <div class="form-group row">
   <label for="example-password-input" class="col-xs-2 col-form-label">Confirm password</label>
   <div class="col-xs-10">
-    <input class="form-control" type="confirmPassword"  name="confirmPassword" ng-model="confirmPassword">
+    <input class="form-control" type="password"  name="confirmPassword" ng-model="confirmPassword">
   </div>
 </div>
 <div class="form-group row">
   <label for="example-email-input" class="col-xs-2 col-form-label">Name</label>
   <div class="col-xs-10">
-    <input class="form-control" type="name"  name="name" ng-model="name">
+    <input class="form-control" type="text"  name="name" ng-model="name">
   </div>
 </div>
 <!-- Reikia issiaisinti, ar reikalingas 'surname'??? -->
@@ -54,16 +54,19 @@
 <div class="form-group row">
   <label for="example-email-input" class="col-xs-2 col-form-label">Email</label>
   <div class="col-xs-10">
-    <input class="form-control" type="email"  type="email"  name="email" ng-model="email">
+    <input class="form-control" type="text"  type="email"  name="email" ng-model="email">
   </div>
 </div>
 <div class="form-group row">
   <label for="example-tel-input" class="col-xs-2 col-form-label">Phone</label>
   <div class="col-xs-10">
-    <input class="form-control" type="tel"  type="phone"  name="phone" ng-model="phone">
+    <input class="form-control" type="text"  type="phone"  name="phone" ng-model="phone">
   </div>
 </div>
 
 <div class="form-group row">
-<button type="button" class="btn btn-secondary">Register</button>
+<button type="submit" class="btn btn-warning" ng-click="$ctrl.createNewUser()">Register</button>
+<button type="button" class="btn btn-default" ng-click="$ctrl.logout()">Go back to login form</button>
+
+
 </div>

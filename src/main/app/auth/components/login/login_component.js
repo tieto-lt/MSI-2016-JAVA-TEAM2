@@ -22,6 +22,7 @@ function Controller($state, AuthService) {
 
     function createNewUser() {
         console.log("create new user");
+        
     }
 
 }

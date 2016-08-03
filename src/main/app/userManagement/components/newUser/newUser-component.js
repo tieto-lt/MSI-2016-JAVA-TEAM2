@@ -1,22 +1,20 @@
 var module = require('main_module');
 
-function Controller($state, $stateParams, ItemService) {
+function Controller($state) {
   var vm = this;
+
   vm.username = undefined;
   vm.password = undefined;
+  vm.name = undefined;
+  vm.email = undefined;
+  vm.phone = undefined;
 
-  vm.login = login;
-  vm.error = undefined;
+  function createNewUser() {
+      console.log("register!");
+  }
 
-  function login() {
-      AuthService.login(vm.username, vm.password).then(
-          function (response) {
-              vm.error = undefined;
-              $state.go('root.itemList');
-          },
-          function (err) {
-              vm.error = err.data.error_description;
-          });
+  function logout() {
+      $state.go('root.Login');
   }
 
 }
