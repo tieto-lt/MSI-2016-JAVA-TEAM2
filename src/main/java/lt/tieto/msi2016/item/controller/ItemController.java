@@ -26,6 +26,7 @@ public class ItemController extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/api/items")
     public List<Item> all() {
+        System.out.println("hello  sdsdsd world 2");
         return service.all();
     }
 

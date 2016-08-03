@@ -1,6 +1,7 @@
 package lt.tieto.msi2016.auth.model;
 
 
+public class User {
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
