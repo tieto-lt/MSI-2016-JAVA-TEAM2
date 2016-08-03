@@ -3,14 +3,24 @@ var module = require('main_module');
 function Controller($state) {
   var vm = this;
 
-  vm.username = undefined;
-  vm.password = undefined;
-  vm.name = undefined;
-  vm.email = undefined;
-  vm.phone = undefined;
+  vm.user = {};
 
-  function createNewUser() {
-      console.log("register!");
+  cm.createUser = createUser;
+  vm.errors = [];
+
+  function createUser() {
+    UserServiceImpl.create(vm.user).then(
+        function () {
+            $state.go('root.Login');
+        },
+        function (err) {
+            if (err.status === 400) {
+                vm.errors = err.data;
+            } else {
+                console.log('Error', err);
+            }
+        }
+    );
   }
 
   function logout() {
@@ -19,6 +29,7 @@ function Controller($state) {
 
 }
 
+Controller.$inject = ['$state', 'UserServiceImpl'];
 module.component('newUser', {
     controller: Controller,
     templateUrl: require('./newUser.html')
