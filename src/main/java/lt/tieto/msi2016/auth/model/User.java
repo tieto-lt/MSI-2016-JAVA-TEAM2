@@ -1,16 +1,16 @@
 package lt.tieto.msi2016.auth.model;
 
-
-public class User {
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-public class CreateUser {
+public class User {
 
     @NotNull
     private String userName;
 
     @NotNull
+    @Size(min=6)
     private String password;
 
     @NotNull
@@ -21,6 +21,7 @@ public class CreateUser {
     private String email;
 
     @NotNull
+    @Size(min=7)
     private String phone;
 
     public String getUserName() {
