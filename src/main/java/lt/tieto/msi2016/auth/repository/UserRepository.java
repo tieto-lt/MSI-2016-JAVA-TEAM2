@@ -18,7 +18,7 @@ public class UserRepository extends BaseRepository<UserDb> {
     private JdbcTemplate jdbcTemplate;
 
     public UserRepository() {
-        super(ROW_MAPPER, ROW_UNMAPPER, "users", "username");
+        super(ROW_MAPPER, ROW_UNMAPPER, "users", "id");
     }
 
     private static final RowMapper<UserDb> ROW_MAPPER = (rs, rowNum) -> {
