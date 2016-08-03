@@ -23,4 +23,10 @@ public class UserServiceImpl implements UserService {
         userRepository.create(UserDb.valueOf(user));
     }
 
+    public void checkUsername (User user)
+    {
+        //userRepository.
+
+
+    }
 }
