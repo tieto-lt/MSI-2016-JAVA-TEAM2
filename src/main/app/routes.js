@@ -43,6 +43,27 @@ module.config(function($stateProvider, $urlRouterProvider) {
       data: {
         isPublic: true
       }
+    })
+    .state('root.customerPage', {
+      url: "/customerPage",
+      template: "<customer-page></customer-page>",
+      data: {
+        isPublic: true
+      }
+    })
+    .state('root.accountInformation', {
+      url: "/accountInformation",
+      template: "<account-information></account-information>",
+      data: {
+        isPublic: true
+      }
+    })
+    .state('root.operatorPage', {
+      url: "/operatorPage",
+      template: "<operator-page></operator-page>",
+      data: {
+        isPublic: true
+      }
     });
 });
 
