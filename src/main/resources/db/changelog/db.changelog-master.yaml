@@ -83,14 +83,29 @@ databaseChangeLog:
                   name: username
                   type: varchar(45)
                   constraints:
-                    primaryKey: true
                     nullable: false
+                    unique: true
               - column:
                   name: password
                   type: varchar(60)
               - column:
                   name: enabled
                   type: boolean
+              - column:
+                 name: id
+                 type: int
+                 autoIncrement: true
+                 constraints:
+                   primaryKey: true
+              - column:
+                 name: name
+                 type: varchar(90)
+              - column:
+                 name: email
+                 type: varchar(255)
+              - column:
+                 name: phone
+                 type: varchar(60)
 
   - changeSet:
       id: 5
@@ -144,59 +159,3 @@ databaseChangeLog:
                 name: authority
                 value: 'ADMIN'
             tableName: authorities
-
-  - changeSet:
-      id: 7
-      author: tieto
-      changes:
-         - dropForeignKeyConstraint:
-            baseTableName: authorities
-            constraintName: fk_username_auth
-         - dropColumn:
-            columnName: username
-            tableName: authorities
-         - addColumn:
-            columns:
-            - column:
-               name: userId
-               type: int
-            tableName: authorities
-         - addColumn:
-               columns:
-               - column:
-                   name: id
-                   type: int
-               - column:
-                   name: name
-                   type: varchar(90)
-               - column:
-                   name: email
-                   type: varchar(255)
-               - column:
-                   name: phone
-                   type: varchar(60)
-               tableName: users
-         - dropPrimaryKey:
-                tableName: users
-         - update:
-               columns:
-               - column:
-                   name: id
-                   value: 1
-               tableName: users
-               where: upper(username) like upper('admin')
-         - addPrimaryKey:
-                columnNames: id
-                constraintName: pk_users
-                tableName: users
-         - addAutoIncrement:
-                columnDataType: int
-                columnName: id
-                incrementBy: 1
-                tableName: users
-         - addForeignKeyConstraint:
-                baseColumnNames: userId
-                baseTableName: authorities
-                constraintName: fk_user_auth
-                referencedColumnNames: id
-                referencedTableName: users
