@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
-public class CreateUserController extends BaseController {
+public class UserController extends BaseController {
 
     private final String accepts = "application/json";
 

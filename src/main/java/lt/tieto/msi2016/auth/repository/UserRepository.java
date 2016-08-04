@@ -4,6 +4,7 @@ import com.nurkiewicz.jdbcrepository.RowUnmapper;
 import lt.tieto.msi2016.auth.repository.model.UserDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -45,6 +46,21 @@ public class UserRepository extends BaseRepository<UserDb> {
     public boolean exists(String username) {
         List<Map<String, Object>> result = jdbcTemplate.queryForList("select id from users where username = ?", username);
         return !result.isEmpty();
+    }
+
+    /**
+     * Inserts username and authority to table authorities
+     *
+     * @param userName
+     * @param authority
+     */
+    public void insertUserAuthority(String userName, String authority) {
+        try {
+            jdbcTemplate.queryForMap("select username from authorities where username = ?", userName).isEmpty();
+            jdbcTemplate.update("UPDATE authorities set authority = ? where username = ?", authority,userName);
+        } catch (EmptyResultDataAccessException e) {
+            jdbcTemplate.update("INSERT INTO authorities (username,authority) values(?,?)", userName,authority);
+        }
     }
 
 

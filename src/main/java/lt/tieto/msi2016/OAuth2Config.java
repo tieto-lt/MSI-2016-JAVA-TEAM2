@@ -69,7 +69,7 @@ public class OAuth2Config implements AuthorizationServerConfigurer, ResourceServ
     public void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http.authorizeRequests()
-                .antMatchers("/api/users").permitAll()
+                .antMatchers("/api/users/").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated();
