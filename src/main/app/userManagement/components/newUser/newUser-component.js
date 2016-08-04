@@ -37,6 +37,7 @@ function Controller($state, UserServiceImpl) {
   vm.customValidate = customValidate;
 
   function customValidate() {
+
       return true;
   }
 
