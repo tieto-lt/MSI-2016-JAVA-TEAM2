@@ -42,10 +42,17 @@ public class UserServiceImpl implements UserService {
         return User.valueOf(userRepository.findOne(id));
     }
 
-    public void checkUsername (User user)
+    public boolean checkUsername (String userName)
     {
-        //userRepository.
-
+        User user = getUserByUserName(userName);
+        if (user==null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
     }
 

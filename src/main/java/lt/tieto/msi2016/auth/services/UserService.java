@@ -26,4 +26,8 @@ public interface UserService {
     Collection<User> all();
 
     User getUserByUserName(String userName);
+
+    boolean checkUsername (String userName);
+
+
 }

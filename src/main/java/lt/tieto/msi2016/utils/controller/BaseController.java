@@ -1,9 +1,7 @@
 package lt.tieto.msi2016.utils.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import lt.tieto.msi2016.utils.exception.DataNotFoundException;
+import lt.tieto.msi2016.utils.exception.FieldValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,6 +11,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BaseController {
 
@@ -41,6 +42,13 @@ public class BaseController {
                      .collect(Collectors.toList());
     }
 
+    @ExceptionHandler(FieldValidationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public FieldValidationError processFieldValidationExeption(FieldValidationException ex) {
+        return new FieldValidationError(ex.getFieldName(),ex.getErrorMessage());
+    }
+
     public static class FieldValidationError {
         private String name;
         private String message;
@@ -59,5 +67,6 @@ public class BaseController {
             return message;
         }
     }
+
 
 }
