@@ -1,17 +1,20 @@
 var module = require('main_module');
 
-function Controller($state) {
+function Controller($state, UserServiceImpl) {
   var vm = this;
 
   vm.user = {};
 
-  cm.createUser = createUser;
+  vm.create = create;
+  vm.logout = logout;
   vm.errors = [];
 
-  function createUser() {
+  function create() {
+    console.log("creating new user");
     UserServiceImpl.create(vm.user).then(
         function () {
-            $state.go('root.Login');
+            console.log(vm.user.userName);
+            $state.go('root.Login', { username: vm.user.userName});
         },
         function (err) {
             if (err.status === 400) {
@@ -25,7 +28,9 @@ function Controller($state) {
 
 
   function logout() {
-      $state.go('root.Login');
+      console.log("loggin out");
+      $state.go('root.Login', { username: vm.user.userName});
+
   }
 
 }

@@ -4,15 +4,17 @@ package lt.tieto.msi2016.auth.services;
 import lt.tieto.msi2016.auth.model.User;
 import lt.tieto.msi2016.auth.repository.UserRepository;
 import lt.tieto.msi2016.auth.repository.model.UserDb;
-import static lt.tieto.msi2016.utils.constants.Authorities.*;
+import static lt.tieto.msi2016.utils.constants.Roles.*;
 
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
+import lt.tieto.msi2016.item.service.ItemService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -21,33 +23,24 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Resource
     private BCryptPasswordEncoder encoder;
-    @Resource
-    private JdbcTemplate jdbcTemplate;
 
     /**
      *{@inheritDoc}
      */
     @Transactional
     @Override
-    public void createUser(final User user) {
+    public User createUser(final User user) {
         UserDb userDb = UserDb.valueOf(user);
         userDb.setPassword(encoder.encode(userDb.getPassword()));
         userDb.setEnabled(1);
         userRepository.create(userDb);
-        insertUserAuthority(user.getUserName(),ADMIN.toString());
+        userRepository.insertUserAuthority(user.getUserName(),CUSTOMER);
+        return User.valueOf(userRepository.findByUserName(user.getUserName()));
     }
 
-    /**
-     *{@inheritDoc}
-     */
     @Override
-    public void insertUserAuthority(String userName, String authority) {
-        try {
-            jdbcTemplate.queryForMap("select username from authorities where username = ?", userName).isEmpty();
-            jdbcTemplate.update("UPDATE authorities set authority = ? where username = ?", authority,userName);
-        } catch (EmptyResultDataAccessException e) {
-            jdbcTemplate.update("INSERT INTO authorities (username,authority) values(?,?)", userName,authority);
-        }
+    public User getUserInfo(Long id) {
+        return User.valueOf(userRepository.findOne(id));
     }
 
     public void checkUsername (User user)
@@ -55,5 +48,10 @@ public class UserServiceImpl implements UserService {
         //userRepository.
 
 
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<User> all() {
+        return userRepository.findAll().stream().map(User::valueOf).collect(Collectors.toList());
     }
 }
