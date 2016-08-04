@@ -1,35 +1,52 @@
 package lt.tieto.msi2016.auth.controllers;
 
+
 import lt.tieto.msi2016.auth.model.User;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import lt.tieto.msi2016.auth.services.UserService;
 
-import java.util.Arrays;
-import java.util.List;
+import static lt.tieto.msi2016.utils.constants.Roles.*;
 
-/**
- * Created by it9 on 16.8.4.
- */
+import lt.tieto.msi2016.utils.controller.BaseController;
+import lt.tieto.msi2016.utils.services.SecurityHolder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.util.Collection;
+
 @RestController
-public class UserController {
-    static final List<User> USERS_LIST = Arrays.asList(
-            new User(1l,"Petriukas","Petras","petras@one.lt","+3705463544"),
-            new User(1l,"Petriukas1","Petras1","petras1@one.lt","+3705463541"),
-            new User(1l,"Petriukas2","Petras2","petras2@one.lt","+3705463542")
-    );
+public class UserController extends BaseController {
 
-  /*  @RequestMapping(method = RequestMethod.GET, path = "/api/items/{id}")
-    public User get(@PathVariable Long id) {
-        return USERS_LIST.stream()
-                .filter(i -> i.getId().equals(id))
-                .findFirst()
-                .orElse(null);
-    }*/
+    private final String accepts = "application/json";
 
-    @RequestMapping(method = RequestMethod.GET, path = "/userList")
-    public List<User> users() {
-        return USERS_LIST;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private SecurityHolder securityHolder;
+
+    @RequestMapping(value = "/api/users", method = RequestMethod.POST, consumes = accepts)
+    public User createUser(@RequestBody final User user) {
+        return userService.createUser(user);
     }
+
+    @RequestMapping(value = "/api/users", method = RequestMethod.GET)
+    public Collection<User> getUsers() {
+        return userService.all();
+    }
+
+    @RequestMapping(value = "/api/users/{id}", method = RequestMethod.GET)
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
+        if (canAccessInfo(id)) {
+            return ResponseEntity.ok(userService.getUserInfo(id));
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+        }
+    }
+
+    private boolean canAccessInfo(Long id) {
+        return securityHolder.getUserPrincipal().getUsername() == userService.getUserInfo(id).getUserName() || securityHolder.getUserPrincipal().getAuthorities().stream().filter(grantedAuthority -> grantedAuthority.getAuthority().equals(ADMIN)) != null;
+    }
+
 }

@@ -3,7 +3,7 @@ var module = require('main_module');
 function Service($http, $q) {
 
   this.get = function(id) {
-    return $http.get('/userList').then(
+    return $http.get('/api/users').then(
       function(response) {
         return response.data.filter(function(user) {
           return user.id === id;
@@ -13,7 +13,7 @@ function Service($http, $q) {
   };
 
   this.all = function() {
-    return $http.get('/userList');
+    return $http.get('/api/users');
   };
 
   this.update = function(user) {

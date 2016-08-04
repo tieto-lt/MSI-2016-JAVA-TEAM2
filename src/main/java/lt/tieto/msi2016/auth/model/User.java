@@ -1,5 +1,7 @@
 package lt.tieto.msi2016.auth.model;
 
+import lt.tieto.msi2016.auth.repository.model.UserDb;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -27,15 +29,14 @@ public class User {
     @Size(min=7)
     private String phone;
 
-    public User() {
-    }
-
-    public User(Long id, String username, String name, String email, String phone) {
-        this.id = id;
-        this.name = name;
-        this.userName=username;
-        this.email=email;
-        this.phone=phone;
+    public static User valueOf(UserDb userDb){
+        User user = new User();
+        user.setId(userDb.getId());
+        user.setUserName(userDb.getUserName());
+        user.setName(userDb.getName());
+        user.setEmail(userDb.getEmail());
+        user.setPhone(userDb.getPhone());
+        return user;
     }
 
     public String getUserName() {

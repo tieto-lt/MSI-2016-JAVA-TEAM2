@@ -23,6 +23,9 @@ module.config(function($stateProvider, $urlRouterProvider) {
       template: "<login></login>",
       data: {
         isPublic: true
+      },
+      params: {
+        username: undefined
       }
     })
     .state('root.itemList', {
