@@ -72,7 +72,6 @@ public class UserServiceImpl implements UserService {
         UserDb userDb = userRepository.findOne(user.getId());
         userDb.setUserName(user.getUserName());
         userDb.setEmail(user.getEmail());
-        userDb.setPassword(user.getPassword());
         userDb.setPhone(user.getPhone());
         userDb.setName(user.getName());
         User updatedUser = User.valueOf(userRepository.save(userDb));
