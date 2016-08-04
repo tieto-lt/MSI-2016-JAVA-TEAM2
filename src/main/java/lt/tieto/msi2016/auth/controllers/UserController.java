@@ -59,7 +59,8 @@ public class UserController extends BaseController {
 
 
     @RequestMapping(value = "/api/users/{id}", method = RequestMethod.PUT,consumes = accepts)
-    public User getUsers(@RequestBody final User user,@PathVariable Long id) {
+    public User updateUser(@RequestBody final User user,@PathVariable Long id) {
+        userService.updateUserInfo(user);
         return user;
     }
 
