@@ -29,6 +29,8 @@ public class User {
     @Size(min=7)
     private String phone;
 
+    private String userRole;
+
     public static User valueOf(UserDb userDb){
         User user = new User();
         user.setId(userDb.getId());
@@ -85,5 +87,13 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 }

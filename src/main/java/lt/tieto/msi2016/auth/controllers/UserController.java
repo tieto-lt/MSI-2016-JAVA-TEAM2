@@ -32,7 +32,8 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/api/users", method = RequestMethod.GET)
     public Collection<User> getUsers() {
-        return userService.all();
+            return userService.all();
+
     }
 
     @RequestMapping(value = "/api/users/{id}", method = RequestMethod.GET)
@@ -46,12 +47,17 @@ public class UserController extends BaseController {
 
 
     @RequestMapping(value = "/api/users/{id}", method = RequestMethod.PUT,consumes = accepts)
-    public User getUsers(@RequestBody final User user,@PathVariable Long id) {
+    public User updateUser(@RequestBody final User user,@PathVariable Long id) {
+        userService.updateUserInfo(user);
         return user;
     }
 
     private boolean canAccessInfo(Long id) {
-        return securityHolder.getUserPrincipal().getUsername().equals(userService.getUserInfo(id).getUserName()) || !securityHolder.getUserPrincipal().getAuthorities().stream().filter(grantedAuthority -> grantedAuthority.getAuthority().equals(ADMIN)).collect(Collectors.toList()).isEmpty();
+        return securityHolder.getUserPrincipal().getUsername().equals(userService.getUserInfo(id).getUserName()) || isUserAdmin();
     }
 
+    private boolean isUserAdmin ()
+    {
+        return !securityHolder.getUserPrincipal().getAuthorities().stream().filter(grantedAuthority -> grantedAuthority.getAuthority().equals(ADMIN)).collect(Collectors.toList()).isEmpty();
+    }
 }
