@@ -10,11 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.stream.Collectors;
 
 import static lt.tieto.msi2016.utils.constants.Roles.ADMIN;
-import javax.annotation.Resource;
-import java.util.Collection;
 
 @RestController
 public class UserController extends BaseController {
@@ -43,6 +42,12 @@ public class UserController extends BaseController {
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
         }
+    }
+
+
+    @RequestMapping(value = "/api/users/{id}", method = RequestMethod.PUT,consumes = accepts)
+    public User getUsers(@RequestBody final User user,@PathVariable Long id) {
+        return user;
     }
 
     private boolean canAccessInfo(Long id) {
