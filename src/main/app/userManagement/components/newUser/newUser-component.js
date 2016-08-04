@@ -5,7 +5,7 @@ function Controller($state) {
 
   vm.user = {};
 
-  cm.createUser = createUser;
+  vm.createUser = createUser;
   vm.errors = [];
 
   function createUser() {
