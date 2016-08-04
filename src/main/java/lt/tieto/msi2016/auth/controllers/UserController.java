@@ -8,6 +8,7 @@ import lt.tieto.msi2016.utils.services.SecurityHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -30,6 +31,7 @@ public class UserController extends BaseController {
         return userService.createUser(user);
     }
 
+    @Secured(ADMIN)
     @RequestMapping(value = "/api/users", method = RequestMethod.GET)
     public Collection<User> getUsers() {
             return userService.all();
