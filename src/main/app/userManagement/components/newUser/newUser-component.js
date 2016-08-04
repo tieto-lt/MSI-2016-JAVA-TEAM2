@@ -13,8 +13,8 @@ function Controller($state, UserServiceImpl) {
     console.log("creating new user");
     UserServiceImpl.create(vm.user).then(
         function () {
+            console.log(vm.user.userName);
             $state.go('root.Login', { username: vm.user.userName});
-
         },
         function (err) {
             if (err.status === 400) {
@@ -29,7 +29,7 @@ function Controller($state, UserServiceImpl) {
 
   function logout() {
       console.log("loggin out");
-      $state.go('root.Login', { username: 'test'});
+      $state.go('root.Login', { username: vm.user.userName});
 
   }
 

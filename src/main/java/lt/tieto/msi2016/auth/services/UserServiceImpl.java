@@ -5,11 +5,15 @@ import lt.tieto.msi2016.auth.model.User;
 import lt.tieto.msi2016.auth.repository.UserRepository;
 import lt.tieto.msi2016.auth.repository.model.UserDb;
 import static lt.tieto.msi2016.utils.constants.Roles.*;
+
+import lt.tieto.msi2016.item.service.ItemService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -44,5 +48,10 @@ public class UserServiceImpl implements UserService {
         //userRepository.
 
 
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<User> all() {
+        return userRepository.findAll().stream().map(User::valueOf).collect(Collectors.toList());
     }
 }

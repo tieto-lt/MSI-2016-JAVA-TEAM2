@@ -67,6 +67,17 @@ module.config(function($stateProvider, $urlRouterProvider) {
       data: {
         isPublic: true
       }
+    })
+    .state('root.adminPage', {
+      url: "/adminPage",
+      template: "<admin-page></admin-page>",
+      data: {
+        isPublic: true
+      }
+    })
+    .state('root.userList', {
+      url: "/userList",
+      template: "<user-list></user-list>"
     });
 });
 

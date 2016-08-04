@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.stream.Collectors;
 
 import static lt.tieto.msi2016.utils.constants.Roles.ADMIN;
+import javax.annotation.Resource;
+import java.util.Collection;
 
 @RestController
 public class UserController extends BaseController {
@@ -27,6 +29,11 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/api/users", method = RequestMethod.POST, consumes = accepts)
     public User createUser(@RequestBody final User user) {
         return userService.createUser(user);
+    }
+
+    @RequestMapping(value = "/api/users", method = RequestMethod.GET)
+    public Collection<User> getUsers() {
+        return userService.all();
     }
 
     @RequestMapping(value = "/api/users/{id}", method = RequestMethod.GET)
