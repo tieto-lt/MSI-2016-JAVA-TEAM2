@@ -70,12 +70,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUserInfo(User user) {
         UserDb userDb = userRepository.findOne(user.getId());
-        userDb.setUserName(user.getUserName());
-        userDb.setEmail(user.getEmail());
-        userDb.setPhone(user.getPhone());
-        userDb.setName(user.getName());
+        userDb.setUserName(user.getUserName().isEmpty() ? userDb.getUserName() : user.getUserName());
+        userDb.setEmail(user.getEmail().isEmpty() ? userDb.getEmail() : user.getEmail());
+        userDb.setPhone(user.getPhone().isEmpty() ? userDb.getPhone() : user.getPhone());
+        userDb.setName(user.getName().isEmpty() ? userDb.getName() : user.getName());
         User updatedUser = User.valueOf(userRepository.save(userDb));
-        userRepository.insertUserAuthority(user.getUserName(),user.getUserRole());
+        if(user.getUserRole() != null || !user.getUserRole().isEmpty()) {
+            userRepository.insertUserAuthority(user.getUserName(), user.getUserRole());
+        }
         return updatedUser;
     }
 
