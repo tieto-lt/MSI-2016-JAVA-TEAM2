@@ -18,10 +18,13 @@ function Controller($state, AuthService) {
             function (err) {
                 vm.error = err.data.error_description;
             });
+
+
     }
 
-    function createNewUser() {
+    function createUser() {
         console.log("create new user");
+
     }
 
 }
