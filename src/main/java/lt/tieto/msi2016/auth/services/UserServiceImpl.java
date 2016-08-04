@@ -25,14 +25,19 @@ public class UserServiceImpl implements UserService {
      */
     @Transactional
     @Override
-    public void createUser(final User user) {
+    public User createUser(final User user) {
         UserDb userDb = UserDb.valueOf(user);
         userDb.setPassword(encoder.encode(userDb.getPassword()));
         userDb.setEnabled(1);
         userRepository.create(userDb);
         userRepository.insertUserAuthority(user.getUserName(),CUSTOMER);
+        return User.valueOf(userRepository.findByUserName(user.getUserName()));
     }
 
+    @Override
+    public User getUserInfo(Long id) {
+        return User.valueOf(userRepository.findOne(id));
+    }
 
     public void checkUsername (User user)
     {

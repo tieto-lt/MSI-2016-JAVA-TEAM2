@@ -10,8 +10,13 @@ public interface UserService {
      *
      * @param user
      */
-   void createUser(User user);
+   User createUser(User user);
 
-
-
+    /**
+     * Returns user info
+     *
+     * @param id
+     * @return
+     */
+    User getUserInfo(Long id);
 }

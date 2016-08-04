@@ -44,8 +44,7 @@ public class UserRepository extends BaseRepository<UserDb> {
     );
 
     public boolean exists(String username) {
-        List<Map<String, Object>> result = jdbcTemplate.queryForList("select id from users where username = ?", username);
-        return !result.isEmpty();
+        return findByUserName(username) != null;
     }
 
     /**
@@ -56,12 +55,25 @@ public class UserRepository extends BaseRepository<UserDb> {
      */
     public void insertUserAuthority(String userName, String authority) {
         try {
-            jdbcTemplate.queryForMap("select username from authorities where username = ?", userName).isEmpty();
+            jdbcTemplate.queryForMap("select username from authorities where username = ?", userName);
             jdbcTemplate.update("UPDATE authorities set authority = ? where username = ?", authority,userName);
         } catch (EmptyResultDataAccessException e) {
             jdbcTemplate.update("INSERT INTO authorities (username,authority) values(?,?)", userName,authority);
         }
     }
+
+    /**
+     *
+     *
+     * @param userName
+     * @return UserDb
+     */
+    public UserDb findByUserName(String userName){
+            return jdbcTemplate.queryForObject("select * from users where username = ?",new Object[]{userName},ROW_MAPPER);
+    }
+
+
+
 
 
 }
