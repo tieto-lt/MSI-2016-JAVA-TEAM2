@@ -10,9 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static lt.tieto.msi2016.utils.constants.Roles.ADMIN;
@@ -34,17 +32,7 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/api/users", method = RequestMethod.GET)
     public Collection<User> getUsers() {
-        if(isUserAdmin())
-        {
             return userService.all();
-        }
-        else
-        {
-            List<User> userList = new ArrayList<>();
-            userList.add(userService.getUserByUserName(securityHolder.getUserPrincipal().getUsername()));
-            return userList;
-
-        }
 
     }
 
