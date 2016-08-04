@@ -3,3 +3,4 @@ require('customerPage/customerPage-component');
 require('accountInformation/accountInformation-component');
 require('operatorPage/operatorPage-component');
 require('adminPage/adminPage-component');
+require('userList/userList_component');

@@ -2,6 +2,10 @@ var module = require('main_module');
 
 function Service($http, $q) {
 
+  this.create = function(user) {
+      return $http.post('/api/users', user);
+  };
+
   this.get = function(id) {
     return $http.get('/api/users').then(
       function(response) {
@@ -34,14 +38,11 @@ function Service($http, $q) {
     return d.promise;
   };
 
-  this.put = function(item) {
-      return $http.put('/api/items/' + user.id, user);
+  this.put = function(user) {
+      return $http.put('/api/users/' + user.id, user);
   };
-
-
-
 
 }
 
 Service.$inject = ['$http', '$q'];
-module.service('UserService', Service);
+module.service('UserServiceImpl', Service);
