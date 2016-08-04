@@ -1,5 +1,5 @@
 
-
+<div ng-form="vm.myCustomForm">
 <div class="container">
     <h3>Registration form</h3>
     <div class="msi-content" ui-view ng-cloak></div>
@@ -9,8 +9,14 @@
 <div class="form-group row" >
   <label for="example-text-input" class="col-xs-2 col-form-label">Username</label>
   <div class="col-xs-10">
-    <input class="form-control" type="text" ng-model="$ctrl.user.userName" >
+    <input name="username" class="form-control" type="text" ng-model="$ctrl.user.userName"
+      required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-minlength="6" ng-maxlength="20">
   </div>
+  <div ng-show="vm.myCustomForm.username.$error.required">Field Username is required!</div>
+  <div ng-show="vm.myCustomForm.username.$error.minlength">Username must consist of at least 6 characters.</div>
+  <div ng-show="vm.myCustomForm.username.$error.maxlength">Maximum length of the username is 20.</div>
+  <div ng-show="vm.myCustomForm.username.$error.pattern">User is allowed to enter letters a-z, numbers 0-9 and symbols “.”, “-” and “_”, provided non of these are the first symbol.</div>
+  <div ng-show="vm.customValidate()">User is not allowed to enter more than three of the same symbol in a row</div>
 </div>
 
 
@@ -54,8 +60,11 @@
 </div>
 
 <div class="form-group row">
-<button type="submit" class="btn btn-warning" ng-click="$ctrl.create()">Register</button>
+<button type="submit" class="btn btn-warning" ng-click="vm.myCustomForm.$valid && $ctrl.create()" ng-disabled="vm.myCustomForm.$valid == false">Register</button>
 <button type="button" class="btn btn-default" ng-click="$ctrl.logout()">Go back to login form</button>
 
 
+
+
 </div>
+<div>

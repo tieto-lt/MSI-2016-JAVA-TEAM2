@@ -9,9 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Map;
-
 @Repository
 public class UserRepository extends BaseRepository<UserDb> {
 
@@ -69,7 +66,13 @@ public class UserRepository extends BaseRepository<UserDb> {
      * @return UserDb
      */
     public UserDb findByUserName(String userName){
+
+        try {
             return jdbcTemplate.queryForObject("select * from users where username = ?",new Object[]{userName},ROW_MAPPER);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+
     }
 
 

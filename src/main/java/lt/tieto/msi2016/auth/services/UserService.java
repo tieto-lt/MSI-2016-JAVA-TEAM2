@@ -37,6 +37,10 @@ public interface UserService {
      */
     User getUserByUserName(String userName);
 
+    boolean checkUsername (String userName);
+
+
+
     /**
      * Updates user details
      *
