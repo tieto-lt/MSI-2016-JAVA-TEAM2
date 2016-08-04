@@ -9,7 +9,7 @@
 <div class="form-group row" >
   <label for="example-text-input" class="col-xs-2 col-form-label">Username</label>
   <div class="col-xs-10">
-    <input class="form-control" type="text" name="username" ng-model="username" >
+    <input class="form-control" type="text" ng-model="$ctrl.user.userName" >
   </div>
 </div>
 
@@ -18,19 +18,19 @@
 <div class="form-group row">
   <label for="example-password-input" class="col-xs-2 col-form-label">Password</label>
   <div class="col-xs-10">
-    <input class="form-control" type="password" name="password" ng-model="password">
+    <input class="form-control" type="password" ng-model="$ctrl.user.password">
   </div>
 </div>
 <div class="form-group row">
   <label for="example-password-input" class="col-xs-2 col-form-label">Confirm password</label>
   <div class="col-xs-10">
-    <input class="form-control" type="password"  name="confirmPassword" ng-model="confirmPassword">
+    <input class="form-control" type="password"  name="confirmPassword">
   </div>
 </div>
 <div class="form-group row">
   <label for="example-email-input" class="col-xs-2 col-form-label">Name</label>
   <div class="col-xs-10">
-    <input class="form-control" type="text"  name="name" ng-model="name">
+    <input class="form-control" type="text" ng-model="$ctrl.user.name">
   </div>
 </div>
 <!-- Reikia issiaisinti, ar reikalingas 'surname'??? -->
@@ -43,18 +43,18 @@
 <div class="form-group row">
   <label for="example-email-input" class="col-xs-2 col-form-label">Email</label>
   <div class="col-xs-10">
-    <input class="form-control" type="text" name="email" ng-model="email">
+    <input class="form-control" type="text" ng-model="$ctrl.user.email">
   </div>
 </div>
 <div class="form-group row">
   <label for="example-tel-input" class="col-xs-2 col-form-label">Phone</label>
   <div class="col-xs-10">
-    <input class="form-control" type="text" name="phone" ng-model="phone">
+    <input class="form-control" type="text" ng-model="$ctrl.user.phone">
   </div>
 </div>
 
 <div class="form-group row">
-<button type="submit" class="btn btn-warning" ng-click="$ctrl.createUser()">Register</button>
+<button type="submit" class="btn btn-warning" ng-click="$ctrl.create()">Register</button>
 <button type="button" class="btn btn-default" ng-click="$ctrl.logout()">Go back to login form</button>
 
 

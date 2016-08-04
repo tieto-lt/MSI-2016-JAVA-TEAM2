@@ -9,8 +9,6 @@ function Controller($state, ItemService) {
     vm.errors = [];
 
     function create() {
-      console.log("creating");
-      
         ItemService.create(vm.item).then(
             function () {
                 $state.go('root.itemList');
