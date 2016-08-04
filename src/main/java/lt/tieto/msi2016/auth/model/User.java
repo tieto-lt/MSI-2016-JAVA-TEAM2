@@ -1,5 +1,7 @@
 package lt.tieto.msi2016.auth.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -74,4 +76,5 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
+
 }

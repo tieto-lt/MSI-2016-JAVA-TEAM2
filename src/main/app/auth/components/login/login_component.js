@@ -1,9 +1,9 @@
 var module = require('main_module');
 
-function Controller($state, AuthService) {
+function Controller($state, AuthService, $stateParams) {
 
     var vm = this;
-    vm.username = undefined;
+    vm.username = $stateParams.username;
     vm.password = undefined;
 
     vm.login = login;
@@ -30,7 +30,7 @@ function Controller($state, AuthService) {
 }
 
 
-Controller.$inject = ['$state', 'AuthService'];
+Controller.$inject = ['$state', 'AuthService', '$stateParams'];
 require('login.scss');
 module.component('login', {
     controller: Controller,
