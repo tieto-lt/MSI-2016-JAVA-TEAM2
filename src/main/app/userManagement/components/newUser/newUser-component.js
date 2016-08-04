@@ -8,6 +8,7 @@ function Controller($state, UserServiceImpl) {
   vm.create = create;
   vm.logout = logout;
   vm.errors = [];
+  vm.myCustomForm = {};
 
   function create() {
     console.log("creating new user");
@@ -30,6 +31,17 @@ function Controller($state, UserServiceImpl) {
   function logout() {
       console.log("loggin out");
       $state.go('root.Login', { username: vm.user.userName});
+
+  }
+
+  vm.customValidate = customValidate;
+
+  function customValidate() {
+      return true;
+  }
+
+  function validate(){
+    return vm.myCustomForm.$valid && customValidate();
 
   }
 
