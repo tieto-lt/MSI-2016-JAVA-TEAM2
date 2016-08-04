@@ -6,11 +6,19 @@ function Controller(UserService) {
 
     vm.users = [];
 
+    vm.executeUpdate = executeUpdate;
+
     vm.$onInit = function() {
       UserService.all().then(function(response){
         vm.users = response.data;
       });
     };
+
+    function executeUpdate(){
+      console.log('update exectud');
+      //UserServiceImpl.put(parameters).then... do sth
+    }
+
 }
 
 Controller.$inject = ['UserService'];

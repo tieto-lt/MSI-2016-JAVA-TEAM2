@@ -22,9 +22,9 @@
                 <td>{{user.name}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.phone}}</td>
-                <td><input type="radio" value="ROLE_ADMIN" name="ROLE" checked></td>
-                <td><input type="radio" value="ROLE_CUTOMER" name="ROLE"></td>
-                <td><input type="radio" value="ROLE_OPERATOR" name="ROLE"></td>
+                <td><input ng-click="$ctrl.executeUpdate()" type="radio" value="ROLE_ADMIN" name="ROLE" checked></td>
+                <td><input ng-click="$ctrl.executeUpdate()"type="radio" value="ROLE_CUTOMER" name="ROLE"></td>
+                <td><input ng-click="$ctrl.executeUpdate()"type="radio" value="ROLE_OPERATOR" name="ROLE"></td>
             </tr>
         </tbody>
     </table>

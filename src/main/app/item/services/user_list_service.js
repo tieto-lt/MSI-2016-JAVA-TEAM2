@@ -33,6 +33,14 @@ function Service($http, $q) {
     d.resolve(id);
     return d.promise;
   };
+
+  this.put = function(item) {
+      return $http.put('/api/items/' + user.id, user);
+  };
+
+
+
+
 }
 
 Service.$inject = ['$http', '$q'];
