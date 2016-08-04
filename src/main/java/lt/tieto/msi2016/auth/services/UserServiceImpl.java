@@ -32,9 +32,9 @@ public class UserServiceImpl implements UserService {
         UserDb userDb = UserDb.valueOf(user);
         userDb.setPassword(encoder.encode(userDb.getPassword()));
         userDb.setEnabled(1);
-        userRepository.create(userDb);
+        User newUser = User.valueOf(userRepository.save(userDb));
         userRepository.insertUserAuthority(user.getUserName(),CUSTOMER);
-        return User.valueOf(userRepository.findByUserName(user.getUserName()));
+        return newUser;
     }
 
     @Transactional(readOnly = true)
@@ -75,9 +75,9 @@ public class UserServiceImpl implements UserService {
         userDb.setPassword(user.getPassword());
         userDb.setPhone(user.getPhone());
         userDb.setName(user.getName());
-        userRepository.update(userDb);
+        User updatedUser = User.valueOf(userRepository.save(userDb));
         userRepository.insertUserAuthority(user.getUserName(),user.getUserRole());
-        return User.valueOf(userRepository.findByUserName(userDb.getUserName()));
+        return updatedUser;
     }
 
 }
