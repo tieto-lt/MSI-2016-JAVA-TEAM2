@@ -23,6 +23,7 @@ function Controller($state) {
     );
   }
 
+
   function logout() {
       $state.go('root.Login');
   }
