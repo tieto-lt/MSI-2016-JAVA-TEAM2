@@ -4,6 +4,7 @@ package lt.tieto.msi2016.auth.controllers;
 import lt.tieto.msi2016.auth.model.User;
 import lt.tieto.msi2016.auth.services.UserService;
 import lt.tieto.msi2016.utils.controller.BaseController;
+import lt.tieto.msi2016.utils.exception.FieldValidationException;
 import lt.tieto.msi2016.utils.services.SecurityHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -27,8 +29,18 @@ public class UserController extends BaseController {
     private SecurityHolder securityHolder;
 
     @RequestMapping(value = "/api/users", method = RequestMethod.POST, consumes = accepts)
-    public User createUser(@RequestBody final User user) {
-        return userService.createUser(user);
+    public User createUser(@RequestBody final @Valid User user) {
+        if(userService.checkUsername(user.getUserName()))
+        {
+
+            return userService.createUser(user);
+        }
+        else
+        {
+            throw new FieldValidationException("UserName","UserName already exists");
+        }
+
+
     }
 
     @Secured(ADMIN)
