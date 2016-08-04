@@ -27,6 +27,17 @@ public class User {
     @Size(min=7)
     private String phone;
 
+    public User() {
+    }
+
+    public User(Long id, String username, String name, String email, String phone) {
+        this.id = id;
+        this.name = name;
+        this.userName=username;
+        this.email=email;
+        this.phone=phone;
+    }
+
     public String getUserName() {
         return userName;
     }
