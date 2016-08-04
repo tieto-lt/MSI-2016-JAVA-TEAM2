@@ -22,8 +22,26 @@ public interface UserService {
      */
     User getUserInfo(Long id);
 
-
+    /**
+     *
+     *
+     * @return all user objects
+     */
     Collection<User> all();
 
+    /**
+     *
+     *
+     * @param userName
+     * @return User object by user name
+     */
     User getUserByUserName(String userName);
+
+    /**
+     * Updates user details
+     *
+     * @param user
+     * @return updated user object
+     */
+    User updateUserInfo(User user);
 }

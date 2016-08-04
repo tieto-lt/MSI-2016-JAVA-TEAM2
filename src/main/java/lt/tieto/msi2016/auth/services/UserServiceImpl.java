@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService {
         return User.valueOf(userRepository.findByUserName(user.getUserName()));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public User getUserInfo(Long id) {
         return User.valueOf(userRepository.findOne(id));
@@ -54,8 +55,22 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll().stream().map(User::valueOf).collect(Collectors.toList());
     }
 
-    @Override
+    @Transactional(readOnly = true)
     public User getUserByUserName(String userName) {
         return User.valueOf(userRepository.findByUserName(userName));
     }
+    @Transactional
+    @Override
+    public User updateUserInfo(User user) {
+        UserDb userDb = userRepository.findOne(user.getId());
+        userDb.setUserName(user.getUserName());
+        userDb.setEmail(user.getEmail());
+        userDb.setPassword(user.getPassword());
+        userDb.setPhone(user.getPhone());
+        userDb.setName(user.getName());
+        userRepository.update(userDb);
+        userRepository.insertUserAuthority(user.getUserName(),user.getUserRole());
+        return User.valueOf(userRepository.findByUserName(userDb.getUserName()));
+    }
+
 }
