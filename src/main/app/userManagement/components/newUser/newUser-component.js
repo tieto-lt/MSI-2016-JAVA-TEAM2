@@ -10,6 +10,7 @@ function Controller($state, UserServiceImpl) {
   vm.logout = logout;
   vm.errors = [];
 
+
   function create() {
     console.log("creating new user");
     UserServiceImpl.create(vm.user).then(
