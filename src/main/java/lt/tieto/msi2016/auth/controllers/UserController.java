@@ -61,8 +61,8 @@ public class UserController extends BaseController {
 
     @Secured(ADMIN)
     @RequestMapping(value = "/api/users/{id}", method = RequestMethod.PUT)
-    public User updateUserRole(@RequestParam("userRole")String userRole, @PathVariable Long id) {
-        return userService.updateUserRole(userRole,id);
+    public User updateUserRole(@RequestBody User user, @PathVariable Long id) {
+        return userService.updateUser(user,id);
     }
 
     private boolean canAccessInfo(Long id) {
