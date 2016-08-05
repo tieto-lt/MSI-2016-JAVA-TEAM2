@@ -60,10 +60,9 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public User updateUserRole(String userRole, Long id) {
+    public User updateUser(User user,Long id) {
         UserDb userDb = userRepository.findOne(id);
-        userRepository.insertUserAuthority(userDb.getUserName(),userRole);
-        User user = fillUser(userDb);
+        userRepository.insertUserAuthority(userDb.getUserName(),user.getUserRole());
         return user;
     }
 
