@@ -44,11 +44,11 @@
                     <div class="">
                       <input id="passwordinput" name="confirmPassword" placeholder="Confirm Password" class="form-control input-md" type="password"
                       ng-model="$ctrl.user.confirmPassword" ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30" match-Password="$ctrl.user.password">
-                      <div ng-show="vm.myCustomForm.confirmPassword.$error.required">Field Password is required!</div>
-                      <div ng-show="vm.myCustomForm.confirmPassword.$error.minlength">Password must be at least 6 symbols long.</div>
-                      <div ng-show="vm.myCustomForm.confirmPassword.$error.maxlength">Maximum length of the password is 30 symbols.</div>
-                      <div ng-show="vm.myCustomForm.confirmPassword.$error.pattern">Password is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div>
-                      <div ng-show="vm.myCustomForm.confirmPassword.$error.matchPassword">Passwords does not match</div>
+                      <div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.required">Field Password is required!</div>
+                      <div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.minlength">Password must be at least 6 symbols long.</div>
+                      <div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.maxlength">Maximum length of the password is 30 symbols.</div>
+                      <div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.pattern">Password is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div>
+                      <div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.matchPassword">Passwords does not match</div>
                     </div>
                   </div>
 
@@ -75,9 +75,10 @@
          <div class="form-group">
            <label class=" control-label" for="textinput">Email</label>
            <div class="">
-             <input id="textinput" name="email" class="form-control input-md" type="text"
+             <input id="textinput" name="email" class="form-control input-md" type="email"
              ng-model="$ctrl.user.email" required>
              <div class="help-block" ng-show="vm.myCustomForm.email.$error.required">Field Email is required!</div>
+             <div class="help-block" ng-show="vm.myCustomForm.email.$error.email">Invalid email adress</div>
            </div>
          </div>
 <!--div class="form-group row">
@@ -93,8 +94,9 @@
            <label class=" control-label" for="textinput">Phone</label>
            <div class="">
              <input id="textinput" name="phone" class="form-control input-md" type="text"
-             ng-model="$ctrl.user.phone" required>
+             ng-model="$ctrl.user.phone" required pattern="^[\+ | 0-9][0-9]*">
              <div class="help-block" ng-show="vm.myCustomForm.phone.$error.required">Field phone is required!</div>
+             <div class="help-block" ng-show="vm.myCustomForm.phone.$error.pattern">Field phone is only numbers!</div>
            </div>
          </div>
 

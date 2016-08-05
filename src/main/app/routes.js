@@ -4,7 +4,7 @@ var module = angular.module('AngularSpringRestDemo');
 module.config(function($stateProvider, $urlRouterProvider) {
 
   // For any unmatched url, redirect to /
-  $urlRouterProvider.otherwise("/");
+  $urlRouterProvider.otherwise("/login");
   //
   // Now set up the states
   $stateProvider
@@ -14,9 +14,6 @@ module.config(function($stateProvider, $urlRouterProvider) {
     .state('root.home', {
       url: '/',
       template: "<h4>This is home</h4>",
-      data: {
-        isPublic: true
-      }
     })
     .state('root.Login', {
       url: "/login",
@@ -50,30 +47,18 @@ module.config(function($stateProvider, $urlRouterProvider) {
     .state('root.customerPage', {
       url: "/customerPage",
       template: "<customer-page></customer-page>",
-      data: {
-        isPublic: true
-      }
     })
     .state('root.accountInformation', {
       url: "/accountInformation",
       template: "<account-information></account-information>",
-      data: {
-        isPublic: true
-      }
     })
     .state('root.operatorPage', {
       url: "/operatorPage",
       template: "<operator-page></operator-page>",
-      data: {
-        isPublic: true
-      }
     })
     .state('root.adminPage', {
       url: "/adminPage",
       template: "<admin-page></admin-page>",
-      data: {
-        isPublic: true
-      }
     })
     .state('root.userList', {
       url: "/userList",
@@ -90,8 +75,23 @@ module.run(['$transitions', 'Session', '$state', function($transitions, Session,
       to: function (state) { return !state.data || !state.data.isPublic; }
     },
     function () {
+      console.log("back to login");
       if (!Session.isSessionActive()) {
+
         return $state.target("root.Login");
       }
     });
+
+  $transitions.onStart(
+    {
+      to: function (state) {
+         return state.name == "root.Login" && Session.isSessionActive();
+       }
+    },
+    function () {
+      console.log("TODO: fix this errror");
+        return $state.go("root.home");
+
+    });
+
 }]);
