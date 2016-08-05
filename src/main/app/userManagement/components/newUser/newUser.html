@@ -94,8 +94,9 @@
            <label class=" control-label" for="textinput">Phone</label>
            <div class="">
              <input id="textinput" name="phone" class="form-control input-md" type="text"
-             ng-model="$ctrl.user.phone" required>
+             ng-model="$ctrl.user.phone" required pattern="^[\+ | 0-9][0-9]*">
              <div class="help-block" ng-show="vm.myCustomForm.phone.$error.required">Field phone is required!</div>
+             <div class="help-block" ng-show="vm.myCustomForm.phone.$error.pattern">Field phone is only numbers!</div>
            </div>
          </div>
 
