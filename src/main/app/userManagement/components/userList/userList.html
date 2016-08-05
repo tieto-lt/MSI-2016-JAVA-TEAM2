@@ -1,7 +1,19 @@
+<div class="container auth">
+  <h1 class="text-center">User list  </h1>
 
-    <h1>User List</h1>
+      <fieldset>
+<div>
   <form action="">
-    <table class="table">
+    <div class="span7">
+<div class="widget stacked widget-table action-table">
+  <!--div class="widget-header">
+					<i class="icon-th-list"></i>
+					<h3>User list</h3>
+				</div> <! /widget-header -->
+
+        <div class="widget-content">
+
+    <table class="table table-striped table-bordered">
         <thead>
 
             <tr>
@@ -22,11 +34,19 @@
                 <td>{{user.name}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.phone}}</td>
-                <td><input ng-click="$ctrl.executeUpdate(user,'ROLE_ADMIN')" type="radio"  name="ROLE" ng-value="user.userRole == 'ROLE_ADMIN'"></td>
-                <td><input ng-click="$ctrl.executeUpdate(user,'ROLE_CUSTOMER')" type="radio"  name="ROLE" ng-value="user.userRole == 'ROLE_CUSTOMER'"></td>
-                <td><input ng-click="$ctrl.executeUpdate(user,'ROLE_OPERATOR')" type="radio"  name="ROLE" ng-value="user.userRole == 'ROLE_OPERATOR'"></td>
+                <td><input ng-model="user.userRole" ng-click="$ctrl.executeUpdate(user,'ROLE_ADMIN')" type="radio"  value="ROLE_ADMIN"></td>
+                <td><input ng-model="user.userRole" ng-click="$ctrl.executeUpdate(user,'ROLE_CUSTOMER')" type="radio" value="ROLE_CUSTOMER"></td>
+                <td><input ng-model="user.userRole" ng-click="$ctrl.executeUpdate(user,'ROLE_OPERATOR')" type="radio" value="ROLE_OPERATOR"></td>
             </tr>
         </tbody>
     </table>
     </form>
+</div>
+</fieldset>
+
+
+  <div class="clearfix"></div>
+</div>
+</div>
+</div> <!-- /widget -->
 </div>

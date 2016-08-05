@@ -1,4 +1,5 @@
 var module = require('main_module');
+require('userList.scss');
 
 function Controller(UserServiceImpl) {
     //Convention to call controller instance 'vm'

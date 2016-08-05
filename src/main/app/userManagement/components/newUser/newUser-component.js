@@ -28,6 +28,7 @@ function Controller($state, UserServiceImpl) {
   }
 
 
+
   function logout() {
       console.log("loggin out");
       $state.go('root.Login', { username: vm.user.userName});
@@ -40,4 +41,22 @@ Controller.$inject = ['$state', 'UserServiceImpl'];
 module.component('newUser', {
     controller: Controller,
     templateUrl: require('./newUser.html')
+});
+module.directive("matchPassword", function(){
+ return {
+     require: "ngModel",
+     scope: {
+         otherModelValue: "=matchPassword"
+     },
+     link: function(scope, element, attributes, ngModel) {
+
+         ngModel.$validators.matchPassword = function(modelValue) {
+             return modelValue == scope.otherModelValue;
+         };
+
+         scope.$watch("otherModelValue", function() {
+             ngModel.$validate();
+         });
+     }
+ };
 });
