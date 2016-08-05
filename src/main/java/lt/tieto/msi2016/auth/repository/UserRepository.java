@@ -9,6 +9,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+import java.util.Map;
+
 @Repository
 public class UserRepository extends BaseRepository<UserDb> {
 
@@ -37,7 +40,7 @@ public class UserRepository extends BaseRepository<UserDb> {
             "email", userDb.getEmail(),
             "phone", userDb.getPhone(),
             "id", userDb.getId(),
-            "enabled",userDb.getEnabled()
+            "enabled", userDb.getEnabled()
     );
 
     public boolean exists(String username) {
@@ -53,30 +56,33 @@ public class UserRepository extends BaseRepository<UserDb> {
     public void insertUserAuthority(String userName, String authority) {
         try {
             jdbcTemplate.queryForMap("select username from authorities where username = ?", userName);
-            jdbcTemplate.update("UPDATE authorities set authority = ? where username = ?", authority,userName);
+            jdbcTemplate.update("UPDATE authorities set authority = ? where username = ?", authority, userName);
         } catch (EmptyResultDataAccessException e) {
-            jdbcTemplate.update("INSERT INTO authorities (username,authority) values(?,?)", userName,authority);
+            jdbcTemplate.update("INSERT INTO authorities (username,authority) values(?,?)", userName, authority);
         }
     }
 
     /**
-     *
-     *
      * @param userName
      * @return UserDb
      */
-    public UserDb findByUserName(String userName){
+    public UserDb findByUserName(String userName) {
 
         try {
-            return jdbcTemplate.queryForObject("select * from users where username = ?",new Object[]{userName},ROW_MAPPER);
+            return jdbcTemplate.queryForObject("select * from users where username = ?", new Object[]{userName}, ROW_MAPPER);
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
 
     }
 
-
-
+    public Collection<String> getUserRole(String userName) {
+        try {
+            return jdbcTemplate.queryForList("select authority from authorities where username = ?", String.class,userName);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
 
 
 }

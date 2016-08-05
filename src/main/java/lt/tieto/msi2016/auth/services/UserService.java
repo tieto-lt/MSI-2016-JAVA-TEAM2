@@ -40,12 +40,12 @@ public interface UserService {
     boolean checkUsername (String userName);
 
 
-
     /**
-     * Updates user details
+     * Updates user role
      *
-     * @param user
-     * @return updated user object
+     * @param userRole
+     * @param id
+     * @return updated user
      */
-    User updateUserInfo(User user);
+    User updateUserRole(String userRole,Long id);
 }

@@ -32,15 +32,16 @@ public class UserServiceImpl implements UserService {
         UserDb userDb = UserDb.valueOf(user);
         userDb.setPassword(encoder.encode(userDb.getPassword()));
         userDb.setEnabled(1);
-        User newUser = User.valueOf(userRepository.save(userDb));
+        User newUser = User.valueOf(userRepository.create(userDb));
         userRepository.insertUserAuthority(user.getUserName(),CUSTOMER);
+        newUser.setUserRole(CUSTOMER);
         return newUser;
     }
 
     @Transactional(readOnly = true)
     @Override
     public User getUserInfo(Long id) {
-        return User.valueOf(userRepository.findOne(id));
+        return fillUser(userRepository.findOne(id));
     }
 
     public boolean checkUsername (String userName)
@@ -57,28 +58,31 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Transactional
+    @Override
+    public User updateUserRole(String userRole, Long id) {
+        UserDb userDb = userRepository.findOne(id);
+        userRepository.insertUserAuthority(userDb.getUserName(),userRole);
+        User user = fillUser(userDb);
+        return user;
+    }
+
     @Transactional(readOnly = true)
     public Collection<User> all() {
-        return userRepository.findAll().stream().map(User::valueOf).collect(Collectors.toList());
+        return userRepository.findAll().stream().map(this::fillUser).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public User getUserByUserName(String userName) {
-        return User.valueOf(userRepository.findByUserName(userName));
-    }
-    @Transactional
-    @Override
-    public User updateUserInfo(User user) {
-        UserDb userDb = userRepository.findOne(user.getId());
-        userDb.setUserName(user.getUserName().isEmpty() ? userDb.getUserName() : user.getUserName());
-        userDb.setEmail(user.getEmail().isEmpty() ? userDb.getEmail() : user.getEmail());
-        userDb.setPhone(user.getPhone().isEmpty() ? userDb.getPhone() : user.getPhone());
-        userDb.setName(user.getName().isEmpty() ? userDb.getName() : user.getName());
-        User updatedUser = User.valueOf(userRepository.save(userDb));
-        if(user.getUserRole() != null || !user.getUserRole().isEmpty()) {
-            userRepository.insertUserAuthority(user.getUserName(), user.getUserRole());
-        }
-        return updatedUser;
+        UserDb userDb = userRepository.findByUserName(userName);
+        return userDb == null ? null : User.valueOf(userDb);
+
     }
 
+    @Transactional
+    private User fillUser(UserDb userDb){
+        User user = User.valueOf(userDb);
+        user.setUserRole(userRepository.getUserRole(userDb.getUserName()).stream().findFirst().get());
+        return user;
+    }
 }

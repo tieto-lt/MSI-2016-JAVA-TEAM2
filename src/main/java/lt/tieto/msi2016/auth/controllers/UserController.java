@@ -59,11 +59,10 @@ public class UserController extends BaseController {
         }
     }
 
-
-    @RequestMapping(value = "/api/users/{id}", method = RequestMethod.PUT,consumes = accepts)
-    public User updateUser(@RequestBody final User user,@PathVariable Long id) {
-        userService.updateUserInfo(user);
-        return user;
+    @Secured(ADMIN)
+    @RequestMapping(value = "/api/users/{id}", method = RequestMethod.PUT)
+    public User updateUserRole(@RequestParam("userRole")String userRole, @PathVariable Long id) {
+        return userService.updateUserRole(userRole,id);
     }
 
     private boolean canAccessInfo(Long id) {
