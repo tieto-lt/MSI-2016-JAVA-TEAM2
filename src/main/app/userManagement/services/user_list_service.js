@@ -26,11 +26,11 @@ function Service($http, $q) {
     return d.promise;
   };
 
-  this.create = function(user) {
-    var d = $q.defer();
-    d.resolve(user);
-    return d.promise;
-  };
+  // this.create = function(user) {
+  //   var d = $q.defer();
+  //   d.resolve(user);
+  //   return d.promise;
+  // };
 
   this.remove = function(id) {
     var d = $q.defer();
