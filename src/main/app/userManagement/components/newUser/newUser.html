@@ -48,6 +48,7 @@
                       <div ng-show="vm.myCustomForm.confirmPassword.$error.minlength">Password must be at least 6 symbols long.</div>
                       <div ng-show="vm.myCustomForm.confirmPassword.$error.maxlength">Maximum length of the password is 30 symbols.</div>
                       <div ng-show="vm.myCustomForm.confirmPassword.$error.pattern">Password is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div>
+                      <div ng-show="vm.myCustomForm.confirmPassword.$error.matchPassword">Passwords does not match</div>
                     </div>
                   </div>
 
