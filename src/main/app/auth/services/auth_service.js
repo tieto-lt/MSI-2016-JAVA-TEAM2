@@ -3,6 +3,7 @@ module = require('main_module');
 function Service ($http, $httpParamSerializer, $cookies) {
 
     this.login = login;
+    this.redirect = redirect;
 
     function login(username, password) {
         var data = { grant_type:"password", username: username, password: password, client_id: "web-ui" };
@@ -22,6 +23,10 @@ function Service ($http, $httpParamSerializer, $cookies) {
                 $cookies.put("access_token", data.data.access_token);
                 return data;
             });
+    }
+
+    function redirect() {
+
     }
 }
 

@@ -6,6 +6,7 @@ function Controller(UserServiceImpl) {
 
     vm.user = {};
 
+
     vm.executeUpdate = executeUpdate;
 
     vm.$onInit = function() {
@@ -14,7 +15,9 @@ function Controller(UserServiceImpl) {
       });
     };
 
-    function executeUpdate() {
+    function executeUpdate(user,newRole) {
+      vm.user = user;
+    user.userRole = newRole;
         UserServiceImpl.put(vm.user).then(
             function () { console.log('Update success'); },
             function (err) {

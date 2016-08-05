@@ -42,10 +42,8 @@ public interface UserService {
 
     /**
      * Updates user role
-     *
-     * @param userRole
-     * @param id
+     * @param user
      * @return updated user
      */
-    User updateUserRole(String userRole,Long id);
+    User updateUser(User user,Long id);
 }
