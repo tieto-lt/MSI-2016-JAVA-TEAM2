@@ -1,4 +1,5 @@
 var module = require('main_module');
+require('login.scss');
 
 function Controller($state, AuthService, $stateParams, Session) {
 
