@@ -1,58 +1,67 @@
+<div class="container auth">
+    <h1 class="text-center">New User <span>Registration Form</span> </h1>
+    <div id="big-form" class="well auth-box">
+      <form>
+        <fieldset>
 
 <div ng-form="vm.myCustomForm">
 <div class="container">
-    <h3>Registration form</h3>
     <div class="msi-content" ui-view ng-cloak></div>
 </div>
 
+<!-- Text input-->
+         <div class="form-group">
+           <label class=" control-label" for="textinput">Username</label>
+           <div class="">
+             <input id="textinput" name="username" placeholder="Username" class="form-control input-md" type="text"
+             ng-model="$ctrl.user.userName"
+               required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-minlength="6" ng-maxlength="20">
+               <div ng-show="vm.myCustomForm.username.$error.required">Field Username is required!</div>
+               <div ng-show="vm.myCustomForm.username.$error.minlength">Username must consist of at least 6 characters.</div>
+               <div ng-show="vm.myCustomForm.username.$error.maxlength">Maximum length of the username is 20.</div>
+               <div ng-show="vm.myCustomForm.username.$error.pattern">User is allowed to enter letters a-z, numbers 0-9 and symbols “.”, “-” and “_”, provided non of these are the first symbol.</div>
+               <div ng-show="vm.customValidate()">User is not allowed to enter more than three of the same symbol in a row</div>
+           </div>
+         </div>
 
-<div class="form-group row" >
-  <label for="example-text-input" class="col-xs-2 col-form-label">Username</label>
-  <div class="col-xs-10">
-    <input name="username" class="form-control" type="text" ng-model="$ctrl.user.userName"
-      required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-minlength="6" ng-maxlength="20">
-  </div>
-  <div ng-show="vm.myCustomForm.username.$error.required">Field Username is required!</div>
-  <div ng-show="vm.myCustomForm.username.$error.minlength">Username must consist of at least 6 characters.</div>
-  <div ng-show="vm.myCustomForm.username.$error.maxlength">Maximum length of the username is 20.</div>
-  <div ng-show="vm.myCustomForm.username.$error.pattern">User is allowed to enter letters a-z, numbers 0-9 and symbols “.”, “-” and “_”, provided non of these are the first symbol.</div>
-  <div ng-show="vm.customValidate()">User is not allowed to enter more than three of the same symbol in a row</div>
-</div>
 
+<!-- Password input-->
+          <div class="form-group">
+            <label class=" control-label" for="password">Password</label>
+            <div class="">
+              <input id="passwordinput" name="password" placeholder="Password" class="form-control input-md" type="password"
+              ng-model="$ctrl.user.password" ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30">
+              <div ng-show="vm.myCustomForm.password.$error.required">Field Username is required!</div>
+              <div ng-show="vm.myCustomForm.password.$error.minlength">Password must be at least 6 symbols long.</div>
+              <div ng-show="vm.myCustomForm.password.$error.maxlength">Maximum length of the password is 30 symbols.</div>
+              <div ng-show="vm.myCustomForm.password.$error.pattern">User is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div>
+            </div>
+          </div>
 
+          <!--  Confirm Password input-->
+                  <div class="form-group">
+                    <label class=" control-label" for="password">Confirm Password</label>
+                    <div class="">
+                      <input id="passwordinput" name="confirmPassword" placeholder="Confirm Password" class="form-control input-md" type="password"
+                      ng-model="$ctrl.user.confirmPassword" ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30">
+                      <div ng-show="vm.myCustomForm.confirmPassword.$error.required">Field Password is required!</div>
+                      <div ng-show="vm.myCustomForm.confirmPassword.$error.minlength">Password must be at least 6 symbols long.</div>
+                      <div ng-show="vm.myCustomForm.confirmPassword.$error.maxlength">Maximum length of the password is 30 symbols.</div>
+                      <div ng-show="vm.myCustomForm.confirmPassword.$error.pattern">Password is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div>
+                    </div>
+                  </div>
 
-<div class="form-group row">
-  <label for="example-password-input" class="col-xs-2 col-form-label">Password</label>
-  <div class="col-xs-10">
-    <input name="password" class="form-control" type="password" ng-model="$ctrl.user.password"
-      ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30">
-  </div>
-  <div ng-show="vm.myCustomForm.password.$error.required">Field Username is required!</div>
-  <div ng-show="vm.myCustomForm.password.$error.minlength">Password must be at least 6 symbols long.</div>
-  <div ng-show="vm.myCustomForm.password.$error.maxlength">Maximum length of the password is 30 symbols.</div>
-  <div ng-show="vm.myCustomForm.password.$error.pattern">User is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div>
-</div>
+                  <!-- Text input-->
+                           <div class="form-group">
+                             <label class=" control-label" for="textinput">Name</label>
+                             <div class="">
+                               <input id="textinput" name="name" placeholder="Name" class="form-control input-md" type="text"
+                               ng-model="$ctrl.user.name" required ng-maxlength="255">
+                               <div ng-show="vm.myCustomForm.name.$error.required">Field Name is required!</div>
+                               <div ng-show="vm.myCustomForm.name.$error.maxlength">Maximum length of the name is 255 symbols.</div>
+                             </div>
+                           </div>
 
-<div class="form-group row">
-  <label for="example-password-input" class="col-xs-2 col-form-label">Confirm password</label>
-  <div class="col-xs-10">
-    <input class="form-control" type="password"  name="confirmPassword" ng-model="$ctrl.user.confirmPassword"
-      ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30">
-  </div>
-  <div ng-show="vm.myCustomForm.confirmPassword.$error.required">Field Password is required!</div>
-  <div ng-show="vm.myCustomForm.confirmPassword.$error.minlength">Password must be at least 6 symbols long.</div>
-  <div ng-show="vm.myCustomForm.confirmPassword.$error.maxlength">Maximum length of the password is 30 symbols.</div>
-  <div ng-show="vm.myCustomForm.confirmPassword.$error.pattern">Password is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div>
-</div>
-
-<div class="form-group row">
-  <label for="example-email-input" class="col-xs-2 col-form-label">Name</label>
-  <div class="col-xs-10">
-    <input name="name" class="form-control" type="text" ng-model="$ctrl.user.name" required ng-maxlength="255">
-  </div>
-  <div ng-show="vm.myCustomForm.name.$error.required">Field Email is required!</div>
-  <div ng-show="vm.myCustomForm.name.$error.maxlength">Maximum length of the name is 255 symbols.</div>
-</div>
 <!-- Reikia issiaisinti, ar reikalingas 'surname'??? -->
 <!-- <div class="form-group row">
   <label for="example-email-input" class="col-xs-2 col-form-label">Surname</label>
@@ -60,23 +69,42 @@
     <input class="form-control" type="text"  id="surname">
   </div>
 </div> -->
-<div class="form-group row">
+
+<!-- Text input-->
+         <div class="form-group">
+           <label class=" control-label" for="textinput">Email</label>
+           <div class="">
+             <input id="textinput" name="email" placeholder="Email" class="form-control input-md" type="text"
+             ng-model="$ctrl.user.email" required>
+             <div ng-show="vm.myCustomForm.email.$error.required">Field Email is required!</div>
+           </div>
+         </div>
+<!--div class="form-group row">
   <label for="example-email-input" class="col-xs-2 col-form-label">Email</label>
   <div class="col-xs-10">
     <input name="email" class="form-control" type="text" ng-model="$ctrl.user.email"
       required>
   </div>
   <div ng-show="vm.myCustomForm.email.$error.required">Field Email is required!</div>
-</div>
+</div-->
+<!-- Text input-->
+         <div class="form-group">
+           <label class=" control-label" for="textinput">Phone</label>
+           <div class="">
+             <input id="textinput" name="phone" placeholder="Phone" class="form-control input-md" type="text"
+             ng-model="$ctrl.user.phone" required>
+             <div ng-show="vm.myCustomForm.phone.$error.required">Field phone is required!</div>
+           </div>
+         </div>
 
-<div class="form-group row">
+<!--div class="form-group row">
   <label for="example-tel-input" class="col-xs-2 col-form-label">Phone</label>
   <div class="col-xs-10">
     <input name="phone" class="form-control" type="text" ng-model="$ctrl.user.phone"
       required>
   </div>
   <div ng-show="vm.myCustomForm.phone.$error.required">Field phone is required!</div>
-</div>
+</div-->
 
 <div class="form-group row">
 <button type="submit" class="btn btn-warning" ng-click="vm.myCustomForm.$valid && $ctrl.create()" ng-disabled="vm.myCustomForm.$valid == false">Register</button>
@@ -87,3 +115,8 @@
 
 </div>
 <div>
+</fieldset>
+    </form>
+  </div>
+  <div class="clearfix"></div>
+</div>
