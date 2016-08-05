@@ -1,5 +1,6 @@
 var module = require('main_module');
 
+
 function Controller($state, Session) {
 
     var vm = this;
