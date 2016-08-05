@@ -60,7 +60,7 @@ public class UserController extends BaseController {
     }
 
     @Secured(ADMIN)
-    @RequestMapping(value = "/api/users/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/api/users/{id}", method = RequestMethod.PUT,consumes = accepts)
     public User updateUserRole(@RequestBody User user, @PathVariable Long id) {
         return userService.updateUser(user,id);
     }
