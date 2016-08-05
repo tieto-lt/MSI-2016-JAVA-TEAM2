@@ -1,1 +1,20 @@
-<a ng-click="$ctrl.logout()" ng-show="$ctrl.isLogoutVisible()">Logout</a>
+<nav class="navbar navbar-fixed-top " role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <ul class="nav navbar-nav">
+  <a class="navbar-brand" >Navbar</a>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">User List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Account details</a>
+      </li>
+      <li class="nav-item">
+     <a ng-click="$ctrl.logout()" ng-show="$ctrl.isLogoutVisible()">Logout</a>
+      </li>
+    </ul>
+
+</nav>
+<!--<a ng-click="$ctrl.logout()" ng-show="$ctrl.isLogoutVisible()">Logout</a> -->
