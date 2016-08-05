@@ -42,12 +42,12 @@
                   <div class="form-group">
                     <label class=" control-label" for="password">Confirm Password</label>
                     <div class="">
-                      <input id="passwordinput" name="confirmPassword" class="form-control input-md" type="password"
-                      ng-model="$ctrl.user.confirmPassword" ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30">
-                      <div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.required">Field Password is required!</div>
-                      <div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.minlength">Password must be at least 6 symbols long.</div>
-                      <div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.maxlength">Maximum length of the password is 30 symbols.</div>
-                      <div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.pattern">Password is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div>
+                      <input id="passwordinput" name="confirmPassword" placeholder="Confirm Password" class="form-control input-md" type="password"
+                      ng-model="$ctrl.user.confirmPassword" ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30" match-Password="$ctrl.user.password">
+                      <div ng-show="vm.myCustomForm.confirmPassword.$error.required">Field Password is required!</div>
+                      <div ng-show="vm.myCustomForm.confirmPassword.$error.minlength">Password must be at least 6 symbols long.</div>
+                      <div ng-show="vm.myCustomForm.confirmPassword.$error.maxlength">Maximum length of the password is 30 symbols.</div>
+                      <div ng-show="vm.myCustomForm.confirmPassword.$error.pattern">Password is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div>
                     </div>
                   </div>
 
