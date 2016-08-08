@@ -2,11 +2,15 @@ package lt.tieto.msi2016;
 
 import javax.sql.DataSource;
 
+import lt.tieto.msi2016.auth.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -15,9 +19,15 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Configuration
 @EnableAuthorizationServer
@@ -26,6 +36,8 @@ public class OAuth2Config implements AuthorizationServerConfigurer, ResourceServ
 
     @Autowired
     private DataSource dataSource;
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -37,6 +49,25 @@ public class OAuth2Config implements AuthorizationServerConfigurer, ResourceServ
         return c;
     }
 
+    public class CustomJwtAccessTokenEnhancer implements TokenEnhancer {
+
+        private JwtAccessTokenConverter c;
+
+        public CustomJwtAccessTokenEnhancer(JwtAccessTokenConverter c) {
+            this.c = c;
+        }
+
+        @Override
+        public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
+            DefaultOAuth2AccessToken token = new DefaultOAuth2AccessToken(accessToken);
+            Map<String, Object> addInfo = new LinkedHashMap<>();
+            addInfo.putAll(token.getAdditionalInformation());
+            addInfo.put("userId", userRepository.findByUserName(((User)authentication.getPrincipal()).getUsername()).getId());
+            token.setAdditionalInformation(addInfo);
+            return c.enhance(token, authentication);
+        }
+    }
+
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
         oauthServer.tokenKeyAccess("isAnonymous() || hasAuthority('ROLE_TRUSTED_CLIENT')")
@@ -45,8 +76,10 @@ public class OAuth2Config implements AuthorizationServerConfigurer, ResourceServ
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        JwtAccessTokenConverter converter = accessTokenConverter();
         endpoints.authenticationManager(authenticationManager)
-                 .accessTokenConverter(accessTokenConverter())
+                 .accessTokenConverter(converter)
+                 .tokenEnhancer(new CustomJwtAccessTokenEnhancer(converter))
                  .tokenStore(tokenStore());
     }
 
