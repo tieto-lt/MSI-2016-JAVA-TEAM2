@@ -1,13 +1,13 @@
 <nav ng-show="$ctrl.isNavigationVisible()" class="navbar navbar-fixed-top " role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
-  <ul class="nav navbar-nav" style="background-color: rgba(0, 0, 25, 0.6); width: 100%;">
+  <ul class="nav navbar-nav" style="background-color: rgba(0, 0, 50, 1); width: 100%;">
   <a class="navbar-brand" >Dronify</a>
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
-    
+
       <li class="nav-item">
-        <a class="nav-link" href="#">Account details</a>
+        <a ng-click="$ctrl.accountInfo()" >Account Details</a>
       </li>
       <li class="nav-item" style="float: right;" >
         <a ng-click="$ctrl.logout()" ng-show="$ctrl.isLogoutVisible()" >Logout</a>

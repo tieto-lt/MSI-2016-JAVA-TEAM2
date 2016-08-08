@@ -47,6 +47,9 @@ module.config(function($stateProvider, $urlRouterProvider) {
     .state('root.customerPage', {
       url: "/customerPage",
       template: "<customer-page></customer-page>",
+      data : {
+        role : "ROLE_CUSTOMER"
+      }
     })
     .state('root.accountInformation', {
       url: "/accountInformation",
@@ -55,14 +58,23 @@ module.config(function($stateProvider, $urlRouterProvider) {
     .state('root.operatorPage', {
       url: "/operatorPage",
       template: "<operator-page></operator-page>",
+      data : {
+        role : "ROLE_OPERATOR"
+      }
     })
     .state('root.adminPage', {
       url: "/adminPage",
       template: "<admin-page></admin-page>",
+      data : {
+        role: "ROLE_ADMIN"
+      }
     })
     .state('root.userList', {
       url: "/userList",
-      template: "<user-list></user-list>"
+      template: "<user-list></user-list>",
+      data: {
+        role: "ROLE_ADMIN"
+      }
     });
 });
 
@@ -81,15 +93,52 @@ module.run(['$transitions', 'Session', '$state', function($transitions, Session,
     });
 
   $transitions.onStart(
+  {
+    to: function (state) {
+       return state.name == "root.Login" && Session.isSessionActive();
+     }
+  },
+  function () {
+    console.log("TODO: fix this errror");
+      return $state.go("root.home");
+
+  });
+
+  $transitions.onStart(
+   {
+     to: function (state) {
+       return state.data && state.data.role && state.data.role.indexOf("ROLE_ADMIN") >= 0;
+     }
+   },
+   function () {
+      if (Session.getSession().authorities[0] != "ROLE_ADMIN") {
+        return $state.target('root.home');
+      }
+   });
+
+   $transitions.onStart(
     {
       to: function (state) {
-         return state.name == "root.Login" && Session.isSessionActive();
-       }
+        return state.data && state.data.role && state.data.role.indexOf("ROLE_CUSTOMER") >= 0;
+      }
     },
     function () {
-      console.log("TODO: fix this errror");
-        return $state.go("root.home");
-
+       if (Session.getSession().authorities[0] != "ROLE_CUSTOMER") {
+         return $state.target('root.home');
+       }
     });
+
+    $transitions.onStart(
+     {
+       to: function (state) {
+         return state.data && state.data.role && state.data.role.indexOf("ROLE_OPERATOR") >= 0;
+       }
+     },
+     function () {
+        if (Session.getSession().authorities[0] != "ROLE_OPERATOR") {
+          return $state.target('root.home');
+        }
+     });
+
 
 }]);

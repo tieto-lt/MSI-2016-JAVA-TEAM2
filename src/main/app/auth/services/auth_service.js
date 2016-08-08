@@ -4,6 +4,7 @@ function Service ($http, $httpParamSerializer, $cookies) {
 
     this.login = login;
     this.redirect = redirect;
+    this.logout = logout;
 
     function login(username, password) {
         var data = { grant_type:"password", username: username, password: password, client_id: "web-ui" };
@@ -26,6 +27,10 @@ function Service ($http, $httpParamSerializer, $cookies) {
 
     function redirect() {
 
+    }
+    function logout()
+    {
+        return $http.post('/api/users/logout');
     }
 }
 

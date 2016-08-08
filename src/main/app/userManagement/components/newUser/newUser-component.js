@@ -20,7 +20,7 @@ function Controller($state, UserServiceImpl) {
         },
         function (err) {
             if (err.status === 400) {
-                vm.errors = err.data;
+                vm.errors = [err.data];
             } else {
                 console.log('Error', err);
             }

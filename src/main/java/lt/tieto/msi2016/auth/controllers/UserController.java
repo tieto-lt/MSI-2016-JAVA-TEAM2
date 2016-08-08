@@ -73,4 +73,9 @@ public class UserController extends BaseController {
     {
         return !securityHolder.getUserPrincipal().getAuthorities().stream().filter(grantedAuthority -> grantedAuthority.getAuthority().equals(ADMIN)).collect(Collectors.toList()).isEmpty();
     }
+
+    @RequestMapping(value = "/api/users/logout", method = RequestMethod.POST)
+    public void logout() {
+        securityHolder.logout();
+    }
 }
