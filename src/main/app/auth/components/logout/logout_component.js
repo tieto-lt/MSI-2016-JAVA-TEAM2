@@ -6,6 +6,7 @@ function Controller($state, Session, AuthService, $http) {
     var vm = this;
 
     vm.logout = logout;
+    vm.accountInfo = accountInfo;
     vm.isLogoutVisible = isLogoutVisible;
     vm.isNavigationVisible = isNavigationVisible;
 
@@ -28,6 +29,10 @@ function Controller($state, Session, AuthService, $http) {
                 Session.invalidate();
                 $state.go('root.Login');
             });
+    }
+
+    function accountInfo() {
+        $state.go('root.accountInformation');
     }
 }
 
