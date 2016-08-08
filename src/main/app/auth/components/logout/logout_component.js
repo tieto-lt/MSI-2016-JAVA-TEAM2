@@ -1,7 +1,7 @@
 var module = require('main_module');
 
 
-function Controller($state, Session) {
+function Controller($state, Session, AuthService) {
 
     var vm = this;
 
@@ -22,13 +22,17 @@ function Controller($state, Session) {
     }
 
     function logout() {
-        Session.invalidate();
-        $state.go('root.Login');
+        AuthService.logout().then(
+            function() {
+                $http.defaults.headers.common.Authorization=undefined;
+                Session.invalidate();
+                $state.go('root.Login');
+            });
     }
 }
 
 
-Controller.$inject = ['$state', 'Session'];
+Controller.$inject = ['$state', 'Session', 'AuthService'];
 
 module.component('logout', {
     controller: Controller,
