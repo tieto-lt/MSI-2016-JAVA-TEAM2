@@ -20,6 +20,11 @@ function Service($http, $q) {
     return $http.get('/api/users');
   };
 
+  this.getUser = function(userId) {
+    return $http.get('/api/users/'+ userId, userId);
+  };
+
+
   this.update = function(user) {
     var d = $q.defer();
     d.resolve(user);

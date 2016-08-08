@@ -6,6 +6,7 @@ function Controller($state, Session) {
     var vm = this;
 
     vm.logout = logout;
+    vm.accountInfo = accountInfo;
     vm.isLogoutVisible = isLogoutVisible;
     vm.isNavigationVisible = isNavigationVisible;
 
@@ -24,6 +25,10 @@ function Controller($state, Session) {
     function logout() {
         Session.invalidate();
         $state.go('root.Login');
+    }
+
+    function accountInfo() {
+        $state.go('root.accountInformation');
     }
 }
 
