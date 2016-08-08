@@ -8,8 +8,7 @@ function Controller($state, Session, UserServiceImpl) {
     vm.errors = [];
 
    vm.$onInit = function(user) {
-     // TODO kai token'as tures ID, tai ideti ja i x
-     UserServiceImpl.getUser(/*x*/2).then(
+     UserServiceImpl.getUser(Session.getSession().userId).then(
          function (response) {
            vm.user = response.data;
            console.log('getting user ok');
