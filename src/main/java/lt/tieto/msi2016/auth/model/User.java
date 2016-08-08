@@ -11,24 +11,25 @@ public class User {
     private Long id;
 
     @NotNull
-    @Size(min=6)
+    @Size(min=6,max = 20)
+    @Pattern(regexp = "^[a-zA-Z0-9_]+$")
     private String userName;
 
     @NotNull
-    @Size(min=6)
+    @Size(min=6,max = 30)
+    @Pattern(regexp = "^[a-zA-Z0-9_]+$")
     private String password;
 
     @NotNull
+    @Size(max = 255)
     private String name;
 
     @NotNull
-    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
-            +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-            +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+    @Pattern(regexp="^[a-z0-9!#$%&'*+\\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$")
     private String email;
 
     @NotNull
-    @Size(min=7)
+    @Pattern(regexp = "^[\\+ | 0-9][0-9]*")
     private String phone;
 
     private String userRole;
