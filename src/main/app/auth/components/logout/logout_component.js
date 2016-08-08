@@ -9,18 +9,28 @@ function Controller($state, Session, AuthService, $http) {
     vm.accountInfo = accountInfo;
     vm.isLogoutVisible = isLogoutVisible;
     vm.isNavigationVisible = isNavigationVisible;
+    vm.isItNewUser = isItNewUser;
 
     function isLogoutVisible() {
         return Session.isSessionActive();
     }
 
     function isNavigationVisible() {
-      if($state.current.name != "root.Login"){
+      if($state.current.name != "root.Login" ){
           return true;
       } else {
           return false;
       }
     }
+
+    function isItNewUser() {
+      if($state.current.name != "root.newUser" ){
+          return true;
+      } else {
+          return false;
+      }
+    }
+
 
     function logout() {
         AuthService.logout().then(
