@@ -68,8 +68,6 @@ module.config(function($stateProvider, $urlRouterProvider) {
 
 module.run(['$transitions', 'Session', '$state', function($transitions, Session, $state) {
 
-  Session.initHttp();
-
   $transitions.onStart(
     {
       to: function (state) { return !state.data || !state.data.isPublic; }

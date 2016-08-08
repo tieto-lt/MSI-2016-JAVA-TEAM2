@@ -9,4 +9,8 @@ require("bootstrap/dist/css/bootstrap.css");
 
 var _module = angular.module('AngularSpringRestDemo', ['ui.router', 'ngMessages', 'ngCookies', 'angular-jwt']);
 
+_module.config(['$httpProvider', function($httpProvider) {
+   $httpProvider.interceptors.push('myInterceptor');
+}]);
+
 module.exports = _module;
