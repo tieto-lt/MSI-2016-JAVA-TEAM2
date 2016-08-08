@@ -1,7 +1,7 @@
 var module = require('main_module');
 
 
-function Controller($state, Session, AuthService) {
+function Controller($state, Session, AuthService, $http) {
 
     var vm = this;
 
@@ -32,7 +32,7 @@ function Controller($state, Session, AuthService) {
 }
 
 
-Controller.$inject = ['$state', 'Session', 'AuthService'];
+Controller.$inject = ['$state', 'Session', 'AuthService', '$http'];
 
 module.component('logout', {
     controller: Controller,
