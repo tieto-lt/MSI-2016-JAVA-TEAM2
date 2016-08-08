@@ -11,7 +11,7 @@
 
 <!-- Text input-->
          <div class="form-group">
-           <label class=" control-label" for="textinput">Username</label>
+           <label class=" control-label" for="textinput">UserName</label>
            <div class="">
              <input id="textinput" name="username" class="form-control input-md" type="text"
              ng-model="$ctrl.user.userName"
@@ -42,7 +42,7 @@
                   <div class="form-group">
                     <label class=" control-label" for="password">Confirm Password</label>
                     <div class="">
-                      <input id="passwordinput" name="confirmPassword" placeholder="Confirm Password" class="form-control input-md" type="password"
+                      <input id="passwordinput" name="confirmPassword"  class="form-control input-md" type="password"
                       ng-model="$ctrl.user.confirmPassword" ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30" match-Password="$ctrl.user.password">
                       <div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.required">Field Password is required!</div>
                       <div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.minlength">Password must be at least 6 symbols long.</div>
@@ -114,7 +114,11 @@
 <button type="button" class="btn btn-default" ng-click="$ctrl.logout()">Go back to login form</button>
 
 
-
+    <div class="alert alert-danger" role="alert" ng-repeat="error in $ctrl.errors">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+         Field '{{error.name}}' : {{error.message}}
+    </div>
 
 </div>
 <div>
