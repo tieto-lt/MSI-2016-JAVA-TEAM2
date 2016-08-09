@@ -18,7 +18,7 @@ public class MissionsController {
     @Autowired
     private MissionService missionService;
 
-    @RequestMapping(method = RequestMethod.GET, name = "api/missions")
+    @RequestMapping(method = RequestMethod.GET, value = "api/missions")
     public ResponseEntity<MissionResponse> getMissions(@RequestParam("operatorToken") String operatorToken) {
         return ResponseEntity.ok(missionService.getDefaultMission());
     }

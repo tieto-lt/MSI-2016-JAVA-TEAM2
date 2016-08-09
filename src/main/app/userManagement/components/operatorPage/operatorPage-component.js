@@ -6,6 +6,9 @@ function Controller(Session, OperatorService) {
 
 
   vm.error = undefined;
+
+  // kol dar nera visu end point'u, tol nenaudoti
+
   vm.validateOperator = validateOperator;
 
   function validateOperator() {
