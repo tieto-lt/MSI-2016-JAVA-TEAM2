@@ -14,4 +14,6 @@ public interface OperatorService {
      * @return
      */
     Operator getOperatorState(Long id);
+
+    void verifyOperatorService (String token);
 }

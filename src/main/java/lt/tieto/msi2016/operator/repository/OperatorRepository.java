@@ -54,5 +54,22 @@ public class OperatorRepository extends BaseRepository<OperatorDb> {
 
     }
 
+    public OperatorDb findByToken(String token)
+    {
+        try {
+            return jdbcTemplate.queryForObject("select * from operators where token = ?", new Object[]{token}, ROW_MAPPER);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    public void changeOperatorVerify(Long userId, Boolean isVerified) {
+        try {
+            jdbcTemplate.update("UPDATE operators set isVerified = ? where userId = ?", isVerified, userId);
+        } catch (EmptyResultDataAccessException e) {
+
+        }
+    }
+
 
 }
