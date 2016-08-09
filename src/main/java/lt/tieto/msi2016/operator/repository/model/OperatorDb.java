@@ -12,6 +12,8 @@ public class OperatorDb extends DbModel {
 
     private Boolean isVerified;
 
+    private Long userId;
+
     public static OperatorDb valueOf (Operator operator)
     {
         OperatorDb operatorDb = new OperatorDb();
@@ -19,6 +21,7 @@ public class OperatorDb extends DbModel {
         operatorDb.setId(operator.getId());
         operatorDb.setToken(operator.getToken());
         operatorDb.setVerified(operator.getVerified());
+        operatorDb.setUserId(operator.getUserId());
         return operatorDb;
     }
 
@@ -37,5 +40,13 @@ public class OperatorDb extends DbModel {
 
     public void setVerified(Boolean verified) {
         isVerified = verified;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

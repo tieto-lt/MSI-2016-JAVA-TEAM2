@@ -13,6 +13,8 @@ public class Operator {
 
     private Boolean isVerified;
 
+    private Long userId;
+
     public static Operator valueOf (OperatorDb operatorDb)
     {
         Operator operator = new Operator();
@@ -20,6 +22,7 @@ public class Operator {
         operator.setId(operatorDb.getId());
         operator.setToken(operatorDb.getToken());
         operator.setVerified(operatorDb.getVerified());
+        operator.setUserId(operatorDb.getUserId());
         return operator;
     }
 
@@ -45,5 +48,14 @@ public class Operator {
 
     public void setVerified(Boolean verified) {
         isVerified = verified;
+    }
+
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

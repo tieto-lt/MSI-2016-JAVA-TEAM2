@@ -22,7 +22,7 @@ public class OperatorServiceImpl implements OperatorService {
     @Override
     public Operator getOperatorState(Long id)
     {
-        return fillOperator(operatorRepository.findOne(id));//padaryti, kad rastu pagal user id is operator lentos
+        return fillOperator(operatorRepository.findById(id));//padaryti, kad rastu pagal user id is operator lentos
     }
 
     @Transactional

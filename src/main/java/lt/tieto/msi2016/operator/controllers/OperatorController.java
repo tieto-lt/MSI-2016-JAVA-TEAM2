@@ -34,7 +34,7 @@ public class OperatorController extends BaseController {
 
 
     @Secured(OPERATOR)
-    @RequestMapping(value = "/api/users/{id}/operatorStates", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/users/{id}/operatorState", method = RequestMethod.GET)
     public ResponseEntity<Operator> getOperator(@PathVariable Long id){
         if(canAccessInfo(id))
         {

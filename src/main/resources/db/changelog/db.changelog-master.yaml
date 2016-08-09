@@ -169,7 +169,7 @@ databaseChangeLog:
             tableName: operators
             columns:
               - column:
-                  name: id
+                  name: userId
                   type: int
               - column:
                   name: token
@@ -177,17 +177,17 @@ databaseChangeLog:
               - column:
                   name: isVerified
                   type: bool
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
 
         - addForeignKeyConstraint:
             onDelete: CASCADE
-            baseColumnNames: id
+            baseColumnNames: userId
             baseTableName: operators
-            constraintName: fk_id_auth
+            constraintName: fk_userId_operators
             referencedColumnNames: id
             referencedTableName: users
-        - createIndex:
-            columns:
-              - column:
-                  name: id
-            indexName: idx_operators_id
-            tableName: operators
