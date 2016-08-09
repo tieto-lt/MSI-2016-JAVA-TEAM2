@@ -48,4 +48,15 @@ public class OperatorServiceImpl implements OperatorService {
         }
         return Operator.valueOf(opDb);
     }
+
+    @Transactional
+    public void verifyOperatorService (String token)
+    {
+        OperatorDb operatorDb = operatorRepository.findByToken(token);
+
+        operatorRepository.changeOperatorVerify(operatorDb.getUserId(), false);
+
+    }
+
+
 }

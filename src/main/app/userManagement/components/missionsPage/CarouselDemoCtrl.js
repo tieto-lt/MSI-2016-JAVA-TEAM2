@@ -7,7 +7,7 @@ angular.module('ui.bootstrap').controller('CarouselDemoCtrl', function ($scope) 
 
   $scope.addSlide = function(pictureId) {
     slides.push({
-      image: 'http://images2.fanpop.com/images/photos/4600000/Nature-random-4603337-500-313',
+      image: 'https://dharmaonthefarmdotcom.files.wordpress.com/2016/03/cropped-screen-shot-2016-03-28-at-9-42-04-pm.png',
       text: ['Nice image','Awesome photograph','That is so cool','I love that'][3],
       id: currIndex++
     });

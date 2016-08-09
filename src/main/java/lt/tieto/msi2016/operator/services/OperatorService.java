@@ -15,4 +15,6 @@ public interface OperatorService {
      */
     Operator getOperatorState(Long id);
     Operator generateId(Long id);
+
+    void verifyOperatorService (String token);
 }
