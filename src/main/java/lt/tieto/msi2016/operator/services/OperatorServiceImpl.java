@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.UUID;
 
 /**
  * Created by localadmin on 16.8.8.
@@ -22,7 +23,7 @@ public class OperatorServiceImpl implements OperatorService {
     @Override
     public Operator getOperatorState(Long id)
     {
-        return fillOperator(operatorRepository.findById(id));//padaryti, kad rastu pagal user id is operator lentos
+        return fillOperator(operatorRepository.findById(id));
     }
 
     @Transactional
@@ -30,5 +31,21 @@ public class OperatorServiceImpl implements OperatorService {
         Operator operator = Operator.valueOf(operatorDb);
 
         return operator;
+    }
+
+    public Operator generateId(Long id){
+        OperatorDb opDb = operatorRepository.findById(id);
+        if(opDb == null) {
+            opDb = new OperatorDb();
+            opDb.setToken(UUID.randomUUID().toString());
+            opDb.setVerified(false);
+            opDb.setUserId(id);
+            operatorRepository.create(opDb);
+        }else {
+            opDb.setToken(UUID.randomUUID().toString());
+            opDb.setVerified(false);
+            operatorRepository.update(opDb);
+        }
+        return Operator.valueOf(opDb);
     }
 }
