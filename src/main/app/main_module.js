@@ -1,6 +1,6 @@
 //Main module which gets required 'module = require('main_module')' in all custom written angular modules
 require('angular');
-require("ui-bootstrap/ui-bootstrap.js");
+require('angular-ui-bootstrap');
 require('angular-animate');
 require('angular-touch');
 require('angular-ui-router');
