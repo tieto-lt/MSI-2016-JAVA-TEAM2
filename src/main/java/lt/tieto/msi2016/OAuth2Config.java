@@ -1,7 +1,5 @@
 package lt.tieto.msi2016;
 
-import javax.sql.DataSource;
-
 import lt.tieto.msi2016.auth.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +23,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
-import java.util.HashMap;
+import javax.sql.DataSource;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -103,6 +101,7 @@ public class OAuth2Config implements AuthorizationServerConfigurer, ResourceServ
         // @formatter:off
         http.authorizeRequests()
                 .antMatchers("/api/users").permitAll()
+                .antMatchers("/api/missions").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated();
