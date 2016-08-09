@@ -2,5 +2,8 @@ require('newUser/newUser-component');
 require('customerPage/customerPage-component');
 require('accountInformation/accountInformation-component');
 require('operatorPage/operatorPage-component');
+require('operatorPage/AccordionDemoCtrl');
+require('operatorPage/CarouselDemoCtrl');
+require('operatorPage/ProgressDemoCtrl');
 require('adminPage/adminPage-component');
 require('userList/userList_component');
