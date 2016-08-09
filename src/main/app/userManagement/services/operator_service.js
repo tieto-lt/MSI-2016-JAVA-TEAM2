@@ -1,15 +1,12 @@
 var module = require('main_module');
 
-function Service($http, $q) {
+function Service($http, $q, $cookies) {
 
-  // kol dar nera visu end point'u, tol nenaudoti
-
-
-  this.validateOperator = function(operatorId) {
-    return $http.get('/api/users/' + operatorId +'/operatorState', operatorId);
+  this.verifyOperator = function(operatorId) {
+    return $http.post('/api/users/' + operatorId + '/operatorState', operatorId);
   };
 
 }
 
-Service.$inject = ['$http', '$q'];
+Service.$inject = ['$http', '$q', '$cookies'];
 module.service('OperatorService', Service);

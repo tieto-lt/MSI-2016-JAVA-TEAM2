@@ -12,10 +12,12 @@ function Controller($state, Session, AuthService, $http) {
     vm.isItNewUser = isItNewUser;
     vm.isOperator = isOperator;
     vm.isCustomer = isCustomer;
+    vm.isAdmin = isAdmin;
     vm.goToOperatorPage = goToOperatorPage;
-    vm.goToMissionsPage = goToMissionsPage;
-    vm.goToOrdersPage = goToOrdersPage;
+    vm.goToAdminPage = goToAdminPage;
     vm.goToCustomerPage = goToCustomerPage;
+    vm.goToMissionsPage = goToMissionsPage;
+    vm.goToUserList = goToUserList;
 
     function isLogoutVisible() {
         return Session.isSessionActive();
@@ -60,6 +62,15 @@ function Controller($state, Session, AuthService, $http) {
         }
     }
 
+    function isAdmin(){
+
+        if(Session.isSessionActive() && Session.getSession().authorities[0] == "ROLE_ADMIN"){
+          return true;
+        } else {
+          return false;
+        }
+    }
+
     function isCustomer(){
 
         if(Session.isSessionActive() && Session.getSession().authorities[0] == "ROLE_CUSTOMER"){
@@ -72,17 +83,21 @@ function Controller($state, Session, AuthService, $http) {
     function goToOperatorPage() {
         $state.go('root.operatorPage');
     }
+    function goToCustomerPage() {
+        $state.go('root.customerPage');
+    }
+    function goToAdminPage() {
+        $state.go('root.adminPage');
+    }
 
     function goToMissionsPage(){
         $state.go('root.missionsPage');
     }
 
-    function goToOrdersPage(){
-        $state.go('root.customerPage');
+    function goToUserList(){
+        $state.go('root.userList');
     }
-    function goToCustomerPage(){
-        $state.go('root.customerPage');
-    }
+
 
 }
 
