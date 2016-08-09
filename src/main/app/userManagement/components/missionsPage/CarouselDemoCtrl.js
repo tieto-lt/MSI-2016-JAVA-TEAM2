@@ -5,11 +5,10 @@ angular.module('ui.bootstrap').controller('CarouselDemoCtrl', function ($scope) 
   var slides = $scope.slides = [];
   var currIndex = 0;
 
-  $scope.addSlide = function() {
-    var newWidth = 600 + slides.length + 1;
+  $scope.addSlide = function(pictureId) {
     slides.push({
-      image: 'http://lorempixel.com/' + newWidth + '/300',
-      text: ['Nice image','Awesome photograph','That is so cool','I love that'][slides.length % 4],
+      image: 'http://images2.fanpop.com/images/photos/4600000/Nature-random-4603337-500-313',
+      text: ['Nice image','Awesome photograph','That is so cool','I love that'][3],
       id: currIndex++
     });
   };
@@ -20,7 +19,7 @@ angular.module('ui.bootstrap').controller('CarouselDemoCtrl', function ($scope) 
   };
 
   for (var i = 0; i < 4; i++) {
-    $scope.addSlide();
+    $scope.addSlide(i);
   }
 
   // Randomize logic below
