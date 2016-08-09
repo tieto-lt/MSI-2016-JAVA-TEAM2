@@ -1,32 +1,45 @@
 <nav ng-show="$ctrl.isNavigationVisible()" class="navbar navbar-fixed-top " role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <ul class="nav navbar-nav" style="background-color: rgba(0, 0, 50, 1); width: 100%;">
-  <a class="navbar-brand" >Dronify</a>
+  <a class="navbar-brand" >DRONIFY</a>
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a ng-show="$ctrl.isOperator()" ng-click="$ctrl.goToOperatorPage()" >Operator page</a>
+        <a ng-show="$ctrl.isOperator()" href="#/operatorPage" ng-click="$ctrl.goToOperatorPage()" >Operator page
+        <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a ng-show="$ctrl.isOperator()" ng-click="$ctrl.goToMissionsPage()" >Missions page</a>
+        <a ng-show="$ctrl.isAdmin()" href="#/adminPage" ng-click="$ctrl.goToAdminPage()" >Admin page
+        <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a ng-show="$ctrl.isItNewUser()" ng-click="$ctrl.accountInfo()" >Account Details</a>
+        <a ng-show="$ctrl.isCustomer()" href="#/customerPage" ng-click="$ctrl.goToCustomerPage()" >Customer page
+        <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item" ng-show="$ctrl.isOperator()" ng-if="true">
-        <a ng-if="false">
-          <button type="button" class="btn btn-success">Verified</button>
-        </a>
-        <a ng-if="true">
-          <button type="button" class="btn btn-danger">Not Verified</button>
-        </a>
+      <li class="nav-item">
+        <a ng-show="$ctrl.isOperator()" href="#/missionsPage" ng-click="$ctrl.goToMissionsPage()" >Missions page
+        <span class="sr-only">(current)</span></a>
       </li>
-
-
+      <li class="nav-item">
+        <a ng-show="$ctrl.isAdmin()" href="#/userList" ng-click="$ctrl.goToUserList()" >User List
+        <span class="sr-only">(current)</span></a>
+      </li>
       <li class="nav-item" style="float: right;" >
         <a ng-click="$ctrl.logout()" ng-show="$ctrl.isLogoutVisible()" >Logout</a>
       </li>
+      <li class="nav-item">
+        <a ng-show="$ctrl.isItNewUser()" href="#/accountInformation" ng-click="$ctrl.accountInfo()" >Account Details
+        <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" style="float: right;" ng-show="$ctrl.isOperator()" ng-if="true" >
+        <a ng-if="false"  class="btn btn-success">
+          Verified
+        </a>
+        <a ng-if="true" class="btn btn-danger"> Not Verified </a>
+      </li>
+
+
 
     </ul>
 

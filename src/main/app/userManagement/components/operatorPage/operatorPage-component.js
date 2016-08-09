@@ -1,15 +1,14 @@
 var module = require('main_module');
 
-function Controller(Session, OperatorService) {
+function Controller(Session, OperatorService, $state) {
   var vm = this;
   vm.user = {};
-
-
   vm.error = undefined;
-  vm.validateOperator = validateOperator;
 
-  function validateOperator() {
-      OperatorService.validateOperator(Session.getSession().userId).then(
+  vm.verifyOperator = verifyOperator;
+
+  function verifyOperator() {
+      OperatorService.verifyOperator(Session.getSession().userId).then(
           function (response) {
               vm.error = undefined;
               $state.go('root.operatorPage');
@@ -20,7 +19,7 @@ function Controller(Session, OperatorService) {
   }
 
 }
-Controller.$injcet = ['Session', 'OperatorService'];
+Controller.$injcet = ['Session', 'OperatorService', '$state'];
 module.component('operatorPage', {
     controller: Controller,
     templateUrl: require('./operatorPage.html')

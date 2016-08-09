@@ -18,7 +18,7 @@ function Controller(UserServiceImpl) {
 
     function executeUpdate(user,newRole) {
       vm.user = user;
-    user.userRole = newRole;
+      user.userRole = newRole;
         UserServiceImpl.put(vm.user).then(
             function () { console.log('Update success'); },
             function (err) {

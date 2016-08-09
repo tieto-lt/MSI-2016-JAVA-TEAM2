@@ -45,6 +45,16 @@ public class OperatorController extends BaseController {
         }
     }
 
+    @Secured(OPERATOR)
+    @RequestMapping(value = "/api/users/{id}/operatorState", method = RequestMethod.POST)
+    public ResponseEntity<Operator> generateToken(@PathVariable Long id){
+      if(canAccessInfo(id)){
+         return ResponseEntity.ok(operatorService.generateId(id));
+      }
+
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+    }
+
     private boolean canAccessInfo(Long id){
         return securityHolder.getUserPrincipal().getUsername().equals(userService.getUserInfo(id).getUserName());
     }
