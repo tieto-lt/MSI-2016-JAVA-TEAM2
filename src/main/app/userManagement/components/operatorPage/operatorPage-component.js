@@ -2,13 +2,24 @@ var module = require('main_module');
 
 function Controller(Session, OperatorService, $state) {
   var vm = this;
-  vm.user = {};
+  vm.operatorState = {};
   vm.error = undefined;
 
-  vm.verifyOperator = verifyOperator;
+  vm.getVerificationInfo = getVerificationInfo;
 
-  function verifyOperator() {
-      OperatorService.verifyOperator(Session.getSession().userId).then(
+  vm.$onInit = function() {
+    OperatorService.getVerificationInfo(Session.getSession().userId).then(
+    function (response) {
+        vm.operatorState = response.data;
+    },
+    function (err) {
+        vm.error = err.data.error_description;
+    });
+  };
+
+
+  function getVerificationInfo() {
+      OperatorService.getVerificationInfo(Session.getSession().userId).then(
           function (response) {
               vm.error = undefined;
               $state.go('root.operatorPage');

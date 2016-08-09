@@ -9,4 +9,3 @@ require('missionsPage/CarouselDemoCtrl');
 require('missionsPage/ProgressDemoCtrl');
 require('adminPage/adminPage-component');
 require('userList/userList_component');
-require('homePage/homePage-component');

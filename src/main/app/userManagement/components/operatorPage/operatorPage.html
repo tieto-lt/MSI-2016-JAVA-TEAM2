@@ -10,18 +10,20 @@
       <div class="msi-content" ui-view ng-cloak></div>
   </div>
 
-  <button type="button" class="btn btn-success">Verified</button>
-  <button type="button" class="btn btn-danger">Not Verified</button>
-
   <div ng-controller="CollapseDemoCtrl">
-	<button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed && $ctrl.verifyOperator()">Click to verify</button>
-	<hr>
-	<div uib-collapse="!isCollapsed">
-		<div class="well well-lg">Verifying</div>
-	</div>
+	
+    <h4>Token:</h4>
+    <pre>{{$ctrl.operatorState.token}}</pre>
+    <h4>Verification: </h4>
+    <pre>{{$ctrl.operatorState.verified}}</pre>
 
+    <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed && $ctrl.getVerificationInfo()">Click to verify</button>
+  	<hr>
+  	<div uib-collapse="!isCollapsed">
+  		<div class="well well-lg">Verifying</div>
+  	</div>
 
-</div>
+  </div>
 
 
 
