@@ -1,4 +1,4 @@
-package lt.tieto.msi2016.missions.model;
+package lt.tieto.msi2016.missions.model.mission;
 
 import java.util.List;
 

@@ -1,8 +1,10 @@
 package lt.tieto.msi2016.missions.services;
 
-import lt.tieto.msi2016.missions.model.MissionCommands;
-import lt.tieto.msi2016.missions.model.MissionPlan;
-import lt.tieto.msi2016.missions.model.MissionResponse;
+import lt.tieto.msi2016.missions.model.mission.MissionCommands;
+import lt.tieto.msi2016.missions.model.mission.MissionPlan;
+import lt.tieto.msi2016.missions.model.mission.MissionResponse;
+import lt.tieto.msi2016.missions.repository.MissionResultRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,6 +15,9 @@ import java.util.List;
  */
 @Service
 public class MissionServiceImpl implements MissionService {
+
+    @Autowired
+    private MissionResultRepository missionResultRepository;
 
     private static MissionResponse defaultMission;
 
@@ -43,5 +48,10 @@ public class MissionServiceImpl implements MissionService {
     @Override
     public MissionResponse getDefaultMission() {
         return defaultMission;
+    }
+
+    @Override
+    public void saveResults(Long missionId, String operatorToken, String result) {
+
     }
 }
