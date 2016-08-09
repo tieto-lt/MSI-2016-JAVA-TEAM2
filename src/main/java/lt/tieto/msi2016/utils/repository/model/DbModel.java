@@ -13,7 +13,7 @@ public class DbModel implements Persistable<Long> {
 
     @Override
     public boolean isNew() {
-        return false;
+        return id == null;
     }
 
     public void setId(Long id) {
