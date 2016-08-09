@@ -62,6 +62,13 @@ module.config(function($stateProvider, $urlRouterProvider) {
         role : "ROLE_OPERATOR"
       }
     })
+    .state('root.missionsPage', {
+      url: "/missionsPage",
+      template: "<missions-page></missions-page>",
+      data : {
+        role : "ROLE_OPERATOR"
+      }
+    })
     .state('root.adminPage', {
       url: "/adminPage",
       template: "<admin-page></admin-page>",
