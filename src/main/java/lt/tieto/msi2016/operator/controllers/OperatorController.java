@@ -12,14 +12,14 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.RestController;
 
 import static lt.tieto.msi2016.utils.constants.Roles.OPERATOR;
 
 /**
  * Created by localadmin on 16.8.8.
  */
+@RestController
 public class OperatorController extends BaseController {
 
     @Autowired
@@ -34,7 +34,7 @@ public class OperatorController extends BaseController {
 
 
     @Secured(OPERATOR)
-    @RequestMapping(value = "/api/users/{id}/operatorStates", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/users/{id}/operatorState", method = RequestMethod.GET)
     public ResponseEntity<Operator> getOperator(@PathVariable Long id){
         if(canAccessInfo(id))
         {
@@ -46,12 +46,8 @@ public class OperatorController extends BaseController {
     }
 
     private boolean canAccessInfo(Long id){
-        return securityHolder.getUserPrincipal().getUsername().equals(userService.getUserInfo(id).getUserName()) || isUserOperator();
+        return securityHolder.getUserPrincipal().getUsername().equals(userService.getUserInfo(id).getUserName());
     }
 
-    private boolean isUserOperator()
-    {
-        return !securityHolder.getUserPrincipal().getAuthorities().stream().filter(grantedAuthority -> grantedAuthority.getAuthority().equals(OPERATOR)).collect(Collectors.toList()).isEmpty();
-    }
 
 }
