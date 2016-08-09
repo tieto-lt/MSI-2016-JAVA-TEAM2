@@ -160,3 +160,34 @@ databaseChangeLog:
                 name: authority
                 value: 'ROLE_ADMIN'
             tableName: authorities
+
+  - changeSet:
+      id: 7
+      author: tieto
+      changes:
+        - createTable:
+            tableName: operators
+            columns:
+              - column:
+                  name: id
+                  type: int
+              - column:
+                  name: token
+                  type: varchar(36)
+              - column:
+                  name: isVerified
+                  type: bool
+
+        - addForeignKeyConstraint:
+            onDelete: CASCADE
+            baseColumnNames: id
+            baseTableName: operators
+            constraintName: fk_id_auth
+            referencedColumnNames: id
+            referencedTableName: users
+        - createIndex:
+            columns:
+              - column:
+                  name: id
+            indexName: idx_operators_id
+            tableName: operators
