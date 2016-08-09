@@ -3,6 +3,7 @@ package lt.tieto.msi2016.operator.services;
 import lt.tieto.msi2016.operator.model.Operator;
 import lt.tieto.msi2016.operator.repository.OperatorRepository;
 import lt.tieto.msi2016.operator.repository.model.OperatorDb;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -10,6 +11,7 @@ import javax.annotation.Resource;
 /**
  * Created by localadmin on 16.8.8.
  */
+@Service
 public class OperatorServiceImpl implements OperatorService {
 
     @Resource
@@ -20,7 +22,7 @@ public class OperatorServiceImpl implements OperatorService {
     @Override
     public Operator getOperatorState(Long id)
     {
-        return fillOperator(operatorRepository.findOne(id));
+        return fillOperator(operatorRepository.findOne(id));//padaryti, kad rastu pagal user id is operator lentos
     }
 
     @Transactional
