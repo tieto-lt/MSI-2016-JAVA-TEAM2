@@ -82,6 +82,13 @@ module.config(function($stateProvider, $urlRouterProvider) {
       data: {
         role: "ROLE_ADMIN"
       }
+    })
+    .state('root.homePage', {
+      url: "/homePage",
+      template: "<home-page></home-page>",
+      data: {
+        isPublic: true
+      }
     });
 });
 

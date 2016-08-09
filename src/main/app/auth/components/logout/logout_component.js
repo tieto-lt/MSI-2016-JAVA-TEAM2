@@ -10,6 +10,7 @@ function Controller($state, Session, AuthService, $http) {
     vm.isLogoutVisible = isLogoutVisible;
     vm.isNavigationVisible = isNavigationVisible;
     vm.isItNewUser = isItNewUser;
+    vm.isItHome = isItHome;
     vm.isOperator = isOperator;
     vm.isCustomer = isCustomer;
     vm.isAdmin = isAdmin;
@@ -18,6 +19,8 @@ function Controller($state, Session, AuthService, $http) {
     vm.goToCustomerPage = goToCustomerPage;
     vm.goToMissionsPage = goToMissionsPage;
     vm.goToUserList = goToUserList;
+    vm.goHome = goHome;
+    vm.goLogin = goLogin;
 
     function isLogoutVisible() {
         return Session.isSessionActive();
@@ -33,6 +36,14 @@ function Controller($state, Session, AuthService, $http) {
 
     function isItNewUser() {
       if($state.current.name != "root.newUser" ){
+          return true;
+      } else {
+          return false;
+      }
+    }
+
+    function isItHome() {
+      if($state.current.name == "root.homePage" ){
           return true;
       } else {
           return false;
@@ -83,6 +94,9 @@ function Controller($state, Session, AuthService, $http) {
     function goToOperatorPage() {
         $state.go('root.operatorPage');
     }
+    function goLogin() {
+        $state.go('root.login');
+    }
     function goToCustomerPage() {
         $state.go('root.customerPage');
     }
@@ -97,7 +111,9 @@ function Controller($state, Session, AuthService, $http) {
     function goToUserList(){
         $state.go('root.userList');
     }
-
+    function goHome(){
+        $state.go('root.homePage');
+    }
 
 }
 
