@@ -14,7 +14,7 @@
   <button type="button" class="btn btn-danger">Not Verified</button>
 
   <div ng-controller="CollapseDemoCtrl">
-	<button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Click to verify</button>
+	<button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed && $ctrl.verifyOperator()">Click to verify</button>
 	<hr>
 	<div uib-collapse="!isCollapsed">
 		<div class="well well-lg">Verifying</div>
