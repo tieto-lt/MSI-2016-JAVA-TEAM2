@@ -55,18 +55,15 @@ body{
   color:    #fff;
   font-weight:300;
 }
-.auth .auth-box input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-  color:    #fff;
+/*.auth .auth-box input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+/*  color:    #fff;
   font-weight:300;
 }
 .auth .auth-box input::-moz-placeholder { /* Mozilla Firefox 19+ */
-  color:    #fff;
+/*  color:    #fff;
   font-weight:300;
-}
-.auth .auth-box input:-ms-input-placeholder { /* Internet Explorer 10+ */
-  color:    #fff;
-  font-weight:300;
-}
+}*/
+
 .auth span.input-group-addon,
 .input-group-btn button{
   border:none;
