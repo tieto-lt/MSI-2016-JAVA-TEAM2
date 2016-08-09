@@ -8,9 +8,7 @@ function Controller($state, Session, UserServiceImpl) {
     vm.errors = [];
 
    vm.$onInit = function(user) {
-     console.log($state);
-     console.log(Session);
-     UserServiceImpl.getUser(2).then(
+     UserServiceImpl.getUser(Session.getSession().userId).then(
          function (response) {
            vm.user = response.data;
            console.log('getting user ok');
