@@ -17,4 +17,5 @@ public interface OperatorService {
     Operator generateId(Long id);
 
     void verifyOperatorService (String token);
+    public boolean tokenExists(String operatorToken);
 }

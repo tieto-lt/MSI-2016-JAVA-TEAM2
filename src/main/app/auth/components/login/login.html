@@ -6,43 +6,27 @@
 
 <form class="msi-signin">
 
-    <!--label for="inputEmail" class="sr-only">Email address</label>
-    <input type="text" id="inputEmail"
-           class="form-control msi-input-email"
-           placeholder="Email address" required autofocus
-           ng-model="$ctrl.username"-->
+
 
            <div class="form-group">
              <label class=" control-label" for="inputEmail">Username</label>
              <div class="">
                <input id="inputEmail" name="username" class="form-control input-md" type="text"
                ng-model="$ctrl.username" required autofocus>
-                 <!--required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-minlength="6" ng-maxlength="20">
-                 <div class="help-block" ng-show="vm.myCustomForm.username.$error.required">Field Username is required!</div>
-                 <div class="help-block" ng-show="vm.myCustomForm.username.$error.minlength">Username must consist of at least 6 characters.</div>
-                 <div class="help-block" ng-show="vm.myCustomForm.username.$error.maxlength">Maximum length of the username is 20.</div>
-                 <div class="help-block" ng-show="vm.myCustomForm.username.$error.pattern">User is allowed to enter letters a-z, numbers 0-9 and symbols “.”, “-” and “_”, provided non of these are the first symbol.</div>
-                 <div class="help-block" ng-show="vm.customValidate()">User is not allowed to enter more than three of the same symbol in a row</div-->
+
              </div>
            </div>
-           <!-- Password input-->
+
                      <div class="form-group">
                        <label class=" control-label" for="inputPassword">Password</label>
                        <div class="">
                          <input id="inputPassword" name="password" class="form-control input-md" type="password"
                          ng-model="$ctrl.password" >
-                         <!--ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30">
-                         <div class="help-block"  ng-show="vm.myCustomForm.password.$error.required">Field Username is required!</div>
-                         <div class="help-block" ng-show="vm.myCustomForm.password.$error.minlength">Password must be at least 6 symbols long.</div>
-                         <div class="help-block" ng-show="vm.myCustomForm.password.$error.maxlength">Maximum length of the password is 30 symbols.</div>
-                         <div class="help-block" ng-show="vm.myCustomForm.password.$error.pattern">User is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div-->
+
                        </div>
                      </div>
 
-    <!--label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword"
-           class="form-control msi-input-password" placeholder="Password" required
-           ng-model="$ctrl.password"-->
+
 
 
     <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="$ctrl.login()">
