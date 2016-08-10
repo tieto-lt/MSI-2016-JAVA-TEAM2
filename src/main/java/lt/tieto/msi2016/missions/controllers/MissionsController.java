@@ -31,7 +31,7 @@ public class MissionsController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "api/missions")
+    @RequestMapping(method = RequestMethod.GET, value = "/api/missions")
     public ResponseEntity<?> getMissions(@RequestParam("operatorToken") String operatorToken) {
         if(operatorService.tokenExists(operatorToken)) {
             return ResponseEntity.ok(missionService.getDefaultMission());
@@ -50,7 +50,7 @@ public class MissionsController {
     }
 
     @Secured(OPERATOR)
-    @RequestMapping(value = "/api/missions",params = "onlyCompleted=true",method = RequestMethod.GET)
+    @RequestMapping(value = "/api/int/missions", params = "onlyCompleted=true", method = RequestMethod.GET)
     public ResponseEntity<MissionCompleted> getCompletedMissions ()
     {
         if(missionService.isAnyMissionDone(securityHolder.getUserPrincipal().getUsername()))
@@ -76,7 +76,7 @@ public class MissionsController {
     }
 
     @Secured(OPERATOR)
-    @RequestMapping(value = "/api/missions/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/int/missions/{id}", method = RequestMethod.GET)
     public ResponseEntity<Result> returnMissionDetails (@PathVariable Long id)
     {
         String username = securityHolder.getUserPrincipal().getUsername();
