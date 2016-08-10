@@ -1,8 +1,11 @@
 package lt.tieto.msi2016.missions.repository;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
 import lt.tieto.msi2016.missions.repository.mode.MissionResultDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
@@ -12,8 +15,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MissionResultRepository extends BaseRepository<MissionResultDb> {
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     public MissionResultRepository() {
-        super(ROW_MAPPER, ROW_UNMAPPER, "MISSION_RESULTS", "id");
+        super(ROW_MAPPER, ROW_UNMAPPER, "mission_results", "id");
     }
 
     private static final RowMapper<MissionResultDb> ROW_MAPPER = (rs, rowNum) -> {
@@ -21,7 +27,7 @@ public class MissionResultRepository extends BaseRepository<MissionResultDb> {
         missionResultDb.setId(rs.getLong("id"));
         missionResultDb.setMissionId(rs.getLong("missionId"));
         missionResultDb.setOperatorId(rs.getLong("operatorId"));
-        missionResultDb.setResult(rs.getBlob("result"));
+        missionResultDb.setResult(rs.getString("result"));
         return missionResultDb;
     };
 

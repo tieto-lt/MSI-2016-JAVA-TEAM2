@@ -2,8 +2,6 @@ package lt.tieto.msi2016.missions.repository.mode;
 
 import lt.tieto.msi2016.utils.repository.model.DbModel;
 
-import java.sql.Blob;
-
 /**
  * Created by localadmin on 16.8.9.
  */
@@ -11,7 +9,7 @@ public class MissionResultDb extends DbModel {
 
     private Long operatorId;
     private Long missionId;
-    private Blob result;
+    private String result;
 
     public Long getOperatorId() {
         return operatorId;
@@ -29,11 +27,11 @@ public class MissionResultDb extends DbModel {
         this.missionId = missionId;
     }
 
-    public Blob getResult() {
+    public String getResult() {
         return result;
     }
 
-    public void setResult(Blob result) {
+    public void setResult(String result) {
         this.result = result;
     }
 }
