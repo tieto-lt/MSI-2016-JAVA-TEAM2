@@ -16,4 +16,6 @@ public interface MissionService {
     Result getResultFromBlob (MissionResult missionResult );
 
     boolean isAnyMissionDone(String username);
+
+    Result getResultFromOperatorId(Long missionId);
 }

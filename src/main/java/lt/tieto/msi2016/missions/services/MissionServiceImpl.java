@@ -77,6 +77,14 @@ public class MissionServiceImpl implements MissionService {
         }
     }
 
+    public Result getResultFromOperatorId(Long operatorId)
+    {
+        MissionResultDb missionResultDb = missionResultRepository.findByOperatorId(operatorId);
+        MissionResult missionResult = MissionResult.missionResult(missionResultDb);
+        Result result = getResultFromBlob(missionResult);
+        return result;
+    }
+
     public boolean isAnyMissionDone(String username)//hack for US07
     {
         int i = missionResultRepository.selectAllMissionsDoneByUser(username);
