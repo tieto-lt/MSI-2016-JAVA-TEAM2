@@ -1,14 +1,14 @@
 package lt.tieto.msi2016.missions.services;
 
-import lt.tieto.msi2016.missions.model.mission.MissionCommands;
-import lt.tieto.msi2016.missions.model.mission.MissionPlan;
-import lt.tieto.msi2016.missions.model.mission.MissionResponse;
+import lt.tieto.msi2016.missions.model.mission.*;
 import lt.tieto.msi2016.missions.repository.MissionResultRepository;
-import lt.tieto.msi2016.missions.repository.mode.MissionResultDb;
+import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
 import lt.tieto.msi2016.operator.repository.OperatorRepository;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +22,7 @@ public class MissionServiceImpl implements MissionService {
     private MissionResultRepository missionResultRepository;
     @Autowired
     private OperatorRepository operatorRepository;
+
 
     private static MissionResponse defaultMission;
 
@@ -61,5 +62,39 @@ public class MissionServiceImpl implements MissionService {
         missionResult.setMissionId(missionId);
         missionResult.setOperatorId(operatorRepository.findByToken(operatorToken).getId());
         missionResultRepository.save(missionResult);
+    }
+
+
+    public Result getResultFromBlob (MissionResult missionResult )
+    {
+        try {
+            Result result = new ObjectMapper().readValue(missionResult.getResult(), Result.class);
+            return result;
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Result getResultFromOperatorId(Long operatorId)
+    {
+        MissionResultDb missionResultDb = missionResultRepository.findByOperatorId(operatorId);
+        MissionResult missionResult = MissionResult.missionResult(missionResultDb);
+        Result result = getResultFromBlob(missionResult);
+        return result;
+    }
+
+    public boolean isAnyMissionDone(String username)//hack for US07
+    {
+        int i = missionResultRepository.selectAllMissionsDoneByUser(username);
+        if(i==0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
