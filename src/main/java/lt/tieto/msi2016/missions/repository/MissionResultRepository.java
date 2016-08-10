@@ -1,6 +1,5 @@
 package lt.tieto.msi2016.missions.repository;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
 import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
@@ -38,17 +37,7 @@ public class MissionResultRepository extends BaseRepository<MissionResultDb> {
             "operatorId", missionResultDb.getOperatorId(),
             "result", missionResultDb.getResult()
     );
-    /*
-    public UserDb findByUserName(String userName) {
 
-        try {
-            return jdbcTemplate.queryForObject("select * from users where username = ?", new Object[]{userName}, ROW_MAPPER);
-        } catch (EmptyResultDataAccessException e) {
-            return null;
-        }
-
-    }
-     */
     public MissionResultDb findByOperatorId(Long operatorId)
     {
         try
@@ -61,5 +50,19 @@ public class MissionResultRepository extends BaseRepository<MissionResultDb> {
 
         }
     }
+
+    public  int selectAllMissionsDoneByUser(String username)
+    {
+        try
+        {
+           return jdbcTemplate.queryForObject("select mission_results.missionId from users inner join operators on operators.userId = users.id inner join mission_results on mission_results.operatorId = operators.id where users.username = ?",Integer.class,username);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            return 0;
+        }
+    }
+
+
 
 }

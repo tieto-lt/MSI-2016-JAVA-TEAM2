@@ -15,5 +15,5 @@ public interface MissionService {
 
     Result getResultFromBlob (MissionResult missionResult );
 
-   
+    boolean isAnyMissionDone(String username);
 }

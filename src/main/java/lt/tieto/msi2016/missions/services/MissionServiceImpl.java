@@ -75,7 +75,18 @@ public class MissionServiceImpl implements MissionService {
             e.printStackTrace();
             return null;
         }
+    }
 
-
+    public boolean isAnyMissionDone(String username)//hack for US07
+    {
+        int i = missionResultRepository.selectAllMissionsDoneByUser(username);
+        if(i==0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
