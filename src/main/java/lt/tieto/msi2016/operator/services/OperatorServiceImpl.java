@@ -58,5 +58,10 @@ public class OperatorServiceImpl implements OperatorService {
         }
     }
 
+    @Transactional
+    public boolean tokenExists(String operatorToken){
+        return operatorRepository.findByToken(operatorToken) != null;
+    }
+
 
 }

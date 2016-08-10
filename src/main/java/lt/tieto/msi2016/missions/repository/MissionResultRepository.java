@@ -1,5 +1,6 @@
 package lt.tieto.msi2016.missions.repository;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
 import lt.tieto.msi2016.missions.repository.mode.MissionResultDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
@@ -36,6 +37,5 @@ public class MissionResultRepository extends BaseRepository<MissionResultDb> {
             "operatorId", missionResultDb.getOperatorId(),
             "result", missionResultDb.getResult()
     );
-
 
 }
