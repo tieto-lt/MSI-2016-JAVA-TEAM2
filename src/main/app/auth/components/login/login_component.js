@@ -1,7 +1,7 @@
 var module = require('main_module');
 require('login.css');
 
-function Controller($state, AuthService, $stateParams, Session) {
+function Controller($state, AuthService, $stateParams, Session, OperatorService) {
 
     var vm = this;
     vm.username = $stateParams.username;
@@ -16,15 +16,24 @@ function Controller($state, AuthService, $stateParams, Session) {
                 var role = Session.getSession().authorities[0];
                 if(role == "ROLE_ADMIN"){
                   vm.error = undefined;
-                  $state.go('root.userList');
+                  $state.go('root.adminPage');
                 }
                 else if (role == "ROLE_CUSTOMER") {
                   vm.error = undefined;
                   $state.go('root.customerPage');
                 }
-                else if (role == "ROLE_OPERATOR"){
-                  vm.error = undefined;
-                  $state.go('root.operatorPage');
+                else if (role == "ROLE_OPERATOR") {
+                  OperatorService.getOperator(Session.getSession().userId).then(
+                  function (response) {
+                    console.log(response.data);
+                    if(response.data.token){
+                        vm.error = undefined;
+                        $state.go('root.homePage');
+                    } else {
+                        vm.error = undefined;
+                        $state.go('root.operatorPage');
+                    }
+                  });
                 } else {
                   vm.error = undefined;
                   $state.go('root.itemList');
@@ -34,18 +43,11 @@ function Controller($state, AuthService, $stateParams, Session) {
                 vm.error = err.data.error_description;
             });
 
-
     }
-
-    function createUser() {
-        console.log("create new user");
-
-    }
-
 }
 
 
-Controller.$inject = ['$state', 'AuthService', '$stateParams', 'Session'];
+Controller.$inject = ['$state', 'AuthService', '$stateParams', 'Session', 'OperatorService'];
 require('login.scss');
 module.component('login', {
     controller: Controller,

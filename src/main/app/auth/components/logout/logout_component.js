@@ -1,7 +1,7 @@
 var module = require('main_module');
 require('logout.css');
 
-function Controller($state, Session, AuthService, $http) {
+function Controller($state, Session, AuthService, $http, OperatorService) {
 
     var vm = this;
 
@@ -21,6 +21,25 @@ function Controller($state, Session, AuthService, $http) {
     vm.goToUserList = goToUserList;
     vm.goHome = goHome;
     vm.goLogin = goLogin;
+    vm.isVerified = false;
+    vm.verifyButton = verifyButton;
+
+
+    function verifyButton(){
+      if(isOperator()){
+        OperatorService.getOperator(Session.getSession().userId).then(
+        function (response) {
+            vm.isVerified = response.data.verified;
+            console.log(vm.isVerified);
+        },
+        function (err) {
+            vm.error = err.data.error_description;
+        });
+      }
+    }
+
+    verifyButton();
+
 
     function isLogoutVisible() {
         return Session.isSessionActive();
@@ -118,7 +137,7 @@ function Controller($state, Session, AuthService, $http) {
 }
 
 
-Controller.$inject = ['$state', 'Session', 'AuthService', '$http'];
+Controller.$inject = ['$state', 'Session', 'AuthService', '$http', 'OperatorService'];
 
 module.component('logout', {
     controller: Controller,

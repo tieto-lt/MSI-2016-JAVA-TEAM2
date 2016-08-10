@@ -1,12 +1,20 @@
 package lt.tieto.msi2016.missions.controllers;
 
-import lt.tieto.msi2016.missions.model.mission.MissionPlan;
-import lt.tieto.msi2016.missions.model.mission.MissionResponse;
+import lt.tieto.msi2016.auth.model.User;
+import lt.tieto.msi2016.auth.services.UserService;
+import lt.tieto.msi2016.missions.model.mission.MissionCompleted;
+import lt.tieto.msi2016.missions.model.mission.Result;
 import lt.tieto.msi2016.missions.services.MissionService;
+import lt.tieto.msi2016.operator.model.Operator;
 import lt.tieto.msi2016.operator.services.OperatorService;
+import lt.tieto.msi2016.utils.services.SecurityHolder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+
+import static lt.tieto.msi2016.utils.constants.Roles.OPERATOR;
 
 /**
  * Created by localadmin on 16.8.9.
@@ -18,22 +26,63 @@ public class MissionsController {
     private MissionService missionService;
     @Autowired
     private OperatorService operatorService;
+    @Autowired
+    private SecurityHolder securityHolder;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET, value = "api/missions")
-    public ResponseEntity<MissionResponse> getMissions(@RequestParam("operatorToken") String operatorToken) {
-        return ResponseEntity.ok(missionService.getDefaultMission());
+    public ResponseEntity<?> getMissions(@RequestParam("operatorToken") String operatorToken) {
+        if(operatorService.tokenExists(operatorToken)) {
+            return ResponseEntity.ok(missionService.getDefaultMission());
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
     }
 
     @RequestMapping(value = "/api/missions/{id}/reserve", method = RequestMethod.POST)
-    public ResponseEntity<MissionPlan> reserve(@RequestParam("operatorToken") String operatorToken) {
-        return ResponseEntity.ok(missionService.getDefaultMission().getMissions().get(0));
+    public ResponseEntity<?> reserve(@RequestParam("operatorToken") String operatorToken) {
+        if (operatorService.tokenExists(operatorToken)){
+            return ResponseEntity.ok(missionService.getDefaultMission().getMissions().get(0));
+    } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+    }
 
+    @Secured(OPERATOR)
+    @RequestMapping(value = "/api/missions",params = "onlyCompleted=true",method = RequestMethod.GET)
+    public ResponseEntity<MissionCompleted> getCompletedMissions ()
+    {
+        if(missionService.isAnyMissionDone(securityHolder.getUserPrincipal().getUsername()))
+        {
+            MissionCompleted missionCompleted = new MissionCompleted();
+            return ResponseEntity.ok(missionCompleted);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+        }
     }
 
     @RequestMapping(value = "/api/missions/{id}", method = RequestMethod.POST)
-    public void verifyOperator(@PathVariable Long id, @RequestParam("operatorToken") String operatorToken, @RequestBody String result) {
-        operatorService.verifyOperatorService(operatorToken); // TODO: change to mission id after misions are added
-        missionService.saveResults(id, operatorToken, result);
+    public ResponseEntity<Void> verifyOperator(@PathVariable Long id, @RequestParam("operatorToken") String operatorToken, @RequestBody String result) {
+        if(operatorService.tokenExists(operatorToken)) {
+            operatorService.verifyOperatorService(operatorToken); // TODO: change to mission id after misions are added
+            missionService.saveResults(id, operatorToken, result);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
 
+    }
+
+    @Secured(OPERATOR)
+    @RequestMapping(value = "/api/missions/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Result> returnMissionDetails (@PathVariable Long id)
+    {
+        String username = securityHolder.getUserPrincipal().getUsername();
+        User user = userService.getUserByUserName(username);
+        Operator operator = operatorService.getOperatorState(user.getId());
+        Result result = missionService.getResultFromOperatorId(operator.getId());
+        return ResponseEntity.ok(result);
     }
 }

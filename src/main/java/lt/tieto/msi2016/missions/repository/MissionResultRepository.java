@@ -1,9 +1,10 @@
 package lt.tieto.msi2016.missions.repository;
 
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
-import lt.tieto.msi2016.missions.repository.mode.MissionResultDb;
+import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -36,6 +37,32 @@ public class MissionResultRepository extends BaseRepository<MissionResultDb> {
             "operatorId", missionResultDb.getOperatorId(),
             "result", missionResultDb.getResult()
     );
+
+    public MissionResultDb findByOperatorId(Long operatorId)
+    {
+        try
+        {
+            return jdbcTemplate.queryForObject("select * from mission_results where operatorId = ?", new Object[]{operatorId}, ROW_MAPPER);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            return null;
+
+        }
+    }
+
+    public  int selectAllMissionsDoneByUser(String username)
+    {
+        try
+        {
+           return jdbcTemplate.queryForObject("select mission_results.missionId from users inner join operators on operators.userId = users.id inner join mission_results on mission_results.operatorId = operators.id where users.username = ?",Integer.class,username);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            return 0;
+        }
+    }
+
 
 
 }

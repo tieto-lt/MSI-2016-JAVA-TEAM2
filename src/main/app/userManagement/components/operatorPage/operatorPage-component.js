@@ -5,10 +5,10 @@ function Controller(Session, OperatorService, $state) {
   vm.operatorState = {};
   vm.error = undefined;
 
-  vm.getVerificationInfo = getVerificationInfo;
+  vm.generateToken = generateToken;
 
   vm.$onInit = function() {
-    OperatorService.getVerificationInfo(Session.getSession().userId).then(
+    OperatorService.getOperator(Session.getSession().userId).then(
     function (response) {
         vm.operatorState = response.data;
     },
@@ -18,11 +18,11 @@ function Controller(Session, OperatorService, $state) {
   };
 
 
-  function getVerificationInfo() {
-      OperatorService.getVerificationInfo(Session.getSession().userId).then(
+  function generateToken() {
+      OperatorService.generateToken(Session.getSession().userId).then(
           function (response) {
               vm.error = undefined;
-              $state.go('root.operatorPage');
+              vm.operatorState = response.data;
           },
           function (err) {
               vm.error = err.data.error_description;
@@ -30,7 +30,7 @@ function Controller(Session, OperatorService, $state) {
   }
 
 }
-Controller.$injcet = ['Session', 'OperatorService', '$state'];
+Controller.$injcet = ['Session', 'OperatorService', '$state', '$route'];
 module.component('operatorPage', {
     controller: Controller,
     templateUrl: require('./operatorPage.html')

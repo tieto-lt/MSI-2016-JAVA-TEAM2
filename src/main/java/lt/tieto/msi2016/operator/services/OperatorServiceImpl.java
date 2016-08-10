@@ -26,11 +26,15 @@ public class OperatorServiceImpl implements OperatorService {
         return fillOperator(operatorRepository.findById(id));
     }
 
+
     @Transactional
     private Operator fillOperator(OperatorDb operatorDb){
-        Operator operator = Operator.valueOf(operatorDb);
-
-        return operator;
+        Operator operator = new Operator();
+        if(operatorDb == null){
+            return operator;
+        } else {
+            return operator = Operator.valueOf(operatorDb);
+        }
     }
 
     public Operator generateId(Long id){
@@ -56,6 +60,11 @@ public class OperatorServiceImpl implements OperatorService {
         if (operatorDb != null) {
             operatorRepository.changeOperatorVerify(operatorDb.getUserId(), true);
         }
+    }
+
+    @Transactional
+    public boolean tokenExists(String operatorToken){
+        return operatorRepository.findByToken(operatorToken) != null;
     }
 
 

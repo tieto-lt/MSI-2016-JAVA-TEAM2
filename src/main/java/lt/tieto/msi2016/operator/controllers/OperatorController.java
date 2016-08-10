@@ -1,6 +1,7 @@
 package lt.tieto.msi2016.operator.controllers;
 
 import lt.tieto.msi2016.auth.services.UserService;
+import lt.tieto.msi2016.missions.services.MissionService;
 import lt.tieto.msi2016.operator.model.Operator;
 import lt.tieto.msi2016.operator.services.OperatorService;
 import lt.tieto.msi2016.utils.controller.BaseController;
@@ -31,14 +32,19 @@ public class OperatorController extends BaseController {
     @Autowired
     private SecurityHolder securityHolder;
 
+    @Autowired
+    private MissionService missionService;
+
 
 
     @Secured(OPERATOR)
     @RequestMapping(value = "/api/users/{id}/operatorState", method = RequestMethod.GET)
     public ResponseEntity<Operator> getOperator(@PathVariable Long id){
+
         if(canAccessInfo(id))
         {
-            return ResponseEntity.ok(operatorService.getOperatorState(id));
+            Operator operator = operatorService.getOperatorState(id);
+            return operator != null ? ResponseEntity.ok(operator) : ResponseEntity.ok(new Operator());
         }
         else{
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);

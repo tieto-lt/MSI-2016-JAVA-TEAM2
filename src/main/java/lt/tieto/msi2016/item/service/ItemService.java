@@ -1,15 +1,15 @@
 package lt.tieto.msi2016.item.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import lt.tieto.msi2016.item.model.Item;
 import lt.tieto.msi2016.item.repository.ItemRepository;
 import lt.tieto.msi2016.item.repository.model.ItemDb;
+import lt.tieto.msi2016.utils.exception.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ItemService {
@@ -67,6 +67,7 @@ public class ItemService {
 
     private static ItemDb mapToItemDb(Long id, Item api) {
         ItemDb db = new ItemDb();
+        System.out.println();
         db.setId(id);
         db.setName(api.getName());
         db.setQuantity(api.getQuantity());
