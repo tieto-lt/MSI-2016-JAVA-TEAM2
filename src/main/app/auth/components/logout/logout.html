@@ -1,10 +1,12 @@
 <nav ng-show="$ctrl.isNavigationVisible()" class="navbar navbar-fixed-top " role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
-  <ul class="nav navbar-nav" style="background-color: rgba(0, 0, 50, 1); width: 100%;">
-  <a class="navbar-brand" >DRONIFY</a>
+  <ul class="nav navbar-nav" style=" width: 100%;">
+  <a class="navbar-brand" style="color:#11151C; font-weight:bold; font-size:22px; font-family: courier">DRONIFY</a>
     <!--  <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li> -->
+
+
       <li class="nav-item">
         <a ng-show="$ctrl.isOperator()" href="#/operatorPage" ng-click="$ctrl.goToOperatorPage()" >Operator page
         <span class="sr-only">(current)</span></a>

@@ -1,5 +1,5 @@
 var module = require('main_module');
-require('newUser-style.css');
+//require('newUser-style.css');
 
 function Controller($state, UserServiceImpl) {
   var vm = this;

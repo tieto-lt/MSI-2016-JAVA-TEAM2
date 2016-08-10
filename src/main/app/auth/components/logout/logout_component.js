@@ -1,5 +1,5 @@
 var module = require('main_module');
-
+require('logout.css');
 
 function Controller($state, Session, AuthService, $http) {
 

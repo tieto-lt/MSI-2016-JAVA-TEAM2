@@ -1,4 +1,4 @@
-.margin-top-20{
+/*.margin-top-20{
   margin-top: 20px;
 }
 body{
@@ -52,9 +52,9 @@ body{
 }
 
 .auth .auth-box input::-webkit-input-placeholder { /* WebKit browsers */
-  color:    #fff;
+/*   color:    #fff;
   font-weight:300;
-}
+} */
 /*.auth .auth-box input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
 /*  color:    #fff;
   font-weight:300;
@@ -63,7 +63,7 @@ body{
 /*  color:    #fff;
   font-weight:300;
 }*/
-
+/*
 .auth span.input-group-addon,
 .input-group-btn button{
   border:none;
@@ -101,7 +101,7 @@ body{
     font-weight:300;
 }
 /*for radios & checkbox labels*/
-.auth .radio label,
+/*.auth .radio label,
 .auth label.radio-inline,
 .auth .checkbox label,
 .auth label.checkbox-inline{
@@ -123,13 +123,13 @@ body{
     color:#000;
 }
 /*multiple select*/
-.auth select[multiple] option,
+/*.auth select[multiple] option,
 .auth select[size] {
   color:#fff!important;
 }
 
 /*Form buttons*/
-.auth form .btn{
+/*.auth form .btn{
   background:none;
   -webkit-transition: background 0.2s ease-in-out;
   -moz-transition: background 0.2s ease-in-out;

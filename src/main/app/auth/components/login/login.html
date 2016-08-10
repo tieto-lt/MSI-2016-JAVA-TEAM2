@@ -1,59 +1,54 @@
-<div class="container auth">
-    <h1 class="text-center">Log in</h1>
-    <div id="big-form" class="well auth-box">
-      <form>
-        <fieldset>
+    <div class="container" >
+        <div id="loginbox" style="margin-top:50px; border-color:#11151C" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info" style= "border-width: 3px; border-color:#11151C;">
+                    <div class="panel-heading" style="background-color:#11151C;" >
+                        <div class="panel-title" style="font-family: courier; font-weight:bold; color:#FFFFFF; font-size:22px" >Log In</div>
 
-<form class="msi-signin">
+                    </div>
 
-    <!--label for="inputEmail" class="sr-only">Email address</label>
-    <input type="text" id="inputEmail"
-           class="form-control msi-input-email"
-           placeholder="Email address" required autofocus
-           ng-model="$ctrl.username"-->
+                    <div style="padding-top:30px" class="panel-body" >
 
-           <div class="form-group">
-             <label class=" control-label" for="inputEmail">Username</label>
-             <div class="">
-               <input id="inputEmail" name="username" class="form-control input-md" type="text"
-               ng-model="$ctrl.username" required autofocus>
-                 <!--required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-minlength="6" ng-maxlength="20">
-                 <div class="help-block" ng-show="vm.myCustomForm.username.$error.required">Field Username is required!</div>
-                 <div class="help-block" ng-show="vm.myCustomForm.username.$error.minlength">Username must consist of at least 6 characters.</div>
-                 <div class="help-block" ng-show="vm.myCustomForm.username.$error.maxlength">Maximum length of the username is 20.</div>
-                 <div class="help-block" ng-show="vm.myCustomForm.username.$error.pattern">User is allowed to enter letters a-z, numbers 0-9 and symbols “.”, “-” and “_”, provided non of these are the first symbol.</div>
-                 <div class="help-block" ng-show="vm.customValidate()">User is not allowed to enter more than three of the same symbol in a row</div-->
-             </div>
-           </div>
-           <!-- Password input-->
-                     <div class="form-group">
-                       <label class=" control-label" for="inputPassword">Password</label>
-                       <div class="">
-                         <input id="inputPassword" name="password" class="form-control input-md" type="password"
-                         ng-model="$ctrl.password" >
-                         <!--ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30">
-                         <div class="help-block"  ng-show="vm.myCustomForm.password.$error.required">Field Username is required!</div>
-                         <div class="help-block" ng-show="vm.myCustomForm.password.$error.minlength">Password must be at least 6 symbols long.</div>
-                         <div class="help-block" ng-show="vm.myCustomForm.password.$error.maxlength">Maximum length of the password is 30 symbols.</div>
-                         <div class="help-block" ng-show="vm.myCustomForm.password.$error.pattern">User is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div-->
-                       </div>
-                     </div>
+                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-    <!--label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword"
-           class="form-control msi-input-password" placeholder="Password" required
-           ng-model="$ctrl.password"-->
+                        <form id="loginform" class="form-horizontal" role="form">
 
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="$ctrl.login()">
-        Sign in
-    </button>
+                            <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="inputEmail" type="text" class="form-control input-md" name="username" value="" ng-model="$ctrl.username" required autofocus placeholder="username or email">
+                                    </div>
 
-    <button class="btn btn-lg btn-default btn-block" ui-sref="root.newUser" ng-click="$ctrl.createUser()">
-        New user? Sign up!
-    </button>
+                            <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input id="inputPassword" type="password" class="form-control input-md" name="password" ng-model="$ctrl.password" placeholder="password">
+                                    </div>
+
+                                <div style="margin-top:10px" class="form-group">
+                                    <!-- Button -->
+
+                                    <div class="col-sm-12 controls">
+                                      <a id="btn-login" href="#" class="btn btn-lg " style="border: double; padding: 7px 20px; color:#11151C; font-family:courier;" type="submit" ng-click="$ctrl.login()"  >Sign in  </a>
+                                    </div>
+                                </div>
 
 
+                                <div class="form-group">
+                                    <div class="col-md-12 control">
+                                        <div style="border-top: 1px solid#888; padding-top:15px; font-family: courier; font-size:16px" >
+                                            Don't have an account?
+                                        <a href="#" ui-sref="root.newUser" ng-click="$ctrl.createUser()" >
+                                            Sign Up Here
+                                        </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+
+
+                        </div>
+                    </div>
+        </div>
 
 
 

@@ -1,6 +1,12 @@
 <div class="container auth">
-    <h1 class="text-center">New User <span>Registration Form</span> </h1>
-    <div id="big-form" class="well auth-box">
+  <div id="loginbox" style="margin-top:50px; border-color:#11151C; background-color:#FFFFFF" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="panel panel-info" style= "border-width: 3px; border-color:#11151C;">
+              <div class="panel-heading" style="background-color:#11151C;" >
+                  <div class="panel-title" style="font-family: courier; font-weight:bold; color:#FFFFFF; font-size:22px" >New User Registration Form</div>
+
+              </div>
+
+    <div id="big-form" class="well auth-box" style="background-color:#FFFFFF;">
       <form>
 
 <div ng-form="vm.myCustomForm">
@@ -62,15 +68,7 @@
                              </div>
                            </div>
 
-<!-- Reikia issiaisinti, ar reikalingas 'surname'??? -->
-<!-- <div class="form-group row">
-  <label for="example-email-input" class="col-xs-2 col-form-label">Surname</label>
-  <div class="col-xs-10">
-    <input class="form-control" type="text"  id="surname">
-  </div>
-</div> -->
 
-<!-- Text input-->
          <div class="form-group">
            <label class=" control-label" for="textinput">Email</label>
            <div class="">
@@ -80,15 +78,7 @@
              <div class="help-block" ng-show="vm.myCustomForm.email.$error.email">Invalid email adress</div>
            </div>
          </div>
-<!--div class="form-group row">
-  <label for="example-email-input" class="col-xs-2 col-form-label">Email</label>
-  <div class="col-xs-10">
-    <input name="email" class="form-control" type="text" ng-model="$ctrl.user.email"
-      required>
-  </div>
-  <div ng-show="vm.myCustomForm.email.$error.required">Field Email is required!</div>
-</div-->
-<!-- Text input-->
+
          <div class="form-group">
            <label class=" control-label" for="textinput">Phone</label>
            <div class="">
@@ -99,18 +89,23 @@
            </div>
          </div>
 
-<!--div class="form-group row">
-  <label for="example-tel-input" class="col-xs-2 col-form-label">Phone</label>
-  <div class="col-xs-10">
-    <input name="phone" class="form-control" type="text" ng-model="$ctrl.user.phone"
-      required>
-  </div>
-  <div ng-show="vm.myCustomForm.phone.$error.required">Field phone is required!</div>
-</div-->
+
 
 <div class="form-group row">
-<button type="submit" class="btn btn-warning" ng-click="vm.myCustomForm.$valid && $ctrl.create()" ng-disabled="vm.myCustomForm.$valid == false">Register</button>
-<button type="button" class="btn btn-default" ng-click="$ctrl.logout()">Go back to login form</button>
+<button type="submit" class="btn btn-default" style="margin-left:0.5cm; border: double; background-color: #FFFFFF; font-weight:bold; padding: 7px 20px; color:#11151C; font-family:courier;" ng-click="vm.myCustomForm.$valid && $ctrl.create()" ng-disabled="vm.myCustomForm.$valid == false"> Register</button>
+
+<div class="form-group">
+<div class="col-md-12 control">
+    <div style="margin-top:15px; border-top: 1px solid#888; padding-top:15px; font-family: courier; font-size:16px" >
+        Already registered?
+    <a href="#" ui-sref="root.login" ng-click="$ctrl.logout()">
+        Go back to login
+    </a>
+    </div>
+</div>
+</div>
+
+
 
 
     <div class="alert alert-danger" role="alert" ng-repeat="error in $ctrl.errors">
