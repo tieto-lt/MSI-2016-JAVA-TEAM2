@@ -4,8 +4,12 @@ function Service($http, $q, $cookies) {
 
 
 
-  this.getVerificationInfo = function(operatorId) {
+  this.generateToken = function(operatorId) {
     return $http.post('/api/users/' + operatorId + '/operatorState', operatorId);
+  };
+
+  this.getOperator = function(operatorId) {
+    return $http.get('/api/users/' + operatorId + '/operatorState', operatorId);
   };
 
 }

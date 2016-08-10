@@ -38,7 +38,8 @@ public class OperatorController extends BaseController {
     public ResponseEntity<Operator> getOperator(@PathVariable Long id){
         if(canAccessInfo(id))
         {
-            return ResponseEntity.ok(operatorService.getOperatorState(id));
+            Operator operator = operatorService.getOperatorState(id);
+            return operator != null ? ResponseEntity.ok(operator) : ResponseEntity.ok(new Operator());
         }
         else{
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
