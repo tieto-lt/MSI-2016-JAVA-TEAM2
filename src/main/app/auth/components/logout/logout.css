@@ -1,0 +1,11 @@
+.nav-item{
+  font-family: courier;
+  color: #11151C;
+  font-size: 16px;
+}
+
+.nav navbar-nav{
+  color:#11151C;
+  border-bottom: 2px solid #11151C ;
+ background-color: #11151C;
+}

@@ -1,0 +1,25 @@
+.label{
+font-size: 18px;
+color: #404040;
+font-family: courier;
+
+}
+
+.control-label{
+font-size: 16px;
+}
+
+.help-block{
+  color: #7C2929;
+  font-style: bold;
+  font-family: courier;
+}
+
+.control-label{
+  font-family: courier;
+}
+
+.signup link{
+  font-family: courier;
+  font-size: 18px;
+}

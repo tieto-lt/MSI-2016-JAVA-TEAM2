@@ -1,6 +1,6 @@
 <nav ng-show="$ctrl.isNavigationVisible()" class="navbar navbar-fixed-top " role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
-  <ul class="nav navbar-nav" style=" width: 100%;">
+  <ul class="nav navbar-nav" style=" width: 100%; border-bottom: 3px solid #11151C; color:#11151C">
   <a class="navbar-brand" style="color:#11151C; font-weight:bold; font-size:22px; font-family: courier">DRONIFY</a>
     <!--  <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -8,7 +8,7 @@
 
 
       <li class="nav-item">
-        <a ng-show="$ctrl.isOperator()" href="#/operatorPage" ng-click="$ctrl.goToOperatorPage()" >Operator page
+        <a ng-show="$ctrl.isOperator()" href="#/operatorPage" ng-click="$ctrl.goToOperatorPage()" style="color:#11151C">Operator page
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
@@ -47,8 +47,8 @@
         <a ng-click="$ctrl.logout()" ng-show="$ctrl.isLogoutVisible()" >Logout</a>
       </li>
 
-      <li class="nav-item">
-        <a ng-show="$ctrl.isItNewUser()==false"  href="#/homePage" ng-click="$ctrl.goHome()" >Home
+      <li class="nav-item" >
+        <a ng-show="$ctrl.isItNewUser()==false"  href="#/homePage" ng-click="$ctrl.goHome()" style="font-color:#11151C" >Home
         <span class="sr-only">(current)</span></a>
       </li>
 
