@@ -191,3 +191,32 @@ databaseChangeLog:
             constraintName: fk_userId_operators
             referencedColumnNames: id
             referencedTableName: users
+  - changeSet:
+        id: 8
+        author: tieto
+        changes:
+          - createTable:
+              tableName: mission_results
+              columns:
+                - column:
+                    name: id
+                    type: int
+                    autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                - column:
+                    name: missionId
+                    type: int
+                - column:
+                    name: operatorId
+                    type: int
+                - column:
+                    name: result
+                    type: clob
+          - addForeignKeyConstraint:
+              onDelete: CASCADE
+              baseColumnNames: operatorId
+              baseTableName: mission_results
+              constraintName: fk_id_operators
+              referencedColumnNames: id
+              referencedTableName: operators
