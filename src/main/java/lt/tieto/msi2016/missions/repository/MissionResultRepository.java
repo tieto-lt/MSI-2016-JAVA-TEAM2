@@ -1,9 +1,10 @@
 package lt.tieto.msi2016.missions.repository;
 
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
-import lt.tieto.msi2016.missions.repository.mode.MissionResultDb;
+import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -36,6 +37,29 @@ public class MissionResultRepository extends BaseRepository<MissionResultDb> {
             "operatorId", missionResultDb.getOperatorId(),
             "result", missionResultDb.getResult()
     );
+    /*
+    public UserDb findByUserName(String userName) {
+
+        try {
+            return jdbcTemplate.queryForObject("select * from users where username = ?", new Object[]{userName}, ROW_MAPPER);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+
+    }
+     */
+    public MissionResultDb findByOperatorId(Long operatorId)
+    {
+        try
+        {
+            return jdbcTemplate.queryForObject("select * from mission_results where operatorId = ?", new Object[]{operatorId}, ROW_MAPPER);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            return null;
+
+        }
+    }
 
 
 }

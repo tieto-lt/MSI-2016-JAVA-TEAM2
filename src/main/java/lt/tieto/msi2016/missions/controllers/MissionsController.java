@@ -35,5 +35,7 @@ public class MissionsController {
         operatorService.verifyOperatorService(operatorToken); // TODO: change to mission id after misions are added
         missionService.saveResults(id, operatorToken, result);
 
+
+
     }
 }
