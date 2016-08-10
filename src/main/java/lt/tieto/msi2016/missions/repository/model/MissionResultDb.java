@@ -1,4 +1,4 @@
-package lt.tieto.msi2016.missions.repository.mode;
+package lt.tieto.msi2016.missions.repository.model;
 
 import lt.tieto.msi2016.utils.repository.model.DbModel;
 

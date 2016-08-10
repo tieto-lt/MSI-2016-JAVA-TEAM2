@@ -26,6 +26,7 @@ public class OperatorServiceImpl implements OperatorService {
         return fillOperator(operatorRepository.findById(id));
     }
 
+
     @Transactional
     private Operator fillOperator(OperatorDb operatorDb){
         Operator operator = new Operator();
