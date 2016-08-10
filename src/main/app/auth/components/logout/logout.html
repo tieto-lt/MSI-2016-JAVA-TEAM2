@@ -54,11 +54,9 @@
         <a  ng-show="$ctrl.isItHome()" href="#/login" ng-click="$ctrl.goLogin()" > Login </a>
       </li>
 
-      <li class="nav-item" style="float: right;" ng-show="$ctrl.isOperator()" ng-if="true" >
-        <a ng-if="false"  class="btn btn-success">
-          Verified
-        </a>
-        <a ng-if="true" class="btn btn-danger"> Not Verified </a>
+      <li class="nav-item" style="float: right;" ng-show="$ctrl.isOperator()" >
+        <a ng-show="$ctrl.isVerified"  class="btn btn-success">Verified</a>
+        <a ng-hide="$ctrl.isVerified" class="btn btn-danger"> Not Verified </a>
       </li>
 
 
