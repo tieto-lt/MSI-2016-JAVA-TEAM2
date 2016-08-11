@@ -1,5 +1,10 @@
+
+
+
 <nav ng-show="$ctrl.isNavigationVisible()" class="navbar navbar-fixed-top " role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
+
+
   <ul class="nav navbar-nav" style=" width: 100%; background-color:#11151C">
   <a class="navbar-brand" >DRONIFY</a>
     <!--  <li class="nav-item active">
@@ -52,11 +57,10 @@
       </li>
 
       <li class="nav-item" style="float: right;" ng-show="$ctrl.isOperator()" >
-        <a ng-show="$ctrl.isVerified"  class="btn btn-default" style="background-color:#58AF50; border-color:#58AF50; color:#FFFFFF; font-weight:bold; font-family:courier;">Verified</a>
-        <a ng-hide="$ctrl.isVerified" class="btn btn-default" style="background-color:#B21A1A; border-color:#B21A1A; color:#FFFFFF; font-weight:bold; font-family:courier;"> Not Verified </a>
+        <a ng-show="$ctrl.isVerified"  class="btn btn-default" style="padding:14px 18px;background-color:#58AF50; border-color:#58AF50; color:#FFFFFF; font-weight:bold; font-family:courier;">Verified</a>
+        <a ng-hide="$ctrl.isVerified" class="btn btn-default" style="padding:14px 18px;background-color:#B21A1A; border-color:#B21A1A; color:#FFFFFF; font-weight:bold; font-family:courier;"> Not Verified </a>
       </li>
 
     </ul>
 
 </nav>
-<!--<a ng-click="$ctrl.logout()" ng-show="$ctrl.isLogoutVisible()">Logout</a> -->
