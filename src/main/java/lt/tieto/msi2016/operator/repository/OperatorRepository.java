@@ -71,7 +71,14 @@ public class OperatorRepository extends BaseRepository<OperatorDb> {
         }
     }
 
+    public void deleteOperatorByUserId(Long userId)
+    {
+        try {
+            jdbcTemplate.update("DELETE FROM operators WHERE userId = ?", new Object[]{userId});
+        } catch (EmptyResultDataAccessException e) {
 
+        }
+    }
 
 
 

@@ -25,7 +25,7 @@ public class User {
     private String name;
 
     @NotNull
-    @Pattern(regexp="^[A-z0-9!#$%&'*+\\/=?^_`{|}~.-]+@[A-z0-9]([A-z0-9-]*[A-z0-9])?(\\.[A-z0-9]([A-z0-9-]*[A-z0-9])?)*$")
+    @Pattern(regexp = "^[A-z0-9!#$%&'*+\\/=?^_`{|}~.-]+@[A-z0-9]([A-z0-9-]*[A-z0-9])?(\\.[A-z0-9]([A-z0-9-]*[A-z0-9])?)*$")
     private String email;
 
     @NotNull
