@@ -1,0 +1,23 @@
+
+.panel-default >.panel-heading {
+    background-color: #11151C;
+    color: #FFFFFF;
+    font-family: courier;
+    font-weight: bold;
+
+}
+.panel-default >.panel-inside{
+  border-width: 2px;
+}
+.progress {
+    text-align:center;
+}
+.progress-value {
+    position:absolute;
+    right:0;
+    left:0;
+    color: #11151C;
+    font-size: 16px;
+    font-weight: normal;
+    font-family:cursive;
+}

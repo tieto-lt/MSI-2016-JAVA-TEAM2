@@ -220,3 +220,42 @@ databaseChangeLog:
               constraintName: fk_id_operators
               referencedColumnNames: id
               referencedTableName: operators
+
+  - changeSet:
+        id: 9
+        author: tieto
+        changes:
+          - createTable:
+              tableName: orders
+              columns:
+                - column:
+                    name: id
+                    type: int
+                    autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                - column:
+                    name: userId
+                    type: int
+                - column:
+                    name: isApproved
+                    type: bool
+                - column:
+                    name: name
+                    type: varchar(255)
+                - column:
+                    name: details
+                    type: varchar(500)
+                - column:
+                    name: email
+                    type: varchar(255)
+                - column:
+                    name: phone
+                    type: varchar(60)
+          - addForeignKeyConstraint:
+              onDelete: CASCADE
+              baseColumnNames: userId
+              baseTableName: orders
+              constraintName: fk_id_users
+              referencedColumnNames: id
+              referencedTableName: users

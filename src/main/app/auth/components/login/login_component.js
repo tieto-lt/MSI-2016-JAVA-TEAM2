@@ -1,5 +1,5 @@
 var module = require('main_module');
-require('login.scss');
+require('login.css');
 
 function Controller($state, AuthService, $stateParams, Session, OperatorService) {
 
@@ -9,6 +9,7 @@ function Controller($state, AuthService, $stateParams, Session, OperatorService)
 
     vm.login = login;
     vm.error = undefined;
+    vm.enterPressed = enterPressed;
 
     function login() {
         AuthService.login(vm.username, vm.password).then(
@@ -20,7 +21,7 @@ function Controller($state, AuthService, $stateParams, Session, OperatorService)
                 }
                 else if (role == "ROLE_CUSTOMER") {
                   vm.error = undefined;
-                  $state.go('root.customerPage');
+                  $state.go('root.customerHomePage');
                 }
                 else if (role == "ROLE_OPERATOR") {
                   OperatorService.getOperator(Session.getSession().userId).then(
@@ -28,7 +29,7 @@ function Controller($state, AuthService, $stateParams, Session, OperatorService)
                     console.log(response.data);
                     if(response.data.token){
                         vm.error = undefined;
-                        $state.go('root.homePage');
+                        $state.go('root.operatorHomePage');
                     } else {
                         vm.error = undefined;
                         $state.go('root.operatorPage');
@@ -43,6 +44,11 @@ function Controller($state, AuthService, $stateParams, Session, OperatorService)
                 vm.error = err.data.error_description;
             });
 
+    }
+
+  function enterPressed (keyEvent) {
+      if (keyEvent.which === 13)
+      login();
     }
 }
 

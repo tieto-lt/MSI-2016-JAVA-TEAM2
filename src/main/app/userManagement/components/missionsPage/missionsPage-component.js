@@ -1,4 +1,6 @@
 var module = require('main_module');
+require('style.css');
+
 
 function Controller(missionService) {
   var vm = this;

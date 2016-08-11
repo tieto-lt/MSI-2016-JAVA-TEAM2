@@ -1,7 +1,7 @@
 var module = require('main_module');
+require('logout.css');
 
-
-function Controller($state, Session, AuthService, $http) {
+function Controller($state, Session, AuthService, $http, OperatorService, $transitions) {
 
     var vm = this;
 
@@ -21,13 +21,30 @@ function Controller($state, Session, AuthService, $http) {
     vm.goToUserList = goToUserList;
     vm.goHome = goHome;
     vm.goLogin = goLogin;
+    vm.isVerified = false;
+
+    $transitions.onStart(
+      {},
+      function() {
+        console.log('state change');
+        if(isOperator()){
+          OperatorService.getOperator(Session.getSession().userId).then(
+          function (response) {
+              vm.isVerified = response.data.verified;
+              console.log(vm.isVerified);
+          },
+          function (err) {
+              vm.error = err.data.error_description;
+          });
+        }
+      });
 
     function isLogoutVisible() {
         return Session.isSessionActive();
     }
 
     function isNavigationVisible() {
-      if($state.current.name != "root.Login" ){
+      if($state.current.name != "root.Login" || $state.current.name != "root.newUser"){
           return true;
       } else {
           return false;
@@ -100,6 +117,9 @@ function Controller($state, Session, AuthService, $http) {
     function goToCustomerPage() {
         $state.go('root.customerPage');
     }
+    function goToCustomerHomePage(){
+        $state.go('root.customerHomePage');
+    }
     function goToAdminPage() {
         $state.go('root.adminPage');
     }
@@ -118,7 +138,7 @@ function Controller($state, Session, AuthService, $http) {
 }
 
 
-Controller.$inject = ['$state', 'Session', 'AuthService', '$http'];
+Controller.$inject = ['$state', 'Session', 'AuthService', '$http', 'OperatorService', '$transitions'];
 
 module.component('logout', {
     controller: Controller,

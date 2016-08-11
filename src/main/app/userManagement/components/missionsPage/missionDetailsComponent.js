@@ -18,7 +18,14 @@ function Controller(missionService) {
     if(element.status && element.status.open){
       return;
     }
-    vm.myInterval = 5000;
+    vm.navigationData = {
+      startX: undefined,
+      startY: undefined,
+      endX: undefined,
+      endY: undefined,
+      battery: undefined
+    };
+
     vm.noWrapSlides = false;
     vm.active = 0;
     var slides = vm.slides = [];
@@ -38,9 +45,20 @@ function Controller(missionService) {
 
     missionService.retrieveMissionDetails(vm.mission.id).then(function(data){
       var images = data.data.images;
+      var navigationData = data.data.navigationData;
+      if(navigationData){
+        vm.navigationData.startX = navigationData[0].x;
+        vm.navigationData.startY = navigationData[0].y;
+        vm.navigationData.endX = navigationData[navigationData.length-1].x;
+        vm.navigationData.endY = navigationData[navigationData.length-1].y;
+        vm.navigationData.battery = navigationData[navigationData.length-1].battery;
+        vm.prepareBar(vm.navigationData.battery);
+      }
+
       for(i = 0; i<images.length; i++){
         vm.addSlide(images[i].imageBase64);
       }
+
     });
 
     // Randomize logic below
@@ -80,42 +98,25 @@ function Controller(missionService) {
 
    //Progress bar
 
-    vm.random = function() {
-      var value = Math.floor(Math.random() * 100 + 1);
+    vm.prepareBar = function(battery) {
+      var value = battery;
       var type;
 
       if (value < 25) {
-        type = 'success';
-      } else if (value < 50) {
-        type = 'info';
-      } else if (value < 75) {
-        type = 'warning';
-      } else {
         type = 'danger';
+      } else if (value < 50) {
+        type = 'warning';
+      } else if (value < 75) {
+        type = 'info';
+      } else {
+        type = 'success';
       }
-
-      vm.showWarning = type === 'danger' || type === 'warning';
-
       vm.dynamic = value;
       vm.type = type;
     };
 
-    vm.random();
 
-    vm.randomStacked = function() {
-      vm.stacked = [];
-      var types = ['success', 'info', 'warning', 'danger'];
 
-      for (var i = 0, n = Math.floor(Math.random() * 4 + 1); i < n; i++) {
-          var index = Math.floor(Math.random() * 4);
-          vm.stacked.push({
-            value: Math.floor(Math.random() * 30 + 1),
-            type: types[index]
-          });
-      }
-    };
-
-    vm.randomStacked();
   };
 
 
