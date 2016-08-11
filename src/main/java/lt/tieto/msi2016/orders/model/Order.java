@@ -36,6 +36,8 @@ public class Order {
 
     private String date;
 
+    private String status;
+
     public static Order valueOf (OrderDb orderDb)
     {
         Order order = new Order();
@@ -47,6 +49,7 @@ public class Order {
         order.setEmail(orderDb.getEmail());
         order.setPhone(orderDb.getPhone());
         order.setDate(orderDb.getDate());
+        order.setStatus(orderDb.getStatus());
         return order;
     }
 
@@ -112,5 +115,13 @@ public class Order {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

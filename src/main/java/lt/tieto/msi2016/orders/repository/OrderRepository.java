@@ -31,6 +31,7 @@ public class OrderRepository extends BaseRepository<OrderDb>{
         order.setEmail(rs.getString("email"));
         order.setPhone(rs.getString("phone"));
         order.setDate(rs.getString("date"));
+        order.setStatus(rs.getString("status"));
         return  order;
     };
 
@@ -42,7 +43,8 @@ public class OrderRepository extends BaseRepository<OrderDb>{
       "email", orderDb.getEmail(),
       "phone",orderDb.getPhone(),
       "isApproved", orderDb.getApproved(),
-      "date",orderDb.getDate()
+      "date",orderDb.getDate(),
+      "status", orderDb.getStatus()
     );
 
 

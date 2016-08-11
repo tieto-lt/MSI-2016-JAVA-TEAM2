@@ -47,6 +47,7 @@ function Service($http, $q) {
       return $http.put('/api/users/' + user.id, user);
   };
 
+
 }
 
 Service.$inject = ['$http', '$q'];

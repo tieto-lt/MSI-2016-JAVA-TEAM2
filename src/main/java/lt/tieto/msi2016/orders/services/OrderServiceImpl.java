@@ -29,6 +29,7 @@ public class OrderServiceImpl implements  OrderService{
        OrderDb orderDb = OrderDb.valueOf(order);
         orderDb.setApproved(false);
         orderDb.setDate(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date(System.currentTimeMillis())));
+        orderDb.setStatus("not completed");
         Order newOrder = Order.valueOf(orderRepository.create(orderDb));
         return newOrder;
     }

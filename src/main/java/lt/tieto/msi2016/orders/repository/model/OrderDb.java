@@ -22,6 +22,8 @@ public class OrderDb extends DbModel {
 
     private String date;
 
+    private String status;
+
     public static OrderDb valueOf(Order order) {
         OrderDb orderDb = new OrderDb();
         orderDb.setUserId(order.getUserId());
@@ -31,6 +33,7 @@ public class OrderDb extends DbModel {
         orderDb.setEmail(order.getEmail());
         orderDb.setPhone(order.getPhone());
         orderDb.setDate(order.getDate());
+        orderDb.setStatus(order.getStatus());
         return orderDb;
     }
 
@@ -89,5 +92,13 @@ public class OrderDb extends DbModel {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
