@@ -6,17 +6,17 @@
 <body>
 
 <div class="container">
-    <h3 style="font-family:courier;">Missions page</h3>
+    <h2 style="font-family:courier; margin-bottom:0.5cm; margin-top:0.5cm;">Missions page</h2>
     <div class="msi-content" ui-view ng-cloak></div>
 </div>
 
 
-<div ng-controller="AccordionDemoCtrl">
+<div class="accordion" ng-controller="AccordionDemoCtrl" >
   <script type="text/ng-template" id="group-template.html">
     <div class="panel-heading">
       <h4 class="panel-title" style="color:#fa39c3">
         <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
-          <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
+          <span uib-accordion-header  ng-class="{'text-muted': isDisabled}" >
             {{heading}}
           </span>
         </a>
@@ -35,11 +35,12 @@
 
 
     <div uib-accordion-group class="panel-default" is-open="status.open">
-      <uib-accordion-heading>
-        Mission 1 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+      <uib-accordion-heading >
+        Mission 1 <i class="pull-right glyphicon"  ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
       </uib-accordion-heading>
-      <div ng-controller="CarouselDemoCtrl">
-        <h3>Gallery</h3>
+      <div class="panel-inside" ng-controller="CarouselDemoCtrl">
+        <h3 style="font-family: courier;">Gallery</h3>
+        <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px" >
   <div style="height: 305px">
     <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
       <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
@@ -51,12 +52,13 @@
       </div>
     </div>
   </div>
-
+</div>
   <div ng-controller="ProgressDemoCtrl">
 
     <hr />
-    <h3>Coordinates</h3>
-    <h4>Beginning</h4>
+    <h3 style="font-family: courier;" >Coordinates</h3>
+      <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px" >
+    <h4 style="font-family: courier;" >Beginning</h4>
     <table >
       <tr>
         <td >
@@ -82,12 +84,14 @@
       </tr>
 
       </table>
-
+</div>
 
     <hr />
-    <h3>Battery</h3>
-    <uib-progressbar animate="false" value="69" type="success"><b>69%</b></uib-progressbar>
+    <h3 style="font-family:courier;">Battery</h3>
+      <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px" >
+    <uib-progressbar class="battery" animate="false" value="69" type="success"><b class="percentage">69%</b></uib-progressbar>
 
+</div>
 </div>
 </div>
     </div>
