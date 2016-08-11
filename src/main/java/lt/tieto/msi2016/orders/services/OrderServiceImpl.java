@@ -16,17 +16,17 @@ import java.util.stream.Collectors;
  * Created by localadmin on 16.8.11.
  */
 @Service
-public class OrderServiceImpl implements  OrderService{
+public class OrderServiceImpl implements OrderService {
 
     @Resource
     OrderRepository orderRepository;
+
     /**
-     *{@inheritDoc}
+     * {@inheritDoc}
      */
     @Transactional
-    public Order createOrder(final Order order)
-    {
-       OrderDb orderDb = OrderDb.valueOf(order);
+    public Order createOrder(final Order order) {
+        OrderDb orderDb = OrderDb.valueOf(order);
         orderDb.setApproved(false);
         orderDb.setDate(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date(System.currentTimeMillis())));
         orderDb.setStatus("not completed");

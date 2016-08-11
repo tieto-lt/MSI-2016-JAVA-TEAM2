@@ -1,58 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Account Info</title>
+    <meta charset="UTF-8">
+    <title>Account Info</title>
 </head>
 <body>
 
-  <div class="container">
-    <div id="registrationBox" style="margin-top:50px; border-color:#11151C; background-color:#FFFFFF" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-      <div class="panel panel-info" style= "border-width: 3px; border-color:#11151C;">
-        <div class="panel-heading" style="border-radius: 0; background-color:#11151C;" >
-          <div class="panel-title" style="font-family: courier; font-weight:bold; color:#FFFFFF; font-size:22px" >Account Information</div>
+<div class="container">
+    <div id="registrationBox" style="margin-top:50px; border-color:#11151C; background-color:#FFFFFF"
+         class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info" style="border-width: 3px; border-color:#11151C;">
+            <div class="panel-heading" style="border-radius: 0; background-color:#11151C;">
+                <div class="panel-title" style="font-family: courier; font-weight:bold; color:#FFFFFF; font-size:22px">
+                    Account Information
+                </div>
 
-          <div class="msi-content" ui-view ng-cloak></div>
+                <div class="msi-content" ui-view ng-cloak></div>
+            </div>
+
+            <div id="big-form" class="well auth-box" style="background-color:#FFFFFF; margin-bottom:0cm">
+                <form>
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-xs-2 col-form-label" style="font-family:courier;">Username</label>
+                        <div class="col-xs-10">
+                            <input class="form-control" type="text" ng-model="$ctrl.user.userName" name="userName">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="example-email-input" class="col-xs-2 col-form-label" style="font-family:courier;">Name</label>
+                        <div class="col-xs-10">
+                            <input class="form-control" type="text" ng-model="$ctrl.user.name" name="name">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="example-email-input" class="col-xs-2 col-form-label" style="font-family:courier;">Email</label>
+                        <div class="col-xs-10">
+                            <input class="form-control" type="email" ng-model="$ctrl.user.email" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-tel-input" class="col-xs-2 col-form-label" style="font-family:courier;">Phone</label>
+                        <div class="col-xs-10">
+                            <input class="form-control" type="tel" ng-model="$ctrl.user.phone" name="phone">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <button type="button" class="btn btn-warning"
+                                style="margin-left:0.4cm; margin-top:0.2cm; border: double;  font-weight:bold; padding: 7px 20px; color:#11151C; font-family:courier;">
+                            Update
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="clearfix"></div>
         </div>
-
-        <div id="big-form" class="well auth-box" style="background-color:#FFFFFF; margin-bottom:0cm">
-          <form>
-
-            <div class="form-group row">
-              <label for="example-text-input" class="col-xs-2 col-form-label" style="font-family:courier;">Username</label>
-              <div class="col-xs-10">
-                <input class="form-control" type="text" ng-model="$ctrl.user.userName" name="userName">
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label for="example-email-input" class="col-xs-2 col-form-label" style="font-family:courier;">Name</label>
-              <div class="col-xs-10">
-                <input class="form-control" type="text" ng-model="$ctrl.user.name" name="name">
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label for="example-email-input" class="col-xs-2 col-form-label" style="font-family:courier;">Email</label>
-              <div class="col-xs-10">
-                <input class="form-control" type="email" ng-model="$ctrl.user.email" name="email">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="example-tel-input" class="col-xs-2 col-form-label" style="font-family:courier;">Phone</label>
-              <div class="col-xs-10">
-                <input class="form-control" type="tel"  ng-model="$ctrl.user.phone" name="phone">
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <button type="button" class="btn btn-warning"style="margin-left:0.4cm; margin-top:0.2cm; border: double;  font-weight:bold; padding: 7px 20px; color:#11151C; font-family:courier;">Update</button>
-            </div>
-          </form>
-        </div>
-        <div class="clearfix"></div>
-      </div>
     </div>
-  </div>
+</div>
 </body>
 </html>

@@ -4,53 +4,63 @@ package lt.tieto.msi2016.missions.model.mission;
  * Created by localadmin on 16.8.10.
  */
 public class NavigationData {
-    private int x;
+    private double x;
 
-    private int y;
+    private double y;
 
-    private int z;
+    private double z;
 
-    private int altitude;
+    private double altitude;
 
-    private int altitudeMeters;
+    private double altitudeMeters;
 
-    public int getX() {
+    private int battery;
+
+    public double getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
-    public int getZ() {
+    public double getZ() {
         return z;
     }
 
-    public void setZ(int z) {
+    public void setZ(double z) {
         this.z = z;
     }
 
-    public int getAltitude() {
+    public double getAltitude() {
         return altitude;
     }
 
-    public void setAltitude(int altitude) {
+    public void setAltitude(double altitude) {
         this.altitude = altitude;
     }
 
-    public int getAltitudeMeters() {
+    public double getAltitudeMeters() {
         return altitudeMeters;
     }
 
-    public void setAltitudeMeters(int altitudeMeters) {
+    public void setAltitudeMeters(double altitudeMeters) {
         this.altitudeMeters = altitudeMeters;
+    }
+
+    public int getBattery() {
+        return battery;
+    }
+
+    public void setBattery(int battery) {
+        this.battery = battery;
     }
 }

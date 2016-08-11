@@ -6,31 +6,36 @@
 <body>
 
   <div class="container">
-    <h3 style="font-family:courier;">Token page</h3>
+      <h2 style="font-family:courier; margin-top:2cm">Token page</h2>
     <div class="msi-content" ui-view ng-cloak></div>
   </div>
 
   <div ng-controller="CollapseDemoCtrl">
 
-    <div id="tokenBox" style="margin-top:50px; border-color:#11151C; background-color:#FFFFFF" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-            <div class="panel panel-info" style= "border-width: 3px; border-color:#11151C;">
-              <div class="panel-heading" style=" border-radius: 0; background-color:#11151C;" >
-                <div class="panel-title" style="font-family: courier; font-weight:bold; color:#FFFFFF; font-size:22px" >Generate token</div>
+      <div id="tokenBox" style="margin-top:50px; border-color:#11151C; background-color:#FFFFFF"
+           class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+          <div class="panel panel-info" style="border-width: 3px; border-color:#11151C;">
+              <div class="panel-heading" style=" border-radius: 0; background-color:#11151C;">
+                  <div class="panel-title"
+                       style="font-family: courier; font-weight:bold; color:#FFFFFF; font-size:22px">Generate token
+                  </div>
+              </div>
+
+              <div ng-if="$ctrl.operatorState.token">
+                  <h4 style="font-family:courier; margin-left:0.4cm; ">Token:</h4>
+                  <pre style="margin-left:0.4cm;  margin-right:0.4cm;">{{$ctrl.operatorState.token}}</pre>
+                  <h4 style="font-family:courier; margin-left:0.4cm;">Verification: </h4>
+                  <pre ng-show="$ctrl.operatorState.verified" style="margin-left:0.4cm;  margin-right:0.4cm;">Verified</pre>
+                  <pre ng-hide="$ctrl.operatorState.verified" style="margin-left:0.4cm;  margin-right:0.4cm;">Not verified</pre>
     </div>
 
-    <div ng-if="$ctrl.operatorState.token">
-      <h4 style="font-family:courier; margin-left:0.4cm; ">Token:</h4>
-      <pre  style="margin-left:0.4cm;  margin-right:0.4cm;">{{$ctrl.operatorState.token}}</pre>
-      <h4 style="font-family:courier; margin-left:0.4cm;">Verification: </h4>
-      <pre style="margin-left:0.4cm;  margin-right:0.4cm;">{{$ctrl.operatorState.verified}}</pre>
+              <button type="button" class="btn btn-warning"
+                      style="margin-left:0.4cm; margin-bottom:0.5cm; border: double;  font-weight:bold; padding: 7px 20px; color:#11151C; font-family:courier;"
+                      ng-click="$ctrl.generateToken()">Generate token
+              </button>
+
     </div>
-
-    <button type="button" class="btn btn-warning" style="margin-left:0.4cm; margin-bottom:0.5cm; border: double;  font-weight:bold; padding: 7px 20px; color:#11151C; font-family:courier;" ng-click="$ctrl.generateToken()">Generate token</button>
-
-  </div>
-
-
-
-
+      </div>
+      </div>
 </body>
 </html>

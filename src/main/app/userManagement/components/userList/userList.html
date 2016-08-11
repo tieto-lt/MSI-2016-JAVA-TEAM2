@@ -1,5 +1,5 @@
 <div class="container auth">
-  <h1 class="text-center" style="font-family:courier;">User list  </h1>
+  <h1 class="text-center"> User list  </h1>
 
   <fieldset>
     <div>
@@ -27,14 +27,14 @@
              <tbody>
                 <tr ng-repeat="user in $ctrl.users">
 
-                  <td>{{$index + 1 }}</td>
+                  <td style="font-weight:bold;">{{$index + 1 }}</td>
                   <td>{{user.userName}}</td>
                   <td>{{user.name}}</td>
                   <td>{{user.email}}</td>
                   <td>{{user.phone}}</td>
-                  <td><input ng-model="user.userRole" ng-click="$ctrl.executeUpdate(user,'ROLE_ADMIN')" type="radio"  value="ROLE_ADMIN"></td>
-                  <td><input ng-model="user.userRole" ng-click="$ctrl.executeUpdate(user,'ROLE_CUSTOMER')" type="radio" value="ROLE_CUSTOMER"></td>
-                  <td class="mylinkclass withanimation"><input ng-model="user.userRole" ng-click="$ctrl.executeUpdate(user,'ROLE_OPERATOR')" type="radio" value="ROLE_OPERATOR"></td>
+                  <td style="text-align:center"><input ng-model="user.userRole" ng-click="$ctrl.executeUpdate(user,'ROLE_ADMIN')" type="radio"  value="ROLE_ADMIN"></td>
+                  <td style="text-align:center"><input ng-model="user.userRole" ng-click="$ctrl.executeUpdate(user,'ROLE_CUSTOMER')" type="radio" value="ROLE_CUSTOMER"></td>
+                  <td style="text-align:center" class="mylinkclass withanimation"><input ng-model="user.userRole" ng-click="$ctrl.executeUpdate(user,'ROLE_OPERATOR')" type="radio" value="ROLE_OPERATOR"></td>
 
                 </tr>
               </tbody>

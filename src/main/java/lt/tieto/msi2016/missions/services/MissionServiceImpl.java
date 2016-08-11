@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -35,14 +36,33 @@ public class MissionServiceImpl implements MissionService {
         defaultMissionPlan.setSubmittedBy("System");
         missionPlanList.add(defaultMissionPlan);
 
-        List<MissionCommands> missionCommandsList = new ArrayList<>();
+        List<MissionCommands> missionCommandsList = Arrays.asList(new MissionCommands[]{
+                MissionCommands.newMission().command("takeoff"),
+                MissionCommands.newMission().command("calibrate"),
+                MissionCommands.newMission().command("altitude").withArguments(1.5),
+                MissionCommands.newMission().command("forward").withArguments("2"),
+                MissionCommands.newMission().command("takePicture"),
+                MissionCommands.newMission().command("altitude").withArguments(1),
+                MissionCommands.newMission().command("cw").withArguments(60),
+                MissionCommands.newMission().command("takePicture"),
+                MissionCommands.newMission().command("altitude").withArguments(1.5),
+                MissionCommands.newMission().command("cw").withArguments(60),
+                MissionCommands.newMission().command("takePicture"),
+                MissionCommands.newMission().command("altitude").withArguments(1),
+                MissionCommands.newMission().command("cw").withArguments(60),
+                MissionCommands.newMission().command("takePicture"),
+                MissionCommands.newMission().command("altitude").withArguments(1.5),
+                MissionCommands.newMission().command("cw").withArguments(60),
+                MissionCommands.newMission().command("takePicture"),
+                MissionCommands.newMission().command("altitude").withArguments(1),
+                MissionCommands.newMission().command("cw").withArguments(60),
+                MissionCommands.newMission().command("takePicture"),
+                MissionCommands.newMission().command("altitude").withArguments(1.5),
+                MissionCommands.newMission().command("cw").withArguments(60),
+                MissionCommands.newMission().command("takePicture"),
+                MissionCommands.newMission().command("land")
 
-        MissionCommands firstMissionCommand = new MissionCommands();
-        firstMissionCommand.setCommandType("takeoff");
-        MissionCommands secondMissionCommand = new MissionCommands();
-        secondMissionCommand.setCommandType("land");
-        missionCommandsList.add(firstMissionCommand);
-        missionCommandsList.add(secondMissionCommand);
+        });
 
         defaultMissionPlan.setCommands(missionCommandsList);
 
@@ -88,13 +108,7 @@ public class MissionServiceImpl implements MissionService {
     public boolean isAnyMissionDone(String username)//hack for US07
     {
         int i = missionResultRepository.selectAllMissionsDoneByUser(username);
-        if(i==0)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return i != 0;
+
     }
 }

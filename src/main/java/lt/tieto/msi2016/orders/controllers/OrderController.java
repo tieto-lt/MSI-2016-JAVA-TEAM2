@@ -20,7 +20,7 @@ import static lt.tieto.msi2016.utils.constants.Roles.ADMIN;
  * Created by localadmin on 16.8.11.
  */
 @RestController
-public class OrderController extends BaseController{
+public class OrderController extends BaseController {
 
     private final String accepts = "application/json";
 
@@ -30,7 +30,7 @@ public class OrderController extends BaseController{
     @RequestMapping(value = "/api/orders", method = RequestMethod.POST, consumes = accepts)
     public Order createOrder(@RequestBody final @Valid Order order) {
 
-            return orderService.createOrder(order);
+        return orderService.createOrder(order);
 
     }
 
