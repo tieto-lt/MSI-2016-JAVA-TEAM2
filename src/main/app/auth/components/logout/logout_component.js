@@ -128,6 +128,10 @@ function Controller($state, Session, AuthService, $http, OperatorService, $trans
         $state.go('root.missionsPage');
     }
 
+    function goToOrderPage(){
+        $state.go('root.orderPage');
+    }
+
     function goToUserList(){
         $state.go('root.userList');
     }
