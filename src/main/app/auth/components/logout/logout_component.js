@@ -44,7 +44,7 @@ function Controller($state, Session, AuthService, $http, OperatorService, $trans
     }
 
     function isNavigationVisible() {
-      if($state.current.name != "root.Login" ){
+      if($state.current.name != "root.Login" || $state.current.name != "root.newUser"){
           return true;
       } else {
           return false;
