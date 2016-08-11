@@ -9,6 +9,7 @@ function Controller($state, UserServiceImpl) {
   vm.create = create;
   vm.logout = logout;
   vm.errors = [];
+  vm.enterPressed = enterPressed;
 
 
   function create() {
@@ -28,7 +29,10 @@ function Controller($state, UserServiceImpl) {
     );
   }
 
-
+  function enterPressed (keyEvent) {
+      if (keyEvent.which === 13)
+      create();
+    }
 
   function logout() {
       console.log("loggin out");

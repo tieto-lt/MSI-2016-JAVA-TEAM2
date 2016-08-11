@@ -9,6 +9,7 @@ function Controller($state, AuthService, $stateParams, Session, OperatorService)
 
     vm.login = login;
     vm.error = undefined;
+    vm.enterPressed = enterPressed;
 
     function login() {
         AuthService.login(vm.username, vm.password).then(
@@ -43,6 +44,11 @@ function Controller($state, AuthService, $stateParams, Session, OperatorService)
                 vm.error = err.data.error_description;
             });
 
+    }
+
+  function enterPressed (keyEvent) {
+      if (keyEvent.which === 13)
+      login();
     }
 }
 
