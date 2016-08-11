@@ -34,7 +34,12 @@ public class Order {
     @Pattern(regexp = "^[\\+ | 0-9][0-9]*")
     private String phone;
 
-    public static Order valueOf(OrderDb orderDb) {
+    private String date;
+
+    private String status;
+
+    public static Order valueOf (OrderDb orderDb)
+    {
         Order order = new Order();
         order.setId(orderDb.getId());
         order.setUserId(orderDb.getUserId());
@@ -43,6 +48,8 @@ public class Order {
         order.setName(orderDb.getName());
         order.setEmail(orderDb.getEmail());
         order.setPhone(orderDb.getPhone());
+        order.setDate(orderDb.getDate());
+        order.setStatus(orderDb.getStatus());
         return order;
     }
 
@@ -100,5 +107,21 @@ public class Order {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * Created by localadmin on 16.8.11.
  */
 @Repository
-public class OrderRepository extends BaseRepository<OrderDb> {
+public class OrderRepository extends BaseRepository<OrderDb>{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -21,24 +21,30 @@ public class OrderRepository extends BaseRepository<OrderDb> {
         super(ROW_MAPPER, ROW_UNMAPPER, "orders", "id");
     }
 
-    private static final RowMapper<OrderDb> ROW_MAPPER = (rs, rowNum) -> {
+    private static final  RowMapper<OrderDb> ROW_MAPPER = (rs, rowNum) ->{
         OrderDb order = new OrderDb();
         order.setId(rs.getLong("id"));
+        order.setApproved(rs.getBoolean("isApproved"));
         order.setUserId(rs.getLong("userId"));
         order.setName(rs.getString("name"));
         order.setDetails(rs.getString("details"));
         order.setEmail(rs.getString("email"));
         order.setPhone(rs.getString("phone"));
-        return order;
+        order.setDate(rs.getString("date"));
+        order.setStatus(rs.getString("status"));
+        return  order;
     };
 
-    private static final RowUnmapper<OrderDb> ROW_UNMAPPER = orderDb -> mapOf(
-            "id", orderDb.getId(),
-            "userId", orderDb.getUserId(),
-            "name", orderDb.getName(),
-            "details", orderDb.getDetails(),
-            "email", orderDb.getEmail(),
-            "phone", orderDb.getPhone()
+    private static final  RowUnmapper<OrderDb> ROW_UNMAPPER = orderDb -> mapOf(
+      "id", orderDb.getId(),
+      "userId", orderDb.getUserId(),
+      "name", orderDb.getName(),
+      "details", orderDb.getDetails(),
+      "email", orderDb.getEmail(),
+      "phone",orderDb.getPhone(),
+      "isApproved", orderDb.getApproved(),
+      "date",orderDb.getDate(),
+      "status", orderDb.getStatus()
     );
 
 
