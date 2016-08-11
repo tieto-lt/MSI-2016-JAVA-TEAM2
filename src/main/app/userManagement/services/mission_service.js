@@ -2,13 +2,14 @@ module = require('main_module');
 
 function Service ($http,Session) {
 
-    function retrieveMissions() {
-      return $http.get('/api/missions?onlyCompleted=true');
-    }
+    this.retrieveMissions = function retrieveMissions(){
+      return $http.get('/api/int/missions?onlyCompleted=true');
+    };
 
-    function retrieveMissionDetails(missionId){
-      return $http.get('/api/missions/-1'); //TODO: Change to missionId after missions will be added
-    }
+    this.retrieveMissionDetails = function retrieveMissionDetails(missionId){
+      return $http.get('/api/int/missions/'+missionId);
+    };
+
 }
 
 Service.$inject = ['$http','Session'];

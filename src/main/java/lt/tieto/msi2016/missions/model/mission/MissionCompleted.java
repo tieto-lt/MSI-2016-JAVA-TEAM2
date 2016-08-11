@@ -5,6 +5,8 @@ package lt.tieto.msi2016.missions.model.mission;
  */
 public class MissionCompleted {
 
+    private Long id = -1L;
+
     private String name = "Default mission";
 
     private String description = "Default mission that verifies your drone";
@@ -23,5 +25,13 @@ public class MissionCompleted {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

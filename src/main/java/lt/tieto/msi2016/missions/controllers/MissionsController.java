@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+
 import static lt.tieto.msi2016.utils.constants.Roles.OPERATOR;
 
 /**
@@ -51,15 +53,14 @@ public class MissionsController {
 
     @Secured(OPERATOR)
     @RequestMapping(value = "/api/int/missions", params = "onlyCompleted=true", method = RequestMethod.GET)
-    public ResponseEntity<MissionCompleted> getCompletedMissions ()
+    public ResponseEntity<?> getCompletedMissions()
     {
         if(missionService.isAnyMissionDone(securityHolder.getUserPrincipal().getUsername()))
         {
-            MissionCompleted missionCompleted = new MissionCompleted();
-            return ResponseEntity.ok(missionCompleted);
+            return ResponseEntity.ok(Arrays.asList(new MissionCompleted[]{new MissionCompleted()}));
         }
         else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
 
