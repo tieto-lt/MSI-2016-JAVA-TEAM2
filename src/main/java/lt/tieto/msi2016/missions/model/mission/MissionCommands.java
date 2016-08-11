@@ -1,5 +1,6 @@
 package lt.tieto.msi2016.missions.model.mission;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,8 +9,22 @@ import java.util.List;
 public class MissionCommands {
 
     private String commandType;
-    private List<String> args;
+    private List<Object> args = new ArrayList<>();
 
+
+    public static MissionCommands newMission(){
+        return new MissionCommands();
+    }
+
+    public MissionCommands command(String commandType){
+        this.setCommandType(commandType);
+        return this;
+    }
+
+    public MissionCommands withArguments(Object argument){
+        this.getArgs().add(argument);
+        return this;
+    }
 
     public String getCommandType() {
         return commandType;
@@ -19,11 +34,11 @@ public class MissionCommands {
         this.commandType = commandType;
     }
 
-    public List<String> getArgs() {
+    public List<Object> getArgs() {
         return args;
     }
 
-    public void setArgs(List<String> args) {
+    public void setArgs(List<Object> args) {
         this.args = args;
     }
 }

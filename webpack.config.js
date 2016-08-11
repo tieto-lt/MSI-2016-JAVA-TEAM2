@@ -23,7 +23,7 @@ module.exports = {
             allChunks: true
          }),
          new CopyWebpackPlugin([
-          { from: { glob: './src/main/app/Images/**/*.jpg'}},
+          { from: { glob: './src/main/app/Images/**/*.ico'}},
         ])
      ],
      resolve: {
