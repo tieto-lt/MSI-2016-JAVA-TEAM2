@@ -1,11 +1,14 @@
-.nav-item{
+.menu-item{
   font-family: courier;
-  color: #11151C;
+  color: #FFFFFF;
   font-size: 16px;
+  
 }
 
-.nav navbar-nav{
-  color:#11151C;
-  border-bottom: 2px solid #11151C ;
- background-color: #11151C;
+
+.navbar-brand{
+  color:#FFFFFF;
+  font-weight:bold;
+  font-size:22px;
+  font-family: courier;
 }

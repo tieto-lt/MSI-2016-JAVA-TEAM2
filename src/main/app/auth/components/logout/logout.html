@@ -1,55 +1,64 @@
 <nav ng-show="$ctrl.isNavigationVisible()" class="navbar navbar-fixed-top " role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
-  <ul class="nav navbar-nav" style=" width: 100%; border-bottom: 3px solid #11151C; color:#11151C">
-  <a class="navbar-brand" style="color:#11151C; font-weight:bold; font-size:22px; font-family: courier">DRONIFY</a>
+  <ul class="nav navbar-nav" style=" width: 100%; background-color:#11151C">
+  <a class="navbar-brand" >DRONIFY</a>
     <!--  <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li> -->
 
 
       <li class="nav-item">
-        <a ng-show="$ctrl.isOperator()" href="#/operatorPage" ng-click="$ctrl.goToOperatorPage()" style="color:#11151C">Operator page
+        <a  class="menu-item" ng-show="$ctrl.isOperator()" href="#/operatorPage" ng-click="$ctrl.goToOperatorPage()" >Operator page
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a ng-show="$ctrl.isAdmin()" href="#/adminPage" ng-click="$ctrl.goToAdminPage()" >Admin page
+        <a  class="menu-item" ng-show="$ctrl.isAdmin()" href="#/adminPage" ng-click="$ctrl.goToAdminPage()" >Admin page
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a ng-show="$ctrl.isCustomer()" href="#/customerPage" ng-click="$ctrl.goToCustomerPage()" >Customer page
+        <a class="menu-item" ng-show="$ctrl.isCustomer()" href="#/customerPage" ng-click="$ctrl.goToCustomerPage()" >Customer page
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a ng-show="$ctrl.isCustomer()" href="#/customerPage" ng-click="$ctrl.goToCustomerPage()" >Orders page
+        <a class="menu-item" ng-show="$ctrl.isCustomer()" href="#/customerPage" ng-click="$ctrl.goToCustomerPage()" >Orders page
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a ng-show="$ctrl.isCustomer()" href="#/accountInformation" ng-click="$ctrl.accountInfo()" >Account Details
+        <a class="menu-item" ng-show="$ctrl.isCustomer()" href="#/accountInformation" ng-click="$ctrl.accountInfo()" >Account Details
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a ng-show="$ctrl.isOperator()" href="#/missionsPage" ng-click="$ctrl.goToMissionsPage()" >Missions page
+        <a class="menu-item" ng-show="$ctrl.isOperator()" href="#/missionsPage" ng-click="$ctrl.goToMissionsPage()" >Missions page
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a ng-show="$ctrl.isOperator()"  href="#/accountInformation" ng-click="$ctrl.accountInfo()" >Account Details
+        <a class="menu-item" ng-show="$ctrl.isOperator()"  href="#/accountInformation" ng-click="$ctrl.accountInfo()" >Account Details
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a ng-show="$ctrl.isAdmin()" href="#/userList" ng-click="$ctrl.goToUserList()" >User List
+        <a class="menu-item" ng-show="$ctrl.isAdmin()" href="#/userList" ng-click="$ctrl.goToUserList()" >User List
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a ng-show="$ctrl.isAdmin()"  href="#/accountInformation" ng-click="$ctrl.accountInfo()" >Account Details
+        <a class="menu-item" ng-show="$ctrl.isAdmin()"  href="#/accountInformation" ng-click="$ctrl.accountInfo()" >Account Details
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" style="float: right;" >
-        <a ng-click="$ctrl.logout()" ng-show="$ctrl.isLogoutVisible()" >Logout</a>
+        <a class="menu-item" ng-click="$ctrl.logout()" ng-show="$ctrl.isLogoutVisible()" >Logout</a>
+      </li>
+
+      <li class="nav-item" >
+        <a class="menu-item" ng-show="$ctrl.isItNewUser()==false"  href="#/homePage" ng-click="$ctrl.goHome()"  >Home
+        <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item" style="float: right;"  >
+        <a  class="menu-item" ng-show="$ctrl.isItHome()" href="#/login" ng-click="$ctrl.goLogin()" > Login </a>
       </li>
 
       <li class="nav-item" style="float: right;" ng-show="$ctrl.isOperator()" >
-        <a ng-show="$ctrl.isVerified"  class="btn btn-success">Verified</a>
-        <a ng-hide="$ctrl.isVerified" class="btn btn-danger"> Not Verified </a>
+        <a ng-show="$ctrl.isVerified"  class="btn btn-default" style="background-color:#58AF50; border-color:#58AF50; color:#FFFFFF; font-weight:bold; font-family:courier;">Verified</a>
+        <a ng-hide="$ctrl.isVerified" class="btn btn-default" style="background-color:#B21A1A; border-color:#B21A1A; color:#FFFFFF; font-weight:bold; font-family:courier;"> Not Verified </a>
       </li>
 
     </ul>
