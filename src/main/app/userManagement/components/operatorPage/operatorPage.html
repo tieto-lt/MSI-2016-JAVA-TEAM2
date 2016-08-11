@@ -25,7 +25,8 @@
                   <h4 style="font-family:courier; margin-left:0.4cm; ">Token:</h4>
                   <pre style="margin-left:0.4cm;  margin-right:0.4cm;">{{$ctrl.operatorState.token}}</pre>
                   <h4 style="font-family:courier; margin-left:0.4cm;">Verification: </h4>
-                  <pre style="margin-left:0.4cm;  margin-right:0.4cm;">{{$ctrl.operatorState.verified}}</pre>
+                  <pre ng-show="$ctrl.operatorState.verified" style="margin-left:0.4cm;  margin-right:0.4cm;">Verified</pre>
+                  <pre ng-hide="$ctrl.operatorState.verified" style="margin-left:0.4cm;  margin-right:0.4cm;">Not verified</pre>
     </div>
 
               <button type="button" class="btn btn-warning"
