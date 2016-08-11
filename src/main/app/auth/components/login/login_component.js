@@ -28,7 +28,7 @@ function Controller($state, AuthService, $stateParams, Session, OperatorService)
                     console.log(response.data);
                     if(response.data.token){
                         vm.error = undefined;
-                        $state.go('root.homePage');
+                        $state.go('root.operatorPage');
                     } else {
                         vm.error = undefined;
                         $state.go('root.operatorPage');
