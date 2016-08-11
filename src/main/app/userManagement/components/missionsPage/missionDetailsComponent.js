@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller(missionService) {
+function Controller(missionService,$stringToNumber) {
   var vm = this;
 
   vm.oneAtATime = true;
@@ -47,10 +47,10 @@ function Controller(missionService) {
       var images = data.data.images;
       var navigationData = data.data.navigationData;
       if(navigationData){
-        vm.navigationData.startX = navigationData[0].x;
-        vm.navigationData.startY = navigationData[0].y;
-        vm.navigationData.endX = navigationData[navigationData.length-1].x;
-        vm.navigationData.endY = navigationData[navigationData.length-1].y;
+        vm.navigationData.startX = navigationData[0].x.toFixed(8);
+        vm.navigationData.startY = navigationData[0].y.toFixed(8);
+        vm.navigationData.endX = navigationData[navigationData.length-1].x.toFixed(8);
+        vm.navigationData.endY = navigationData[navigationData.length-1].y.toFixed(8);
         vm.navigationData.battery = navigationData[navigationData.length-1].battery;
         vm.prepareBar(vm.navigationData.battery);
       }
