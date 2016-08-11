@@ -24,11 +24,13 @@ public class OrderRepository extends BaseRepository<OrderDb>{
     private static final  RowMapper<OrderDb> ROW_MAPPER = (rs, rowNum) ->{
         OrderDb order = new OrderDb();
         order.setId(rs.getLong("id"));
+        order.setApproved(rs.getBoolean("isApproved"));
         order.setUserId(rs.getLong("userId"));
         order.setName(rs.getString("name"));
         order.setDetails(rs.getString("details"));
         order.setEmail(rs.getString("email"));
         order.setPhone(rs.getString("phone"));
+        order.setDate(rs.getString("date"));
         return  order;
     };
 
@@ -38,7 +40,9 @@ public class OrderRepository extends BaseRepository<OrderDb>{
       "name", orderDb.getName(),
       "details", orderDb.getDetails(),
       "email", orderDb.getEmail(),
-      "phone",orderDb.getPhone()
+      "phone",orderDb.getPhone(),
+      "isApproved", orderDb.getApproved(),
+      "date",orderDb.getDate()
     );
 
 

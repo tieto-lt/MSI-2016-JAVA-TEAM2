@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  * Created by localadmin on 16.8.11.
@@ -24,9 +28,20 @@ public class OrderServiceImpl implements  OrderService{
     {
        OrderDb orderDb = OrderDb.valueOf(order);
         orderDb.setApproved(false);
+        orderDb.setDate(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date(System.currentTimeMillis())));
         Order newOrder = Order.valueOf(orderRepository.create(orderDb));
         return newOrder;
-
     }
+    @Transactional(readOnly = true)
+    public Collection<Order> all(){
+        return orderRepository.findAll().stream().map(this::fillOrder).collect(Collectors.toList());
+    }
+
+    @Transactional
+    private Order fillOrder(OrderDb orderDb){
+        Order order = Order.valueOf(orderDb);
+        return order;
+    }
+
 
 }
