@@ -32,7 +32,7 @@ function Controller($state, AuthService, $stateParams, Session, OperatorService)
                         $state.go('root.operatorPage');
                     } else {
                         vm.error = undefined;
-                        $state.go('root.operatorPage');
+                        $state.go('root.operatorHomePage');
                     }
                   });
                 } else {
