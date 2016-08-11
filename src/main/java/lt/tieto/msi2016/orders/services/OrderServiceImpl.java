@@ -1,8 +1,8 @@
 package lt.tieto.msi2016.orders.services;
 
+import lt.tieto.msi2016.orders.model.Order;
 import lt.tieto.msi2016.orders.repository.OrderRepository;
 import lt.tieto.msi2016.orders.repository.model.OrderDb;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,15 +19,14 @@ public class OrderServiceImpl implements  OrderService{
     /**
      *{@inheritDoc}
      */
-   /* @Transactional
-    @Override
+    @Transactional
     public Order createOrder(final Order order)
     {
-        OrderDb orderDb = OrderDb.valueOf(order);
+       OrderDb orderDb = OrderDb.valueOf(order);
         orderDb.setApproved(false);
         Order newOrder = Order.valueOf(orderRepository.create(orderDb));
         return newOrder;
 
-    }*/
+    }
 
 }
