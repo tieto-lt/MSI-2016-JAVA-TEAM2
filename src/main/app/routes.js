@@ -51,6 +51,13 @@ module.config(function($stateProvider, $urlRouterProvider) {
         role : "ROLE_CUSTOMER"
       }
     })
+    .state('root.customerHomePage', {
+      url: "/customerHomePage",
+      template: "<customer-home-page></customer-home-page>",
+      data : {
+        role : "ROLE_CUSTOMER"
+      }
+    })
     .state('root.accountInformation', {
       url: "/accountInformation",
       template: "<account-information></account-information>",
@@ -58,6 +65,13 @@ module.config(function($stateProvider, $urlRouterProvider) {
     .state('root.operatorPage', {
       url: "/operatorPage",
       template: "<operator-page></operator-page>",
+      data : {
+        role : "ROLE_OPERATOR"
+      }
+    })
+    .state('root.operatorHomePage', {
+      url: "/operatorHomePage",
+      template: "<operator-home-page></operator-home-page>",
       data : {
         role : "ROLE_OPERATOR"
       }

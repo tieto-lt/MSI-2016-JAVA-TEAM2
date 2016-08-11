@@ -21,7 +21,7 @@ function Controller($state, AuthService, $stateParams, Session, OperatorService)
                 }
                 else if (role == "ROLE_CUSTOMER") {
                   vm.error = undefined;
-                  $state.go('root.customerPage');
+                  $state.go('root.customerHomePage');
                 }
                 else if (role == "ROLE_OPERATOR") {
                   OperatorService.getOperator(Session.getSession().userId).then(
@@ -29,7 +29,7 @@ function Controller($state, AuthService, $stateParams, Session, OperatorService)
                     console.log(response.data);
                     if(response.data.token){
                         vm.error = undefined;
-                        $state.go('root.homePage');
+                        $state.go('root.operatorHomePage');
                     } else {
                         vm.error = undefined;
                         $state.go('root.operatorPage');

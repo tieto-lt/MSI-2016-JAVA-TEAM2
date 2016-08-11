@@ -12,6 +12,7 @@ function Controller($state, UserServiceImpl) {
   vm.enterPressed = enterPressed;
 
 
+
   function create() {
     console.log("creating new user");
     UserServiceImpl.create(vm.user).then(

@@ -4,7 +4,7 @@ function Controller($state, $stateParams, ItemService) {
 
 }
 
-module.component('registrationForm', {
+module.component('customerHomePage', {
     controller: Controller,
-    templateUrl: require('./registrationForm.html')
+    templateUrl: require('./customerHomePage.html')
 });
