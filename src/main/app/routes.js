@@ -103,6 +103,13 @@ module.config(function($stateProvider, $urlRouterProvider) {
       data: {
         isPublic: true
       }
+    })
+    .state('root.orderPage', {
+      url: "/orderPage",
+      template: "<order-page></order-page>",
+      data: {
+        role : "ROLE_CUSTOMER"
+      }
     });
 });
 
