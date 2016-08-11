@@ -4,6 +4,7 @@ package lt.tieto.msi2016.auth.services;
 import lt.tieto.msi2016.auth.model.User;
 import lt.tieto.msi2016.auth.repository.UserRepository;
 import lt.tieto.msi2016.auth.repository.model.UserDb;
+import lt.tieto.msi2016.operator.repository.OperatorRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Resource
     private BCryptPasswordEncoder encoder;
+    @Resource
+    private OperatorRepository operatorRepository;
 
     /**
      *{@inheritDoc}
@@ -61,6 +64,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public User updateUser(User user,Long id) {
+        if(user.getUserRole()!="ROLE_CUSTOMER" && operatorRepository.findById(user.getId())!=null)
+        {
+            operatorRepository.deleteOperatorByUserId(user.getId());
+        }
         UserDb userDb = userRepository.findOne(id);
         userRepository.insertUserAuthority(userDb.getUserName(),user.getUserRole());
         return user;
