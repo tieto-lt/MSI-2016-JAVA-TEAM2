@@ -1,5 +1,10 @@
+.text-center {
+  font-family:courier;
+}
+
 .table-bordered {
-border: 1px solid #dddddd;
+border: 1px solid #11151C;
+
 border-collapse: separate;
 border-left: 0;
 -webkit-border-radius: 4px;
@@ -13,8 +18,10 @@ margin-bottom: 20px;
 background-color: transparent;
 border-collapse: collapse;
 border-spacing: 0;
+border-color: #11151C;
 display: table;
 }
+
 
 .widget.widget-table .table {
 margin-bottom: 0;
@@ -75,6 +82,18 @@ thead {
 display: table-header-group;
 vertical-align: middle;
 border-color: inherit;
+border-width: 2px;
+background-color: #11151C;
+color: #FFFFFF;
+font-family: courier;
+
+}
+
+tbody {
+color: #11151C;
+font-family: courier;
+
+
 }
 
 .widget .widget-header h3 {

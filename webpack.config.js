@@ -1,4 +1,6 @@
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var CopyWebpackPlugin = require("copy-webpack-plugin");
+
 module.exports = {
      entry: './src/main/app/app.js',
      output: {
@@ -19,7 +21,10 @@ module.exports = {
      plugins: [
          new ExtractTextPlugin("styles.bundle.css", {
             allChunks: true
-         })
+         }),
+         new CopyWebpackPlugin([
+          { from: { glob: './src/main/app/Images/**/*.ico'}},
+        ])
      ],
      resolve: {
         root: __dirname,

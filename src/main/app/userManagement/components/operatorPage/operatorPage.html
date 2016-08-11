@@ -6,7 +6,7 @@
 <body>
 
   <div class="container">
-      <h3 style="font-family:courier;">Token page</h3>
+      <h2 style="font-family:courier; margin-top:2cm">Token page</h2>
     <div class="msi-content" ui-view ng-cloak></div>
   </div>
 
@@ -25,7 +25,8 @@
                   <h4 style="font-family:courier; margin-left:0.4cm; ">Token:</h4>
                   <pre style="margin-left:0.4cm;  margin-right:0.4cm;">{{$ctrl.operatorState.token}}</pre>
                   <h4 style="font-family:courier; margin-left:0.4cm;">Verification: </h4>
-                  <pre style="margin-left:0.4cm;  margin-right:0.4cm;">{{$ctrl.operatorState.verified}}</pre>
+                  <pre ng-show="$ctrl.operatorState.verified" style="margin-left:0.4cm;  margin-right:0.4cm;">Verified</pre>
+                  <pre ng-hide="$ctrl.operatorState.verified" style="margin-left:0.4cm;  margin-right:0.4cm;">Not verified</pre>
     </div>
 
               <button type="button" class="btn btn-warning"
