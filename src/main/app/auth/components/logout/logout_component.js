@@ -117,6 +117,9 @@ function Controller($state, Session, AuthService, $http, OperatorService, $trans
     function goToCustomerPage() {
         $state.go('root.customerPage');
     }
+    function goToCustomerHomePage(){
+        $state.go('root.customerHomePage');
+    }
     function goToAdminPage() {
         $state.go('root.adminPage');
     }

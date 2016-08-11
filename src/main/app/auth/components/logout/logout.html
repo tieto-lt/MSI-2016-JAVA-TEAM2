@@ -8,15 +8,19 @@
 
 
       <li class="nav-item">
-        <a  class="menu-item" ng-show="$ctrl.isOperator()" href="#/operatorPage" ng-click="$ctrl.goToOperatorPage()" >Operator page
-        <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
         <a  class="menu-item" ng-show="$ctrl.isAdmin()" href="#/adminPage" ng-click="$ctrl.goToAdminPage()" >Home page
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="menu-item" ng-show="$ctrl.isCustomer()" href="#/customerPage" ng-click="$ctrl.goToCustomerPage()" >Home page
+        <a class="menu-item" ng-show="$ctrl.isCustomer()" href="#/customerHomePage" ng-click="$ctrl.goToCustomerHomePage()" >Home page
+        <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="menu-item" ng-show="$ctrl.isOperator()" href="#/operatorHomePage" ng-click="$ctrl.goToOperatorHomePage()" >Home page
+        <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a  class="menu-item" ng-show="$ctrl.isOperator()" href="#/operatorPage" ng-click="$ctrl.goToOperatorPage()" >Token page
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
