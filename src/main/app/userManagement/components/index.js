@@ -1,5 +1,6 @@
 require('newUser/newUser-component');
 require('customerPage/customerPage-component');
+require('customerHomePage/customerHomePage-component');
 require('accountInformation/accountInformation-component');
 require('operatorPage/operatorPage-component');
 require('operatorPage/CollapseDemoCtrl');

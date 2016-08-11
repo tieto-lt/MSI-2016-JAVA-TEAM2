@@ -21,7 +21,7 @@ function Controller($state, AuthService, $stateParams, Session, OperatorService)
                 }
                 else if (role == "ROLE_CUSTOMER") {
                   vm.error = undefined;
-                  $state.go('root.customerPage');
+                  $state.go('root.customerHomePage');
                 }
                 else if (role == "ROLE_OPERATOR") {
                   OperatorService.getOperator(Session.getSession().userId).then(

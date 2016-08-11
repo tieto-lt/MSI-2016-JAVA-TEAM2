@@ -12,11 +12,11 @@
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a  class="menu-item" ng-show="$ctrl.isAdmin()" href="#/adminPage" ng-click="$ctrl.goToAdminPage()" >Admin page
+        <a  class="menu-item" ng-show="$ctrl.isAdmin()" href="#/adminPage" ng-click="$ctrl.goToAdminPage()" >Home page
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="menu-item" ng-show="$ctrl.isCustomer()" href="#/customerPage" ng-click="$ctrl.goToCustomerPage()" >Customer page
+        <a class="menu-item" ng-show="$ctrl.isCustomer()" href="#/customerPage" ng-click="$ctrl.goToCustomerPage()" >Home page
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
@@ -45,15 +45,6 @@
       </li>
       <li class="nav-item" style="float: right;" >
         <a class="menu-item" ng-click="$ctrl.logout()" ng-show="$ctrl.isLogoutVisible()" >Logout</a>
-      </li>
-
-      <li class="nav-item" >
-        <a class="menu-item" ng-show="$ctrl.isItNewUser()==false"  href="#/homePage" ng-click="$ctrl.goHome()"  >Home
-        <span class="sr-only">(current)</span></a>
-      </li>
-
-      <li class="nav-item" style="float: right;"  >
-        <a  class="menu-item" ng-show="$ctrl.isItHome()" href="#/login" ng-click="$ctrl.goLogin()" > Login </a>
       </li>
 
       <li class="nav-item" style="float: right;" ng-show="$ctrl.isOperator()" >

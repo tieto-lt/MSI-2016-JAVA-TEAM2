@@ -51,6 +51,13 @@ module.config(function($stateProvider, $urlRouterProvider) {
         role : "ROLE_CUSTOMER"
       }
     })
+    .state('root.customerHomePage', {
+      url: "/customerHomePage",
+      template: "<customer-home-page></customer-home-page>",
+      data : {
+        role : "ROLE_CUSTOMER"
+      }
+    })
     .state('root.accountInformation', {
       url: "/accountInformation",
       template: "<account-information></account-information>",
