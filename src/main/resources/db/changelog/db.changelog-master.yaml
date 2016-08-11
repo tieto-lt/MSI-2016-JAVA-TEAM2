@@ -252,6 +252,12 @@ databaseChangeLog:
                 - column:
                     name: phone
                     type: varchar(60)
+                - column:
+                    name: date
+                    type: varchar(60)
+                - column:
+                    name: status
+                    type: varchar(60)
           - addForeignKeyConstraint:
               onDelete: CASCADE
               baseColumnNames: userId

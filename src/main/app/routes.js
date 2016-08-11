@@ -110,6 +110,13 @@ module.config(function($stateProvider, $urlRouterProvider) {
       data: {
         role : "ROLE_CUSTOMER"
       }
+    })
+    .state('root.orderList', {
+      url: "/orderList",
+      template: "<order-list></order-list>",
+      data: {
+        role: "ROLE_ADMIN"
+      }
     });
 });
 
