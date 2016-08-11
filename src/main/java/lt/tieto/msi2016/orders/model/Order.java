@@ -27,15 +27,14 @@ public class Order {
     private String details;
 
     @NotNull
-    @Pattern(regexp="^[A-z0-9!#$%&'*+\\/=?^_`{|}~.-]+@[A-z0-9]([A-z0-9-]*[A-z0-9])?(\\.[A-z0-9]([A-z0-9-]*[A-z0-9])?)*$")
+    @Pattern(regexp = "^[A-z0-9!#$%&'*+\\/=?^_`{|}~.-]+@[A-z0-9]([A-z0-9-]*[A-z0-9])?(\\.[A-z0-9]([A-z0-9-]*[A-z0-9])?)*$")
     private String email;
 
     @NotNull
     @Pattern(regexp = "^[\\+ | 0-9][0-9]*")
     private String phone;
 
-    public static Order valueOf (OrderDb orderDb)
-    {
+    public static Order valueOf(OrderDb orderDb) {
         Order order = new Order();
         order.setId(orderDb.getId());
         order.setUserId(orderDb.getUserId());

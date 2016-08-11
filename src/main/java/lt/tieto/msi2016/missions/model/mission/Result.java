@@ -29,4 +29,6 @@ public class Result {
     public void setImages(ArrayList<Image> images) {
         this.images = images;
     }
+
+
 }

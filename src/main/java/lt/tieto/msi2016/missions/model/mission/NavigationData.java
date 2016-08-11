@@ -14,6 +14,8 @@ public class NavigationData {
 
     private int altitudeMeters;
 
+    private int battery;
+
     public int getX() {
         return x;
     }
@@ -52,5 +54,13 @@ public class NavigationData {
 
     public void setAltitudeMeters(int altitudeMeters) {
         this.altitudeMeters = altitudeMeters;
+    }
+
+    public int getBattery() {
+        return battery;
+    }
+
+    public void setBattery(int battery) {
+        this.battery = battery;
     }
 }

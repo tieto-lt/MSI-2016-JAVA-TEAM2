@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+
 import static lt.tieto.msi2016.utils.constants.Roles.OPERATOR;
 
 /**
@@ -31,7 +33,7 @@ public class MissionsController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "api/missions")
+    @RequestMapping(method = RequestMethod.GET, value = "/api/missions")
     public ResponseEntity<?> getMissions(@RequestParam("operatorToken") String operatorToken) {
         if(operatorService.tokenExists(operatorToken)) {
             return ResponseEntity.ok(missionService.getDefaultMission());
@@ -50,16 +52,15 @@ public class MissionsController {
     }
 
     @Secured(OPERATOR)
-    @RequestMapping(value = "/api/missions",params = "onlyCompleted=true",method = RequestMethod.GET)
-    public ResponseEntity<MissionCompleted> getCompletedMissions ()
+    @RequestMapping(value = "/api/int/missions", params = "onlyCompleted=true", method = RequestMethod.GET)
+    public ResponseEntity<?> getCompletedMissions()
     {
         if(missionService.isAnyMissionDone(securityHolder.getUserPrincipal().getUsername()))
         {
-            MissionCompleted missionCompleted = new MissionCompleted();
-            return ResponseEntity.ok(missionCompleted);
+            return ResponseEntity.ok(Arrays.asList(new MissionCompleted[]{new MissionCompleted()}));
         }
         else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
 
@@ -76,7 +77,7 @@ public class MissionsController {
     }
 
     @Secured(OPERATOR)
-    @RequestMapping(value = "/api/missions/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/int/missions/{id}", method = RequestMethod.GET)
     public ResponseEntity<Result> returnMissionDetails (@PathVariable Long id)
     {
         String username = securityHolder.getUserPrincipal().getUsername();

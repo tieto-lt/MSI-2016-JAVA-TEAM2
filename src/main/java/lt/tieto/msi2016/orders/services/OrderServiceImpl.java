@@ -12,17 +12,17 @@ import javax.annotation.Resource;
  * Created by localadmin on 16.8.11.
  */
 @Service
-public class OrderServiceImpl implements  OrderService{
+public class OrderServiceImpl implements OrderService {
 
     @Resource
     OrderRepository orderRepository;
+
     /**
-     *{@inheritDoc}
+     * {@inheritDoc}
      */
     @Transactional
-    public Order createOrder(final Order order)
-    {
-       OrderDb orderDb = OrderDb.valueOf(order);
+    public Order createOrder(final Order order) {
+        OrderDb orderDb = OrderDb.valueOf(order);
         orderDb.setApproved(false);
         Order newOrder = Order.valueOf(orderRepository.create(orderDb));
         return newOrder;

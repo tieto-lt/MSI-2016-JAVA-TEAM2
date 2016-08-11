@@ -88,13 +88,7 @@ public class MissionServiceImpl implements MissionService {
     public boolean isAnyMissionDone(String username)//hack for US07
     {
         int i = missionResultRepository.selectAllMissionsDoneByUser(username);
-        if(i==0)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return i != 0;
+
     }
 }
