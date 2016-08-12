@@ -34,7 +34,7 @@ function Controller(UserServiceImpl, $uibModal, $scope) {
       animation: true,
       templateUrl: 'myModalContent.html',
       controller: 'ModalInstanceCtrl',
-      size: "lg",
+      size: "sm",
       resolve: {
         items: function() {
           return $scope.items;
@@ -56,9 +56,9 @@ function Controller(UserServiceImpl, $uibModal, $scope) {
       function() {
         console.log('Update success');
 
-        open();
+        // open();
         // $uibModalInstance.dismiss('cancel');
-        wait(1000);
+        // wait(500);
 
       },
       function(err) {
