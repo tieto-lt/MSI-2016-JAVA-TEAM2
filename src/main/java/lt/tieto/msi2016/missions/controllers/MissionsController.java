@@ -35,7 +35,7 @@ public class MissionsController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/api/missions")
     public ResponseEntity<?> getMissions(@RequestParam("operatorToken") String operatorToken) {
-        if(operatorService.tokenExists(operatorToken) && !missionService.isAnyMissionDone(securityHolder.getUserPrincipal().getUsername())) {
+        if(operatorService.tokenExists(operatorToken) && !operatorService.isVerified(operatorToken)) {
             return ResponseEntity.ok(missionService.getDefaultMission());
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();

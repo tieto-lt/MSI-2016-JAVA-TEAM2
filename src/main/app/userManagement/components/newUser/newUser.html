@@ -6,7 +6,7 @@
 
       </div>
 
-      <div id="big-form" class="well auth-box" style="background-color:#FFFFFF;">
+      <div id="big-form" class="well auth-box" style="background-color:#FFFFFF; margin-bottom:0">
         <form>
 
           <div ng-form="vm.myCustomForm">
@@ -92,7 +92,7 @@
 
 
             <div class="form-group row">
-              <button type="submit" class="btn btn-default" style="margin-left:0.5cm; border: double; background-color: #FFFFFF; font-weight:bold; padding: 7px 20px; color:#11151C; font-family:courier;" ng-click="vm.myCustomForm.$valid && $ctrl.create()" ng-disabled="vm.myCustomForm.$valid == false"> Register</button>
+              <button type="submit" class="btn btn-warning" style="margin-left:0.5cm; border: double;  font-weight:bold; padding: 7px 20px; color:#11151C; font-family:courier;" ng-click="vm.myCustomForm.$valid && $ctrl.create()" ng-disabled="vm.myCustomForm.$valid == false"> Register</button>
 
               <div class="form-group">
                 <div class="col-md-12 control">

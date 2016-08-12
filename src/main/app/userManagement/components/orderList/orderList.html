@@ -5,16 +5,18 @@
     <div>
       <form action="">
         <div class="span7">
-          <div class="widget stacked widget-table action-table">
-            <span class="label">Filter status by:</span>
+          <div style="margin-top:0.5cm; margin-bottom:0.5cm" class="widget stacked widget-table action-table">
+            <span style="margin-top:0.5cm; margin-bottom:0.5cm" class="label">Filter by order status:</span>
           <select ng-model="searchparam.status">
+              <option value="">All</option>
               <option value="not completed">Not completed</option>
-              <option value="completing">Completing</option>
-              <option value="complete">Complete</option>
+              <option value="completing">In progress</option>
+              <option value="complete">Completed</option>
+
            </select>
 
 
-<br><span class="label">Ordered By: {{orderByField}}, Reverse Sort: {{reverseSort}}</span>
+
           <div class="widget-content">
 
             <table class="table table-striped table-bordered">
