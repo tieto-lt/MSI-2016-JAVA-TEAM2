@@ -1,7 +1,7 @@
 var module = require('main_module');
 require('userList.scss');
 
-function Controller(UserServiceImpl, $uibModal, $scope, $uibModalInstance) {
+function Controller(UserServiceImpl, $uibModal, $scope) {
   //Convention to call controller instance 'vm'
   var vm = this;
 
@@ -57,7 +57,7 @@ function Controller(UserServiceImpl, $uibModal, $scope, $uibModalInstance) {
         console.log('Update success');
 
         open();
-        $uibModalInstance.dismiss('cancel');
+        // $uibModalInstance.dismiss('cancel');
         wait(1000);
 
       },
@@ -72,7 +72,7 @@ function Controller(UserServiceImpl, $uibModal, $scope, $uibModalInstance) {
 
 }
 
-Controller.$inject = ['UserServiceImpl', '$uibModal', '$scope', '$uibModalInstance'];
+Controller.$inject = ['UserServiceImpl', '$uibModal', '$scope'];
 
 module.component('userList', {
   controller: Controller,

@@ -45,6 +45,10 @@
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
+        <a class="menu-item" ng-show="$ctrl.isAdmin()" href="#/orderList" ng-click="$ctrl.goToOrderList()" >Orders
+        <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
         <a class="menu-item" ng-show="$ctrl.isAdmin()" href="#/userList" ng-click="$ctrl.goToUserList()" >Users
         <span class="sr-only">(current)</span></a>
       </li>
@@ -53,7 +57,7 @@
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" style="float: right;" >
-        <a class="menu-item" ng-click="$ctrl.logout()" href="#/accountInformation" ng-show="$ctrl.isLogoutVisible()" >Logout</a>
+        <a class="menu-item" ng-click="$ctrl.logout()" href="" ng-show="$ctrl.isLogoutVisible()" >Logout</a>
       </li>
 
       <li class="nav-item" style="float: right;" ng-show="$ctrl.isOperator()" >
