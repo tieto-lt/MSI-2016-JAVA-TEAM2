@@ -1,11 +1,10 @@
 
-
-
 <nav ng-show="$ctrl.isNavigationVisible()" class="navbar navbar-fixed-top " role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
-
+  <link rel='shortcut icon' type='image/x-icon' href='src/main/app/Images/Favicon.ico' />
 
   <ul class="nav navbar-nav" style=" width: 100%; background-color:#11151C">
+
   <a class="navbar-brand" style="font-family:courier" >DRONIFY</a>
     <!--  <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -57,7 +56,7 @@
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" style="float: right;" >
-        <a class="menu-item" ng-click="$ctrl.logout()" href="" ng-show="$ctrl.isLogoutVisible()" >Logout</a>
+        <a class="menu-item" ng-click="$ctrl.logout()" href="#/accountInformation" ng-show="$ctrl.isLogoutVisible()" >Logout</a>
       </li>
 
       <li class="nav-item" style="float: right;" ng-show="$ctrl.isOperator()" >

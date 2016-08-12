@@ -1,15 +1,15 @@
 <div class="container auth">
-    <div id="loginbox" style="margin-top:50px; border-color:#11151C; background-color:#FFFFFF"
+    <div id="loginbox" style="margin-top:50px;border-color:#11151C; background-color:#FFFFFF"
          class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        <div class="panel panel-info" style="border-width: 3px; border-color:#11151C;">
-            <div class="panel-heading" style="background-color:#11151C;">
+        <div class="panel panel-info" style=" border-width: 3px; border-color:#11151C;">
+            <div class="panel-heading" style="background-color:#11151C; border-radius:0">
                 <div class="panel-title" style="font-family: courier; font-weight:bold; color:#FFFFFF; font-size:22px">
                     Place an order
                 </div>
 
             </div>
 
-            <div id="big-form" class="well auth-box" style="background-color:#FFFFFF;">
+            <div id="big-form" class="well auth-box" style="margin-bottom:0; background-color:#FFFFFF">
                 <form>
 
                     <div ng-form="vm.myCustomForm">
@@ -19,13 +19,13 @@
 
                         <!-- Text input-->
                         <div class="form-group">
-                            <label class=" control-label" for="textinput">Mission Name</label>
+                            <label class=" control-label" for="textinput">Mission Name<span style="color:#e32;">*</span></label>
                             <div class="">
                                 <input id="textinput" name="name" class="form-control input-md" type="text"
                                        ng-model="$ctrl.order.name" required ng-maxlength="255">
-                                <div class="help-block" ng-show="vm.myCustomForm.name.$error.required">Field Mission
+                                <!--div class="help-block" ng-show="vm.myCustomForm.name.$error.required && vm.myCustomForm.name.$touched">Field Mission
                                     Name is required!
-                                </div>
+                                </div-->
                                 <div class="help-block" ng-show="vm.myCustomForm.name.$error.maxlength">Maximum length
                                     of the mission name is 255 symbols.
                                 </div>
@@ -33,13 +33,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label class=" control-label" for="textinput">Email</label>
+                            <label class=" control-label" for="textinput">Email<span style="color:#e32;">*</span></label>
                             <div class="">
                                 <input id="textinput" name="email" class="form-control input-md" type="email"
-                                       ng-model="$ctrl.order.email" required>
-                                <div class="help-block" ng-show="vm.myCustomForm.email.$error.required">Field Email is
+                                       ng-model="$ctrl.order.email" required >
+                                <!--div class="help-block" ng-show="vm.myCustomForm.email.$error.required && vm.myCustomForm.email.$touched">Field Email is
                                     required!
-                                </div>
+                                </div-->
                                 <div class="help-block" ng-show="vm.myCustomForm.email.$error.email">Invalid email
                                     adress
                                 </div>
@@ -47,13 +47,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label class=" control-label" for="textinput">Phone</label>
+                            <label class=" control-label" for="textinput">Phone<span style="color:#e32;">*</span></label>
                             <div class="">
                                 <input id="textinput" name="phone" class="form-control input-md" type="text"
                                        ng-model="$ctrl.order.phone" required pattern="^[\+ | 0-9][0-9]*">
-                                <div class="help-block" ng-show="vm.myCustomForm.phone.$error.required">Field phone is
+                                <!--div class="help-block" ng-show="vm.myCustomForm.phone.$error.required && vm.myCustomForm.phone.$touched">Field phone is
                                     required!
-                                </div>
+                                </div-->
                                 <div class="help-block" ng-show="vm.myCustomForm.phone.$error.pattern">Field phone is
                                     only numbers!
                                 </div>
@@ -62,28 +62,27 @@
 
                         <!-- Text input-->
                         <div class="form-group">
-                            <label class=" control-label" for="textinput">Mission Details</label>
+                            <label class=" control-label" for="textinput">Mission Details<span style="color:#e32;">*</span></label>
                             <div class="">
                                 <input id="textinput" name="details" class="form-control input-md" type="text"
                                        ng-model="$ctrl.order.details" required ng-maxlength="500"
                                        ng-keypress="$ctrl.enterPressed($event)">
-                                <div class="help-block" ng-show="vm.myCustomForm.details.$error.required">Field Mission
+                                <!--div class="help-block" ng-show="vm.myCustomForm.details.$error.required && vm.myCustomForm.details.$touched">Field Mission
                                     Details is required!
-                                </div>
+                                </div-->
                                 <div class="help-block" ng-show="vm.myCustomForm.details.$error.maxlength">Maximum
                                     length of the mission details is 500 symbols.
                                 </div>
                             </div>
                         </div>
 
-
                         <div class="form-group row">
-                            <button type="submit" class="btn btn-default"
-                                    style="margin-left:0.5cm; border: double; background-color: #FFFFFF; font-weight:bold; padding: 7px 20px; color:#11151C; font-family:courier;"
+                            <button type="submit" class="btn btn-warning"
+                                    style="margin-left:0.5cm; border: double; font-weight:bold; padding: 7px 20px; color:#11151C; font-family:courier; margin-top:0.3cm; margin-bottom:0.3cm"
                                     ng-click="vm.myCustomForm.$valid && $ctrl.create()"
                                     ng-disabled="vm.myCustomForm.$valid == false"> Place an Order
                             </button>
-
+<p style="font-family:courier; color: #BC0000; margin-top:0.4cm; margin-left:0.3cm; margin-bottom:0; font-weight: bold; "> * Field is required! </p>
                             <div class="form-group">
 
 
@@ -93,9 +92,9 @@
                                     Field '{{error.name}}' : {{error.message}}
                                 </div>
 
+
                             </div>
-                            <div>
-                            </div>
+
                         </div>
                     </div>
                 </form>
