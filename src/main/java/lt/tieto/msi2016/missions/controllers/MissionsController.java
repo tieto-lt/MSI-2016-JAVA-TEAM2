@@ -3,10 +3,12 @@ package lt.tieto.msi2016.missions.controllers;
 import lt.tieto.msi2016.auth.model.User;
 import lt.tieto.msi2016.auth.services.UserService;
 import lt.tieto.msi2016.missions.model.mission.MissionCompleted;
+import lt.tieto.msi2016.missions.model.mission.MissionResponse;
 import lt.tieto.msi2016.missions.model.mission.Result;
 import lt.tieto.msi2016.missions.services.MissionService;
 import lt.tieto.msi2016.operator.model.Operator;
 import lt.tieto.msi2016.operator.services.OperatorService;
+import lt.tieto.msi2016.utils.controller.BaseController;
 import lt.tieto.msi2016.utils.services.SecurityHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +24,7 @@ import static lt.tieto.msi2016.utils.constants.Roles.OPERATOR;
  * Created by localadmin on 16.8.9.
  */
 @RestController
-public class MissionsController {
+public class MissionsController extends BaseController {
 
     @Autowired
     private MissionService missionService;
@@ -35,10 +37,13 @@ public class MissionsController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/api/missions")
     public ResponseEntity<?> getMissions(@RequestParam("operatorToken") String operatorToken) {
-        if(operatorService.tokenExists(operatorToken) && !operatorService.isVerified(operatorToken)) {
+        if(!operatorService.isVerified(operatorToken)) {
             return ResponseEntity.ok(missionService.getDefaultMission());
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } else if(operatorService.isVerified(operatorToken)) {
+            return ResponseEntity.ok(new MissionResponse());
+        }
+         else {
+             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
 

@@ -82,7 +82,8 @@ public class OperatorRepository extends BaseRepository<OperatorDb> {
 
     public boolean isVerified(String operatorToken) {
         try {
-           return jdbcTemplate.queryForObject("SELECT isVerified from operators where token = ?",Integer.class,operatorToken) == 1;
+            Integer verificationStatus = jdbcTemplate.queryForObject("SELECT isVerified from operators where token = ?",Integer.class,operatorToken);
+           return verificationStatus != null && verificationStatus == 1;
         } catch (EmptyResultDataAccessException e) {
             return false;
         }
