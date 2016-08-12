@@ -42,21 +42,25 @@ function Controller($state, Session, AuthService, $http, OperatorService, $trans
 
     }
 
+    vm.$onInit = function() {
+      vm.checkVerificationStatus();
+    };
+
+    vm.checkVerificationStatus = function checkVerificationStatus(){
+      if(isOperator()){
+        OperatorService.getOperator(Session.getSession().userId).then(
+        function (response) {
+            vm.isVerified = response.data.verified;
+            console.log(vm.isVerified);
+        },
+        function (err) {
+            vm.error = err.data.error_description;
+        });
+      }
+    };
+
     $transitions.onStart(
-      {},
-      function() {
-        console.log('state change');
-        if(isOperator()){
-          OperatorService.getOperator(Session.getSession().userId).then(
-          function (response) {
-              vm.isVerified = response.data.verified;
-              console.log(vm.isVerified);
-          },
-          function (err) {
-              vm.error = err.data.error_description;
-          });
-        }
-      });
+      {},vm.checkVerificationStatus);
 
     function isLogoutVisible() {
         return Session.isSessionActive();
