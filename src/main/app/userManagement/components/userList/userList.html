@@ -1,77 +1,61 @@
 <div class="container auth">
-  <h1 class="text-center"> User list  </h1>
+    <h1 class="text-center" style="font-family:courier;">User list </h1>
 
-  <!-- <div ng-controller="ModalDemoCtrl">
-    <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title">I'm a modal!</h3>
+    <fieldset>
+        <div>
+            <form action="">
+                <div class="span7">
+                    <div class="widget stacked widget-table action-table">
+
+
+                        <div class="widget-content">
+
+                            <table class="table table-striped table-bordered">
+                                <thead>
+
+                                <tr>
+                                    <th>#</th>
+                                    <th>Username</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Admin</th>
+                                    <th>Customer</th>
+                                    <th>Operator</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="user in $ctrl.users">
+
+                                    <td>{{$index + 1 }}</td>
+                                    <td>{{user.userName}}</td>
+                                    <td>{{user.name}}</td>
+                                    <td>{{user.email}}</td>
+                                    <td>{{user.phone}}</td>
+                                    <td><input ng-model="user.userRole"
+                                               ng-click="$ctrl.executeUpdate(user,'ROLE_ADMIN')" type="radio"
+                                               value="ROLE_ADMIN"></td>
+                                    <td><input ng-model="user.userRole"
+                                               ng-click="$ctrl.executeUpdate(user,'ROLE_CUSTOMER')" type="radio"
+                                               value="ROLE_CUSTOMER"></td>
+                                    <td class="mylinkclass withanimation"><input ng-model="user.userRole"
+                                                                                 ng-click="$ctrl.executeUpdate(user,'ROLE_OPERATOR')"
+                                                                                 type="radio" value="ROLE_OPERATOR">
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="modal-body">
-            <ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
-
-    <button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
-    <button type="button" class="btn btn-default" ng-click="open('lg')">Large modal</button>
-    <button type="button" class="btn btn-default" ng-click="open('sm')">Small modal</button>
-    <button type="button" class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled }})</button>
-    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
-  </div> -->
-
-  <fieldset>
-    <div>
-      <form action="">
-        <div class="span7">
-          <div class="widget stacked widget-table action-table">
+    </fieldset>
 
 
-          <div class="widget-content">
-
-            <table class="table table-striped table-bordered">
-              <thead>
-
-                <tr>
-                  <th>#</th>
-                  <th>Username</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Admin</th>
-                  <th>Customer</th>
-                  <th>Operator</th>
-                </tr>
-              </thead>
-             <tbody>
-                <tr ng-repeat="user in $ctrl.users">
-
-                  <td style="font-weight:bold;">{{$index + 1 }}</td>
-                  <td>{{user.userName}}</td>
-                  <td>{{user.name}}</td>
-                  <td>{{user.email}}</td>
-                  <td>{{user.phone}}</td>
-                  <td style="text-align:center"><input ng-model="user.userRole" ng-click="$ctrl.executeUpdate(user,'ROLE_ADMIN')" type="radio"  value="ROLE_ADMIN"></td>
-                  <td style="text-align:center"><input ng-model="user.userRole" ng-click="$ctrl.executeUpdate(user,'ROLE_CUSTOMER')" type="radio" value="ROLE_CUSTOMER"></td>
-                  <td style="text-align:center" class="mylinkclass withanimation"><input ng-model="user.userRole" ng-click="$ctrl.executeUpdate(user,'ROLE_OPERATOR')" type="radio" value="ROLE_OPERATOR"></td>
-
-                </tr>
-              </tbody>
-            </table>
-          </form>
-        </div>
-      </fieldset>
-
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
+    <div class="clearfix"></div>
+</div>
+</div>
 </div> <!-- /widget -->
 </div>
