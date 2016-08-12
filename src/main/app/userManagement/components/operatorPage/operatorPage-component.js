@@ -11,6 +11,10 @@ function Controller(Session, OperatorService, $state) {
     OperatorService.getOperator(Session.getSession().userId).then(
     function (response) {
         vm.operatorState = response.data;
+        if(vm.operatorState.token===null)
+        {
+          vm.operatorState.token = "Press the button to generate new token";
+        }
     },
     function (err) {
         vm.error = err.data.error_description;
