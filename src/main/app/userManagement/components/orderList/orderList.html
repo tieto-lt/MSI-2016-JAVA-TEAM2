@@ -11,8 +11,7 @@
               <option value="">All</option>
               <option value="not completed">Not completed</option>
               <option value="completing">In progress</option>
-              <option value="complete">Completed</option>
-
+              <option value="done">Done</option>
            </select>
 
 
@@ -33,7 +32,7 @@
           Date<span ng-show="orderByField == 'date'"><span ng-show="!reverseSort"><img src="https://upload.wikimedia.org/wikipedia/commons/0/01/Arrow-up-navmenu.png"></span><span ng-show="reverseSort"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Arrow-down-navmenu.png"</span></span>
         </a></th>
                   <th>Status</th>
-                  <th>Approve</th>
+                  <!--th>Approve</th-->
                 </tr>
               </thead>
              <tbody>
@@ -47,7 +46,7 @@
                   <td>{{order.details}}</td>
                   <td>{{order.date}}</td>
                   <td>{{order.status}}</td>
-                  <td><input ngModel="order.isApproved" type="checkbox" value="true"></td>
+                  <!--td><input ngModel="order.isApproved" type="checkbox" value="true"></td-->
                 </tr>
               </tbody>
             </table>
