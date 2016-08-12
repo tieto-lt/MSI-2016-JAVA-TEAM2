@@ -21,7 +21,7 @@
                 <input id="textinput" name="username" class="form-control input-md" type="text"
                 ng-model="$ctrl.user.userName"
                 required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-minlength="6" ng-maxlength="20" >
-                <div class="help-block" ng-show="vm.myCustomForm.username.$error.required && vm.myCustomForm.username.$touched">Field Username is required!</div>
+                <!--div class="help-block" ng-show="vm.myCustomForm.username.$error.required && vm.myCustomForm.username.$touched">Field Username is required!</div-->
                 <div class="help-block" ng-show="vm.myCustomForm.username.$error.minlength">Username must consist of at least 6 characters.</div>
                 <div class="help-block" ng-show="vm.myCustomForm.username.$error.maxlength">Maximum length of the username is 20.</div>
                 <div class="help-block" ng-show="vm.myCustomForm.username.$error.pattern">User is allowed to enter letters a-z, numbers 0-9 and symbols “.”, “-” and “_”, provided non of these are the first symbol.</div>
@@ -36,7 +36,7 @@
               <div class="">
                 <input id="passwordinput" name="password" class="form-control input-md" type="password"
                 ng-model="$ctrl.user.password" ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30">
-                <div class="help-block"  ng-show="vm.myCustomForm.password.$error.required && vm.myCustomForm.password.$touched">Field Password is required!</div>
+                <!--div class="help-block"  ng-show="vm.myCustomForm.password.$error.required && vm.myCustomForm.password.$touched">Field Password is required!</div-->
                 <div class="help-block" ng-show="vm.myCustomForm.password.$error.minlength">Password must be at least 6 symbols long.</div>
                 <div class="help-block" ng-show="vm.myCustomForm.password.$error.maxlength">Maximum length of the password is 30 symbols.</div>
                 <div class="help-block" ng-show="vm.myCustomForm.password.$error.pattern">User is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div>
@@ -49,7 +49,7 @@
               <div class="">
                 <input id="passwordinput" name="confirmPassword"  class="form-control input-md" type="password"
                 ng-model="$ctrl.user.confirmPassword" ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30" match-Password="$ctrl.user.password">
-                <div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.required && vm.myCustomForm.confirmPassword.$touched">Field Confirm Password is required!</div>
+                <!--div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.required && vm.myCustomForm.confirmPassword.$touched">Field Confirm Password is required!</div-->
                 <div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.minlength">Password must be at least 6 symbols long.</div>
                 <div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.maxlength">Maximum length of the password is 30 symbols.</div>
                 <div class="help-block" ng-show="vm.myCustomForm.confirmPassword.$error.pattern">Password is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div>
@@ -63,7 +63,7 @@
               <div class="">
                 <input id="textinput" name="name" class="form-control input-md" type="text"
                 ng-model="$ctrl.user.name" required ng-maxlength="255">
-                <div class="help-block" ng-show="vm.myCustomForm.name.$error.required && vm.myCustomForm.name.$touched">Field Name is required!</div>
+                <!--div class="help-block" ng-show="vm.myCustomForm.name.$error.required && vm.myCustomForm.name.$touched">Field Name is required!</div-->
                 <div class="help-block" ng-show="vm.myCustomForm.name.$error.maxlength">Maximum length of the name is 255 symbols.</div>
               </div>
             </div>
@@ -74,7 +74,7 @@
               <div class="">
                 <input id="textinput" name="email" class="form-control input-md" type="email"
                 ng-model="$ctrl.user.email" required>
-                <div class="help-block" ng-show="vm.myCustomForm.email.$error.required && vm.myCustomForm.email.$touched">Field Email is required!</div>
+                <!--div class="help-block" ng-show="vm.myCustomForm.email.$error.required && vm.myCustomForm.email.$touched">Field Email is required!</div-->
                 <div class="help-block" ng-show="vm.myCustomForm.email.$error.email">Invalid email adress</div>
               </div>
             </div>
@@ -84,15 +84,15 @@
               <div class="">
                 <input id="textinput" name="phone" class="form-control input-md" type="text"
                 ng-model="$ctrl.user.phone" required pattern="^[\+ | 0-9][0-9]*" ng-keypress="$ctrl.enterPressed($event)">
-                <div class="help-block" ng-show="vm.myCustomForm.phone.$error.required && vm.myCustomForm.phone.$touched">Field phone is required!</div>
+                <!--div class="help-block" ng-show="vm.myCustomForm.phone.$error.required && vm.myCustomForm.phone.$touched">Field phone is required!</div-->
                 <div class="help-block" ng-show="vm.myCustomForm.phone.$error.pattern">Field phone is only numbers!</div>
               </div>
+
             </div>
-
-
 
             <div class="form-group row">
               <button type="submit" class="btn btn-warning" style="margin-left:0.5cm; border: double;  font-weight:bold; padding: 7px 20px; color:#11151C; font-family:courier;" ng-click="vm.myCustomForm.$valid && $ctrl.create()" ng-disabled="vm.myCustomForm.$valid == false"> Register</button>
+              <p style="font-family:courier; color: #BC0000; margin-top:0.5cm; margin-left:0.3cm; font-weight: bold; "> * Field is required! </p>
 
               <div class="form-group">
                 <div class="col-md-12 control">
@@ -102,8 +102,12 @@
                       Go back to login
                     </a>
                   </div>
+
                 </div>
+
               </div>
+
+
 
 
 
