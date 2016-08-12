@@ -31,15 +31,15 @@ function Controller(UserServiceImpl, $scope) {
       user.userRole = newRole;
         UserServiceImpl.put(vm.user).then(
             function () {
-              console.log('Update success');
               $scope.addAlert('success', 'User\'s ' + user.userName + ' role has been changed to ' + newRole + '.');
             },
             function (err) {
                 if (err.status === 400) {
-                    vm.errors = err.data;
+                    $scope.addAlert('danger', 'Error: ' + err.data.message);
+                    
                 } else {
                     console.log('Error', err);
-                    $scope.addAlert('danger', 'User\'s ' + user.userName + ' role has been changed to ' + newRole + '.');
+                    $scope.addAlert('danger', 'Error: ' + err.data.message);
                 }
             });
     }
