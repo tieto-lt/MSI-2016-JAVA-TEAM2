@@ -265,3 +265,22 @@ databaseChangeLog:
               constraintName: fk_id_users
               referencedColumnNames: id
               referencedTableName: users
+
+  - changeSet:
+        id: 10
+        author: tieto
+        changes:
+          - sql:
+            dbms: MySQL
+            sql:
+               CREATE TRIGGER trg_authorities_bu
+               BEFORE UPDATE ON authorities FOR EACH ROW
+               BEGIN
+               IF OLD.authority = 'ROLE_ADMIN' AND NEW.authority != 'ROLE_ADMIN' THEN
+               SELECT max(authority) into @authority_var from authorities where authority = 'ROLE_ADMIN' and username != old.username;
+               IF @authority_var IS NULL THEN
+               set @msg = concat('Forbidden update for ',OLD.username,'. Last admin in system');
+               signal sqlstate '45000' set message_text = @msg;
+               END IF;
+               END IF;
+               END;
