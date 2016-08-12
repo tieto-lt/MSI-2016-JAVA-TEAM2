@@ -1,5 +1,7 @@
 package lt.tieto.msi2016.missions.model.mission;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -7,7 +9,7 @@ import java.util.List;
  */
 public class MissionResponse {
 
-    private List<MissionPlan> missions;
+    private List<MissionPlan> missions = new ArrayList<>();
 
     public List<MissionPlan> getMissions() {
         return missions;
@@ -16,4 +18,5 @@ public class MissionResponse {
     public void setMissions(List<MissionPlan> missions) {
         this.missions = missions;
     }
+
 }
