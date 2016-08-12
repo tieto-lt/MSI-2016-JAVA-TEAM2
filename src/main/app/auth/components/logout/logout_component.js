@@ -22,6 +22,7 @@ function Controller($state, Session, AuthService, $http, OperatorService, $trans
     vm.goHome = goHome;
     vm.goLogin = goLogin;
     vm.isVerified = false;
+    vm.userName=Session.getSession().user_name;
 
     $transitions.onStart(
       {},
