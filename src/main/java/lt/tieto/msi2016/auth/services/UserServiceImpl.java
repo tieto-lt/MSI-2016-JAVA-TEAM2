@@ -5,11 +5,15 @@ import lt.tieto.msi2016.auth.model.User;
 import lt.tieto.msi2016.auth.repository.UserRepository;
 import lt.tieto.msi2016.auth.repository.model.UserDb;
 import lt.tieto.msi2016.operator.repository.OperatorRepository;
+import lt.tieto.msi2016.utils.exception.FieldValidationException;
+import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import javax.annotation.Resource;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -67,7 +71,11 @@ public class UserServiceImpl implements UserService {
             operatorRepository.deleteOperatorByUserId(user.getId());
         }
         UserDb userDb = userRepository.findOne(id);
-        userRepository.insertUserAuthority(userDb.getUserName(),user.getUserRole());
+        try {
+            userRepository.insertUserAuthority(userDb.getUserName(), user.getUserRole());
+        } catch (UncategorizedSQLException e){
+            throw new FieldValidationException("userRole",e.getSQLException().getMessage());
+        }
         return user;
     }
 
