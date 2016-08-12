@@ -32,7 +32,14 @@ function Controller($state, Session, AuthService, $http, OperatorService, $trans
 
     function userName()
     {
-      return Session.getSession().user_name;
+      if(vm.isUserName())
+      {
+        return  Session.getSession().user_name;
+      }
+      else {
+        return "error";
+      }
+
     }
 
     $transitions.onStart(
