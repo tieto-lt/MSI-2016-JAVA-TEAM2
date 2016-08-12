@@ -1,25 +1,18 @@
-<html>
-  <head>
-      <link rel='shortcut icon' type='image/x-icon' href='src/main/app/Images/Favicon.ico' />
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-
 
 <nav ng-show="$ctrl.isNavigationVisible()" class="navbar navbar-fixed-top " role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
-
+  <link rel='shortcut icon' type='image/x-icon' href='src/main/app/Images/Favicon.ico' />
 
   <ul class="nav navbar-nav" style=" width: 100%; background-color:#11151C">
 
-  <a class="navbar-brand" >DRONIFY</a>
+  <a class="navbar-brand" style="font-family:courier" >DRONIFY</a>
     <!--  <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li> -->
 
 
       <li class="nav-item">
-        <a  class="menu-item" ng-show="$ctrl.isAdmin()" href="#/adminPage" ng-click="$ctrl.goToAdminPage()" >Home page
+        <a  class="menu-item" ng-show="$ctrl.isAdmin()" href="#/adminPage" ng-click="$ctrl.goToAdminPage()" >Home
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
@@ -51,6 +44,10 @@
         <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
+        <a class="menu-item" ng-show="$ctrl.isAdmin()" href="#/orderList" ng-click="$ctrl.goToOrderList()" >Orders
+        <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
         <a class="menu-item" ng-show="$ctrl.isAdmin()" href="#/userList" ng-click="$ctrl.goToUserList()" >Users
         <span class="sr-only">(current)</span></a>
       </li>
@@ -70,4 +67,3 @@
     </ul>
 
 </nav>
-</html>

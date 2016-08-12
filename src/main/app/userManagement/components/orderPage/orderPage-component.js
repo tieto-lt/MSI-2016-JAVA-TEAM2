@@ -8,6 +8,7 @@ function Controller (OrderServiceImpl, Session)
 
   vm.create = create;
   vm.errors = [];
+
   vm.enterPressed = enterPressed;
 
 
