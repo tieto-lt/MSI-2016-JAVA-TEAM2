@@ -1,6 +1,13 @@
 <div class="container auth">
     <h1 class="text-center" style="font-family:courier;">User list </h1>
 
+    <div >
+      <script type="text/ng-template" id="alert.html">
+        <div ng-transclude></div>
+      </script>
+      <div dismiss-on-timeout="4000" uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+    </div>
+
     <fieldset>
         <div>
             <form action="">
@@ -52,6 +59,7 @@
             </form>
         </div>
     </fieldset>
+
 
 
     <div class="clearfix"></div>
