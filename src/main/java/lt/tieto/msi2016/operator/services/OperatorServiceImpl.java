@@ -67,5 +67,10 @@ public class OperatorServiceImpl implements OperatorService {
         return operatorRepository.findByToken(operatorToken) != null;
     }
 
+    @Transactional(readOnly = true)
+    public boolean isVerified(String operatorToken) {
+        return operatorRepository.isVerified(operatorToken);
+    }
+
 
 }

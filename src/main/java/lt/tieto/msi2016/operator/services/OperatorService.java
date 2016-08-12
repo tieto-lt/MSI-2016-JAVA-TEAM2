@@ -14,8 +14,32 @@ public interface OperatorService {
      * @return
      */
     Operator getOperatorState(Long id);
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     Operator generateId(Long id);
 
+    /**
+     *
+     * @param token
+     */
     void verifyOperatorService (String token);
-    public boolean tokenExists(String operatorToken);
+
+    /**
+     *
+     * @param operatorToken
+     * @return
+     */
+    boolean tokenExists(String operatorToken);
+
+    /**
+     *
+     * @param userName
+     * @return
+     */
+    boolean isVerified(String userName);
+
 }
