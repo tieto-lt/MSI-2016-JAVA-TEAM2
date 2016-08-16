@@ -4,6 +4,7 @@ import com.nurkiewicz.jdbcrepository.RowUnmapper;
 import lt.tieto.msi2016.orders.repository.model.OrderDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,6 @@ public class OrderRepository extends BaseRepository<OrderDb>{
     private static final  RowMapper<OrderDb> ROW_MAPPER = (rs, rowNum) ->{
         OrderDb order = new OrderDb();
         order.setId(rs.getLong("id"));
-        order.setApproved(rs.getBoolean("isApproved"));
         order.setUserId(rs.getLong("userId"));
         order.setName(rs.getString("name"));
         order.setDetails(rs.getString("details"));
@@ -42,10 +42,30 @@ public class OrderRepository extends BaseRepository<OrderDb>{
       "details", orderDb.getDetails(),
       "email", orderDb.getEmail(),
       "phone",orderDb.getPhone(),
-      "isApproved", orderDb.getApproved(),
       "date",orderDb.getDate(),
       "status", orderDb.getStatus()
     );
+
+    /*
+        public void changeOperatorVerify(Long userId, Boolean isVerified) {
+        try {
+            jdbcTemplate.update("UPDATE operators set isVerified = ? where userId = ?", isVerified, userId);
+        } catch (EmptyResultDataAccessException e) {
+
+        }
+    }
+     */
+    public void updateOrderStatus(Long orderId, String status)
+    {
+        try{
+            jdbcTemplate.update("UPDATE orders set status = ? where orderId = ?", status, orderId);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+
+        }
+
+    }
 
 
 }

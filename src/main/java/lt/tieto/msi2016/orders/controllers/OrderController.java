@@ -5,13 +5,10 @@ import lt.tieto.msi2016.orders.services.OrderService;
 import lt.tieto.msi2016.utils.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
+import java.io.IOException;
 import java.util.Collection;
 
 import static lt.tieto.msi2016.utils.constants.Roles.ADMIN;
@@ -28,7 +25,7 @@ public class OrderController extends BaseController {
     private OrderService orderService;
 
     @RequestMapping(value = "/api/orders", method = RequestMethod.POST, consumes = accepts)
-    public Order createOrder(@RequestBody final @Valid Order order) {
+    public Order createOrder(@RequestBody final @Valid Order order) throws IOException {
 
         return orderService.createOrder(order);
 
@@ -39,6 +36,14 @@ public class OrderController extends BaseController {
     public Collection<Order> getOrders(){
         return orderService.all();
     }
+
+
+    @Secured(ADMIN)
+    @RequestMapping(value = "/api/orders/{id}", method = RequestMethod.PUT,consumes = accepts)
+    public Order updateOrderStatus(@RequestBody Order order, @PathVariable Long id) {
+        return orderService.updateOrder(order, id);
+    }
+
 
 
 }

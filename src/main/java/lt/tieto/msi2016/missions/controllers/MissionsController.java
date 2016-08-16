@@ -3,11 +3,11 @@ package lt.tieto.msi2016.missions.controllers;
 import lt.tieto.msi2016.auth.model.User;
 import lt.tieto.msi2016.auth.services.UserService;
 import lt.tieto.msi2016.missions.model.mission.MissionCompleted;
-import lt.tieto.msi2016.missions.model.mission.MissionResponse;
 import lt.tieto.msi2016.missions.model.mission.Result;
 import lt.tieto.msi2016.missions.services.MissionService;
 import lt.tieto.msi2016.operator.model.Operator;
 import lt.tieto.msi2016.operator.services.OperatorService;
+import lt.tieto.msi2016.orders.services.OrderService;
 import lt.tieto.msi2016.utils.controller.BaseController;
 import lt.tieto.msi2016.utils.services.SecurityHolder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,23 +34,26 @@ public class MissionsController extends BaseController {
     private SecurityHolder securityHolder;
     @Autowired
     private UserService userService;
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/api/missions")
     public ResponseEntity<?> getMissions(@RequestParam("operatorToken") String operatorToken) {
         if(!operatorService.isVerified(operatorToken)) {
             return ResponseEntity.ok(missionService.getDefaultMission());
         } else if(operatorService.isVerified(operatorToken)) {
-            return ResponseEntity.ok(new MissionResponse());
+            return ResponseEntity.ok(missionService.getUsersMissions());
         }
          else {
              return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
 
+
     @RequestMapping(value = "/api/missions/{id}/reserve", method = RequestMethod.POST)
-    public ResponseEntity<?> reserve(@RequestParam("operatorToken") String operatorToken) {
-        if (operatorService.tokenExists(operatorToken)){
-            return ResponseEntity.ok(missionService.getDefaultMission().getMissions().get(0));
+    public ResponseEntity<?> reserve(@RequestParam("operatorToken") String operatorToken,@PathVariable("id") Long id) {
+        if (operatorService.tokenExists(operatorToken)) {
+            return ResponseEntity.ok(missionService.reserve(operatorToken,id));
     } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
@@ -72,14 +75,23 @@ public class MissionsController extends BaseController {
     @RequestMapping(value = "/api/missions/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> verifyOperator(@PathVariable Long id, @RequestParam("operatorToken") String operatorToken, @RequestBody String result) {
         if(operatorService.tokenExists(operatorToken)) {
-            operatorService.verifyOperatorService(operatorToken); // TODO: change to mission id after misions are added
+            if(id.equals(-1L)) {
+                operatorService.verifyOperatorService(operatorToken);
+            }
+            else
+            {
+                missionService.changeOrderStatus("done", id);
+            }
             missionService.saveResults(id, operatorToken, result);
+
             return ResponseEntity.status(HttpStatus.OK).build();
-        } else {
+        }
+        else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
     }
+
 
     @Secured(OPERATOR)
     @RequestMapping(value = "/api/int/missions/{id}", method = RequestMethod.GET)

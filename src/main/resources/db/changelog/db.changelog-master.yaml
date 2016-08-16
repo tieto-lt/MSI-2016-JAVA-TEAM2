@@ -238,9 +238,6 @@ databaseChangeLog:
                     name: userId
                     type: int
                 - column:
-                    name: isApproved
-                    type: bool
-                - column:
                     name: name
                     type: varchar(255)
                 - column:
@@ -284,3 +281,33 @@ databaseChangeLog:
                END IF;
                END IF;
                END;
+
+  - changeSet:
+        id: 11
+        author: tieto
+        changes:
+          - createTable:
+              tableName: missions
+              columns:
+                - column:
+                    name: id
+                    type: int
+                    autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                - column:
+                    name: orderId
+                    type: int
+                - column:
+                    name: operatorId
+                    type: int
+                - column:
+                    name: missionJSON
+                    type: blob
+          - addForeignKeyConstraint:
+              onDelete: CASCADE
+              baseColumnNames: orderId
+              baseTableName: missions
+              constraintName: fk_id_orders
+              referencedColumnNames: id
+              referencedTableName: orders

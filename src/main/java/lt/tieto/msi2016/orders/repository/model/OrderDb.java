@@ -10,7 +10,6 @@ public class OrderDb extends DbModel {
 
     private Long userId;
 
-    private Boolean isApproved;
 
     private String name;
 
@@ -27,7 +26,6 @@ public class OrderDb extends DbModel {
     public static OrderDb valueOf(Order order) {
         OrderDb orderDb = new OrderDb();
         orderDb.setUserId(order.getUserId());
-        orderDb.setApproved(order.getApproved());
         orderDb.setName(order.getName());
         orderDb.setDetails(order.getDetails());
         orderDb.setEmail(order.getEmail());
@@ -43,14 +41,6 @@ public class OrderDb extends DbModel {
 
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public Boolean getApproved() {
-        return isApproved;
-    }
-
-    public void setApproved(Boolean approved) {
-        isApproved = approved;
     }
 
     public String getName() {

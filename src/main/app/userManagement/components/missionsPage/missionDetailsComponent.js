@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller(missionService,$stringToNumber) {
+function Controller(missionService,$scope) {
   var vm = this;
 
   vm.oneAtATime = true;
@@ -11,13 +11,15 @@ function Controller(missionService,$stringToNumber) {
     isFirstDisabled: false
   };
 
+  $scope.$watch('status.open', function(newValue) {
+    if (newValue) {
+      vm.loadDetails();
+    }
+  });
 
-  vm.loadDetails = function loadDetails(element){
+  vm.loadDetails = function loadDetails(){
 
     // slides
-    if(element.status && element.status.open){
-      return;
-    }
     vm.navigationData = {
       startX: undefined,
       startY: undefined,
@@ -122,7 +124,7 @@ function Controller(missionService,$stringToNumber) {
 
 }
 
-Controller.$inject = ['MissionService'];
+Controller.$inject = ['MissionService', '$scope'];
 
 module.component('missionDetailsComponent', {
     controller: Controller,
