@@ -16,7 +16,6 @@ public class Order {
     @NotNull
     private Long userId;
 
-    private Boolean isApproved;
 
     @NotNull
     @Size(max = 255)
@@ -43,7 +42,6 @@ public class Order {
         Order order = new Order();
         order.setId(orderDb.getId());
         order.setUserId(orderDb.getUserId());
-        order.setApproved(orderDb.getApproved());
         order.setDetails(orderDb.getDetails());
         order.setName(orderDb.getName());
         order.setEmail(orderDb.getEmail());
@@ -67,14 +65,6 @@ public class Order {
 
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public Boolean getApproved() {
-        return isApproved;
-    }
-
-    public void setApproved(Boolean approved) {
-        isApproved = approved;
     }
 
     public String getName() {
