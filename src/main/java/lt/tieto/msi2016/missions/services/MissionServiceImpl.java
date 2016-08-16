@@ -7,7 +7,6 @@ import lt.tieto.msi2016.missions.repository.MissionResultRepository;
 import lt.tieto.msi2016.missions.repository.model.MissionDb;
 import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
 import lt.tieto.msi2016.operator.repository.OperatorRepository;
-import lt.tieto.msi2016.orders.model.Order;
 import lt.tieto.msi2016.orders.repository.OrderRepository;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +108,9 @@ public class MissionServiceImpl implements MissionService {
         missionResult.setOperatorId(operatorRepository.findByToken(operatorToken).getId());
         missionResultRepository.save(missionResult);
     }
+
+    @Transactional
+    public void changeOrderStatus(String status, Long missionId){missionRepository.changeOrderStatus(missionId, status);}
 
 
     public Result getResultFromBlob (MissionResult missionResult )

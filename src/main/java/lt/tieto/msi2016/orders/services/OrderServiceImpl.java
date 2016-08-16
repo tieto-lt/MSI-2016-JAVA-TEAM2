@@ -51,8 +51,7 @@ public class OrderServiceImpl implements OrderService {
         missionRepository.create(missionDb);
         return newOrder;
     }
-    @Transactional
-    public void changeOrderStatus(String status, Long orderId){orderRepository.changeOrderStatus(orderId, status);}
+
 
     @Transactional(readOnly = true)
     public Collection<Order> all(){
@@ -64,6 +63,13 @@ public class OrderServiceImpl implements OrderService {
         Order order = Order.valueOf(orderDb);
         return order;
     }
+
+
+    public Order updateOrder(Order order,Long id) {
+        orderRepository.updateOrderStatus(id, order.getStatus());
+        return order;
+    }
+
 
 
 }

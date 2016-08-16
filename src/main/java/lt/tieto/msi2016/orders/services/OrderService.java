@@ -14,5 +14,5 @@ public interface OrderService {
 
    Collection<Order> all();
 
-   void changeOrderStatus(String status, Long orderId);
+   Order updateOrder(Order order,Long id);
 }
