@@ -7,6 +7,7 @@ import lt.tieto.msi2016.missions.model.mission.Result;
 import lt.tieto.msi2016.missions.services.MissionService;
 import lt.tieto.msi2016.operator.model.Operator;
 import lt.tieto.msi2016.operator.services.OperatorService;
+import lt.tieto.msi2016.orders.services.OrderService;
 import lt.tieto.msi2016.utils.controller.BaseController;
 import lt.tieto.msi2016.utils.services.SecurityHolder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class MissionsController extends BaseController {
     private SecurityHolder securityHolder;
     @Autowired
     private UserService userService;
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/api/missions")
     public ResponseEntity<?> getMissions(@RequestParam("operatorToken") String operatorToken) {
@@ -72,14 +75,23 @@ public class MissionsController extends BaseController {
     @RequestMapping(value = "/api/missions/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> verifyOperator(@PathVariable Long id, @RequestParam("operatorToken") String operatorToken, @RequestBody String result) {
         if(operatorService.tokenExists(operatorToken)) {
-            operatorService.verifyOperatorService(operatorToken); // TODO: change to mission id after misions are added
+            if(id.equals(-1)) {
+                operatorService.verifyOperatorService(operatorToken); // TODO: change to mission id after misions are added
+            }
+            else
+            {
+                orderService.changeOrderStatus("done", id);
+            }
             missionService.saveResults(id, operatorToken, result);
+
             return ResponseEntity.status(HttpStatus.OK).build();
-        } else {
+        }
+        else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
     }
+
 
     @Secured(OPERATOR)
     @RequestMapping(value = "/api/int/missions/{id}", method = RequestMethod.GET)

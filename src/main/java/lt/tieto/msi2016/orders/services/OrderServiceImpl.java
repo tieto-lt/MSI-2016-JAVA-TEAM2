@@ -51,6 +51,9 @@ public class OrderServiceImpl implements OrderService {
         missionRepository.create(missionDb);
         return newOrder;
     }
+    @Transactional
+    public void changeOrderStatus(String status, Long orderId){orderRepository.changeOrderStatus(orderId, status);}
+
     @Transactional(readOnly = true)
     public Collection<Order> all(){
         return orderRepository.findAll().stream().map(this::fillOrder).collect(Collectors.toList());
