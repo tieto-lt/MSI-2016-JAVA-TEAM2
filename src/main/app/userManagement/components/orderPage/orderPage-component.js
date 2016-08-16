@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller (OrderServiceImpl, Session, UserServiceImpl)
+function Controller (OrderServiceImpl, Session, UserServiceImpl, $state)
 {
   var vm = this;
 
@@ -37,7 +37,6 @@ function Controller (OrderServiceImpl, Session, UserServiceImpl)
     OrderServiceImpl.create(vm.order).then(
         function () {
             console.log(vm.order.name);
-
         },
         function (err) {
             if (err.status === 400) {
@@ -55,7 +54,7 @@ function Controller (OrderServiceImpl, Session, UserServiceImpl)
     }
 }
 
-Controller.$inject = ['OrderServiceImpl', 'Session', 'UserServiceImpl'];
+Controller.$inject = ['OrderServiceImpl', 'Session', 'UserServiceImpl', '$state'];
 
 module.component('orderPage', {
     controller: Controller,
