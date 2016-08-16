@@ -80,7 +80,7 @@ public class MissionsController extends BaseController {
             }
             else
             {
-                orderService.changeOrderStatus("done", id);
+                missionService.changeOrderStatus("done", id);
             }
             missionService.saveResults(id, operatorToken, result);
 
