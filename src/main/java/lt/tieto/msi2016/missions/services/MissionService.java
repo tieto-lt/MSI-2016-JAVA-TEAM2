@@ -1,5 +1,7 @@
 package lt.tieto.msi2016.missions.services;
 
+import lt.tieto.msi2016.missions.model.Mission;
+import lt.tieto.msi2016.missions.model.mission.MissionPlan;
 import lt.tieto.msi2016.missions.model.mission.MissionResponse;
 import lt.tieto.msi2016.missions.model.mission.MissionResult;
 import lt.tieto.msi2016.missions.model.mission.Result;
@@ -18,4 +20,6 @@ public interface MissionService {
     boolean isAnyMissionDone(String username);
 
     Result getResultFromOperatorId(Long missionId);
+
+    MissionPlan reserve(String operatorToken, Long missionId);
 }

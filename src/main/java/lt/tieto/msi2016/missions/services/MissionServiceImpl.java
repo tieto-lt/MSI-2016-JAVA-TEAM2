@@ -1,12 +1,16 @@
 package lt.tieto.msi2016.missions.services;
 
+import lt.tieto.msi2016.missions.model.Mission;
 import lt.tieto.msi2016.missions.model.mission.*;
+import lt.tieto.msi2016.missions.repository.MissionRepository;
 import lt.tieto.msi2016.missions.repository.MissionResultRepository;
+import lt.tieto.msi2016.missions.repository.model.MissionDb;
 import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
 import lt.tieto.msi2016.operator.repository.OperatorRepository;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,6 +27,8 @@ public class MissionServiceImpl implements MissionService {
     private MissionResultRepository missionResultRepository;
     @Autowired
     private OperatorRepository operatorRepository;
+    @Autowired
+    private MissionRepository missionRepository;
 
 
     private static MissionResponse defaultMission;
@@ -75,6 +81,7 @@ public class MissionServiceImpl implements MissionService {
         return defaultMission;
     }
 
+    @Transactional()
     @Override
     public void saveResults(Long missionId, String operatorToken, String result) {
         MissionResultDb missionResult = new MissionResultDb();
@@ -97,6 +104,7 @@ public class MissionServiceImpl implements MissionService {
         }
     }
 
+    @Transactional(readOnly = true)
     public Result getResultFromOperatorId(Long operatorId)
     {
         MissionResultDb missionResultDb = missionResultRepository.findByOperatorId(operatorId);
@@ -105,10 +113,23 @@ public class MissionServiceImpl implements MissionService {
         return result;
     }
 
+    @Transactional(readOnly = true)
     public boolean isAnyMissionDone(String username)//hack for US07
     {
         int i = missionResultRepository.selectAllMissionsDoneByUser(username);
         return i != 0;
 
     }
+
+    @Transactional
+    @Override
+    public MissionPlan reserve(String operatorToken, Long missionId) {
+        MissionDb mission = missionRepository.findOne(missionId);
+        mission.setOperatorId(operatorRepository.findByToken(operatorToken).getId());
+        return getDefaultMission().getMissions().get(0);
+    }
+
+
+
+
 }
