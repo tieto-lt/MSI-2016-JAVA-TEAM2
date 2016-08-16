@@ -24,7 +24,6 @@ public class OrderRepository extends BaseRepository<OrderDb>{
     private static final  RowMapper<OrderDb> ROW_MAPPER = (rs, rowNum) ->{
         OrderDb order = new OrderDb();
         order.setId(rs.getLong("id"));
-        order.setApproved(rs.getBoolean("isApproved"));
         order.setUserId(rs.getLong("userId"));
         order.setName(rs.getString("name"));
         order.setDetails(rs.getString("details"));
@@ -42,7 +41,6 @@ public class OrderRepository extends BaseRepository<OrderDb>{
       "details", orderDb.getDetails(),
       "email", orderDb.getEmail(),
       "phone",orderDb.getPhone(),
-      "isApproved", orderDb.getApproved(),
       "date",orderDb.getDate(),
       "status", orderDb.getStatus()
     );

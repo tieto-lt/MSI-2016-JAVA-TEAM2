@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import static lt.tieto.msi2016.utils.constants.Roles.ADMIN;
@@ -28,7 +29,7 @@ public class OrderController extends BaseController {
     private OrderService orderService;
 
     @RequestMapping(value = "/api/orders", method = RequestMethod.POST, consumes = accepts)
-    public Order createOrder(@RequestBody final @Valid Order order) {
+    public Order createOrder(@RequestBody final @Valid Order order) throws IOException {
 
         return orderService.createOrder(order);
 
