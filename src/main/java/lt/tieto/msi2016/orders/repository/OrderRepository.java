@@ -55,10 +55,10 @@ public class OrderRepository extends BaseRepository<OrderDb>{
         }
     }
      */
-    public void changeOrderStatus(Long orderId, String status)
+    public void updateOrderStatus(Long orderId, String status)
     {
         try{
-            jdbcTemplate.update("UPDATE orders inner join missions on missions.orderId=orders.id set orders.status = ? where orders.id = ?", status, orderId);
+            jdbcTemplate.update("UPDATE orders set status = ? where orderId = ?", status, orderId);
         }
         catch (EmptyResultDataAccessException e)
         {

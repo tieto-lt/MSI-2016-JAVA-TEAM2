@@ -22,4 +22,6 @@ public interface MissionService {
     Result getResultFromOperatorId(Long missionId);
 
     List<MissionResponse>  getUsersMissions();
+
+    void changeOrderStatus(String status, Long missionId);
 }

@@ -50,5 +50,16 @@ public class MissionRepository extends BaseRepository<MissionDb> {
 
         }
     }
+    public void changeOrderStatus(Long missionId, String status)
+    {
+        try{
+            jdbcTemplate.update("UPDATE orders inner join missions on missions.orderId=orders.id set orders.status = ? where missions.id = ?", status, missionId);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+
+        }
+
+    }
 
 }

@@ -124,6 +124,9 @@ public class MissionServiceImpl implements MissionService {
         missionResultRepository.save(missionResult);
     }
 
+    @Transactional
+    public void changeOrderStatus(String status, Long missionId){missionRepository.changeOrderStatus(missionId, status);}
+
 
     public Result getResultFromBlob (MissionResult missionResult )
     {
