@@ -52,7 +52,7 @@ public class MissionsController extends BaseController {
 
     @RequestMapping(value = "/api/missions/{id}/reserve", method = RequestMethod.POST)
     public ResponseEntity<?> reserve(@RequestParam("operatorToken") String operatorToken,@PathVariable("id") Long id) {
-        if (operatorService.tokenExists(operatorToken) && id != -1L) {
+        if (operatorService.tokenExists(operatorToken)) {
             return ResponseEntity.ok(missionService.reserve(operatorToken,id));
     } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();

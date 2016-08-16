@@ -145,9 +145,11 @@ public class MissionServiceImpl implements MissionService {
     @Transactional
     @Override
     public MissionPlan reserve(String operatorToken, Long missionId) {
-        MissionDb mission = missionRepository.findOne(missionId);
-        mission.setOperatorId(operatorRepository.findByToken(operatorToken).getId());
-        missionRepository.save(mission);
+        if(missionId != -1L) {
+            MissionDb mission = missionRepository.findOne(missionId);
+            mission.setOperatorId(operatorRepository.findByToken(operatorToken).getId());
+            missionRepository.save(mission);
+        }
         return getDefaultMission().getMissions().get(0);
     }
 
