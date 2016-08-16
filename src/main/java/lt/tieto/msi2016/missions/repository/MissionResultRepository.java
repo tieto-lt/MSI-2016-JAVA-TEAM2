@@ -51,6 +51,7 @@ public class MissionResultRepository extends BaseRepository<MissionResultDb> {
         }
     }
 
+
     public  int selectAllMissionsDoneByUser(String username)
     {
         try

@@ -3,6 +3,9 @@ package lt.tieto.msi2016.missions.repository;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
 import lt.tieto.msi2016.missions.repository.model.MissionDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +15,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MissionRepository extends BaseRepository<MissionDb> {
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     public MissionRepository() {
         super(ROW_MAPPER, ROW_UNMAPPER, "missions", "id");
@@ -32,5 +37,18 @@ public class MissionRepository extends BaseRepository<MissionDb> {
             "operatorId", missionDb.getOperatorId(),
             "missionJSON", missionDb.getMissionJSON()
     );
+
+    public MissionDb findAllIfApproved ()
+    {
+        try
+        {
+            return jdbcTemplate.queryForObject("SELECT missionJSON from missions inner join orders ON orders.id = missions.orderId where orders.status = ?", new Object[]{"approved"}, ROW_MAPPER);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            return null;
+
+        }
+    }
 
 }

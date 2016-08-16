@@ -1,17 +1,24 @@
 package lt.tieto.msi2016.missions.services;
 
+import lt.tieto.msi2016.missions.model.Mission;
 import lt.tieto.msi2016.missions.model.mission.*;
+import lt.tieto.msi2016.missions.repository.MissionRepository;
 import lt.tieto.msi2016.missions.repository.MissionResultRepository;
+import lt.tieto.msi2016.missions.repository.model.MissionDb;
 import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
 import lt.tieto.msi2016.operator.repository.OperatorRepository;
+import lt.tieto.msi2016.orders.model.Order;
+import lt.tieto.msi2016.orders.repository.OrderRepository;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by localadmin on 16.8.9.
@@ -23,6 +30,10 @@ public class MissionServiceImpl implements MissionService {
     private MissionResultRepository missionResultRepository;
     @Autowired
     private OperatorRepository operatorRepository;
+    @Autowired
+    private MissionRepository missionRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
 
     private static MissionResponse defaultMission;
@@ -68,6 +79,35 @@ public class MissionServiceImpl implements MissionService {
 
         defaultMission.setMissions(missionPlanList);
 
+    }
+
+    @Transactional(readOnly = true)
+    public List<MissionResponse> getUsersMissions() {
+
+        List<Mission> missions = missionRepository.findAll().stream().map(this::fillMission).collect(Collectors.toList());
+        List<MissionResponse> missionResponses = new ArrayList<MissionResponse>();
+        for(Mission mission : missions)
+        {
+            Order order = Order.valueOf(orderRepository.findOne(mission.getOrderId()));
+            if(order.getStatus().equals("approved"))
+            {
+                try{
+                    missionResponses.add( new ObjectMapper().readValue(mission.getMissionJSON(),MissionResponse.class));
+                }
+                catch(IOException e)
+                {
+                    MissionResponse missionResponse = new MissionResponse();
+                }
+            }
+        }
+        return missionResponses;
+    }
+
+    @Transactional
+    private Mission fillMission (MissionDb missionDb)
+    {
+        Mission mission = Mission.valueOf(missionDb);
+        return mission;
     }
 
     @Override
