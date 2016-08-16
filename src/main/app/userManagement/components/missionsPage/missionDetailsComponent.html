@@ -1,24 +1,10 @@
 <div uib-accordion-group class="panel-default" is-open="status.open">
-    <script type="text/ng-template" id="group-template.html">
-        <div class="panel-heading">
-            <h4 class="panel-title" style="color:#fa39c3">
-                <a href tabindex="0" class="accordion-toggle" ng-click="$ctrl.toggleOpen()"
-                   uib-accordion-transclude="heading">
-                <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
-                  {{$ctrl.heading}}
-                </span>
-                </a>
-            </h4>
-        </div>
-        <div class="panel-collapse collapse" uib-collapse="!isOpen">
-            <div class="panel-body" style="text-align: right" ng-transclude></div>
-        </div>
-    </script>
+
     <uib-accordion-heading>
         {{$ctrl.mission.name}}
         <i class="pull-right glyphicon"
            ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"
-           ng-click="$ctrl.loadDetails(this)"></i>
+           ></i>
     </uib-accordion-heading>
     <h3 style="font-family: courier;">Gallery</h3>
     <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
