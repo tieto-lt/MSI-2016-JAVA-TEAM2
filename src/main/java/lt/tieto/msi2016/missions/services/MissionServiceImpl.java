@@ -7,6 +7,8 @@ import lt.tieto.msi2016.missions.repository.MissionResultRepository;
 import lt.tieto.msi2016.missions.repository.model.MissionDb;
 import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
 import lt.tieto.msi2016.operator.repository.OperatorRepository;
+import lt.tieto.msi2016.orders.model.Order;
+import lt.tieto.msi2016.orders.repository.OrderRepository;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +18,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-/**
- * Created by localadmin on 16.8.9.
- */
+
 @Service
 public class MissionServiceImpl implements MissionService {
 
@@ -29,11 +30,13 @@ public class MissionServiceImpl implements MissionService {
     private OperatorRepository operatorRepository;
     @Autowired
     private MissionRepository missionRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
 
     private static MissionResponse defaultMission;
 
-    {
+    static {
         defaultMission = new MissionResponse();
 
         List<MissionPlan> missionPlanList = new ArrayList<>();
@@ -42,8 +45,7 @@ public class MissionServiceImpl implements MissionService {
         defaultMissionPlan.setSubmittedBy("System");
         missionPlanList.add(defaultMissionPlan);
 
-        List<MissionCommands> missionCommandsList = Arrays.asList(new MissionCommands[]{
-                MissionCommands.newMission().command("takeoff"),
+        List<MissionCommands> missionCommandsList = Arrays.asList(MissionCommands.newMission().command("takeoff"),
                 MissionCommands.newMission().command("calibrate"),
                 MissionCommands.newMission().command("altitude").withArguments(1.5),
                 MissionCommands.newMission().command("forward").withArguments("2"),
@@ -66,9 +68,7 @@ public class MissionServiceImpl implements MissionService {
                 MissionCommands.newMission().command("altitude").withArguments(1.5),
                 MissionCommands.newMission().command("cw").withArguments(60),
                 MissionCommands.newMission().command("takePicture"),
-                MissionCommands.newMission().command("land")
-
-        });
+                MissionCommands.newMission().command("land"));
 
         defaultMissionPlan.setCommands(missionCommandsList);
 
@@ -76,12 +76,31 @@ public class MissionServiceImpl implements MissionService {
 
     }
 
+    @Transactional(readOnly = true)
+    public List<MissionResponse> getUsersMissions() {
+        return missionRepository.findAll().stream().filter(missionDb -> "approved".equals(orderRepository.findOne(missionDb.getId()).getStatus()) && missionDb.getOperatorId()==null).map(this::fillMission).collect(Collectors.toList());
+    }
+
+    @Transactional
+    private MissionResponse fillMission (MissionDb missionDb)
+    {
+        MissionResponse missionResponse = new MissionResponse();
+        Mission mission = Mission.valueOf(missionDb);
+        try {
+            missionResponse = new ObjectMapper().readValue(mission.getMissionJSON(), MissionResponse.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return missionResponse;
+    }
+
     @Override
     public MissionResponse getDefaultMission() {
         return defaultMission;
     }
 
-    @Transactional()
+    @Transactional
     @Override
     public void saveResults(Long missionId, String operatorToken, String result) {
         MissionResultDb missionResult = new MissionResultDb();
@@ -126,6 +145,7 @@ public class MissionServiceImpl implements MissionService {
     public MissionPlan reserve(String operatorToken, Long missionId) {
         MissionDb mission = missionRepository.findOne(missionId);
         mission.setOperatorId(operatorRepository.findByToken(operatorToken).getId());
+        missionRepository.save(mission);
         return getDefaultMission().getMissions().get(0);
     }
 

@@ -3,7 +3,6 @@ package lt.tieto.msi2016.missions.controllers;
 import lt.tieto.msi2016.auth.model.User;
 import lt.tieto.msi2016.auth.services.UserService;
 import lt.tieto.msi2016.missions.model.mission.MissionCompleted;
-import lt.tieto.msi2016.missions.model.mission.MissionResponse;
 import lt.tieto.msi2016.missions.model.mission.Result;
 import lt.tieto.msi2016.missions.services.MissionService;
 import lt.tieto.msi2016.operator.model.Operator;
@@ -40,12 +39,13 @@ public class MissionsController extends BaseController {
         if(!operatorService.isVerified(operatorToken)) {
             return ResponseEntity.ok(missionService.getDefaultMission());
         } else if(operatorService.isVerified(operatorToken)) {
-            return ResponseEntity.ok(new MissionResponse());
+            return ResponseEntity.ok(missionService.getUsersMissions());
         }
          else {
              return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
+
 
     @RequestMapping(value = "/api/missions/{id}/reserve", method = RequestMethod.POST)
     public ResponseEntity<?> reserve(@RequestParam("operatorToken") String operatorToken,@PathVariable("id") Long id) {
@@ -72,7 +72,7 @@ public class MissionsController extends BaseController {
     @RequestMapping(value = "/api/missions/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> verifyOperator(@PathVariable Long id, @RequestParam("operatorToken") String operatorToken, @RequestBody String result) {
         if(operatorService.tokenExists(operatorToken)) {
-            operatorService.verifyOperatorService(operatorToken); // TODO: change to mission id after misions are added
+                operatorService.verifyOperatorService(operatorToken);
             missionService.saveResults(id, operatorToken, result);
             return ResponseEntity.status(HttpStatus.OK).build();
         } else {
