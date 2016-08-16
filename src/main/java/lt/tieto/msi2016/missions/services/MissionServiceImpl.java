@@ -7,7 +7,6 @@ import lt.tieto.msi2016.missions.repository.MissionResultRepository;
 import lt.tieto.msi2016.missions.repository.model.MissionDb;
 import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
 import lt.tieto.msi2016.operator.repository.OperatorRepository;
-import lt.tieto.msi2016.orders.model.Order;
 import lt.tieto.msi2016.orders.repository.OrderRepository;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by localadmin on 16.8.9.
- */
+
 @Service
 public class MissionServiceImpl implements MissionService {
 
@@ -38,7 +35,7 @@ public class MissionServiceImpl implements MissionService {
 
     private static MissionResponse defaultMission;
 
-    {
+    static {
         defaultMission = new MissionResponse();
 
         List<MissionPlan> missionPlanList = new ArrayList<>();
@@ -47,8 +44,7 @@ public class MissionServiceImpl implements MissionService {
         defaultMissionPlan.setSubmittedBy("System");
         missionPlanList.add(defaultMissionPlan);
 
-        List<MissionCommands> missionCommandsList = Arrays.asList(new MissionCommands[]{
-                MissionCommands.newMission().command("takeoff"),
+        List<MissionCommands> missionCommandsList = Arrays.asList(MissionCommands.newMission().command("takeoff"),
                 MissionCommands.newMission().command("calibrate"),
                 MissionCommands.newMission().command("altitude").withArguments(1.5),
                 MissionCommands.newMission().command("forward").withArguments("2"),
@@ -71,9 +67,7 @@ public class MissionServiceImpl implements MissionService {
                 MissionCommands.newMission().command("altitude").withArguments(1.5),
                 MissionCommands.newMission().command("cw").withArguments(60),
                 MissionCommands.newMission().command("takePicture"),
-                MissionCommands.newMission().command("land")
-
-        });
+                MissionCommands.newMission().command("land"));
 
         defaultMissionPlan.setCommands(missionCommandsList);
 
@@ -83,31 +77,21 @@ public class MissionServiceImpl implements MissionService {
 
     @Transactional(readOnly = true)
     public List<MissionResponse> getUsersMissions() {
-
-        List<Mission> missions = missionRepository.findAll().stream().map(this::fillMission).collect(Collectors.toList());
-        List<MissionResponse> missionResponses = new ArrayList<MissionResponse>();
-        for(Mission mission : missions)
-        {
-            Order order = Order.valueOf(orderRepository.findOne(mission.getOrderId()));
-            if(order.getStatus().equals("approved"))
-            {
-                try{
-                    missionResponses.add( new ObjectMapper().readValue(mission.getMissionJSON(),MissionResponse.class));
-                }
-                catch(IOException e)
-                {
-                    MissionResponse missionResponse = new MissionResponse();
-                }
-            }
-        }
-        return missionResponses;
+        return missionRepository.findAll().stream().filter(missionDb -> "approved".equals(orderRepository.findOne(missionDb.getId()).getStatus()) && missionDb.getOperatorId()==null).map(this::fillMission).collect(Collectors.toList());
     }
 
     @Transactional
-    private Mission fillMission (MissionDb missionDb)
+    private MissionResponse fillMission (MissionDb missionDb)
     {
+        MissionResponse missionResponse = new MissionResponse();
         Mission mission = Mission.valueOf(missionDb);
-        return mission;
+        try {
+            missionResponse = new ObjectMapper().readValue(mission.getMissionJSON(), MissionResponse.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return missionResponse;
     }
 
     @Override
@@ -115,6 +99,7 @@ public class MissionServiceImpl implements MissionService {
         return defaultMission;
     }
 
+    @Transactional
     @Override
     public void saveResults(Long missionId, String operatorToken, String result) {
         MissionResultDb missionResult = new MissionResultDb();
@@ -140,6 +125,7 @@ public class MissionServiceImpl implements MissionService {
         }
     }
 
+    @Transactional(readOnly = true)
     public Result getResultFromOperatorId(Long operatorId)
     {
         MissionResultDb missionResultDb = missionResultRepository.findByOperatorId(operatorId);
@@ -148,10 +134,24 @@ public class MissionServiceImpl implements MissionService {
         return result;
     }
 
+    @Transactional(readOnly = true)
     public boolean isAnyMissionDone(String username)//hack for US07
     {
         int i = missionResultRepository.selectAllMissionsDoneByUser(username);
         return i != 0;
 
     }
+
+    @Transactional
+    @Override
+    public MissionPlan reserve(String operatorToken, Long missionId) {
+        MissionDb mission = missionRepository.findOne(missionId);
+        mission.setOperatorId(operatorRepository.findByToken(operatorToken).getId());
+        missionRepository.save(mission);
+        return getDefaultMission().getMissions().get(0);
+    }
+
+
+
+
 }

@@ -1,5 +1,6 @@
 package lt.tieto.msi2016.missions.services;
 
+import lt.tieto.msi2016.missions.model.mission.MissionPlan;
 import lt.tieto.msi2016.missions.model.mission.MissionResponse;
 import lt.tieto.msi2016.missions.model.mission.MissionResult;
 import lt.tieto.msi2016.missions.model.mission.Result;
@@ -24,4 +25,6 @@ public interface MissionService {
     List<MissionResponse>  getUsersMissions();
 
     void changeOrderStatus(String status, Long missionId);
+
+    MissionPlan reserve(String operatorToken, Long missionId);
 }
