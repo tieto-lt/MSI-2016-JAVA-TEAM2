@@ -4,6 +4,7 @@ import com.nurkiewicz.jdbcrepository.RowUnmapper;
 import lt.tieto.msi2016.orders.repository.model.OrderDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -44,6 +45,27 @@ public class OrderRepository extends BaseRepository<OrderDb>{
       "date",orderDb.getDate(),
       "status", orderDb.getStatus()
     );
+
+    /*
+        public void changeOperatorVerify(Long userId, Boolean isVerified) {
+        try {
+            jdbcTemplate.update("UPDATE operators set isVerified = ? where userId = ?", isVerified, userId);
+        } catch (EmptyResultDataAccessException e) {
+
+        }
+    }
+     */
+    public void changeOrderStatus(Long orderId, String status)
+    {
+        try{
+            jdbcTemplate.update("UPDATE orders inner join missions on missions.orderId=orders.id set orders.status = ? where orders.id = ?", status, orderId);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+
+        }
+
+    }
 
 
 }

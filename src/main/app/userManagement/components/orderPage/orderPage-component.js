@@ -37,6 +37,7 @@ function Controller (OrderServiceImpl, Session, UserServiceImpl, $state)
     OrderServiceImpl.create(vm.order).then(
         function () {
             console.log(vm.order.name);
+            $state.go('root.customerPage');
         },
         function (err) {
             if (err.status === 400) {
