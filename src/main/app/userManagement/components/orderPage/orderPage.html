@@ -11,7 +11,7 @@
 
     <div id="big-form" class="well auth-box" style="margin-bottom:0; background-color:#FFFFFF">
       <form>
-        
+
         <div ng-form="vm.myCustomForm">
           <div class="container">
             <div class="msi-content" ui-view ng-cloak></div>
@@ -19,7 +19,7 @@
 
           <!-- Text input-->
           <div class="form-group">
-            <label class=" control-label" for="textinput">Mission Name<span style="color:#e32;">*</span></label>
+            <label class=" control-label" for="textinput">Order Name<span style="color:#e32;">*</span></label>
             <div class="">
               <input id="textinput" name="name" class="form-control input-md" type="text"
               ng-model="$ctrl.order.name" required ng-maxlength="255">
@@ -27,7 +27,7 @@
               Name is required!
             </div-->
             <div class="help-block" ng-show="vm.myCustomForm.name.$error.maxlength">Maximum length
-              of the mission name is 255 symbols.
+              of the order name is 255 symbols.
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@
 
     <!-- Text input-->
     <div class="form-group">
-      <label class=" control-label" for="textinput">Mission Details<span style="color:#e32;">*</span></label>
+      <label class=" control-label" for="textinput">Order Details<span style="color:#e32;">*</span></label>
       <div class="">
         <input id="textinput" name="details" class="form-control input-md" type="text"
         ng-model="$ctrl.order.details" required ng-maxlength="500"
@@ -71,7 +71,7 @@
         Details is required!
       </div-->
       <div class="help-block" ng-show="vm.myCustomForm.details.$error.maxlength">Maximum
-        length of the mission details is 500 symbols.
+        length of the Order details is 500 symbols.
       </div>
     </div>
   </div>
