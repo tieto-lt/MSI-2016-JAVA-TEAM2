@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller($state, UserServiceImpl) {
+function Controller($state, UserServiceImpl, Session) {
   var vm = this;
 
   vm.user = {};
@@ -42,7 +42,7 @@ function Controller($state, UserServiceImpl) {
 
 }
 
-Controller.$inject = ['$state', 'UserServiceImpl'];
+Controller.$inject = ['$state', 'UserServiceImpl', 'Session'];
 module.component('newUser', {
     controller: Controller,
     templateUrl: require('./newUser.html')
