@@ -66,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
 
 
     public Order updateOrder(Order order,Long id) {
-        orderRepository.updateOrderStatus(id, order.getStatus());
+        orderRepository.save(OrderDb.valueOf(order));
         return order;
     }
 

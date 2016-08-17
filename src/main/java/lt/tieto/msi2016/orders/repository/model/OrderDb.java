@@ -25,6 +25,7 @@ public class OrderDb extends DbModel {
 
     public static OrderDb valueOf(Order order) {
         OrderDb orderDb = new OrderDb();
+        orderDb.setId(order.getId());
         orderDb.setUserId(order.getUserId());
         orderDb.setName(order.getName());
         orderDb.setDetails(order.getDetails());

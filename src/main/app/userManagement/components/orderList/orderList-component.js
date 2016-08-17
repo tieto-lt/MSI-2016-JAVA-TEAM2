@@ -6,6 +6,16 @@ function Controller(OrderServiceImpl, $scope) {
 
     vm.order = {};
 
+    vm.approve = function approve(order){
+      order.status = 'approved';
+      OrderServiceImpl.update(order);
+    };
+
+    vm.decline = function decline(order){
+      order.status = 'declined';
+      OrderServiceImpl.update(order);
+    };
+
 
     vm.$onInit = function() {
       OrderServiceImpl.all().then(function(response){
