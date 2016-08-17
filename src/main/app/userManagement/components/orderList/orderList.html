@@ -34,6 +34,7 @@
                       Date<span ng-show="orderByField == 'date'"><span ng-show="!reverseSort"><img src="https://upload.wikimedia.org/wikipedia/commons/0/01/Arrow-up-navmenu.png"></span><span ng-show="reverseSort"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Arrow-down-navmenu.png"</span></span>
                     </a></th>
                     <th>Status</th>
+                    <th>Approve</th>
                     <!--th>Approve</th-->
                   </tr>
                 </thead>
@@ -48,6 +49,18 @@
                     <td>{{order.details}}</td>
                     <td>{{order.date}}</td>
                     <td>{{order.status}}</td>
+                    <td>
+                      <div style="display:inline;">
+                        <button type="button" class="btn btn-default"
+                            style="border:none; font-weight:bold; padding: 3px 6px; color:#11151C; font-family:courier; width:80px; background-color:rgb(88, 175, 80)"
+                            ng-click="$ctrl.approve(order)" ng-hide="order.status == 'approved' || order.status == 'declined'">Accept
+                        </button>
+                        <button type="button" class="btn btn-default"
+                            style="border:none; font-weight:bold; padding: 3px 6px; color:#11151C; font-family:courier; width:80px; background-color:rgb(178, 26, 26)"
+                            ng-click="$ctrl.decline(order)" ng-hide="order.status == 'approved' || order.status == 'declined'">Decline
+                        </button>
+                      </div>
+                    </td>
                     <!--td><input ngModel="order.isApproved" type="checkbox" value="true"></td-->
                   </tr>
                 </tbody>

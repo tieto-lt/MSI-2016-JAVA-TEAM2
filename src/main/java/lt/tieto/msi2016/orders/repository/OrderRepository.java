@@ -55,17 +55,6 @@ public class OrderRepository extends BaseRepository<OrderDb>{
         }
     }
      */
-    public void updateOrderStatus(Long orderId, String status)
-    {
-        try{
-            jdbcTemplate.update("UPDATE orders set status = ? where orderId = ?", status, orderId);
-        }
-        catch (EmptyResultDataAccessException e)
-        {
-
-        }
-
-    }
 
 
 }

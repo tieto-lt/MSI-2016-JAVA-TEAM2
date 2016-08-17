@@ -9,6 +9,10 @@ function Service($http, $q) {
   this.all = function() {
     return $http.get('/api/orders');
   };
+
+  this.update = function(order) {
+    return $http.put('/api/orders/'+order.id,order);
+  };
 }
 
 Service.$inject = ['$http', '$q'];
