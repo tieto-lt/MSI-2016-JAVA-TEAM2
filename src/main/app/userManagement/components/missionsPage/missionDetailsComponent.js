@@ -8,6 +8,13 @@ function Controller(missionService,$scope, Session) {
   vm.isCompleted = isCompleted;
   vm.isRed=isRed;
   vm.isOrange=isOrange;
+  vm.heading= vm.mission.name;
+
+  vm.$onInit = function() {
+    if (vm.mission.name.length> 110) {
+      vm.heading = vm.mission.name.substr(0, 105) + "...";
+    }
+  };
 
   function isRed(){
     return(vm.mission.status=="not completed"||vm.mission.status=="declined");
