@@ -2,6 +2,10 @@ module = require('main_module');
 
 function Service ($http,Session) {
 
+    this.retrieveAll = function retrieveAll(){
+      return $http.get('/api/int/missions');
+    };
+
     this.retrieveMissions = function retrieveMissions(){
       return $http.get('/api/int/missions?onlyCompleted=true');
     };
@@ -9,6 +13,8 @@ function Service ($http,Session) {
     this.retrieveMissionDetails = function retrieveMissionDetails(missionId){
       return $http.get('/api/int/missions/'+missionId);
     };
+
+
 
 }
 

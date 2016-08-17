@@ -2,7 +2,6 @@ package lt.tieto.msi2016.missions.controllers;
 
 import lt.tieto.msi2016.auth.model.User;
 import lt.tieto.msi2016.auth.services.UserService;
-import lt.tieto.msi2016.missions.model.mission.MissionCompleted;
 import lt.tieto.msi2016.missions.model.mission.Result;
 import lt.tieto.msi2016.missions.services.MissionService;
 import lt.tieto.msi2016.operator.model.Operator;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
+import static lt.tieto.msi2016.utils.constants.Roles.CUSTOMER;
 import static lt.tieto.msi2016.utils.constants.Roles.OPERATOR;
 
 /**
@@ -62,6 +62,12 @@ public class MissionsController extends BaseController {
     @RequestMapping(value = "/api/int/missions", method = RequestMethod.GET, params = "onlyCompleted=true")
     public ResponseEntity<?> getCompletedMissions() {
         return ResponseEntity.ok(Arrays.asList(orderService.getCompletedOrdersByUserName(securityHolder.getUserPrincipal().getUsername())));
+    }
+
+    @Secured(CUSTOMER)
+    @RequestMapping(value = "/api/int/missions", method = RequestMethod.GET)
+    public ResponseEntity<?> getMissions() {
+        return ResponseEntity.ok(orderService.getOrderByUserName(securityHolder.getUserPrincipal().getUsername()));
     }
 
     @RequestMapping(value = "/api/missions/{id}", method = RequestMethod.POST)

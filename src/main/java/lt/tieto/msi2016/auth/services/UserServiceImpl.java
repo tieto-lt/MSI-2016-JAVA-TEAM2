@@ -10,10 +10,8 @@ import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import javax.annotation.Resource;
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
