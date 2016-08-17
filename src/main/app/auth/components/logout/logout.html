@@ -1,65 +1,78 @@
-<nav ng-show="$ctrl.isNavigationVisible()" class="navbar navbar-fixed-top " role="navigation">
+<nav class="navbar navbar-inverse  navbar-fixed-top">
+    <div class="container-fluid">
 
-    <link rel="shortcut icon" type="image/x-icon" href="src/main/app/Images/Favicon.ico" />
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a class="navbar-brand" style="font-family:courier">DRONIFY</a>
+                </li>
+                <li ui-sref-active="active">
+                    <a class="menu-item" ng-show="$ctrl.isAdmin()" ui-sref="root.adminPage">
+                      Home
+                      <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a class="menu-item" ng-show="$ctrl.isOperator()" ui-sref="root.operatorHomePage">
+                      Home
+                      <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a class="menu-item" ng-show="$ctrl.isCustomer()" ui-sref="root.customerHomePage">
+                      Home
+                      <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a class="menu-item" ng-show="$ctrl.isOperator()" ui-sref="root.operatorPage">Token
+                <span class="sr-only">(current)</span></a>
+                </li>
+                <li  ui-sref-active="active" >
+                    <a class="menu-item" ng-show="$ctrl.isCustomer()"  ui-sref="root.customerPage">Orders
+                <span class="sr-only">(current)</span></a>
+                </li>
+                <li ui-sref-active="active">
+                    <a class="menu-item" ng-show="$ctrl.isCustomer()" ui-sref="root.accountInformation" >Account
+                <span class="sr-only">(current)</span></a>
+                </li>
+                <li ui-sref-active="active">
+                    <a class="menu-item" ng-show="$ctrl.isOperator()" ui-sref="root.missionsPage">Missions
+                <span class="sr-only">(current)</span></a>
+                </li>
+                <li ui-sref-active="active">
+                    <a class="menu-item" ng-show="$ctrl.isOperator()" ui-sref="root.accountInformation">Account
+                <span class="sr-only">(current)</span></a>
+                </li>
+                <li ui-sref-active="active">
+                    <a class="menu-item" ng-show="$ctrl.isAdmin()" ui-sref="root.orderList" >
+                      Orders
+                      <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a class="menu-item" ng-show="$ctrl.isAdmin()" ui-sref="root.userList">Users
+                <span class="sr-only">(current)</span></a>
+                </li>
+                <li ui-sref-active="active">
+                    <a class="menu-item" ng-show="$ctrl.isAdmin()" ui-sref="root.accountInformation">Account
+                <span class="sr-only">(current)</span></a>
+                </li>
 
 
-    <ul class="nav navbar-nav" style=" width: 100%; background-color:#11151C">
-
-        <a class="navbar-brand" style="font-family:courier">DRONIFY</a>
-
-        <li class="nav-item">
-            <a class="menu-item" ng-show="$ctrl.isAdmin()" href="#/adminPage" ng-click="$ctrl.goToAdminPage()">Home
-        <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="menu-item" ng-show="$ctrl.isOperator()" href="#/operatorHomePage" ng-click="$ctrl.goToOperatorHomePage()">Home
-        <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item">
-            <a class="menu-item" ng-show="$ctrl.isOperator()" href="#/operatorPage" ng-click="$ctrl.goToOperatorPage()">Token
-        <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="menu-item" ng-show="$ctrl.isCustomer()" href="#/customerPage" ng-click="$ctrl.goToCustomerPage()">Orders
-        <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="menu-item" ng-show="$ctrl.isCustomer()" href="#/accountInformation" ng-click="$ctrl.accountInfo()">Account
-        <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="menu-item" ng-show="$ctrl.isOperator()" href="#/missionsPage" ng-click="$ctrl.goToMissionsPage()">Missions
-        <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="menu-item" ng-show="$ctrl.isOperator()" href="#/accountInformation" ng-click="$ctrl.accountInfo()">Account
-        <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="menu-item" ng-show="$ctrl.isAdmin()" href="#/orderList" ng-click="$ctrl.goToOrderList()">Orders
-        <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="menu-item" ng-show="$ctrl.isAdmin()" href="#/userList" ng-click="$ctrl.goToUserList()">Users
-        <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="menu-item" ng-show="$ctrl.isAdmin()" href="#/accountInformation" ng-click="$ctrl.accountInfo()">Account
-        <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item" style="float: right;">
-            <a class="menu-item" ng-click="$ctrl.logout()" href="#" ng-show="$ctrl.isLogoutVisible()">Logout</a>
-        </li>
-        <li class="nav-item" style="float: right;">
-            <div class="hello" ng-show="$ctrl.isUserName()">Hello, {{$ctrl.userName()}}!</div>
-        </li>
-
-        <li class="nav-item" style="float: right;" ng-show="$ctrl.isOperator()">
-            <a ng-show="$ctrl.isVerified" class="btn btn-default" style="padding:14px 18px;background-color:#58AF50; border-color:#58AF50; color:#FFFFFF; font-weight:bold; font-family:courier;">Verified</a>
-            <a ng-hide="$ctrl.isVerified" class="btn btn-default" style="padding:14px 18px;background-color:#B21A1A; border-color:#B21A1A; color:#FFFFFF; font-weight:bold; font-family:courier;"> Not Verified </a>
-        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li ng-show="$ctrl.isOperator()">
+                  <a ng-show="$ctrl.isVerified" class="btn btn-default" style="padding:14px 18px;background-color:#58AF50; border-color:#58AF50; color:#FFFFFF; font-weight:bold; font-family:courier;">Verified</a>
+                  <a ng-hide="$ctrl.isVerified" class="btn btn-default" style="padding:14px 18px;background-color:#B21A1A; border-color:#B21A1A; color:#FFFFFF; font-weight:bold; font-family:courier;"> Not Verified </a>
+              </li>
+                <li>
+                    <div class="hello" ng-show="$ctrl.isUserName()">Hello, {{$ctrl.userName()}}!</div>
+                </li>
+                <li>
+                    <a class="menu-item" ng-click="$ctrl.logout()" href="#" ng-show="$ctrl.isLogoutVisible()">Logout</a>
+                </li>
 
     </ul>
 
