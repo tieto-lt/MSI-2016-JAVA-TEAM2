@@ -78,7 +78,7 @@ public class MissionServiceImpl implements MissionService {
 
     @Transactional(readOnly = true)
     public List<MissionResponse> getUsersMissions() {
-        return missionRepository.findAll().stream().filter(missionDb -> "approved".equals(orderRepository.findOne(missionDb.getOrderId()).getStatus()) && missionDb.getOperatorId()!=null).map(this::fillMission).collect(Collectors.toList());
+        return missionRepository.findAll().stream().filter(missionDb -> "approved".equals(orderRepository.findOne(missionDb.getOrderId()).getStatus()) && missionDb.getOperatorId()==null).map(this::fillMission).collect(Collectors.toList());
     }
 
     @Transactional
