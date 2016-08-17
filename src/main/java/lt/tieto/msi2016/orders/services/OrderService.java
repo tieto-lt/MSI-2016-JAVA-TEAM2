@@ -15,4 +15,6 @@ public interface OrderService {
    Collection<Order> all();
 
    Order updateOrder(Order order,Long id);
+
+   Collection<Order> getCompletedOrdersByUserName(String username);
 }

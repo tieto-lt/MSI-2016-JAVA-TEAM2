@@ -1,8 +1,8 @@
 <div class="container auth">
-  <div id="loginbox" style="margin-top:50px;border-color:#11151C; background-color:#FFFFFF"
+  <div id="loginbox" style="margin-top:50px;border-color:#222; background-color:#FFFFFF"
   class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-  <div class="panel panel-info" style=" border-width: 3px; border-color:#11151C;">
-    <div class="panel-heading" style="background-color:#11151C; border-radius:0">
+  <div class="panel panel-info" style=" border-width: 3px; border-color:#222;">
+    <div class="panel-heading" style="background-color:#222; border-radius:0">
       <div class="panel-title" style="font-family: courier; font-weight:bold; color:#FFFFFF; font-size:22px">
         Place an order
       </div>
@@ -11,7 +11,7 @@
 
     <div id="big-form" class="well auth-box" style="margin-bottom:0; background-color:#FFFFFF">
       <form>
-        
+
         <div ng-form="vm.myCustomForm">
           <div class="container">
             <div class="msi-content" ui-view ng-cloak></div>
@@ -19,7 +19,7 @@
 
           <!-- Text input-->
           <div class="form-group">
-            <label class=" control-label" for="textinput">Mission Name<span style="color:#e32;">*</span></label>
+            <label class=" control-label" for="textinput">Order Name<span style="color:#e32;">*</span></label>
             <div class="">
               <input id="textinput" name="name" class="form-control input-md" type="text"
               ng-model="$ctrl.order.name" required ng-maxlength="255">
@@ -27,7 +27,7 @@
               Name is required!
             </div-->
             <div class="help-block" ng-show="vm.myCustomForm.name.$error.maxlength">Maximum length
-              of the mission name is 255 symbols.
+              of the order name is 255 symbols.
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@
 
     <!-- Text input-->
     <div class="form-group">
-      <label class=" control-label" for="textinput">Mission Details<span style="color:#e32;">*</span></label>
+      <label class=" control-label" for="textinput">Order Details<span style="color:#e32;">*</span></label>
       <div class="">
         <input id="textinput" name="details" class="form-control input-md" type="text"
         ng-model="$ctrl.order.details" required ng-maxlength="500"
@@ -71,14 +71,14 @@
         Details is required!
       </div-->
       <div class="help-block" ng-show="vm.myCustomForm.details.$error.maxlength">Maximum
-        length of the mission details is 500 symbols.
+        length of the Order details is 500 symbols.
       </div>
     </div>
   </div>
 
   <div class="form-group row">
     <button type="submit" class="btn btn-warning"
-    style="margin-left:0.5cm; border: double; font-weight:bold; padding: 7px 20px; color:#11151C; font-family:courier; margin-top:0.3cm; margin-bottom:0.3cm"
+    style="margin-left:0.5cm; border: double; font-weight:bold; padding: 7px 20px; color:#222; font-family:courier; margin-top:0.3cm; margin-bottom:0.3cm"
     ng-click="vm.myCustomForm.$valid && $ctrl.create()"
     ng-disabled="vm.myCustomForm.$valid == false"> Place an Order
   </button>

@@ -1,6 +1,6 @@
 
 .panel-default >.panel-heading {
-    background-color: #11151C;
+    background-color: #222;
     color: #FFFFFF;
     font-family: courier;
     font-weight: bold;
@@ -16,7 +16,7 @@
     position:absolute;
     right:0;
     left:0;
-    color: #11151C;
+    color: #222;
     font-size: 16px;
     font-weight: normal;
     font-family:cursive;

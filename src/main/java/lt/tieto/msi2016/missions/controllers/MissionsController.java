@@ -43,8 +43,7 @@ public class MissionsController extends BaseController {
             return ResponseEntity.ok(missionService.getDefaultMission());
         } else if(operatorService.isVerified(operatorToken)) {
             return ResponseEntity.ok(missionService.getUsersMissions());
-        }
-         else {
+        } else {
              return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
@@ -60,16 +59,9 @@ public class MissionsController extends BaseController {
     }
 
     @Secured(OPERATOR)
-    @RequestMapping(value = "/api/int/missions", params = "onlyCompleted=true", method = RequestMethod.GET)
-    public ResponseEntity<?> getCompletedMissions()
-    {
-        if(missionService.isAnyMissionDone(securityHolder.getUserPrincipal().getUsername()))
-        {
-            return ResponseEntity.ok(Arrays.asList(new MissionCompleted[]{new MissionCompleted()}));
-        }
-        else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
+    @RequestMapping(value = "/api/int/missions", method = RequestMethod.GET, params = "onlyCompleted=true")
+    public ResponseEntity<?> getCompletedMissions() {
+        return ResponseEntity.ok(Arrays.asList(orderService.getCompletedOrdersByUserName(securityHolder.getUserPrincipal().getUsername())));
     }
 
     @RequestMapping(value = "/api/missions/{id}", method = RequestMethod.POST)
@@ -78,8 +70,7 @@ public class MissionsController extends BaseController {
             if(id.equals(-1L)) {
                 operatorService.verifyOperatorService(operatorToken);
             }
-            else
-            {
+            else {
                 missionService.changeOrderStatus("done", id);
             }
             missionService.saveResults(id, operatorToken, result);

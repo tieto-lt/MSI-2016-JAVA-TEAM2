@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,7 +78,7 @@ public class MissionServiceImpl implements MissionService {
 
     @Transactional(readOnly = true)
     public List<MissionResponse> getUsersMissions() {
-        return missionRepository.findAll().stream().filter(missionDb -> "approved".equals(orderRepository.findOne(missionDb.getId()).getStatus()) && missionDb.getOperatorId()==null).map(this::fillMission).collect(Collectors.toList());
+        return missionRepository.findAll().stream().filter(missionDb -> "approved".equals(orderRepository.findOne(missionDb.getOrderId()).getStatus()) && missionDb.getOperatorId()==null).map(this::fillMission).collect(Collectors.toList());
     }
 
     @Transactional
