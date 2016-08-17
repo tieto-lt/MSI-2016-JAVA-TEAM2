@@ -83,9 +83,10 @@
               <label class=" control-label" for="textinput">Phone<span style="color:#e32;">*</span></label>
               <div class="">
                 <input id="textinput" name="phone" class="form-control input-md" type="text"
-                ng-model="$ctrl.user.phone" required pattern="^[\+ | 0-9][0-9]*" ng-keypress="$ctrl.enterPressed($event)">
+                ng-model="$ctrl.user.phone" required pattern="^[\+ | 0-9][0-9]*" ng-keypress="$ctrl.enterPressed($event)" ng-maxlength="20">
                 <!--div class="help-block" ng-show="vm.myCustomForm.phone.$error.required && vm.myCustomForm.phone.$touched">Field phone is required!</div-->
                 <div class="help-block" ng-show="vm.myCustomForm.phone.$error.pattern">Field phone is only numbers!</div>
+                <div class="help-block" ng-show="vm.myCustomForm.phone.$error.maxlength">Maximum length of the phone is 20.</div>
               </div>
 
             </div>
