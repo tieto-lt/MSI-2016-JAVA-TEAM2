@@ -41,15 +41,15 @@ public class OperatorController extends BaseController {
     @RequestMapping(value = "/api/users/{id}/operatorState", method = RequestMethod.GET)
     public ResponseEntity<Operator> getOperator(@PathVariable Long id){
 
-        if(canAccessInfo(id))
-        {
+        if(canAccessInfo(id)) {
             Operator operator = operatorService.getOperatorState(id);
             return operator != null ? ResponseEntity.ok(operator) : ResponseEntity.ok(new Operator());
-        }
-        else{
+        } else{
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
         }
     }
+
+
 
     @Secured(OPERATOR)
     @RequestMapping(value = "/api/users/{id}/operatorState", method = RequestMethod.POST)
