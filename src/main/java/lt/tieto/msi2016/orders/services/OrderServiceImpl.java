@@ -3,7 +3,6 @@ package lt.tieto.msi2016.orders.services;
 import lt.tieto.msi2016.missions.repository.MissionRepository;
 import lt.tieto.msi2016.missions.repository.model.MissionDb;
 import lt.tieto.msi2016.missions.services.MissionService;
-import lt.tieto.msi2016.operator.repository.OperatorRepository;
 import lt.tieto.msi2016.orders.model.Order;
 import lt.tieto.msi2016.orders.repository.OrderRepository;
 import lt.tieto.msi2016.orders.repository.model.OrderDb;
@@ -73,6 +72,10 @@ public class OrderServiceImpl implements OrderService {
 
     public Collection<Order> getCompletedOrdersByUserName(String username){
         return orderRepository.getCompletedOrdersByUsername(username).stream().map(this::fillOrder).collect(Collectors.toList());
+    }
+
+    public Collection<Order> getOrderByUserName(String username){
+        return orderRepository.getOrdersByUserName(username).stream().map(this::fillOrder).collect(Collectors.toList());
     }
 
 
