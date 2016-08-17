@@ -6,6 +6,24 @@
            ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"
            ></i>
     </uib-accordion-heading>
+    <h3 style="font-family: courier;">Order Information</h3>
+    <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
+    <p style="font-family: courier;" ng-show="$ctrl.isRed()"><b>Mission status:</b> <i style="color: red;" >{{$ctrl.mission.status}}</i></p>
+    <p style="font-family: courier;" ng-show="$ctrl.isOrange()"><b>Mission status:</b> <i style="color: orange;">{{$ctrl.mission.status}}</i></p>
+    <p style="font-family: courier;" ng-show="$ctrl.isCompleted()"><b>Mission status:</b> <i style="color: green;">{{$ctrl.mission.status}}</i></p>
+    <p style="font-family: courier;"><b>Mission name:</b> {{$ctrl.mission.name}}</p>
+    <p style="font-family: courier;"><b>Email:</b> {{$ctrl.mission.email}}</p>
+    <p style="font-family: courier;"><b>Phone:</b> {{$ctrl.mission.phone}}</p>
+    <p style="font-family: courier;"><b>Mission details:</b> {{$ctrl.mission.details}}</p>
+    <p style="font-family: courier;"><b>Ordering date:</b> {{$ctrl.mission.date}}</p>
+
+    </div>
+
+    <p style="font-family: courier; color: red;" ng-show="!$ctrl.isCompleted()">
+      No pictures to show
+    <p>
+
+    <div ng-show="$ctrl.isCompleted()">
     <h3 style="font-family: courier;">Gallery</h3>
     <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
         <div uib-carousel active="active" interval="$ctrl.myInterval" no-wrap="noWrapSlides">
@@ -14,8 +32,8 @@
             </div>
             </div>
         </div>
-
-
+</div>
+        <div ng-show="$ctrl.isOperator()">
     <h3 style="font-family: courier;">Coordinates</h3>
     <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
         <h4 style="font-family: courier;  margin-top:0.3cm">Beginning</h4>
@@ -48,5 +66,6 @@
             </uib-progressbar>
 
         </div>
+      </div>
 </div>
 </div>

@@ -1,9 +1,29 @@
 var module = require('main_module');
 
-function Controller(missionService,$scope) {
+function Controller(missionService,$scope, Session) {
   var vm = this;
 
   vm.oneAtATime = true;
+  vm.isOperator = isOperator;
+  vm.isCompleted = isCompleted;
+  vm.isRed=isRed;
+  vm.isOrange=isOrange;
+
+  function isRed(){
+    return(vm.mission.status=="not completed"||vm.mission.status=="declined");
+  }
+  function isOrange(){
+    return(vm.mission.status=="in progress"||vm.mission.status=="approved");
+  }
+
+  function isOperator(){
+      return(Session.isSessionActive() && Session.getSession().authorities[0] == "ROLE_OPERATOR");
+  }
+
+
+  function isCompleted(){
+      return (vm.mission.status=="done");
+  }
 
   vm.status = {
     isCustomHeaderOpen: false,
@@ -122,9 +142,11 @@ function Controller(missionService,$scope) {
   };
 
 
+
+
 }
 
-Controller.$inject = ['MissionService', '$scope'];
+Controller.$inject = ['MissionService', '$scope', 'Session'];
 
 module.component('missionDetailsComponent', {
     controller: Controller,
