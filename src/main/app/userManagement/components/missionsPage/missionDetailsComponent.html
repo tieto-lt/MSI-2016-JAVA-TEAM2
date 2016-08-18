@@ -21,6 +21,15 @@
 
     </div>
 
+    <h3 style="font-family: courier;">Objects</h3>
+    <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
+      <div ng-repeat="object in $ctrl.mission.orderObjects">
+        <p style="font-family: courier;" ng-show="object.objectName"><b >Object name: </b>{{object.objectName}}</p>
+        <p style="font-family: courier;" ng-show="object.how"><b>Camera Angle: </b>{{object.how}}</p>
+      </div>
+
+    </div>
+
     <p style="font-family: courier; color: red;" ng-show="!$ctrl.isCompleted()">
       No pictures to show
     <p>

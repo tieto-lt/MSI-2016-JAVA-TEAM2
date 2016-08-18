@@ -26,10 +26,12 @@ public class OrderController extends BaseController {
 
     @RequestMapping(value = "/api/orders", method = RequestMethod.POST, consumes = accepts)
     public Order createOrder(@RequestBody final @Valid Order order) throws IOException {
-
-        return orderService.createOrder(order);
+        Order order1 = orderService.createOrder(order);
+        orderService.createOrderObjects(order.getOrderObjects(), order1.getId());
+        return order1;
 
     }
+
 
     @Secured(ADMIN)
     @RequestMapping(value = "/api/orders", method = RequestMethod.GET)
