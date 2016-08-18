@@ -90,7 +90,6 @@ public class MissionsController extends BaseController {
     }
 
 
-    @Secured(OPERATOR)
     @RequestMapping(value = "/api/int/missions/{id}", method = RequestMethod.GET)
     public ResponseEntity<Result> returnMissionDetails (@PathVariable Long id)
     {

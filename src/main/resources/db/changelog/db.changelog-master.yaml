@@ -311,3 +311,13 @@ databaseChangeLog:
               constraintName: fk_id_orders
               referencedColumnNames: id
               referencedTableName: orders
+
+  - changeSet:
+        id: 13
+        author: tieto
+        changes:
+          - sql:
+            dbms: MySQL
+            sql:
+                INSERT INTO missions (id,missionJSON)
+                values(-1,'[{"commandType":"takeoff","args":[]},{"commandType":"calibrate","args":[]},{"commandType":"altitude","args":[1.5]},{"commandType":"forward","args":["2"]},{"commandType":"takePicture","args":[]},{"commandType":"altitude","args":[1]},{"commandType":"cw","args":[60]},{"commandType":"takePicture","args":[]},{"commandType":"altitude","args":[1.5]},{"commandType":"cw","args":[60]},{"commandType":"takePicture","args":[]},{"commandType":"altitude","args":[1]},{"commandType":"cw","args":[60]},{"commandType":"takePicture","args":[]},{"commandType":"altitude","args":[1.5]},{"commandType":"cw","args":[60]},{"commandType":"takePicture","args":[]},{"commandType":"altitude","args":[1]},{"commandType":"cw","args":[60]},{"commandType":"takePicture","args":[]},{"commandType":"altitude","args":[1.5]},{"commandType":"cw","args":[60]},{"commandType":"takePicture","args":[]},{"commandType":"land","args":[]}]');
