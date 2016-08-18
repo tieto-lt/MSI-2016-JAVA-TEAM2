@@ -47,6 +47,14 @@ function Service($http, $q) {
       return $http.put('/api/users/' + user.id, user);
   };
 
+  this.update = function(user) {
+      return $http.put('/api/users/update', user);
+  };
+
+  this.updatePassword = function(currentPassword, newPassword) {
+      return $http.put('/api/users/updatePassword', currentPassword, newPassword);
+  };
+
 
 }
 

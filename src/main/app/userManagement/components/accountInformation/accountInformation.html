@@ -1,65 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="container auth">
+    <div id="registrationBox" style="margin-top:50px; border-color:#222; background-color:#FFFFFF" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info" style="border-width: 3px; border-color:#222;">
+            <div class="panel-heading" style="background-color:#222; border-radius:0">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Account Info</title>
-</head>
-
-<body>
-
-    <div class="container">
-        <div id="registrationBox" style="margin-top:50px; border-color:#11151C; background-color:#FFFFFF" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-            <div class="panel panel-info" style="border-width: 3px; border-color:#11151C;">
-                <div class="panel-heading" style="border-radius: 0; background-color:#11151C;">
-                    <div class="panel-title" style="font-family: courier; font-weight:bold; color:#FFFFFF; font-size:22px">
-                        Account Information
-                    </div>
-
-                    <div class="msi-content" ui-view ng-cloak></div>
+                <div class="panel-title" style="font-family: courier; font-weight:bold; color:#FFFFFF; font-size:22px">Account Information </div>
+            </div>
+            <div class="btn-group btn-group-justified" role="group">
+                <div class="btn-group" role="group">
+                    <button id="0" type="button" style="font-family:courier" class="btn btn-warning" ng-click="$ctrl.setTab(0)">Account details</button>
                 </div>
+                <div class="btn-group" role="group">
+                    <button id="1" type="button" style="font-family:courier" class="btn btn-default" ng-click="$ctrl.setTab(1)">Change password</button>
+                </div>
+            </div>
 
-                <div id="big-form" class="well auth-box" style="background-color:#FFFFFF; margin-bottom:0cm">
+            <div ng-show="$ctrl.firstTab()" id="home">
+                <div ng-show="$ctrl.firstTab()" id="big-form" class="well auth-box" style="background-color:#FFFFFF; border:none">
                     <form>
 
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-xs-2 col-form-label" style="font-family:courier;">Username</label>
-                            <div class="col-xs-10">
-                                <input class="form-control" type="text" ng-model="$ctrl.user.userName" ng-disabled="true" name="userName">
+                        <div ng-form="vm.myCustomForm">
+                            <div class="container">
+                                <div class="msi-content" ui-view ng-cloak></div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="example-email-input" class="col-xs-2 col-form-label" style="font-family:courier;">Name</label>
-                            <div class="col-xs-10">
-                                <input class="form-control" type="text" ng-model="$ctrl.user.name" name="name">
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class=" control-label" for="textinput">UserName</label>
+                                <div class="">
+                                    <input id="textinput" name="username" class="form-control input-md" type="text" ng-model="$ctrl.user.userName" ng-disabled="true">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="example-email-input" class="col-xs-2 col-form-label" style="font-family:courier;">Email</label>
-                            <div class="col-xs-10">
-                                <input class="form-control" type="email" ng-model="$ctrl.user.email" name="email">
+                            <div class="form-group">
+                                <label class=" control-label" for="textinput">Name<span style="color:#e32;">*</span></label>
+                                <div class="">
+                                    <input id="textinput" name="name" class="form-control input-md" type="text" ng-model="$ctrl.user.name" required ng-maxlength="90" ng-keypress=" vm.myCustomForm.$valid && $ctrl.enterPressed($event)">
+                                    <!--div class="help-block" ng-show="vm.myCustomForm.name.$error.required && vm.myCustomForm.name.$touched">Field Name is required!</div-->
+                                    <div class="help-block" ng-show="vm.myCustomForm.name.$error.maxlength">Maximum length of the name is 90 symbols.</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-tel-input" class="col-xs-2 col-form-label" style="font-family:courier;">Phone</label>
-                            <div class="col-xs-10">
-                                <input class="form-control" type="tel" ng-model="$ctrl.user.phone" name="phone">
-                            </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <button type="button" class="btn btn-warning" style="margin-left:0.4cm; margin-top:0.2cm; border: double;  font-weight:bold; padding: 7px 20px; color:#11151C; font-family:courier;">
-                                Update
-                            </button>
+
+                            <div class="form-group">
+                                <label class=" control-label" for="textinput">Email<span style="color:#e32;">*</span></label>
+                                <div class="">
+                                    <input id="textinput" name="email" class="form-control input-md" type="email" ng-model="$ctrl.user.email" required ng-keypress=" vm.myCustomForm.$valid && $ctrl.enterPressed($event)">
+                                    <!--div class="help-block" ng-show="vm.myCustomForm.email.$error.required && vm.myCustomForm.email.$touched">Field Email is required!</div-->
+                                    <div class="help-block" ng-show="vm.myCustomForm.email.$error.email">Invalid email adress</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class=" control-label" for="textinput">Phone<span style="color:#e32;">*</span></label>
+                                <div class="">
+                                    <input id="textinput" name="phone" class="form-control input-md" type="text" ng-model="$ctrl.user.phone" required pattern="^[\+ | 0-9][0-9]*" ng-keypress=" vm.myCustomForm.$valid && $ctrl.enterPressed($event)" ng-maxlength="20">
+                                    <!--div class="help-block" ng-show="vm.myCustomForm.phone.$error.required && vm.myCustomForm.phone.$touched">Field phone is required!</div-->
+                                    <div class="help-block" ng-show="vm.myCustomForm.phone.$error.pattern">Field phone is only numbers!</div>
+                                    <div class="help-block" ng-show="vm.myCustomForm.phone.$error.maxlength">Maximum length of the phone is 20.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <button type="button" class="btn btn-warning" style="margin-left:0.4cm; margin-top:0.2cm; border: double;  font-weight:bold; padding: 7px 20px; color:#11151C; font-family:courier;" ng-click="$ctrl.update()">
+                                    Update user info
+                                </button>
+                                <p style="font-family:courier; color: #BC0000; margin-top:0.5cm; margin-left:0.3cm; font-weight: bold; "> * Field is required! </p>
+
+                            </div>
                         </div>
                     </form>
                 </div>
+            </div>
+
+
+            <div ng-show="!$ctrl.firstTab()" id="menu1">
+                <div ng-show="!$ctrl.firstTab()" id="big-form" class="well auth-box" style="background-color:#FFFFFF; margin-bottom:0; border:none">
+                  <form>
+                  <div ng-form="vm.myCustomForm2">
+                      <div class="container">
+                          <div class="msi-content" ui-view ng-cloak></div>
+                      </div>
+                        <!-- Password input-->
+                        <div class="form-group">
+                            <label class=" control-label" for="currentPassword">Current Password<span style="color:#e32;">*</span></label>
+                            <div class="">
+                                <input id="passwordinput" name="currentPassword" class="form-control input-md" type="password" ng-model="$ctrl.updatePass.currentPassword" ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30" ng-keypress=" vm.myCustomForm2.$valid && $ctrl.enterPressed($event)">
+                                <!--div class="help-block"  ng-show="vm.myCustomForm.password.$error.required && vm.myCustomForm.password.$touched">Field Password is required!</div-->
+                                <div class="help-block" ng-show="vm.myCustomForm2.currentPassword.$error.minlength">Password must be at least 6 symbols long.</div>
+                                <div class="help-block" ng-show="vm.myCustomForm2.currentPassword.$error.maxlength">Maximum length of the password is 30 symbols.</div>
+                                <div class="help-block" ng-show="vm.myCustomForm2.currentPassword.$error.pattern">Password is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div>
+                            </div>
+                        </div>
+
+
+                        <!-- Password input-->
+                        <div class="form-group">
+                            <label class=" control-label" for="password">New Password<span style="color:#e32;">*</span></label>
+                            <div class="">
+                                <input id="passwordinput" name="password" class="form-control input-md" type="password" ng-model="$ctrl.updatePass.newPassword" ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30" ng-keypress=" vm.myCustomForm2.$valid && $ctrl.enterPressed($event)">
+                                <!--div class="help-block"  ng-show="vm.myCustomForm.password.$error.required && vm.myCustomForm.password.$touched">Field Password is required!</div-->
+                                <div class="help-block" ng-show="vm.myCustomForm2.password.$error.minlength">Password must be at least 6 symbols long.</div>
+                                <div class="help-block" ng-show="vm.myCustomForm2.password.$error.maxlength">Maximum length of the password is 30 symbols.</div>
+                                <div class="help-block" ng-show="vm.myCustomForm2.password.$error.pattern">Password is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div>
+                            </div>
+                        </div>
+
+                        <!--  Confirm Password input-->
+                        <div class="form-group">
+                            <label class=" control-label" for="password">Confirm New Password<span style="color:#e32;">*</span></label>
+                            <div class="">
+                                <input name="confirmPassword" class="form-control input-md" type="password" ng-model="$ctrl.user.confirmPassword" ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30" match-Password="$ctrl.updatePass.newPassword"
+                                    ng-keypress=" vm.myCustomForm2.$valid && $ctrl.enterPressed($event)">
+
+                                <div class="help-block" ng-show="vm.myCustomForm2.confirmPassword.$error.minlength">Password must be at least 6 symbols long.</div>
+                                <div class="help-block" ng-show="vm.myCustomForm2.confirmPassword.$error.maxlength">Maximum length of the password is 30 symbols.</div>
+                                <div class="help-block" ng-show="vm.myCustomForm2.confirmPassword.$error.pattern">Password is not allowed any special symbols, only letters A-Z, a-z and numbers 0-9.</div>
+                                <div class="help-block" ng-show="vm.myCustomForm2.confirmPassword.$error.matchPassword">Passwords does not match</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <button type="submit" class="btn btn-warning" style="margin-left:0.5cm; border: double;  font-weight:bold; padding: 7px 20px; color:#222; font-family:courier;" ng-click="vm.myCustomForm.$valid && $ctrl.updatePassword()" ng-disabled="vm.myCustomForm.$valid == false">
+                                Update Password</button>
+                            <p style="font-family:courier; color: #BC0000; margin-top:0.5cm; margin-left:0.3cm; font-weight: bold; "> * Field is required! </p>
+                        </div>
+
+
+                        <div dismiss-on-timeout="4000" uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+
+
+
+
+                        <div dismiss-on-timeout="4000" uib-alert class="alert alert-danger" role="alert" ng-repeat="error in $ctrl.errors">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            <span class="sr-only">Error:</span> Field '{{error.name}}' : {{error.message}}
+                        </div>
+
+
+                    </form>
+                </div>
+
                 <div class="clearfix"></div>
             </div>
         </div>
     </div>
-</body>
-
-</html>
