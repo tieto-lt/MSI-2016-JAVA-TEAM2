@@ -68,13 +68,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional(readOnly = true)
     public Collection<Order> all() {
-        return orderRepository.findAll().stream().map(this::fillOrder).collect(Collectors.toList());
+        return orderRepository.findAll().stream().map(Order::valueOf).collect(Collectors.toList());
     }
 
-    private Order fillOrder(OrderDb orderDb) {
-        Order order = Order.valueOf(orderDb);
-        return order;
-    }
 
 
     @Transactional
@@ -85,11 +81,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional(readOnly = true)
     public Collection<Order> getCompletedOrdersByUserName(String username) {
-        return orderRepository.getCompletedOrdersWithMissionIdByUsername(username).stream().map(this::fillOrder).collect(Collectors.toList());
+        return orderRepository.getCompletedOrdersWithMissionIdByUsername(username).stream().map(Order::valueOf).collect(Collectors.toList());
     }
-
+    @Transactional(readOnly = true)
     public Collection<Order> getOrderByUserName(String username){
-        return orderRepository.getOrdersByUserName(username).stream().map(this::fillOrder).collect(Collectors.toList());
+        return orderRepository.getOrdersByUserName(username).stream().map(Order::valueOf).collect(Collectors.toList());
     }
 
 
