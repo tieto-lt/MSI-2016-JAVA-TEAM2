@@ -51,7 +51,6 @@ function setTab(x) {
     if (x === 0) {
 
         document.getElementById(0).className = "btn btn-warning";
-
         document.getElementById(1).className = "btn btn-default";
     } else {
         document.getElementById(1).className = "btn btn-warning";

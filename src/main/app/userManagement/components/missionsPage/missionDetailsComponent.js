@@ -38,6 +38,7 @@ function Controller(missionService,$scope, Session) {
     isFirstDisabled: false
   };
 
+
   $scope.$watch('status.open', function(newValue) {
     if (newValue) {
       vm.loadDetails();
