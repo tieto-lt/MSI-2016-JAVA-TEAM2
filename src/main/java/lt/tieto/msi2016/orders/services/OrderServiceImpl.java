@@ -4,7 +4,6 @@ import lt.tieto.msi2016.missions.model.mission.MissionCommands;
 import lt.tieto.msi2016.missions.repository.MissionRepository;
 import lt.tieto.msi2016.missions.repository.model.MissionDb;
 import lt.tieto.msi2016.missions.services.MissionService;
-import lt.tieto.msi2016.operator.repository.OperatorRepository;
 import lt.tieto.msi2016.orders.model.Order;
 import lt.tieto.msi2016.orders.repository.OrderRepository;
 import lt.tieto.msi2016.orders.repository.model.OrderDb;
@@ -85,6 +84,10 @@ public class OrderServiceImpl implements OrderService {
     @Transactional(readOnly = true)
     public Collection<Order> getCompletedOrdersByUserName(String username) {
         return orderRepository.getCompletedOrdersWithMissionIdByUsername(username).stream().map(this::fillOrder).collect(Collectors.toList());
+    }
+
+    public Collection<Order> getOrderByUserName(String username){
+        return orderRepository.getOrdersByUserName(username).stream().map(this::fillOrder).collect(Collectors.toList());
     }
 
 

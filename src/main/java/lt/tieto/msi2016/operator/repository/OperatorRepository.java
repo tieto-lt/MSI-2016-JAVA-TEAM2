@@ -34,10 +34,10 @@ public class OperatorRepository extends BaseRepository<OperatorDb> {
     };
 
     private static final  RowUnmapper<OperatorDb> ROW_UNMAPPER = operatorDb -> mapOf(
-      "id", operatorDb.getId(),
-      "token", operatorDb.getToken(),
-      "isVerified", operatorDb.getVerified(),
-      "userId", operatorDb.getUserId()
+            "id", operatorDb.getId(),
+            "token", operatorDb.getToken(),
+            "isVerified", operatorDb.getVerified(),
+            "userId", operatorDb.getUserId()
     );
 
     /**
@@ -83,7 +83,7 @@ public class OperatorRepository extends BaseRepository<OperatorDb> {
     public boolean isVerified(String operatorToken) {
         try {
             Integer verificationStatus = jdbcTemplate.queryForObject("SELECT isVerified from operators where token = ?",Integer.class,operatorToken);
-           return verificationStatus != null && verificationStatus == 1;
+            return verificationStatus != null && verificationStatus == 1;
         } catch (EmptyResultDataAccessException e) {
             return false;
         }

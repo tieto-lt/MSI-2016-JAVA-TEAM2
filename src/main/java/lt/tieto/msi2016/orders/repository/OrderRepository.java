@@ -1,7 +1,6 @@
 package lt.tieto.msi2016.orders.repository;
 
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
-import lt.tieto.msi2016.orders.model.Order;
 import lt.tieto.msi2016.orders.repository.model.OrderDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 /**
  * Created by localadmin on 16.8.11.
@@ -71,6 +69,14 @@ public class OrderRepository extends BaseRepository<OrderDb>{
                      "inner join mission_results on mission_results.missionId = missions.id " +
                      "inner join orders on orders.id = missions.orderId " +
                      "where users.username = ?", ROW_MAPPER, username);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    public Collection<OrderDb> getOrdersByUserName(String username){
+        try {
+            return jdbcTemplate.query("Select * from orders inner join users on orders.userId=users.id where username= ?", ROW_MAPPER, username);
         } catch (EmptyResultDataAccessException e) {
             return null;
         }

@@ -42,6 +42,9 @@ module.config(function($stateProvider, $urlRouterProvider) {
       template: "<new-user></new-user>",
       data: {
         isPublic: true
+      },
+      params: {
+        username: undefined
       }
     })
     .state('root.customerPage', {
@@ -138,6 +141,18 @@ module.run(['$transitions', 'Session', '$state', function($transitions, Session,
   {
     to: function (state) {
        return state.name == "root.Login" && Session.isSessionActive();
+     }
+  },
+  function () {
+    console.log("TODO: fix this errror");
+      return $state.go("root.home");
+
+  });
+
+  $transitions.onStart(
+  {
+    to: function (state) {
+       return state.name == "root.newUser" && Session.isSessionActive();
      }
   },
   function () {

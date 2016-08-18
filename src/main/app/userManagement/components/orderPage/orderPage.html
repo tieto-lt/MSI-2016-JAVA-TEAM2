@@ -22,7 +22,8 @@
             <label class=" control-label" for="textinput">Order Name<span style="color:#e32;">*</span></label>
             <div class="">
               <input id="textinput" name="name" class="form-control input-md" type="text"
-              ng-model="$ctrl.order.name" required ng-maxlength="255">
+              ng-model="$ctrl.order.name" required ng-maxlength="255"
+            >
               <!--div class="help-block" ng-show="vm.myCustomForm.name.$error.required && vm.myCustomForm.name.$touched">Field Mission
               Name is required!
             </div-->
@@ -65,8 +66,7 @@
       <label class=" control-label" for="textinput">Order Details<span style="color:#e32;">*</span></label>
       <div class="">
         <input id="textinput" name="details" class="form-control input-md" type="text"
-        ng-model="$ctrl.order.details" required ng-maxlength="500"
-        ng-keypress="$ctrl.enterPressed($event)">
+        ng-model="$ctrl.order.details" required ng-maxlength="500">
         <!--div class="help-block" ng-show="vm.myCustomForm.details.$error.required && vm.myCustomForm.details.$touched">Field Mission
         Details is required!
       </div-->

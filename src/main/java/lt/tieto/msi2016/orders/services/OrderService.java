@@ -17,4 +17,6 @@ public interface OrderService {
    Order updateOrder(Order order,Long id);
 
    Collection<Order> getCompletedOrdersByUserName(String username);
+
+   Collection<Order> getOrderByUserName(String username);
 }
