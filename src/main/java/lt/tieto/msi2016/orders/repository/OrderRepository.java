@@ -48,26 +48,16 @@ public class OrderRepository extends BaseRepository<OrderDb>{
       "status", orderDb.getStatus()
     );
 
-    /*
-        public void changeOperatorVerify(Long userId, Boolean isVerified) {
-        try {
-            jdbcTemplate.update("UPDATE operators set isVerified = ? where userId = ?", isVerified, userId);
-        } catch (EmptyResultDataAccessException e) {
-
-        }
-    }
-     */
-
 
     public Collection<OrderDb> getCompletedOrdersWithMissionIdByUsername(String username){
         try {
              return jdbcTemplate.query("select " +
-                     "missions.id,orders.userId,orders.name,orders.details,orders.email,orders.phone,orders.date,orders.status" +
-                     " from users " +
-                     "inner join operators on operators.userId = users.id " +
-                     "inner join missions on missions.operatorId = operators.id " +
-                     "inner join mission_results on mission_results.missionId = missions.id " +
-                     "inner join orders on orders.id = missions.orderId " +
+                     "missions.id,orders.userId,COALESCE(orders.name,'default') as name,COALESCE(orders.details,'default') as details,orders.email,orders.phone,orders.date,orders.status" +
+                     " from mission_results " +
+                     "inner join missions on missions.id = mission_results.missionId " +
+                     "inner join operators on operators.id = mission_results.operatorId " +
+                     "inner join users on users.id = operators.userId " +
+                     "left join orders on orders.id = missions.orderId " +
                      "where users.username = ?", ROW_MAPPER, username);
         } catch (EmptyResultDataAccessException e) {
             return null;
@@ -81,6 +71,8 @@ public class OrderRepository extends BaseRepository<OrderDb>{
             return null;
         }
     }
+
+
 
 
 }
