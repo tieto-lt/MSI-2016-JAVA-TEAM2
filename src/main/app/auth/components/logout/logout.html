@@ -4,24 +4,21 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li>
-                    <a class="navbar-brand" style="font-family:courier">DRONIFY</a>
-                </li>
                 <li ui-sref-active="active">
-                    <a class="menu-item" ng-show="$ctrl.isAdmin()" ui-sref="root.adminPage">
-                      Home
+                    <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isAdmin()" ui-sref="root.adminPage">
+                      DRONIFY
                       <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li ui-sref-active="active">
-                    <a class="menu-item" ng-show="$ctrl.isOperator()" ui-sref="root.operatorHomePage">
-                      Home
+                    <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isOperator()" ui-sref="root.operatorHomePage">
+                      DRONIFY
                       <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li ui-sref-active="active">
-                    <a class="menu-item" ng-show="$ctrl.isCustomer()" ui-sref="root.customerHomePage">
-                      Home
+                    <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isCustomer()" ui-sref="root.customerHomePage">
+                      DRONIFY
                       <span class="sr-only">(current)</span>
                     </a>
                 </li>
