@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <button type="button" class="btn btn-warning" style="margin-left:0.4cm; margin-top:0.2cm; border: double;  font-weight:bold; padding: 7px 20px; color:#11151C; font-family:courier;" ng-click="$ctrl.update()">
+                                <button type="button" class="btn btn-warning" style="margin-left:0.4cm; margin-top:0.2cm; border: double;  font-weight:bold; padding: 7px 20px; color:#11151C; font-family:courier;" ng-click="$ctrl.update()" ng-disabled="!vm.myCustomForm.$valid">
                                     Update user info
                                 </button>
                                 <p style="font-family:courier; color: #BC0000; margin-top:0.5cm; margin-left:0.3cm; font-weight: bold; "> * Field is required! </p>
@@ -121,7 +121,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <button type="submit" class="btn btn-warning" style="margin-left:0.5cm; border: double;  font-weight:bold; padding: 7px 20px; color:#222; font-family:courier;" ng-click="vm.myCustomForm.$valid && $ctrl.updatePassword()" ng-disabled="vm.myCustomForm.$valid == false">
+                            <button type="submit" class="btn btn-warning" style="margin-left:0.5cm; border: double;  font-weight:bold; padding: 7px 20px; color:#222; font-family:courier;" ng-click="vm.myCustomForm2.$valid && $ctrl.updatePassword()" ng-disabled="vm.myCustomForm2.$valid == false">
                                 Update Password</button>
                             <p style="font-family:courier; color: #BC0000; margin-top:0.5cm; margin-left:0.3cm; font-weight: bold; "> * Field is required! </p>
                         </div>

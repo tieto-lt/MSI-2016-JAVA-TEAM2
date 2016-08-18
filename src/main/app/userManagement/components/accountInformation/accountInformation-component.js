@@ -9,7 +9,6 @@ function Controller($state, Session, UserServiceImpl, $scope) {
     vm.errors = [];
     vm.update = update;
     vm.updatePassword = updatePassword;
-    vm.errors = [];
     vm.tab = 0;
     vm.firstTab= firstTab;
     vm.setTab= setTab;
