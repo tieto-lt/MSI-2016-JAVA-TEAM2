@@ -10,7 +10,7 @@
     </div>
 
     <div id="big-form" class="well auth-box" style="margin-bottom:0; background-color:#FFFFFF">
-      <form>
+      <form id="orderForm">
 
         <div ng-form="vm.myCustomForm">
           <div class="container">
@@ -21,9 +21,9 @@
           <div class="form-group">
             <label class=" control-label" for="textinput">Order Name<span style="color:#e32;">*</span></label>
             <div class="">
-              <input id="textinput" name="name" class="form-control input-md" type="text"
+              <textarea form="orderForm" style="resize: none;" id="textinput" name="name" class="form-control input-md" type="text"
               ng-model="$ctrl.order.name" required ng-maxlength="255"
-            >
+            ></textarea>
               <!--div class="help-block" ng-show="vm.myCustomForm.name.$error.required && vm.myCustomForm.name.$touched">Field Mission
               Name is required!
             </div-->
@@ -65,8 +65,8 @@
     <div class="form-group">
       <label class=" control-label" for="textinput">Order Details<span style="color:#e32;">*</span></label>
       <div class="">
-        <input id="textinput" name="details" class="form-control input-md" type="text"
-        ng-model="$ctrl.order.details" required ng-maxlength="500">
+        <textarea rows="6" cols="70" style="resize: none;" form="orderForm" id="textinput" name="details" class="form-control input-md" type="text"
+        ng-model="$ctrl.order.details" required ng-maxlength="500"></textarea>
         <!--div class="help-block" ng-show="vm.myCustomForm.details.$error.required && vm.myCustomForm.details.$touched">Field Mission
         Details is required!
       </div-->
