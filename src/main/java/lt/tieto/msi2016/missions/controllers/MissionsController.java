@@ -1,10 +1,8 @@
 package lt.tieto.msi2016.missions.controllers;
 
-import lt.tieto.msi2016.auth.model.User;
 import lt.tieto.msi2016.auth.services.UserService;
 import lt.tieto.msi2016.missions.model.mission.Result;
 import lt.tieto.msi2016.missions.services.MissionService;
-import lt.tieto.msi2016.operator.model.Operator;
 import lt.tieto.msi2016.operator.services.OperatorService;
 import lt.tieto.msi2016.orders.services.OrderService;
 import lt.tieto.msi2016.utils.controller.BaseController;
@@ -14,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
 
 import static lt.tieto.msi2016.utils.constants.Roles.CUSTOMER;
 import static lt.tieto.msi2016.utils.constants.Roles.OPERATOR;
