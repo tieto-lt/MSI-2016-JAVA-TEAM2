@@ -6,7 +6,6 @@ function Controller(missionService) {
   vm.$onInit = function() {
     missionService.retrieveAll().then(function(response){
       vm.missions = response.data;
-
     });
 };
 }
