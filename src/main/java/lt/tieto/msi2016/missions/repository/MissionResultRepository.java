@@ -28,6 +28,7 @@ public class MissionResultRepository extends BaseRepository<MissionResultDb> {
         missionResultDb.setMissionId(rs.getLong("missionId"));
         missionResultDb.setOperatorId(rs.getLong("operatorId"));
         missionResultDb.setResult(rs.getString("result"));
+        missionResultDb.setMissionDate(rs.getTimestamp("missionDate"));
         return missionResultDb;
     };
 
@@ -35,7 +36,8 @@ public class MissionResultRepository extends BaseRepository<MissionResultDb> {
             "id", missionResultDb.getId(),
             "missionId", missionResultDb.getMissionId(),
             "operatorId", missionResultDb.getOperatorId(),
-            "result", missionResultDb.getResult()
+            "result", missionResultDb.getResult(),
+            "missionDate", missionResultDb.getMissionDate()
     );
 
     public MissionResultDb findByOperatorId(Long operatorId)

@@ -75,6 +75,7 @@ function Controller(missionService,$scope, Session) {
     missionService.retrieveMissionDetails(vm.mission.id).then(function(data){
       var images = data.data.images;
       var navigationData = data.data.navigationData;
+      vm.missionDate = data.data.missionDate;
       if(navigationData){
         vm.navigationData.startX = navigationData[0].x.toFixed(8);
         vm.navigationData.startY = navigationData[0].y.toFixed(8);

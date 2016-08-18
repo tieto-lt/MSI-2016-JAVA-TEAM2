@@ -15,8 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -110,6 +113,15 @@ public class MissionServiceImpl implements MissionService {
         missionResult.setResult(result);
         missionResult.setMissionId(missionId);
         missionResult.setOperatorId(operatorRepository.findByToken(operatorToken).getId());
+        try{
+            Date currentDate = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            Date parsedDate = dateFormat.parse(dateFormat.format(currentDate));
+            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+            missionResult.setMissionDate(timestamp);
+        }catch(Exception e){//this generic but you can control another types of exception
+
+        }
         missionResultRepository.save(missionResult);
     }
 
@@ -135,6 +147,7 @@ public class MissionServiceImpl implements MissionService {
         MissionResultDb missionResultDb = missionResultRepository.findByMissionId(missionId);
         MissionResult missionResult = MissionResult.missionResult(missionResultDb);
         Result result = getResultFromBlob(missionResult);
+        result.setMissionDate(missionResult.getMissionDate());
         return result;
     }
 
