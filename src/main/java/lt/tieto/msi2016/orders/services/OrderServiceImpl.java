@@ -37,7 +37,9 @@ public class OrderServiceImpl implements OrderService {
     private static MissionCommands[] missionCommands;
 
     static {
-        missionCommands = new MissionCommands[]{MissionCommands.newMission().command("altitude").withArguments(1.5),
+        missionCommands = new MissionCommands[]{
+                MissionCommands.newMission().command("takeoff"),
+            MissionCommands.newMission().command("altitude").withArguments(1.5),
                 MissionCommands.newMission().command("forward").withArguments("2"),
                 MissionCommands.newMission().command("takePicture"),
                 MissionCommands.newMission().command("land")
