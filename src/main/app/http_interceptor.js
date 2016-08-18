@@ -1,6 +1,6 @@
 var module = require("main_module");
 
-module.factory('myInterceptor', ['$log', 'Session','$state', function($log, session, $state) {
+module.factory('myInterceptor', ['$log', 'Session','$state','$q', function($log, session, $state,$q) {
 
     var requestInterceptor = {
         request: function(config) {
