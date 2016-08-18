@@ -7,7 +7,7 @@
         <div class="span7">
           <div style="margin-top:0.5cm; margin-bottom:0.5cm" class="widget stacked widget-table action-table">
             <span style="margin-top:0.5cm; margin-bottom:0.5cm" class="label">Filter by order status:</span>
-            <select ng-model="searchparam.status">
+            <select ng-model="$ctrl.searchparam.status" id="select">
               <option value="">All</option>
               <option value="not completed">Not completed</option>
               <option value="approved">Approved</option>
@@ -35,11 +35,10 @@
                     </a></th>
                     <th>Status</th>
                     <th>Approve</th>
-                    <!--th>Approve</th-->
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="order in $ctrl.orders | filter: searchparam | orderBy:orderByField:reverseSort">
+                  <tr ng-repeat="order in $ctrl.orders | filter: $ctrl.searchparam | orderBy:orderByField:reverseSort">
 
                     <td>{{$index + 1 }}</td>
                     <td>{{order.userId}}</td>
@@ -49,17 +48,17 @@
                     <td style="max-width:120px; word-wrap:break-word;">{{order.details}}</td>
                     <td style="max-width:100px; word-wrap:break-word;">{{order.date}}</td>
                     <td>{{order.status}}</td>
-                    <td>
-                      <div style="display:inline;">
+                    <td style="max-width:80px; word-wrap:break-word;">
+
                         <button type="button" class="btn btn-default"
-                            style="border:none; font-weight:bold; padding: 3px 6px; color:#11151C; font-family:courier; width:80px; background-color:rgb(88, 175, 80)"
+                            style=" border:none; font-weight:bold; padding: 3px 6px; color:#fff; font-family:courier; width:80px; background-color:rgb(88, 175, 80)"
                             ng-click="$ctrl.approve(order)" ng-hide="order.status == 'approved' || order.status == 'declined'">Accept
                         </button>
                         <button type="button" class="btn btn-default"
-                            style="border:none; font-weight:bold; padding: 3px 6px; color:#11151C; font-family:courier; width:80px; background-color:rgb(178, 26, 26)"
+                            style="clear:left; border:none; font-weight:bold; padding: 3px 6px; color:#fff; font-family:courier; width:80px; background-color:rgb(178, 26, 26)"
                             ng-click="$ctrl.decline(order)" ng-hide="order.status == 'approved' || order.status == 'declined'">Decline
                         </button>
-                      </div>
+
                     </td>
                     <!--td><input ngModel="order.isApproved" type="checkbox" value="true"></td-->
                   </tr>

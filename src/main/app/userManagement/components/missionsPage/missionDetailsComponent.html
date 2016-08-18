@@ -1,10 +1,14 @@
+
+
 <div uib-accordion-group class="panel-default" is-open="status.open">
 
-    <uib-accordion-heading style="font-family: courier" >
+    <uib-accordion-heading style="font-family: courier">
+      <div ng-click="status.open = !status.open">
         {{$ctrl.heading}}
         <i class="pull-right glyphicon"
            ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"
            ></i>
+         </div>
     </uib-accordion-heading>
     <h3 style="font-family: courier;">Order Information</h3>
     <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
@@ -16,6 +20,15 @@
     <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Phone:</b> {{$ctrl.mission.phone}}</p>
     <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Mission details:</b> {{$ctrl.mission.details}}</p>
     <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Ordering date:</b> {{$ctrl.mission.date}}</p>
+
+    </div>
+
+    <h3 style="font-family: courier;">Objects</h3>
+    <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
+      <div ng-repeat="object in $ctrl.mission.orderObjects">
+        <p style="font-family: courier;" ng-show="object.objectName"><b >Object name: </b>{{object.objectName}}</p>
+        <p style="font-family: courier;" ng-show="object.how"><b>Camera Angle: </b>{{object.how}}</p>
+      </div>
 
     </div>
 

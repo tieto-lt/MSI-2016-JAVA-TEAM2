@@ -87,6 +87,18 @@ public class MissionRepository extends BaseRepository<MissionDb> {
 
     }
 
+    public MissionOrderDb getDefaultMission(){
+        try{
+            return jdbcTemplate.queryForObject("select missions.id,missions.missionJSON from missions " +
+                     " where missions.id = ?",(rs, rowNum) -> { MissionOrderDb mission = new MissionOrderDb(); mission.setId(rs.getLong("id")); mission.setSubmittedBy("System");  mission.setMissionJSON(rs.getString("missionJSON")); return mission;},-1);
+        } catch (EmptyResultDataAccessException e)
+        {
+            return null;
+        }
+
+    }
+
+
 
 
 }

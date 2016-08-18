@@ -12,7 +12,7 @@ public class OrderObjectDb extends DbModel {
 
     private Long orderId;
 
-    private String object;
+    private String objectName;
 
     private String how;
 
@@ -20,7 +20,7 @@ public class OrderObjectDb extends DbModel {
         OrderObjectDb orderObjectDb = new OrderObjectDb();
         orderObjectDb.setId(orderObject.getId());
         orderObjectDb.setOrderId(orderObject.getOrderId());
-        orderObjectDb.setObject(orderObject.getObject());
+        orderObjectDb.setObjectName(orderObject.getObjectName());
         orderObjectDb.setHow(orderObject.getHow());
         return orderObjectDb;
     }
@@ -41,13 +41,6 @@ public class OrderObjectDb extends DbModel {
         this.orderId = orderId;
     }
 
-    public String getObject() {
-        return object;
-    }
-
-    public void setObject(String object) {
-        this.object = object;
-    }
 
     public String getHow() {
         return how;
@@ -55,5 +48,13 @@ public class OrderObjectDb extends DbModel {
 
     public void setHow(String how) {
         this.how = how;
+    }
+
+    public String getObjectName() {
+        return objectName;
+    }
+
+    public void setObjectName(String objectName) {
+        this.objectName = objectName;
     }
 }

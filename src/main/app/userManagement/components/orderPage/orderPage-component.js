@@ -8,7 +8,7 @@ function Controller (OrderServiceImpl, Session, UserServiceImpl, $state)
   vm.order = {};
   vm.user = {};
   vm.map={};
-  vm.objectMap=[{},{}];
+  vm.objectMap=[{}];
 
   vm.enableObject=enableObject;
 

@@ -5,6 +5,9 @@ function Controller(OrderServiceImpl, $scope) {
     var vm = this;
 
     vm.order = {};
+    vm.searchparam ={};
+    vm.searchparam.status="not completed";
+
 
     vm.approve = function approve(order){
       order.status = 'approved';

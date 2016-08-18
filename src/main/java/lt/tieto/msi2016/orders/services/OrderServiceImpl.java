@@ -47,7 +47,9 @@ public class OrderServiceImpl implements OrderService {
     private static MissionCommands[] missionCommands;
 
     static {
-        missionCommands = new MissionCommands[]{MissionCommands.newMission().command("altitude").withArguments(1.5),
+        missionCommands = new MissionCommands[]{
+                MissionCommands.newMission().command("takeoff"),
+            MissionCommands.newMission().command("altitude").withArguments(1.5),
                 MissionCommands.newMission().command("forward").withArguments("2"),
                 MissionCommands.newMission().command("takePicture"),
                 MissionCommands.newMission().command("land")
@@ -86,13 +88,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional(readOnly = true)
     public Collection<Order> all() {
-        return orderRepository.findAll().stream().map(this::fillOrder).collect(Collectors.toList());
+        return orderRepository.findAll().stream().map(Order::valueOf).collect(Collectors.toList());
     }
 
-    private Order fillOrder(OrderDb orderDb) {
-        Order order = Order.valueOf(orderDb);
-        return order;
-    }
 
 
     @Transactional
@@ -103,11 +101,22 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional(readOnly = true)
     public Collection<Order> getCompletedOrdersByUserName(String username) {
-        return orderRepository.getCompletedOrdersWithMissionIdByUsername(username).stream().map(this::fillOrder).collect(Collectors.toList());
+        return orderRepository.getCompletedOrdersWithMissionIdByUsername(username).stream().map(Order::valueOf).collect(Collectors.toList());
     }
-
+    @Transactional(readOnly = true)
     public Collection<Order> getOrderByUserName(String username){
         return orderRepository.getOrdersByUserName(username).stream().map(this::fillOrder).collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public Collection<OrderObject> getOrderObjects(Long orderId){
+        return orderObjectRepository.getOrderObjectsByOrderId(orderId).stream().map(OrderObject::valueOf).collect(Collectors.toList());
+    }
+    @Transactional
+    private Order fillOrder(OrderDb orderDb){
+        Order order = Order.valueOf(orderDb);
+        ArrayList<OrderObject> orderObjects = new ArrayList<OrderObject>(getOrderObjects(order.getId()));
+        order.setOrderObjects(orderObjects);
+        return order;
     }
 
 

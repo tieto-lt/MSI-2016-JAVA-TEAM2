@@ -1,6 +1,6 @@
 var module = require("main_module");
 
-module.factory('myInterceptor', ['$log', 'Session', function($log, session) {
+module.factory('myInterceptor', ['$log', 'Session','$state','$q', function($log, session, $state,$q) {
 
     var requestInterceptor = {
         request: function(config) {
@@ -11,10 +11,16 @@ module.factory('myInterceptor', ['$log', 'Session', function($log, session) {
         }
 
         return config;
+      },
+
+        responseError: function(rejection){
+          if(rejection.status == 401){
+             session.invalidate();
+             $state.go('root.Login');
+          }
+          return $q.reject(rejection);
         }
     };
 
     return requestInterceptor;
 }]);
-
-

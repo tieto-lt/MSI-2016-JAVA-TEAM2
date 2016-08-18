@@ -4,9 +4,12 @@ import com.nurkiewicz.jdbcrepository.RowUnmapper;
 import lt.tieto.msi2016.orders.repository.model.OrderObjectDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by localadmin on 16.8.18.
@@ -25,7 +28,7 @@ public class OrderObjectRepository extends BaseRepository<OrderObjectDb> {
         OrderObjectDb orderObjectDb = new OrderObjectDb();
         orderObjectDb.setId(rs.getLong("id"));
         orderObjectDb.setOrderId(rs.getLong("orderId"));
-        orderObjectDb.setObject(rs.getString("object"));
+        orderObjectDb.setObjectName(rs.getString("object"));
         orderObjectDb.setHow(rs.getString("how"));
         return  orderObjectDb;
     };
@@ -33,7 +36,15 @@ public class OrderObjectRepository extends BaseRepository<OrderObjectDb> {
     private static final RowUnmapper<OrderObjectDb> ROW_UNMAPPER = orderObjectDb -> mapOf(
             "id", orderObjectDb.getId(),
             "orderId", orderObjectDb.getOrderId(),
-            "object", orderObjectDb.getObject(),
+            "object", orderObjectDb.getObjectName(),
             "how", orderObjectDb.getHow()
     );
+
+    public List<OrderObjectDb> getOrderObjectsByOrderId(Long orderId){
+        try {
+            return jdbcTemplate.query("Select * from objects where orderId= ?", ROW_MAPPER, new Object[]{orderId});
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
 }

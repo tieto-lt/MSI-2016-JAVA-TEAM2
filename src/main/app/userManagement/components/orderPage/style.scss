@@ -3,7 +3,8 @@ $one-lenght: 50px;
 .map{
   height: $one-lenght*12+20;
   width: $one-lenght*8+20;
-  border: 2px solid black;
+  float: left;
+  padding-top: 100px;
 }
 .unit{
   height: $one-lenght;
