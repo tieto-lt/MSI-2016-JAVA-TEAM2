@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
     @Resource
     private OperatorRepository operatorRepository;
 
+
     /**
      *{@inheritDoc}
      */
@@ -41,6 +42,14 @@ public class UserServiceImpl implements UserService {
         userRepository.insertUserAuthority(user.getUserName(),CUSTOMER);
         newUser.setUserRole(CUSTOMER);
         return newUser;
+    }
+
+
+    @Transactional
+    @Override
+    public void updatePassword(String newPassword, String username){
+        String password = encoder.encode(newPassword);
+        userRepository.updatePassword(password, username);
     }
 
     @Transactional(readOnly = true)
@@ -63,7 +72,9 @@ public class UserServiceImpl implements UserService {
 
     }
 
+
     public User updateUser(User user,Long id) {
+
         if(user.getUserRole()!="ROLE_CUSTOMER" && operatorRepository.findById(user.getId())!=null)
         {
             operatorRepository.deleteOperatorByUserId(user.getId());
@@ -74,9 +85,13 @@ public class UserServiceImpl implements UserService {
         } catch (UncategorizedSQLException e){
             throw new FieldValidationException("userRole",e.getSQLException().getMessage());
         }
+
         return user;
     }
 
+    public void updateUserInfo(User user){
+        userRepository.updateUser(user);
+    }
 
 
     @Transactional(readOnly = true)
@@ -96,5 +111,10 @@ public class UserServiceImpl implements UserService {
         User user = User.valueOf(userDb);
         user.setUserRole(userRepository.getUserRole(userDb.getUserName()).stream().findFirst().get());
         return user;
+    }
+
+    public boolean checkPassword(String currentPassword, String userName){
+        String password = userRepository.getPassword(userName);
+        return encoder.matches(currentPassword,password);
     }
 }

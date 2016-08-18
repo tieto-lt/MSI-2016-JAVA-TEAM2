@@ -2,6 +2,7 @@ package lt.tieto.msi2016.auth.controllers;
 
 
 import lt.tieto.msi2016.auth.model.User;
+import lt.tieto.msi2016.auth.model.user.UpdatePassword;
 import lt.tieto.msi2016.auth.services.UserService;
 import lt.tieto.msi2016.utils.controller.BaseController;
 import lt.tieto.msi2016.utils.exception.FieldValidationException;
@@ -41,6 +42,27 @@ public class UserController extends BaseController {
         }
 
 
+    }
+
+    @RequestMapping(value = "/api/users/update", method = RequestMethod.PUT, consumes = accepts)
+    public void updateUser(@RequestBody final @Valid User user) {
+            userService.updateUserInfo(user);
+    }
+
+    @RequestMapping(value = "/api/users/updatePassword", method = RequestMethod.PUT, consumes = accepts)
+    public void updatePassword(@RequestBody final @Valid UpdatePassword updatePassword) {
+        if(updatePassword.getCurrentPassword().equals(updatePassword.getNewPassword()))
+        {
+            throw new FieldValidationException("New Password","New password is the same as current");
+        }
+        else {
+            if (userService.checkPassword(updatePassword.getCurrentPassword(), securityHolder.getUserPrincipal().getUsername())) {
+
+                userService.updatePassword(updatePassword.getNewPassword(), securityHolder.getUserPrincipal().getUsername());
+            } else {
+                throw new FieldValidationException("Current Password", "Wrong password");
+            }
+        }
     }
 
     @Secured(ADMIN)

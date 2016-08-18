@@ -5,6 +5,7 @@ import lt.tieto.msi2016.orders.repository.model.OrderDb;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 
 /**
  * Created by localadmin on 16.8.11.
@@ -36,6 +37,8 @@ public class Order {
     private String date;
 
     private String status;
+
+    private ArrayList<OrderObject> orderObjects;
 
     public static Order valueOf (OrderDb orderDb)
     {
@@ -114,4 +117,13 @@ public class Order {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public ArrayList<OrderObject> getOrderObjects() {
+        return orderObjects;
+    }
+
+    public void setOrderObjects(ArrayList<OrderObject> orderObjects) {
+        this.orderObjects = orderObjects;
+    }
+
 }

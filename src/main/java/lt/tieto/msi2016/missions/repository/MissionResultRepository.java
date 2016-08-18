@@ -61,7 +61,7 @@ public class MissionResultRepository extends BaseRepository<MissionResultDb> {
         }
         catch (EmptyResultDataAccessException e)
         {
-            return null;
+            return new MissionResultDb();
 
         }
     }

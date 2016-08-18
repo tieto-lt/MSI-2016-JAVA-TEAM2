@@ -314,3 +314,43 @@ databaseChangeLog:
               constraintName: fk_id_orders
               referencedColumnNames: id
               referencedTableName: orders
+
+  - changeSet:
+        id: 13
+        author: tieto
+        changes:
+          - sql:
+            dbms: MySQL
+            sql:
+                INSERT INTO missions (id,missionJSON)
+                values(-1,'[{"commandType":"takeoff","args":[]},{"commandType":"land","args":[]}]');
+
+  - changeSet:
+        id: 14
+        author: tieto
+        changes:
+          - createTable:
+              tableName: objects
+              columns:
+                - column:
+                    name: id
+                    type: int
+                    autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                - column:
+                    name: orderId
+                    type: int
+                - column:
+                    name: object
+                    type: varchar(255)
+                - column:
+                    name: how
+                    type: varchar(60)
+          - addForeignKeyConstraint:
+              onDelete: CASCADE
+              baseColumnNames: orderId
+              baseTableName: objects
+              constraintName: fk_orderId_missions
+              referencedColumnNames: orderId
+              referencedTableName: missions

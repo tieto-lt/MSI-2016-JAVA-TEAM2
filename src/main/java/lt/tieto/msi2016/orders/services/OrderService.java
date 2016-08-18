@@ -1,8 +1,10 @@
 package lt.tieto.msi2016.orders.services;
 
 import lt.tieto.msi2016.orders.model.Order;
+import lt.tieto.msi2016.orders.model.OrderObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -19,4 +21,6 @@ public interface OrderService {
    Collection<Order> getCompletedOrdersByUserName(String username);
 
    Collection<Order> getOrderByUserName(String username);
+
+   void createOrderObjects(ArrayList<OrderObject> orderObjects, Long orderId);
 }

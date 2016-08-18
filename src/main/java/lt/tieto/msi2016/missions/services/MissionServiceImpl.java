@@ -37,48 +37,6 @@ public class MissionServiceImpl implements MissionService {
     private OrderRepository orderRepository;
 
 
-    private static MissionResponse defaultMission;
-
-    static {
-        defaultMission = new MissionResponse();
-
-        List<MissionPlan> missionPlanList = new ArrayList<>();
-        MissionPlan defaultMissionPlan = new MissionPlan();
-        defaultMissionPlan.setMissionId(-1L);
-        defaultMissionPlan.setSubmittedBy("System");
-        missionPlanList.add(defaultMissionPlan);
-
-        List<MissionCommands> missionCommandsList = Arrays.asList(MissionCommands.newMission().command("takeoff"),
-                MissionCommands.newMission().command("calibrate"),
-                MissionCommands.newMission().command("altitude").withArguments(1.5),
-                MissionCommands.newMission().command("forward").withArguments("2"),
-                MissionCommands.newMission().command("takePicture"),
-                MissionCommands.newMission().command("altitude").withArguments(1),
-                MissionCommands.newMission().command("cw").withArguments(60),
-                MissionCommands.newMission().command("takePicture"),
-                MissionCommands.newMission().command("altitude").withArguments(1.5),
-                MissionCommands.newMission().command("cw").withArguments(60),
-                MissionCommands.newMission().command("takePicture"),
-                MissionCommands.newMission().command("altitude").withArguments(1),
-                MissionCommands.newMission().command("cw").withArguments(60),
-                MissionCommands.newMission().command("takePicture"),
-                MissionCommands.newMission().command("altitude").withArguments(1.5),
-                MissionCommands.newMission().command("cw").withArguments(60),
-                MissionCommands.newMission().command("takePicture"),
-                MissionCommands.newMission().command("altitude").withArguments(1),
-                MissionCommands.newMission().command("cw").withArguments(60),
-                MissionCommands.newMission().command("takePicture"),
-                MissionCommands.newMission().command("altitude").withArguments(1.5),
-                MissionCommands.newMission().command("cw").withArguments(60),
-                MissionCommands.newMission().command("takePicture"),
-                MissionCommands.newMission().command("land"));
-
-        defaultMissionPlan.setCommands(missionCommandsList);
-
-        defaultMission.setMissions(missionPlanList);
-
-    }
-
     @Transactional(readOnly = true)
     public MissionResponse getUsersMissions() {
         MissionResponse response = new MissionResponse();
@@ -103,7 +61,9 @@ public class MissionServiceImpl implements MissionService {
 
     @Override
     public MissionResponse getDefaultMission() {
-        return defaultMission;
+        MissionResponse response = new MissionResponse();
+        response.setMissions(Arrays.asList(new MissionPlan[]{fillMission(missionRepository.getDefaultMission())}));
+        return response;
     }
 
     @Transactional
@@ -132,6 +92,9 @@ public class MissionServiceImpl implements MissionService {
     public Result getResultFromBlob (MissionResult missionResult )
     {
         try {
+            if(missionResult.getResult() == null) {
+                return new Result();
+            }
             Result result = new ObjectMapper().readValue(missionResult.getResult(), Result.class);
             return result;
         }

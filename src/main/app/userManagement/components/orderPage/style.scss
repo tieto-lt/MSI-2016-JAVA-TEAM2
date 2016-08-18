@@ -1,0 +1,51 @@
+$one-lenght: 50px;
+
+.map{
+  height: $one-lenght*12+20;
+  width: $one-lenght*8+20;
+  float: left;
+  padding-top: 100px;
+}
+.unit{
+  height: $one-lenght;
+  width: $one-lenght;
+  border: 1px dotted black;
+  float: left;
+  overflow: auto;
+  margin: 0 0 0 0;
+}
+.unitCustomMargin{
+  position: absolute;
+  height: $one-lenght;
+  width: $one-lenght;
+  border: 1px dotted black;
+}
+.circle{
+  border-radius: 50%;
+  border: 2px solid black;
+	width: $one-lenght/2;
+	height: $one-lenght/2;
+  background: orange;
+  display: block;
+  position: absolute;
+  margin: $one-lenght*3.75 $one-lenght*3.75;
+
+}
+.table{
+  width: $one-lenght*4;
+	height: $one-lenght*2;
+  border: 2px solid black;
+  background: grey;
+  display: block;
+  position: absolute;
+  margin: $one-lenght*2 $one-lenght*2;
+  font-family: courier;
+  text-align: center;
+}
+.table:hover{
+    border: 2px solid yellow;
+}
+
+.ob-active {
+    background: green;
+}
