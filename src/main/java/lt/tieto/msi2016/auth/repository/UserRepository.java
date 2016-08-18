@@ -1,6 +1,7 @@
 package lt.tieto.msi2016.auth.repository;
 
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
+import lt.tieto.msi2016.auth.model.User;
 import lt.tieto.msi2016.auth.repository.model.UserDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.Map;
 
 @Repository
 public class UserRepository extends BaseRepository<UserDb> {
@@ -62,6 +62,22 @@ public class UserRepository extends BaseRepository<UserDb> {
         }
     }
 
+    public void updateUser(User user) {
+        try {
+            jdbcTemplate.update("UPDATE users set name = ? , email = ?, phone = ? where username = ?", user.getName(), user.getEmail(), user.getPhone(), user.getUserName());
+        } catch (EmptyResultDataAccessException e) {
+
+        }
+    }
+
+    public void updatePassword(String encodedPassword, String username) {
+        try {
+            jdbcTemplate.update("UPDATE users set password = ? where username = ?", encodedPassword, username);
+        } catch (EmptyResultDataAccessException e) {
+
+        }
+    }
+
     /**
      * @param userName
      * @return UserDb
@@ -81,6 +97,18 @@ public class UserRepository extends BaseRepository<UserDb> {
             return jdbcTemplate.queryForList("select authority from authorities where username = ?", String.class,userName);
         } catch (EmptyResultDataAccessException e) {
             return null;
+        }
+    }
+
+    public  String getPassword(String userName)
+    {
+        try
+        {
+            return jdbcTemplate.queryForObject("select users.password from users where users.username = ?",String.class,userName);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            return "";
         }
     }
 

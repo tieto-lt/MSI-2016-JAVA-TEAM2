@@ -46,4 +46,10 @@ public interface UserService {
      * @return updated user
      */
     User updateUser(User user,Long id);
+
+    void updateUserInfo(User user);
+
+    boolean checkPassword(String currentPassword, String userName);
+
+    void updatePassword(String newPassword, String username);
 }
