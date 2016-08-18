@@ -10,11 +10,11 @@ function Controller(missionService,$scope, Session) {
   vm.isOrange=isOrange;
   vm.heading= vm.mission.name;
 
-  vm.$onInit = function() {
-    if (vm.mission.name.length> 110) {
-      vm.heading = vm.mission.name.substr(0, 105) + "...";
-    }
-  };
+   vm.$onInit = function() {
+     if (vm.mission.name.length> 110) {
+     vm.heading = vm.mission.name.substr(0, 105) + "...";
+     }
+   };
 
   function isRed(){
     return(vm.mission.status=="not completed"||vm.mission.status=="declined");
@@ -85,9 +85,9 @@ function Controller(missionService,$scope, Session) {
         vm.prepareBar(vm.navigationData.battery);
       }
 
-      for(i = 0; i<images.length; i++){
-        vm.addSlide(images[i].imageBase64);
-      }
+       for(i = 0; i<images.length; i++){
+         vm.addSlide(images[i].imageBase64);
+       }
 
     });
 

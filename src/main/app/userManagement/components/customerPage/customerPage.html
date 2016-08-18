@@ -9,7 +9,7 @@
     <h2 style="font-family:courier; margin-top:2cm" >Your orders:</h2>
     <div class="msi-content" ui-view ng-cloak></div>
 </div>
-<uib-accordion close-others="oneAtATime">
+<uib-accordion close-others="true">
     <mission-details-component mission="mission" ng-repeat="mission in $ctrl.missions"></mission-details-component>
 </uib-accordion>
 <a ui-sref="root.orderPage" class="btn btn-primary btn-warning" style="margin-left:0.1cm; margin-top:0.2cm; border: double;  font-weight:bold; padding: 7px 20px; color:#222; font-family:courier;">Order drone service</a>
