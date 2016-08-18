@@ -1,5 +1,6 @@
 package lt.tieto.msi2016.orders.services;
 
+import lt.tieto.msi2016.missions.model.mission.MissionCommands;
 import lt.tieto.msi2016.missions.repository.MissionRepository;
 import lt.tieto.msi2016.missions.repository.model.MissionDb;
 import lt.tieto.msi2016.missions.services.MissionService;
@@ -34,6 +35,17 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     MissionRepository missionRepository;
 
+    private static MissionCommands[] missionCommands;
+
+    static {
+        missionCommands = new MissionCommands[]{MissionCommands.newMission().command("altitude").withArguments(1.5),
+                MissionCommands.newMission().command("forward").withArguments("2"),
+                MissionCommands.newMission().command("takePicture"),
+                MissionCommands.newMission().command("land")
+        };
+
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -43,11 +55,10 @@ public class OrderServiceImpl implements OrderService {
         orderDb.setDate(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date(System.currentTimeMillis())));
         orderDb.setStatus("not completed");
         Order newOrder = Order.valueOf(orderRepository.create(orderDb));
-
         MissionDb missionDb = new MissionDb();
         missionDb.setOrderId(newOrder.getId());
         ObjectWriter ow = new ObjectMapper().writer();
-        String json = ow.writeValueAsString(missionService.getDefaultMission());
+        String json = ow.writeValueAsString(missionCommands);
         missionDb.setMissionJSON(json);
         missionRepository.create(missionDb);
         return newOrder;
@@ -55,24 +66,25 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Transactional(readOnly = true)
-    public Collection<Order> all(){
+    public Collection<Order> all() {
         return orderRepository.findAll().stream().map(this::fillOrder).collect(Collectors.toList());
     }
 
-    @Transactional
-    private Order fillOrder(OrderDb orderDb){
+    private Order fillOrder(OrderDb orderDb) {
         Order order = Order.valueOf(orderDb);
         return order;
     }
 
 
-    public Order updateOrder(Order order,Long id) {
+    @Transactional
+    public Order updateOrder(Order order, Long id) {
         orderRepository.save(OrderDb.valueOf(order));
         return order;
     }
 
-    public Collection<Order> getCompletedOrdersByUserName(String username){
-        return orderRepository.getCompletedOrdersByUsername(username).stream().map(this::fillOrder).collect(Collectors.toList());
+    @Transactional(readOnly = true)
+    public Collection<Order> getCompletedOrdersByUserName(String username) {
+        return orderRepository.getCompletedOrdersWithMissionIdByUsername(username).stream().map(this::fillOrder).collect(Collectors.toList());
     }
 
 

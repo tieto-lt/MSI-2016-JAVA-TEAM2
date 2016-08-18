@@ -52,6 +52,19 @@ public class MissionResultRepository extends BaseRepository<MissionResultDb> {
     }
 
 
+    public MissionResultDb findByMissionId(Long missionId) {
+        try
+        {
+            return jdbcTemplate.queryForObject("select * from mission_results where missionId = ?", new Object[]{missionId}, ROW_MAPPER);
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            return null;
+
+        }
+    }
+
+
     public  int selectAllMissionsDoneByUser(String username)
     {
         try

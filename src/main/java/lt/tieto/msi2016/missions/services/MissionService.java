@@ -20,11 +20,12 @@ public interface MissionService {
 
     boolean isAnyMissionDone(String username);
 
-    Result getResultFromOperatorId(Long missionId);
 
-    List<MissionResponse>  getUsersMissions();
+    MissionResponse  getUsersMissions();
 
     void changeOrderStatus(String status, Long missionId);
 
     MissionPlan reserve(String operatorToken, Long missionId);
+
+    Result getMissionResult(Long missionId);
 }

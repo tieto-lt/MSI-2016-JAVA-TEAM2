@@ -1,10 +1,10 @@
 package lt.tieto.msi2016.missions.services;
 
-import lt.tieto.msi2016.missions.model.Mission;
 import lt.tieto.msi2016.missions.model.mission.*;
 import lt.tieto.msi2016.missions.repository.MissionRepository;
 import lt.tieto.msi2016.missions.repository.MissionResultRepository;
 import lt.tieto.msi2016.missions.repository.model.MissionDb;
+import lt.tieto.msi2016.missions.repository.model.MissionOrderDb;
 import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
 import lt.tieto.msi2016.operator.repository.OperatorRepository;
 import lt.tieto.msi2016.orders.repository.OrderRepository;
@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,22 +77,25 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Transactional(readOnly = true)
-    public List<MissionResponse> getUsersMissions() {
-        return missionRepository.findAll().stream().filter(missionDb -> "approved".equals(orderRepository.findOne(missionDb.getOrderId()).getStatus()) && missionDb.getOperatorId()==null).map(this::fillMission).collect(Collectors.toList());
+    public MissionResponse getUsersMissions() {
+        MissionResponse response = new MissionResponse();
+        response.setMissions(missionRepository.getAllMissionForExecution().stream().map(this::fillMission).collect(Collectors.toList()));
+        return response;
     }
 
-    @Transactional
-    private MissionResponse fillMission (MissionDb missionDb)
+    private MissionPlan fillMission (MissionOrderDb missionOrderDb)
     {
-        MissionResponse missionResponse = new MissionResponse();
-        Mission mission = Mission.valueOf(missionDb);
+        MissionPlan mission = new MissionPlan();
+        mission.setMissionId(missionOrderDb.getId());
+        mission.setSubmittedBy(missionOrderDb.getSubmittedBy());
+        mission.setState(missionOrderDb.getStatus());
         try {
-            missionResponse = new ObjectMapper().readValue(mission.getMissionJSON(), MissionResponse.class);
+            mission.setCommands(Arrays.asList(new ObjectMapper().readValue(missionOrderDb.getMissionJSON(),MissionCommands[].class)));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return missionResponse;
+        return mission;
     }
 
     @Override
@@ -127,9 +130,9 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Transactional(readOnly = true)
-    public Result getResultFromOperatorId(Long operatorId)
+    public Result getMissionResult(Long missionId)
     {
-        MissionResultDb missionResultDb = missionResultRepository.findByOperatorId(operatorId);
+        MissionResultDb missionResultDb = missionResultRepository.findByMissionId(missionId);
         MissionResult missionResult = MissionResult.missionResult(missionResultDb);
         Result result = getResultFromBlob(missionResult);
         return result;
@@ -150,6 +153,10 @@ public class MissionServiceImpl implements MissionService {
             MissionDb mission = missionRepository.findOne(missionId);
             mission.setOperatorId(operatorRepository.findByToken(operatorToken).getId());
             missionRepository.save(mission);
+            MissionPlan missionPlan = new MissionPlan();
+            missionPlan.setMissionId(missionId);
+            missionPlan.setCommands(new ArrayList<>());
+            return missionPlan;
         }
         return getDefaultMission().getMissions().get(0);
     }

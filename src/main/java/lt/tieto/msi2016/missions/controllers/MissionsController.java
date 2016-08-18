@@ -61,11 +61,11 @@ public class MissionsController extends BaseController {
     @Secured(OPERATOR)
     @RequestMapping(value = "/api/int/missions", method = RequestMethod.GET, params = "onlyCompleted=true")
     public ResponseEntity<?> getCompletedMissions() {
-        return ResponseEntity.ok(Arrays.asList(orderService.getCompletedOrdersByUserName(securityHolder.getUserPrincipal().getUsername())));
+        return ResponseEntity.ok(orderService.getCompletedOrdersByUserName(securityHolder.getUserPrincipal().getUsername()));
     }
 
     @RequestMapping(value = "/api/missions/{id}", method = RequestMethod.POST)
-    public ResponseEntity<Void> verifyOperator(@PathVariable Long id, @RequestParam("operatorToken") String operatorToken, @RequestBody String result) {
+    public ResponseEntity<Void> verifyOperator(@PathVariable("id") Long id, @RequestParam("operatorToken") String operatorToken, @RequestBody String result) {
         if(operatorService.tokenExists(operatorToken)) {
             if(id.equals(-1L)) {
                 operatorService.verifyOperatorService(operatorToken);
@@ -88,10 +88,6 @@ public class MissionsController extends BaseController {
     @RequestMapping(value = "/api/int/missions/{id}", method = RequestMethod.GET)
     public ResponseEntity<Result> returnMissionDetails (@PathVariable Long id)
     {
-        String username = securityHolder.getUserPrincipal().getUsername();
-        User user = userService.getUserByUserName(username);
-        Operator operator = operatorService.getOperatorState(user.getId());
-        Result result = missionService.getResultFromOperatorId(operator.getId());
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(missionService.getMissionResult(id));
     }
 }

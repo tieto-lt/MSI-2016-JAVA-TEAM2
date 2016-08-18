@@ -61,9 +61,16 @@ public class OrderRepository extends BaseRepository<OrderDb>{
      */
 
 
-    public Collection<OrderDb> getCompletedOrdersByUsername(String username){
+    public Collection<OrderDb> getCompletedOrdersWithMissionIdByUsername(String username){
         try {
-             return jdbcTemplate.query("select orders.* from users inner join operators on operators.userId = users.id inner join missions on missions.operatorId = operators.id inner join mission_results on mission_results.missionId = missions.id inner join orders on orders.id = missions.orderId where users.username = ?", ROW_MAPPER, username);
+             return jdbcTemplate.query("select " +
+                     "missions.id,orders.userId,orders.name,orders.details,orders.email,orders.phone,orders.date,orders.status" +
+                     " from users " +
+                     "inner join operators on operators.userId = users.id " +
+                     "inner join missions on missions.operatorId = operators.id " +
+                     "inner join mission_results on mission_results.missionId = missions.id " +
+                     "inner join orders on orders.id = missions.orderId " +
+                     "where users.username = ?", ROW_MAPPER, username);
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
