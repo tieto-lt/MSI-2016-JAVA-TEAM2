@@ -51,14 +51,17 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/api/users/updatePassword", method = RequestMethod.PUT, consumes = accepts)
     public void updatePassword(@RequestBody final @Valid UpdatePassword updatePassword) {
-        if(userService.checkPassword(updatePassword.getCurrentPassword(), securityHolder.getUserPrincipal().getUsername()))
+        if(updatePassword.getCurrentPassword().equals(updatePassword.getNewPassword()))
         {
-
-            userService.updatePassword(updatePassword.getNewPassword(), securityHolder.getUserPrincipal().getUsername());
+            throw new FieldValidationException("New Password","New password is the same as current");
         }
-        else
-        {
-            throw new FieldValidationException("Current Password","Wrong password");
+        else {
+            if (userService.checkPassword(updatePassword.getCurrentPassword(), securityHolder.getUserPrincipal().getUsername())) {
+
+                userService.updatePassword(updatePassword.getNewPassword(), securityHolder.getUserPrincipal().getUsername());
+            } else {
+                throw new FieldValidationException("Current Password", "Wrong password");
+            }
         }
     }
 
