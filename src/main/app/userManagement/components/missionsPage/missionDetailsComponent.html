@@ -1,6 +1,4 @@
-
-
-<div uib-accordion-group class="panel-default" is-open="status.open">
+<div uib-accordion-group class="panel-default" close-others="true" is-open="status.open" >
 
     <uib-accordion-heading style="font-family: courier">
       <div ng-click="status.open = !status.open">
@@ -20,6 +18,16 @@
     <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Phone:</b> {{$ctrl.mission.phone}}</p>
     <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Mission details:</b> {{$ctrl.mission.details}}</p>
     <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Ordering date:</b> {{$ctrl.mission.date}}</p>
+    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Mission completion date:</b> {{$ctrl.missionDate}}</p>
+
+    </div>
+
+    <h3 style="font-family: courier;">Objects</h3>
+    <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
+      <div ng-repeat="object in $ctrl.mission.orderObjects">
+        <p style="font-family: courier;" ng-show="object.objectName"><b >Object name: </b>{{object.objectName}}</p>
+        <p style="font-family: courier;" ng-show="object.how"><b>Camera Angle: </b>{{object.how}}</p>
+      </div>
 
     </div>
 

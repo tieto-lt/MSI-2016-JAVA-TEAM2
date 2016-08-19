@@ -1,4 +1,5 @@
 var module = require('main_module');
+require('style.scss');
 
 function Controller (OrderServiceImpl, Session, UserServiceImpl, $state)
 {
@@ -6,11 +7,34 @@ function Controller (OrderServiceImpl, Session, UserServiceImpl, $state)
 
   vm.order = {};
   vm.user = {};
+  vm.map={};
+  vm.objectMap=[{}];
+
+  vm.enableObject=enableObject;
 
   vm.create = create;
   vm.errors = [];
 
   vm.enterPressed = enterPressed;
+
+  vm.map = [];
+  for(vm.i=0; vm.i<96; vm.i++)
+  {
+    vm.map.push({type:"unit", contains: ""});
+  }
+
+  function enableObject(param, nr){
+    if(param===false)
+    {
+      vm.objectMap.splice(nr,1);
+      console.log(vm.objectMap[nr]);
+    }
+    else {
+      vm.objectMap.splice(nr,0,{});
+      vm.objectMap[nr].isEnabled = param;
+    }
+
+  }
 
 
   vm.$onInit = function(user) {
@@ -34,6 +58,8 @@ function Controller (OrderServiceImpl, Session, UserServiceImpl, $state)
   function create() {
     console.log("creating new order");
     vm.order.userId = Session.getSession().userId;
+    vm.order.orderObjects = vm.objectMap;
+    console.log(vm.order);
     OrderServiceImpl.create(vm.order).then(
         function () {
             console.log(vm.order.name);

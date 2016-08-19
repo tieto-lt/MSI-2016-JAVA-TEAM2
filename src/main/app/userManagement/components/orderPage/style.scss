@@ -1,9 +1,12 @@
 $one-lenght: 50px;
 
+
 .map{
-  height: $one-lenght*12+20;
-  width: $one-lenght*8+20;
-  border: 2px solid black;
+  max-height: $one-lenght*12+20;
+  max-width: $one-lenght*8+20;
+  float: left;
+  padding-top: 20px;
+
 }
 .unit{
   height: $one-lenght;
@@ -30,7 +33,7 @@ $one-lenght: 50px;
   margin: $one-lenght*3.75 $one-lenght*3.75;
 
 }
-.table{
+.table1{
   width: $one-lenght*4;
 	height: $one-lenght*2;
   border: 2px solid black;
@@ -41,10 +44,13 @@ $one-lenght: 50px;
   font-family: courier;
   text-align: center;
 }
-.table:hover{
+.table1:hover{
     border: 2px solid yellow;
 }
 
 .ob-active {
     background: green;
+}
+.ob-passive {
+    background: grey;
 }

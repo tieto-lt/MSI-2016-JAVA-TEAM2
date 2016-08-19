@@ -5,8 +5,12 @@ import lt.tieto.msi2016.missions.repository.MissionRepository;
 import lt.tieto.msi2016.missions.repository.model.MissionDb;
 import lt.tieto.msi2016.missions.services.MissionService;
 import lt.tieto.msi2016.orders.model.Order;
+import lt.tieto.msi2016.orders.model.OrderObject;
+import lt.tieto.msi2016.orders.repository.OrderObjectRepository;
 import lt.tieto.msi2016.orders.repository.OrderRepository;
 import lt.tieto.msi2016.orders.repository.model.OrderDb;
+import lt.tieto.msi2016.orders.repository.model.OrderObjectDb;
+import lt.tieto.msi2016.utils.services.SecurityHolder;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,7 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -28,6 +33,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Resource
     OrderRepository orderRepository;
+    @Resource
+    OrderObjectRepository orderObjectRepository;
+
+    @Autowired
+    SecurityHolder securityHolder;
 
     @Autowired
     MissionService missionService;
@@ -65,6 +75,16 @@ public class OrderServiceImpl implements OrderService {
         return newOrder;
     }
 
+    @Transactional
+    public void createOrderObjects(ArrayList<OrderObject> orderObjects, Long orderId) {
+        for (OrderObject orderObject: orderObjects)
+        {
+            OrderObjectDb orderObjectDb = OrderObjectDb.valueOf(orderObject);
+            orderObjectDb.setOrderId(orderId);
+            orderObjectRepository.create(orderObjectDb);
+        }
+    }
+
 
     @Transactional(readOnly = true)
     public Collection<Order> all() {
@@ -85,7 +105,18 @@ public class OrderServiceImpl implements OrderService {
     }
     @Transactional(readOnly = true)
     public Collection<Order> getOrderByUserName(String username){
-        return orderRepository.getOrdersByUserName(username).stream().map(Order::valueOf).collect(Collectors.toList());
+        return orderRepository.getOrdersByUserName(username).stream().map(this::fillOrder).collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public Collection<OrderObject> getOrderObjects(Long orderId){
+        return orderObjectRepository.getOrderObjectsByOrderId(orderId).stream().map(OrderObject::valueOf).collect(Collectors.toList());
+    }
+    @Transactional
+    private Order fillOrder(OrderDb orderDb){
+        Order order = Order.valueOf(orderDb);
+        ArrayList<OrderObject> orderObjects = new ArrayList<OrderObject>(getOrderObjects(order.getId()));
+        order.setOrderObjects(orderObjects);
+        return order;
     }
 
 

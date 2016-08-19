@@ -52,7 +52,7 @@ public class OrderRepository extends BaseRepository<OrderDb>{
     public Collection<OrderDb> getCompletedOrdersWithMissionIdByUsername(String username){
         try {
              return jdbcTemplate.query("select " +
-                     "missions.id,orders.userId,COALESCE(orders.name,'default') as name,COALESCE(orders.details,'default') as details,orders.email,orders.phone,orders.date,COALESCE(orders.status,'done') as status" +
+                     "missions.id,orders.userId,COALESCE(orders.name,'default') as name,COALESCE(orders.details,'default') as details,orders.email,orders.phone,orders.date,COALESCE(orders.status,'done') as status, missionDate" +
                      " from mission_results " +
                      "inner join missions on missions.id = mission_results.missionId " +
                      "inner join operators on operators.id = mission_results.operatorId " +
