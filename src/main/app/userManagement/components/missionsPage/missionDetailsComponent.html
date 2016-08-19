@@ -1,7 +1,7 @@
 <div uib-accordion-group class="panel-default" close-others="true" is-open="status.open" >
 
     <uib-accordion-heading style="font-family: courier">
-      <div ng-click="status.open = !status.open">
+      <div close-others="true">
         {{$ctrl.heading}}
         <i class="pull-right glyphicon"
            ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"
