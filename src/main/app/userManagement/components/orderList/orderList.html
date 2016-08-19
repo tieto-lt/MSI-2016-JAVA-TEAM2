@@ -49,11 +49,11 @@
 
                         <button type="button" class="btn btn-default"
                             style=" border:none; font-weight:bold; padding: 3px 6px; color:#fff; font-family:courier; width:80px; background-color:rgb(88, 175, 80)"
-                            ng-click="$ctrl.approve(order)" ng-hide="order.status != 'not completed'">Accept
+                            ng-click="$ctrl.approve(order)" ng-hide="order.status == 'approved' || order.status == 'done'">Accept
                         </button>
                         <button type="button" class="btn btn-default"
                             style="clear:left; border:none; font-weight:bold; padding: 3px 6px; color:#fff; font-family:courier; width:80px; background-color:rgb(178, 26, 26)"
-                            ng-click="$ctrl.decline(order)" ng-hide="order.status != 'not completed'">Decline
+                            ng-click="$ctrl.decline(order)" ng-hide="order.status == 'declined' || order.status == 'done'">Decline
                         </button>
 
                     </td>
