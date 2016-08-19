@@ -30,7 +30,10 @@ function Controller (OrderServiceImpl, Session, UserServiceImpl, $state)
       console.log(vm.objectMap[nr]);
     }
     else {
+      if(!vm.objectMap[nr].isEnabled)
+      {
       vm.objectMap.splice(nr,0,{});
+    }
       vm.objectMap[nr].isEnabled = param;
     }
 
