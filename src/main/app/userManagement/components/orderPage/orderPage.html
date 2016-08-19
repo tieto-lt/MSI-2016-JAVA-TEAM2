@@ -1,5 +1,5 @@
 <div class="container auth">
-  <div id="loginbox" style="margin-top:50px;border-color:#222; background-color:#FFFFFF"
+  <div id="loginbox" style="margin-top:50px;border-color:#222; background-color:#FFFFFF; float: left; margin-left:0;"
   class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
   <div class="panel panel-info" style=" border-width: 3px; border-color:#222;">
     <div class="panel-heading" style="background-color:#222; border-radius:0">
@@ -75,6 +75,21 @@
       </div>
     </div>
   </div>
+</uib-accordion-heading>
+<h3 style="font-family: courier;">Objects</h3>
+<div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
+  <div>
+    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-show="$ctrl.objectMap[0].isEnabled"><b>Table1:</b>
+      Camera angle
+      <select ng-model="$ctrl.objectMap[0].how">
+        <option value="above">From above</option>
+        <option value="front">From front</option>
+      </select>
+      <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 0); tab = 1" tabindex="0">
+    </p>
+
+  </div>
+</div>
 
   <div class="form-group row">
     <button type="submit" class="btn btn-warning"
@@ -100,6 +115,17 @@
 </form>
 </div>
 <div class="clearfix"></div>
+
 </div>
+
+</div>
+
+<div class="map" >
+<div ng-repeat="unit in $ctrl.map" >
+  <div class="{{unit.type}}"></div>
+
+</div>
+<div class="table1" tabindex="1" ng-class="{'ob-active': tab == 2}" ng-click="$ctrl.enableObject(true, 0); tab = 2; $ctrl.objectMap[0].objectName='Table1'"> Table1</div>
+  <div class="circle"></div>
 </div>
 </div>
