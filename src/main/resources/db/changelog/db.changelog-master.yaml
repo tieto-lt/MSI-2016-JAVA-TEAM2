@@ -213,6 +213,9 @@ databaseChangeLog:
                 - column:
                     name: result
                     type: clob
+                - column:
+                    name: missionDate
+                    type: timestamp
           - addForeignKeyConstraint:
               onDelete: CASCADE
               baseColumnNames: operatorId

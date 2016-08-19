@@ -1,6 +1,11 @@
 package lt.tieto.msi2016.missions.model.mission;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
+
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by localadmin on 16.8.10.
@@ -15,6 +20,9 @@ public class MissionResult {
 
     private String result;
 
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss")
+    private Timestamp missionDate;
+
     public static MissionResult missionResult (MissionResultDb missionResultDb)
     {
         MissionResult missionResult = new MissionResult();
@@ -22,6 +30,7 @@ public class MissionResult {
         missionResult.setMissionId(missionResultDb.getMissionId());
         missionResult.setOperatorId(missionResultDb.getOperatorId());
         missionResult.setResult(missionResultDb.getResult());
+        missionResult.setMissionDate(missionResultDb.getMissionDate());
         return missionResult;
     }
 
@@ -56,5 +65,13 @@ public class MissionResult {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public Timestamp getMissionDate() {
+        return missionDate;
+    }
+
+    public void setMissionDate(Timestamp missionDate) {
+        this.missionDate = missionDate;
     }
 }
