@@ -1,10 +1,12 @@
 $one-lenght: 50px;
 
+
 .map{
-  height: $one-lenght*12+20;
-  width: $one-lenght*8+20;
+  max-height: $one-lenght*12+20;
+  max-width: $one-lenght*8+20;
   float: left;
-  padding-top: 100px;
+  padding-top: 20px;
+
 }
 .unit{
   height: $one-lenght;

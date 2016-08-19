@@ -1,5 +1,5 @@
 <div class="container auth">
-  <div id="loginbox" style="margin-top:50px;border-color:#222; background-color:#FFFFFF; float: left; margin-left:0;"
+  <div id="loginbox" style="border-color:#222; margin-top:60px; background-color:#FFFFFF; width:1200px; height:1000px;margin-left:0;"
   class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
   <div class="panel panel-info" style=" border-width: 3px; border-color:#222;">
     <div class="panel-heading" style="background-color:#222; border-radius:0">
@@ -9,27 +9,34 @@
 
     </div>
 
-    <div id="big-form" class="well auth-box" style="margin-bottom:0; background-color:#FFFFFF">
-      <form id="orderForm">
 
+    <div class="map" style="width: 38%; float:right">
+        <div ng-repeat="unit in $ctrl.map">
+            <div class="{{unit.type}}"></div>
+
+        </div>
+        <div class="table1" tabindex="1" ng-class="{'ob-active': tab == 2}" ng-click="$ctrl.enableObject(true, 0); tab = 2; $ctrl.objectMap[0].objectName='Table1'"> Table1</div>
+        <div class="circle"></div>
+    </div>
+
+<div id="big-form" class="well auth-box" style="margin-bottom:0; background-color:#FFFFFF; width: 62%; float:left">
+    <form id="orderForm" >
         <div ng-form="vm.myCustomForm">
-          <div class="container">
-            <div class="msi-content" ui-view ng-cloak></div>
-          </div>
+            <div class="container">
+                <div class="msi-content" ui-view ng-cloak></div>
+            </div>
 
-          <!-- Text input-->
-          <div class="form-group">
-            <label class=" control-label" for="textinput">Order Name<span style="color:#e32;">*</span></label>
-            <div class="">
-              <textarea form="orderForm" style="resize: none;" id="textinput" name="name" class="form-control input-md" type="text"
-              ng-model="$ctrl.order.name" required ng-maxlength="255"
-            ></textarea>
-              <!--div class="help-block" ng-show="vm.myCustomForm.name.$error.required && vm.myCustomForm.name.$touched">Field Mission
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class=" control-label" for="textinput">Order Name<span style="color:#e32;">*</span></label>
+                <div class="">
+                    <textarea form="orderForm" style="resize: none;" id="textinput" name="name" class="form-control input-md" type="text" ng-model="$ctrl.order.name" required ng-maxlength="255"></textarea>
+                    <!--div class="help-block" ng-show="vm.myCustomForm.name.$error.required && vm.myCustomForm.name.$touched">Field Mission
               Name is required!
             </div-->
-            <div class="help-block" ng-show="vm.myCustomForm.name.$error.maxlength">Maximum length
-              of the order name is 255 symbols.
-            </div>
+                    <div class="help-block" ng-show="vm.myCustomForm.name.$error.maxlength">Maximum length of the order name is 255 symbols.
+                    </div>
           </div>
         </div>
 
@@ -120,12 +127,5 @@
 
 </div>
 
-<div class="map" >
-<div ng-repeat="unit in $ctrl.map" >
-  <div class="{{unit.type}}"></div>
 
-</div>
-<div class="table1" tabindex="1" ng-class="{'ob-active': tab == 2}" ng-click="$ctrl.enableObject(true, 0); tab = 2; $ctrl.objectMap[0].objectName='Table1'"> Table1</div>
-  <div class="circle"></div>
-</div>
 </div>
