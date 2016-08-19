@@ -1,4 +1,5 @@
 var module = require('main_module');
+require('pagination.css');
 
 function Controller(OrderServiceImpl, $scope) {
 
