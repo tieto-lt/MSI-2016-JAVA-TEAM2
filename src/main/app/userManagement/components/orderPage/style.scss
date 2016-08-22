@@ -62,15 +62,68 @@ $one-lenght: 50px;
     border: 2px solid yellow;
 }
 
+.table3{
+  width: $one-lenght*2;
+	height: $one-lenght*2;
+  border: 2px solid black;
+  background: grey;
+  display: block;
+  position: absolute;
+  margin: $one-lenght*2 $one-lenght*6;
+  font-family: courier;
+  text-align: center;
+}
+.table3:hover{
+    border: 2px solid yellow;
+}
+.circle1{
+  border-radius: 50%;
+  border: 2px solid black;
+	width: $one-lenght*2;
+	height: $one-lenght*2;
+  background: grey;
+  display: block;
+  position: absolute;
+  margin: $one-lenght*8 $one-lenght*2;
+  font-family: courier;
+  text-align: center;
+  vertical-align: middle;
+  line-height: $one-lenght*2;
+
+}
+.circle1:hover{
+    border: 2px solid yellow;
+}
+
 .ob-active {
     background: green;
 }
 .ob-passive {
     background: grey;
 }
-.ob-active1 {
-    background: green;
+.table3{
+  width: $one-lenght*2;
+	height: $one-lenght*2;
+  border: 2px solid black;
+  background: grey;
+  display: block;
+  position: absolute;
+  margin: $one-lenght*2 $one-lenght*6;
+  font-family: courier;
+  text-align: center;
 }
-.ob-passive1 {
-    background: grey;
+
+.cross {
+  width: $one-lenght*2;
+	height: $one-lenght*2;
+  display: block;
+  position: absolute;
+  margin: $one-lenght*6 $one-lenght*4;
+  border-radius: 50%;
+  border: 2px solid red;
+  width: $one-lenght*2;
+  height: $one-lenght*2;
+  background: white;
+  background-image:url(https://d30y9cdsu7xlg0.cloudfront.net/png/506823-200.png);
+  background-size: contain;
 }

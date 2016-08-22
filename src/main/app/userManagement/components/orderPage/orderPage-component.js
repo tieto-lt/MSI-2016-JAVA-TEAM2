@@ -8,7 +8,7 @@ function Controller (OrderServiceImpl, Session, UserServiceImpl, $state)
   vm.order = {};
   vm.user = {};
   vm.map={};
-  vm.objectMap=[{},{}];
+  vm.objectMap=[{isEnabled:false},{isEnabled:false},{isEnabled:false}, {isEnabled:false}];
 
   vm.enableObject=enableObject;
 
@@ -32,15 +32,17 @@ function Controller (OrderServiceImpl, Session, UserServiceImpl, $state)
   function enableObject(param, nr){
     if(param===false)
     {
-      vm.objectMap.splice(nr,1);
-      console.log(vm.objectMap[nr]);
+      vm.objectMap.splice(nr,1,{isEnabled:false});
     }
     else {
       if(!vm.objectMap[nr].isEnabled)
       {
-      vm.objectMap.splice(nr,0,{});
+      vm.objectMap.splice(nr,1,{isEnabled:true});
     }
+    else {
       vm.objectMap[nr].isEnabled = param;
+    }
+
     }
 
   }
