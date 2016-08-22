@@ -57,6 +57,44 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
+    private void go (ArrayList<MissionCommands> missionCommands, double x1 ,double y1,double r1,double x0 ,double y0,double r0, int index ){
+        double rotation = Math.toDegrees(Math.atan((x1 - x0) / (y1 - y0)));
+        missionCommands.add(index, MissionCommands.newMission().command("cw").withArguments(rotation)); index++;
+        double forward = Math.sqrt(Math.pow((x1 - x0), 2) + Math.pow((y1 - y0), 2));
+        missionCommands.add(index, MissionCommands.newMission().command("forward").withArguments(forward)); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("cw").withArguments(r1-Math.abs(rotation))); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("switchVerticalCamera")); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
+        x0=x1;y0=y1;r0=r1;
+
+    }
+
+    private ArrayList<MissionCommands> getMissionCommands (ArrayList<OrderObject> objects)
+    {
+        int index = 0;
+        int errorMeters = 0;
+        ArrayList<MissionCommands> missionCommands = new ArrayList<MissionCommands>();
+        missionCommands.add(index, MissionCommands.newMission().command("takeoff")); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("altitude").withArguments(1.5)); index++;
+
+        double x0=0, y0=0, r0=0;
+
+        for (OrderObject orderObject:objects) {
+            if (orderObject.getObjectName()!=null) {
+                double x1 = 0, y1 = 0, r1 = 0;
+                if (orderObject.getObjectName().equals("Table1") && orderObject.getHow().equals("above")) {
+                    x1 = -4.0;
+                    y1 = 6.0;
+                    go(missionCommands, -4.0, 6.0, 0, x0, y0, r0, index);
+
+                }
+            }
+        }
+        missionCommands.add(index, MissionCommands.newMission().command("land")); index++;
+        return missionCommands;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -69,7 +107,16 @@ public class OrderServiceImpl implements OrderService {
         MissionDb missionDb = new MissionDb();
         missionDb.setOrderId(newOrder.getId());
         ObjectWriter ow = new ObjectMapper().writer();
-        String json = ow.writeValueAsString(missionCommands);
+        String json;
+        ArrayList<OrderObject> orderObjects = order.getOrderObjects();
+        if(orderObjects.get(0).getObjectName()!=null){
+
+             json = ow.writeValueAsString(getMissionCommands(orderObjects));
+        }
+        else{
+             json = ow.writeValueAsString(missionCommands);
+        }
+
         missionDb.setMissionJSON(json);
         missionRepository.create(missionDb);
         return newOrder;
@@ -79,9 +126,11 @@ public class OrderServiceImpl implements OrderService {
     public void createOrderObjects(ArrayList<OrderObject> orderObjects, Long orderId) {
         for (OrderObject orderObject: orderObjects)
         {
-            OrderObjectDb orderObjectDb = OrderObjectDb.valueOf(orderObject);
-            orderObjectDb.setOrderId(orderId);
-            orderObjectRepository.create(orderObjectDb);
+            if(orderObject.getObjectName()!=null) {
+                OrderObjectDb orderObjectDb = OrderObjectDb.valueOf(orderObject);
+                orderObjectDb.setOrderId(orderId);
+                orderObjectRepository.create(orderObjectDb);
+            }
         }
     }
 

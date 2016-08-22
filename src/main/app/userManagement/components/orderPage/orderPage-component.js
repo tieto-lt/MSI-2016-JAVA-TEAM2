@@ -8,7 +8,7 @@ function Controller (OrderServiceImpl, Session, UserServiceImpl, $state)
   vm.order = {};
   vm.user = {};
   vm.map={};
-  vm.objectMap=[{}];
+  vm.objectMap=[{},{}];
 
   vm.enableObject=enableObject;
 
@@ -16,11 +16,17 @@ function Controller (OrderServiceImpl, Session, UserServiceImpl, $state)
   vm.errors = [];
 
   vm.enterPressed = enterPressed;
+  vm.isEnabled = isEnabled;
 
   vm.map = [];
   for(vm.i=0; vm.i<96; vm.i++)
   {
     vm.map.push({type:"unit", contains: ""});
+  }
+
+  function isEnabled(nr)
+  {
+    return vm.objectMap[nr].isEnabled;
   }
 
   function enableObject(param, nr){

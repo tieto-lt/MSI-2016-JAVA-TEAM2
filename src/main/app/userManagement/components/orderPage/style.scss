@@ -34,17 +34,31 @@ $one-lenght: 50px;
 
 }
 .table1{
-  width: $one-lenght*4;
+  width: $one-lenght*2;
 	height: $one-lenght*2;
   border: 2px solid black;
   background: grey;
   display: block;
   position: absolute;
-  margin: $one-lenght*2 $one-lenght*2;
+  margin: 0 0;
   font-family: courier;
   text-align: center;
 }
 .table1:hover{
+    border: 2px solid yellow;
+}
+.table2{
+  width: $one-lenght*2;
+	height: $one-lenght*2;
+  border: 2px solid black;
+  background: grey;
+  display: block;
+  position: absolute;
+  margin: $one-lenght*4 0;
+  font-family: courier;
+  text-align: center;
+}
+.table2:hover{
     border: 2px solid yellow;
 }
 
@@ -52,5 +66,11 @@ $one-lenght: 50px;
     background: green;
 }
 .ob-passive {
+    background: grey;
+}
+.ob-active1 {
+    background: green;
+}
+.ob-passive1 {
     background: grey;
 }

@@ -15,7 +15,8 @@
             <div class="{{unit.type}}"></div>
 
         </div>
-        <div class="table1" tabindex="1" ng-class="{'ob-active': tab == 2}" ng-click="$ctrl.enableObject(true, 0); tab = 2; $ctrl.objectMap[0].objectName='Table1'"> Table1</div>
+        <div class="table1" tabindex="1" ng-class="{'ob-active': $ctrl.isEnabled(0)}" ng-click="$ctrl.enableObject(true, 0); $ctrl.objectMap[0].objectName='Table1'"> Table1</div>
+        <div class="table2" tabindex="2" ng-class="{'ob-active': $ctrl.isEnabled(1)}" ng-click="$ctrl.enableObject(true, 1); $ctrl.objectMap[1].objectName='Table2'"> Table2</div>
         <div class="circle"></div>
     </div>
 
@@ -93,6 +94,17 @@
         <option value="front">From front</option>
       </select>
       <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 0); tab = 0" tabindex="0">
+    </p>
+
+  </div>
+  <div>
+    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-show="$ctrl.objectMap[1].isEnabled"><b>Table2:</b>
+      FOTO Camera angle
+      <select ng-model="$ctrl.objectMap[1].how">
+        <option value="above">From above</option>
+        <option value="front">From front</option>
+      </select>
+      <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 1); tab = 1" tabindex="1">
     </p>
 
   </div>
