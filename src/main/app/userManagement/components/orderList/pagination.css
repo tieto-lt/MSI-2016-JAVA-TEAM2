@@ -1,7 +1,7 @@
 .pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus
 {
   color: #222;
-  cursor: not-allowed;
+  cursor: default;
   background-color: #fff;
   border-color: #222;
   border-width: 2px;
@@ -21,7 +21,7 @@
 .pagination > li > a, .pagination > li > span
 {
   color: #222;
-  cursor: not-allowed;
+  cursor: default;
   background-color: #fff;
   border-color: #222;
   border-width: 2px;
