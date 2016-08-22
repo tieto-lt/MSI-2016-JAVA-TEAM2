@@ -76,7 +76,11 @@ function Controller(missionService,$scope, Session, $filter) {
     missionService.retrieveMissionDetails(vm.mission.id).then(function(data){
       var images = data.data.images;
       var navigationData = data.data.navigationData;
-      vm.missionDate = $filter('date')(new Date(data.data.missionDate), 'dd-MM-yyyy HH:mm:ss');
+      if(vm.mission.status=="not completed"||vm.mission.status=="declined") {
+        vm.missionDate = null;
+      } else {
+        vm.missionDate = $filter('date')(new Date(data.data.missionDate), 'dd-MM-yyyy HH:mm:ss');
+      }
       if(navigationData){
         vm.navigationData.startX = navigationData[0].x.toFixed(8);
         vm.navigationData.startY = navigationData[0].y.toFixed(8);
