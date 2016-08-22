@@ -6,7 +6,8 @@ function Controller(UserServiceImpl, $scope) {
     var vm = this;
 
     vm.user = {};
-
+    vm.currentPage = 1;
+    vm.itemsPerPage = 15;
 
     vm.executeUpdate = executeUpdate;
 
@@ -23,7 +24,15 @@ function Controller(UserServiceImpl, $scope) {
     vm.$onInit = function() {
       UserServiceImpl.all().then(function(response){
         vm.users = response.data;
+        vm.filter();
       });
+    };
+
+    vm.filter = function filter(){
+      vm.totalItem =  vm.users.length;
+      var begin = ((vm.currentPage - 1) * vm.itemsPerPage),
+      end = begin + vm.itemsPerPage;
+      vm.slicedUsers = vm.users.slice(begin, end);
     };
 
     function executeUpdate(user,newRole) {
@@ -36,7 +45,7 @@ function Controller(UserServiceImpl, $scope) {
             function (err) {
                 if (err.status === 400) {
                     $scope.addAlert('danger', 'Error: ' + err.data.message);
-                    
+
                 } else {
                     console.log('Error', err);
                     $scope.addAlert('danger', 'Error: ' + err.data.message);

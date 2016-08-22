@@ -24,7 +24,19 @@ function Controller (OrderServiceImpl, Session, UserServiceImpl, $state)
   }
 
   function enableObject(param, nr){
-    vm.objectMap[nr].isEnabled = param;
+    if(param===false)
+    {
+      vm.objectMap.splice(nr,1);
+      console.log(vm.objectMap[nr]);
+    }
+    else {
+      if(!vm.objectMap[nr].isEnabled)
+      {
+      vm.objectMap.splice(nr,0,{});
+    }
+      vm.objectMap[nr].isEnabled = param;
+    }
+
   }
 
 

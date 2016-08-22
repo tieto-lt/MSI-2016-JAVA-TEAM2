@@ -14,7 +14,7 @@
             <form action="">
                 <div class="span7">
                     <div class="widget stacked widget-table action-table">
-
+ <ul style="font-family:courier" uib-pagination total-items="$ctrl.totalItem" items-per-page="$ctrl.itemsPerPage" ng-model="$ctrl.currentPage" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-change="$ctrl.filter()"></ul>
 
                         <div class="widget-content">
 
@@ -33,7 +33,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr ng-repeat="user in $ctrl.users">
+                                <tr ng-repeat="user in $ctrl.slicedUsers">
 
                                     <td>{{$index + 1 }}</td>
                                     <td style="max-width:120px; word-wrap:break-word;">{{user.userName}}</td>

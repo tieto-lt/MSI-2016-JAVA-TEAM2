@@ -1,13 +1,20 @@
 var module = require('main_module');
+require('pagination.css');
 
 function Controller(OrderServiceImpl, $scope) {
 
     var vm = this;
 
-    vm.order = {};
     vm.searchparam ={};
     vm.searchparam.status="not completed";
+    vm.currentPage = 1;
 
+
+    vm.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+
+    vm.itemsPerPage = 15;
 
     vm.approve = function approve(order){
       order.status = 'approved';
@@ -19,13 +26,26 @@ function Controller(OrderServiceImpl, $scope) {
       OrderServiceImpl.update(order);
     };
 
+    vm.onChange = function change(){
+      vm.filter();
+    };
 
     vm.$onInit = function() {
       OrderServiceImpl.all().then(function(response){
         vm.orders = response.data;
+        vm.filter();
       });
     };
 
+     vm.filter = function filter(){
+       vm.filteredOrders = vm.orders.filter(function(order){
+         return vm.searchparam.status === order.status || vm.searchparam.status === '';
+       });
+       vm.totalItem = vm.filteredOrders.length;
+       var begin = ((vm.currentPage - 1) * vm.itemsPerPage),
+       end = begin + vm.itemsPerPage;
+       vm.slicedOrders = vm.filteredOrders.slice(begin, end);
+     };
 
 
 }
