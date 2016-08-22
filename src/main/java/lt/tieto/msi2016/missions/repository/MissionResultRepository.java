@@ -46,7 +46,7 @@ public class MissionResultRepository extends BaseRepository<MissionResultDb> {
             "missionId", missionResultDb.getMissionId(),
             "operatorId", missionResultDb.getOperatorId(),
             "result", missionResultDb.getResult(),
-            "missionDate", missionResultDb.getMissionDate()
+            "missionDate", new Timestamp(missionResultDb.getMissionDate().getMillis())
     );
 
     public MissionResultDb findByOperatorId(Long operatorId)
