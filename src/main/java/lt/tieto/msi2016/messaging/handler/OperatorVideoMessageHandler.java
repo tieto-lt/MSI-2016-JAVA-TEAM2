@@ -19,6 +19,7 @@ public class OperatorVideoMessageHandler extends BinaryWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        registryService.removeOperator(session);
         System.out.println("connection closed");
         super.afterConnectionClosed(session, status);
     }
@@ -26,14 +27,15 @@ public class OperatorVideoMessageHandler extends BinaryWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-
+        String operatorToken = session.getUri().getPath().substring(session.getUri().getPath().lastIndexOf("/"));
+        registryService.addOperator(operatorToken,session);
         System.out.println("connection opened");
         super.afterConnectionEstablished(session);
     }
 
     @Override
     protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message) throws Exception {
-        System.out.println("Hello");
-        super.handleBinaryMessage(session, message);
+        WebSocketSession userSocketSession = registryService.getCustomerSessionByOperatorSession(session);
+        userSocketSession.sendMessage(message);
     }
 }

@@ -73,5 +73,12 @@ public interface RegistryService {
      */
     WebSocketSession getOperatorSessionFromReservation(String userId);
 
+    /**
+     *
+     * @param session
+     * @return
+     */
+    WebSocketSession getCustomerSessionByOperatorSession(WebSocketSession session);
+
 
 }

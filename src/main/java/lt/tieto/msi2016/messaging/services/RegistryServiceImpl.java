@@ -6,6 +6,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -91,8 +92,14 @@ public class RegistryServiceImpl implements RegistryService {
         return userRegistry.getReservationRegistry().get(userId);
     }
 
+    @Override
+    public WebSocketSession getCustomerSessionByOperatorSession(WebSocketSession session) {
+        Optional<String> userId = userRegistry.getReservationRegistry().entrySet().stream().filter(key -> userRegistry.getReservationRegistry().get(key).equals(session)).map(Map.Entry::getKey).findFirst();
+        return userRegistry.getCustomerRegistry().get(userId);
+    }
+
     private void removeOperatorFromReservationRegistry(WebSocketSession session){
-        userRegistry.getReservationRegistry().entrySet().removeIf(key -> session.equals(userRegistry.getReservationRegistry().get(key)));
+        userRegistry.getReservationRegistry().values().removeIf(operatorSession -> operatorSession.equals(session));
     }
 
 }
