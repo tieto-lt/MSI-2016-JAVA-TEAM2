@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller(missionService,$scope, Session) {
+function Controller(missionService,$scope, Session, $filter) {
   var vm = this;
 
   vm.oneAtATime = true;
@@ -76,7 +76,7 @@ function Controller(missionService,$scope, Session) {
     missionService.retrieveMissionDetails(vm.mission.id).then(function(data){
       var images = data.data.images;
       var navigationData = data.data.navigationData;
-      vm.missionDate = data.data.missionDate;
+      vm.missionDate = $filter('date')(new Date(data.data.missionDate), 'dd-MM-yyyy HH:mm:ss');
       if(navigationData){
         vm.navigationData.startX = navigationData[0].x.toFixed(8);
         vm.navigationData.startY = navigationData[0].y.toFixed(8);
@@ -155,7 +155,7 @@ function Controller(missionService,$scope, Session) {
 
 }
 
-Controller.$inject = ['MissionService', '$scope', 'Session'];
+Controller.$inject = ['MissionService', '$scope', 'Session', '$filter'];
 
 module.component('missionDetailsComponent', {
     controller: Controller,

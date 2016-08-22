@@ -9,6 +9,7 @@ import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
 import lt.tieto.msi2016.operator.repository.OperatorRepository;
 import lt.tieto.msi2016.orders.repository.OrderRepository;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -73,15 +75,7 @@ public class MissionServiceImpl implements MissionService {
         missionResult.setResult(result);
         missionResult.setMissionId(missionId);
         missionResult.setOperatorId(operatorRepository.findByToken(operatorToken).getId());
-        try{
-            Date currentDate = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-            Date parsedDate = dateFormat.parse(dateFormat.format(currentDate));
-            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
-            missionResult.setMissionDate(timestamp);
-        }catch(Exception e){//this generic but you can control another types of exception
-
-        }
+        missionResult.setMissionDate(DateTime.now());
         missionResultRepository.save(missionResult);
     }
 

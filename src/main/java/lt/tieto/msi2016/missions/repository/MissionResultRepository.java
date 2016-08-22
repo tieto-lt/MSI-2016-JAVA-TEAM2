@@ -3,11 +3,15 @@ package lt.tieto.msi2016.missions.repository;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
 import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+
+import java.sql.SQLException;
+import java.sql.Timestamp;
 
 /**
  * Created by localadmin on 16.8.9.
@@ -28,9 +32,14 @@ public class MissionResultRepository extends BaseRepository<MissionResultDb> {
         missionResultDb.setMissionId(rs.getLong("missionId"));
         missionResultDb.setOperatorId(rs.getLong("operatorId"));
         missionResultDb.setResult(rs.getString("result"));
-        missionResultDb.setMissionDate(rs.getTimestamp("missionDate"));
+        missionResultDb.setMissionDate(toDateTime(rs.getTimestamp("missionDate")));
         return missionResultDb;
     };
+
+    private static DateTime toDateTime(Timestamp ts) throws SQLException {
+        if (ts == null) return null;
+        return new DateTime(ts);
+    }
 
     private static final RowUnmapper<MissionResultDb> ROW_UNMAPPER = missionResultDb -> mapOf(
             "id", missionResultDb.getId(),
