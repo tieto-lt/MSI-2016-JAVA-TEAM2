@@ -29,4 +29,8 @@ public class CustomerVideoMessageHandler extends BinaryWebSocketHandler {
         super.afterConnectionEstablished(session);
     }
 
+    @Override
+    protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message) throws Exception {
+        super.handleBinaryMessage(session, message);
+    }
 }
