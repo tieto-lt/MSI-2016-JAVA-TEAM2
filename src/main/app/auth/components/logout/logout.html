@@ -20,8 +20,12 @@
                     <a class="menu-item" ng-show="$ctrl.isOperator()" ui-sref="root.operatorPage">Token
                 <span class="sr-only">(current)</span></a>
                 </li>
-                <li  ui-sref-active="active" >
-                    <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isCustomer()"  ui-sref="root.customerPage">DRONIFY
+                <li >
+                    <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isCustomer()"  href="/#/customerPage">DRONIFY
+                <span class="sr-only">(current)</span></a>
+                </li>
+                <li ui-sref-active="active">
+                    <a class="menu-item" ng-show="$ctrl.isCustomer()" ui-sref="root.customerPage" >Orders
                 <span class="sr-only">(current)</span></a>
                 </li>
                 <li ui-sref-active="active">

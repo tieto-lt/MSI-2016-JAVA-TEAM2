@@ -32,3 +32,14 @@
 {
   color: #222;
 }
+
+.select
+{
+  border-width: 2.5px;
+  border-color: #222;
+  background-color: #fff;
+  font-family: courier;
+  min-width: 20px;
+  min-height: 16px;
+  font-size: 16px;
+}
