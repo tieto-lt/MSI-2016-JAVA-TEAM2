@@ -1,16 +1,22 @@
 package lt.tieto.msi2016.messaging.handler;
 
+import lt.tieto.msi2016.messaging.services.RegistryService;
+import lt.tieto.msi2016.messaging.services.RegistryServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.BinaryMessage;
 import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
-import org.springframework.web.socket.handler.BinaryWebSocketHandler;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 /**
  * Created by localadmin on 16.8.22.
  */
 @Component
-public class VideoMessageHandler extends BinaryWebSocketHandler {
+public class CustomerCommandMessageHandler extends TextWebSocketHandler {
+
+    @Autowired
+    private RegistryService registryService;
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
@@ -25,8 +31,10 @@ public class VideoMessageHandler extends BinaryWebSocketHandler {
     }
 
     @Override
-    protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message) throws Exception {
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         System.out.println("Hello");
-        super.handleBinaryMessage(session, message);
+        super.handleTextMessage(session, message);
     }
+
+
 }
