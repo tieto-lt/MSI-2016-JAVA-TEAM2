@@ -62,72 +62,113 @@ public class OrderServiceImpl implements OrderService {
     static {
         missionCommands1 = new MissionCommands[]{
                 MissionCommands.newMission().command("takeoff"),
-                MissionCommands.newMission().command("hover").withArguments(3000),
-                MissionCommands.newMission().command("cw").withArguments(-38),
-                MissionCommands.newMission().command("hover").withArguments(3000),
-                MissionCommands.newMission().command("swichVertivalCamera"),
+                MissionCommands.newMission().command("altitude").withArguments(1.5),
+
+                MissionCommands.newMission().command("backward").withArguments(0.6),
+                MissionCommands.newMission().command("hover").withArguments(1000),
+                MissionCommands.newMission().command("ccw").withArguments(95),
+                MissionCommands.newMission().command("hover").withArguments(1000),
                 MissionCommands.newMission().command("takePicture"),
-                //-5 laipsniu paklaida
-                MissionCommands.newMission().command("hover").withArguments(3000),
+                MissionCommands.newMission().command("switchVerticalCamera"),
+                MissionCommands.newMission().command("hover").withArguments(1000),
+                MissionCommands.newMission().command("forward").withArguments(0.8),
+
+                MissionCommands.newMission().command("hover").withArguments(1000),
+                MissionCommands.newMission().command("takePicture"),
+
+                MissionCommands.newMission().command("forward").withArguments(1),
+                MissionCommands.newMission().command("right").withArguments(2.4),
+
+                MissionCommands.newMission().command("switchHorizontalCamera"),
+                MissionCommands.newMission().command("hover").withArguments(1000),
+                MissionCommands.newMission().command("takePicture"),
+                MissionCommands.newMission().command("switchVerticalCamera"),
+                MissionCommands.newMission().command("hover").withArguments(1000),
+                MissionCommands.newMission().command("takePicture"),
+                MissionCommands.newMission().command("hover").withArguments(1000),
+
+
+                MissionCommands.newMission().command("right").withArguments(1.4),
+                MissionCommands.newMission().command("switchHorizontalCamera"),
+                MissionCommands.newMission().command("hover").withArguments(1000),
+                MissionCommands.newMission().command("takePicture"),
+                MissionCommands.newMission().command("switchVerticalCamera"),
+                MissionCommands.newMission().command("hover").withArguments(1000),
+                MissionCommands.newMission().command("takePicture"),
+                MissionCommands.newMission().command("hover").withArguments(1000),
+
+                MissionCommands.newMission().command("cw").withArguments(180),
+                MissionCommands.newMission().command("forward").withArguments(2),
+                MissionCommands.newMission().command("hover").withArguments(1000),
+                MissionCommands.newMission().command("takePicture"),
+                MissionCommands.newMission().command("switchHorizontalCamera"),
+                MissionCommands.newMission().command("hover").withArguments(1000),
+                MissionCommands.newMission().command("takePicture"),
+
+                MissionCommands.newMission().command("right").withArguments(2),
+                MissionCommands.newMission().command("ccw").withArguments(95),
+
                 MissionCommands.newMission().command("land")
         };
 
     }
 
-    private void go (ArrayList<MissionCommands> missionCommands, double x1 ,double y1,double r1,double x0 ,double y0,double r0, int index, String camera ){
-        double rotation = Math.toDegrees(Math.atan((x1 - x0) / (y1 - y0)));
-        missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
-        missionCommands.add(index, MissionCommands.newMission().command("cw").withArguments(rotation)); index++;
-        /*double forward = Math.sqrt(Math.pow((x1 - x0), 2) + Math.pow((y1 - y0), 2));
-        missionCommands.add(index, MissionCommands.newMission().command("forward").withArguments(forward)); index++;
-        missionCommands.add(index, MissionCommands.newMission().command("cw").withArguments(r1-Math.abs(rotation))); index++;*/
-        missionCommands.add(index, MissionCommands.newMission().command("switch"+camera+"Camera")); index++;
-        missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
-        missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
-        x0=x1;y0=y1;r0=r1;
-
-    }
 
     private ArrayList<MissionCommands> getMissionCommands (ArrayList<OrderObject> objects)
     {
         int index = 0;
-        int errorMeters = 0;
         ArrayList<MissionCommands> missionCommands = new ArrayList<MissionCommands>();
         missionCommands.add(index, MissionCommands.newMission().command("takeoff")); index++;
         missionCommands.add(index, MissionCommands.newMission().command("altitude").withArguments(1.5)); index++;
 
-        double x0=0, y0=0, r0=0;
-
-        for (OrderObject orderObject:objects) {
-            if (orderObject.getObjectName()!=null) {
-                double x1 = 0, y1 = 0, r1 = 0;
-                if (orderObject.getObjectName().equals("Table1") ) {
-                    if(orderObject.getHow().equals("above"))
-                        go(missionCommands, -8.0, 12.0, 0, x0, y0, r0, index, "Vertical");
-                    else
-                        go(missionCommands, -10.0, 12.0, -90, x0, y0, r0, index, "Horizontal");
-                }
-                else if (orderObject.getObjectName().equals("Table2") ) {
-                    if(orderObject.getHow().equals("above"))
-                        go(missionCommands, -8.0, 4.0, 0, x0, y0, r0, index, "Vertical");
-                    else
-                        go(missionCommands, -10.0, 6.0, -90, x0, y0, r0, index, "Horizontal");
-                }
-                else if (orderObject.getObjectName().equals("Table3") ) {
-                    if(orderObject.getHow().equals("above"))
-                        go(missionCommands, 4.0, 8.0, 0, x0, y0, r0, index, "Vertical");
-                    else
-                        go(missionCommands, 2.0, 8.0, 90, x0, y0, r0, index, "Horizontal");
-                }
-                else if (orderObject.getObjectName().equals("Table2") ) {
-                    if(orderObject.getHow().equals("above"))
-                        go(missionCommands, -4.0, -4.0, 0, x0, y0, r0, index, "Vertical");
-                    else
-                        go(missionCommands, -4.0, -2.0, 180, x0, y0, r0, index, "Horizontal");
-                }
-            }
+        missionCommands.add(index, MissionCommands.newMission().command("backward").withArguments(0.6)); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("ccw").withArguments(95)); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
+        if(objects.get(3).getHow()!= null && objects.get(3).getHow().equals("front")){
+            missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
         }
-        go(missionCommands, 0, 0, 0, x0, y0, r0, index, "Vertical");
+        missionCommands.add(index, MissionCommands.newMission().command("switchVerticalCamera")); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("forward").withArguments(0.8)); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
+        if(objects.get(3).getHow()!= null && objects.get(3).getHow().equals("above")){
+            missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
+        }
+        missionCommands.add(index, MissionCommands.newMission().command("forward").withArguments(1)); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("right").withArguments(2.4)); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("switchHorizontalCamera")); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
+        if(objects.get(1).getHow()!= null && objects.get(1).getHow().equals("front")){
+            missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
+        }
+        missionCommands.add(index, MissionCommands.newMission().command("switchVerticalCamera")); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
+        if(objects.get(1).getHow()!= null && objects.get(1).getHow().equals("above")){
+            missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
+        }
+        missionCommands.add(index, MissionCommands.newMission().command("right").withArguments(1.4)); index++;
+        if(objects.get(0).getHow()!= null && objects.get(0).getHow().equals("above")){
+            missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
+        }
+        missionCommands.add(index, MissionCommands.newMission().command("switchHorizontalCamera")); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
+        if(objects.get(0).getHow()!= null && objects.get(0).getHow().equals("front")){
+            missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
+        }
+        missionCommands.add(index, MissionCommands.newMission().command("cw").withArguments(180)); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("forward").withArguments(2)); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
+        if(objects.get(2).getHow()!= null && objects.get(2).getHow().equals("front")){
+            missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
+        }
+        missionCommands.add(index, MissionCommands.newMission().command("switchVerticalCamera")); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
+        if(objects.get(2).getHow()!= null && objects.get(2).getHow().equals("above")){
+            missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
+        }
+        missionCommands.add(index, MissionCommands.newMission().command("right").withArguments(2)); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("ccw").withArguments(95)); index++;
+
         missionCommands.add(index, MissionCommands.newMission().command("land")); index++;
         return missionCommands;
     }
@@ -148,7 +189,7 @@ public class OrderServiceImpl implements OrderService {
         ArrayList<OrderObject> orderObjects = order.getOrderObjects();
         if(orderObjects.get(0).getObjectName()!=null){
 
-             json = ow.writeValueAsString(missionCommands1);
+             json = ow.writeValueAsString(getMissionCommands(orderObjects));
         }
         else{
              json = ow.writeValueAsString(missionCommands1);
