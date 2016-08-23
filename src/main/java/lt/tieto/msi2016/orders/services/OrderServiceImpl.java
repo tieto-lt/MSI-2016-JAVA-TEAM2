@@ -57,12 +57,30 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
+    static MissionCommands[] missionCommands1;
+
+    static {
+        missionCommands1 = new MissionCommands[]{
+                MissionCommands.newMission().command("takeoff"),
+                MissionCommands.newMission().command("hover").withArguments(3000),
+                MissionCommands.newMission().command("cw").withArguments(-38),
+                MissionCommands.newMission().command("hover").withArguments(3000),
+                MissionCommands.newMission().command("swichVertivalCamera"),
+                MissionCommands.newMission().command("takePicture"),
+                //-5 laipsniu paklaida
+                MissionCommands.newMission().command("hover").withArguments(3000),
+                MissionCommands.newMission().command("land")
+        };
+
+    }
+
     private void go (ArrayList<MissionCommands> missionCommands, double x1 ,double y1,double r1,double x0 ,double y0,double r0, int index, String camera ){
         double rotation = Math.toDegrees(Math.atan((x1 - x0) / (y1 - y0)));
+        missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
         missionCommands.add(index, MissionCommands.newMission().command("cw").withArguments(rotation)); index++;
-        double forward = Math.sqrt(Math.pow((x1 - x0), 2) + Math.pow((y1 - y0), 2));
+        /*double forward = Math.sqrt(Math.pow((x1 - x0), 2) + Math.pow((y1 - y0), 2));
         missionCommands.add(index, MissionCommands.newMission().command("forward").withArguments(forward)); index++;
-        missionCommands.add(index, MissionCommands.newMission().command("cw").withArguments(r1-Math.abs(rotation))); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("cw").withArguments(r1-Math.abs(rotation))); index++;*/
         missionCommands.add(index, MissionCommands.newMission().command("switch"+camera+"Camera")); index++;
         missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
         missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
@@ -130,10 +148,10 @@ public class OrderServiceImpl implements OrderService {
         ArrayList<OrderObject> orderObjects = order.getOrderObjects();
         if(orderObjects.get(0).getObjectName()!=null){
 
-             json = ow.writeValueAsString(getMissionCommands(orderObjects));
+             json = ow.writeValueAsString(missionCommands1);
         }
         else{
-             json = ow.writeValueAsString(missionCommands);
+             json = ow.writeValueAsString(missionCommands1);
         }
 
         missionDb.setMissionJSON(json);
