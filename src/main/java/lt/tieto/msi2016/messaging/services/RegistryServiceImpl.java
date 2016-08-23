@@ -1,10 +1,14 @@
 package lt.tieto.msi2016.messaging.services;
 
 import lt.tieto.msi2016.messaging.UserRegistry;
+import lt.tieto.msi2016.messaging.exceptions.NoFreeOperatorsException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.WebSocketSession;
 
 import javax.annotation.PostConstruct;
+import javax.xml.ws.WebServiceException;
+import java.nio.channels.NotYetConnectedException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -61,9 +65,9 @@ public class RegistryServiceImpl implements RegistryService {
     }
 
     @Override
-    public void removeOperator(WebSocketSession session) {
-        userRegistry.getOperatorRegistry().remove(session);
-        removeOperatorFromReservationRegistry(session);
+    public void removeOperator(String operatorToken) {
+        userRegistry.getOperatorRegistry().remove(operatorToken);
+        removeOperatorFromReservationRegistry(operatorToken);
     }
 
     @Override
@@ -74,6 +78,8 @@ public class RegistryServiceImpl implements RegistryService {
 
     @Override
     public void cancelReservation(String userId) {
+        WebSocketSession operatorsSession = userRegistry.getReservationRegistry().get("userId");
+        userRegistry.getOperatorRegistry().put(getPathVariable(operatorsSession),operatorsSession);
         userRegistry.getReservationRegistry().remove(userId);
     }
 
@@ -94,12 +100,24 @@ public class RegistryServiceImpl implements RegistryService {
 
     @Override
     public WebSocketSession getCustomerSessionByOperatorSession(WebSocketSession session) {
-        Optional<String> userId = userRegistry.getReservationRegistry().entrySet().stream().filter(key -> userRegistry.getReservationRegistry().get(key).equals(session)).map(Map.Entry::getKey).findFirst();
-        return userRegistry.getCustomerRegistry().get(userId);
+        Optional<String> userId = userRegistry.getReservationRegistry().entrySet().stream().filter(entry -> userRegistry.getReservationRegistry().get(entry.getKey()).equals(session)).map(Map.Entry::getKey).findFirst();
+        return userRegistry.getCustomerRegistry().get(userId.equals(Optional.empty()) ? userId : userId.get());
     }
 
-    private void removeOperatorFromReservationRegistry(WebSocketSession session){
-        userRegistry.getReservationRegistry().values().removeIf(operatorSession -> operatorSession.equals(session));
+    @Override
+    public String getPathVariable(WebSocketSession session) {
+        return session.getUri().getPath().substring(session.getUri().getPath().lastIndexOf("/")).substring(1);
     }
+
+    @Override
+    public WebSocketSession getFreeOperatorsSession() {
+        return userRegistry.getOperatorRegistry().values().stream().findFirst().get();
+    }
+
+    private void removeOperatorFromReservationRegistry(String operatorToken){
+        userRegistry.getReservationRegistry().entrySet().removeIf(key -> userRegistry.getOperatorRegistry().get(key).equals(userRegistry.getOperatorRegistry().get(operatorToken)));
+    }
+
+
 
 }

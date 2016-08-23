@@ -34,9 +34,9 @@ public interface RegistryService {
     /**
      * Removes operator from operator registry
      *
-     * @param session
+     * @param operatorToken
      */
-    void removeOperator(WebSocketSession session);
+    void removeOperator(String operatorToken);
 
     /**
      * Removes customer from customer registry
@@ -80,5 +80,14 @@ public interface RegistryService {
      */
     WebSocketSession getCustomerSessionByOperatorSession(WebSocketSession session);
 
+    /**
+     * Returns path variable from given session
+     *
+     * @param session
+     * @return
+     */
+    String getPathVariable(WebSocketSession session);
+
+    WebSocketSession getFreeOperatorsSession();
 
 }
