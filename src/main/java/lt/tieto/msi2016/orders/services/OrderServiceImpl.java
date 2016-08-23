@@ -76,8 +76,9 @@ public class OrderServiceImpl implements OrderService {
                 MissionCommands.newMission().command("hover").withArguments(1000),
                 MissionCommands.newMission().command("takePicture"),
 
-                MissionCommands.newMission().command("forward").withArguments(1),
+                MissionCommands.newMission().command("forward").withArguments(0.5),
                 MissionCommands.newMission().command("right").withArguments(2.4),
+                MissionCommands.newMission().command("cw").withArguments(35),
 
                 MissionCommands.newMission().command("switchHorizontalCamera"),
                 MissionCommands.newMission().command("hover").withArguments(1000),
@@ -99,13 +100,15 @@ public class OrderServiceImpl implements OrderService {
 
                 MissionCommands.newMission().command("cw").withArguments(180),
                 MissionCommands.newMission().command("forward").withArguments(2),
-                MissionCommands.newMission().command("hover").withArguments(1000),
-                MissionCommands.newMission().command("takePicture"),
                 MissionCommands.newMission().command("switchHorizontalCamera"),
+                MissionCommands.newMission().command("hover").withArguments(1000),
+                MissionCommands.newMission().command("ccw").withArguments(30),
+                MissionCommands.newMission().command("takePicture"),
+                MissionCommands.newMission().command("switchVerticalCamera"),
                 MissionCommands.newMission().command("hover").withArguments(1000),
                 MissionCommands.newMission().command("takePicture"),
 
-                MissionCommands.newMission().command("right").withArguments(2),
+                MissionCommands.newMission().command("right").withArguments(2.2),
                 MissionCommands.newMission().command("ccw").withArguments(95),
 
                 MissionCommands.newMission().command("land")
@@ -125,17 +128,23 @@ public class OrderServiceImpl implements OrderService {
         missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
         missionCommands.add(index, MissionCommands.newMission().command("ccw").withArguments(95)); index++;
         missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
+
         if(objects.get(3).getHow()!= null && objects.get(3).getHow().equals("front")){
             missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
         }
+
         missionCommands.add(index, MissionCommands.newMission().command("switchVerticalCamera")); index++;
         missionCommands.add(index, MissionCommands.newMission().command("forward").withArguments(0.8)); index++;
         missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
+
         if(objects.get(3).getHow()!= null && objects.get(3).getHow().equals("above")){
             missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
         }
+
         missionCommands.add(index, MissionCommands.newMission().command("forward").withArguments(1)); index++;
         missionCommands.add(index, MissionCommands.newMission().command("right").withArguments(2.4)); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("cw").withArguments(35)); index++;
+
         missionCommands.add(index, MissionCommands.newMission().command("switchHorizontalCamera")); index++;
         missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
         if(objects.get(1).getHow()!= null && objects.get(1).getHow().equals("front")){
@@ -158,6 +167,8 @@ public class OrderServiceImpl implements OrderService {
         missionCommands.add(index, MissionCommands.newMission().command("cw").withArguments(180)); index++;
         missionCommands.add(index, MissionCommands.newMission().command("forward").withArguments(2)); index++;
         missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("cw").withArguments(30)); index++;
+        
         if(objects.get(2).getHow()!= null && objects.get(2).getHow().equals("front")){
             missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
         }
@@ -166,7 +177,7 @@ public class OrderServiceImpl implements OrderService {
         if(objects.get(2).getHow()!= null && objects.get(2).getHow().equals("above")){
             missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
         }
-        missionCommands.add(index, MissionCommands.newMission().command("right").withArguments(2)); index++;
+        missionCommands.add(index, MissionCommands.newMission().command("right").withArguments(2.2)); index++;
         missionCommands.add(index, MissionCommands.newMission().command("ccw").withArguments(95)); index++;
 
         missionCommands.add(index, MissionCommands.newMission().command("land")); index++;
