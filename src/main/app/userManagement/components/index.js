@@ -13,3 +13,4 @@ require('userList/ModalDemoCtrl');
 require('orderPage/orderPage-component');
 require('orderList/orderList-component');
 require('liveControl/liveControl-component');
+require('homePage/homePage-component');

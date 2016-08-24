@@ -1,4 +1,5 @@
 var module = require('main_module');
+require('style.scss');
 
 function Controller($state, $stateParams, ItemService) {
 
