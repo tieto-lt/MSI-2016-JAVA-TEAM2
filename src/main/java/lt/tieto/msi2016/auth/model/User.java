@@ -1,11 +1,13 @@
 package lt.tieto.msi2016.auth.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lt.tieto.msi2016.auth.repository.model.UserDb;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     private Long id;

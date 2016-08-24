@@ -1,7 +1,7 @@
 .pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus
 {
   color: #222;
-  cursor: not-allowed;
+  cursor: default;
   background-color: #fff;
   border-color: #222;
   border-width: 2px;
@@ -21,7 +21,7 @@
 .pagination > li > a, .pagination > li > span
 {
   color: #222;
-  cursor: not-allowed;
+  cursor: default;
   background-color: #fff;
   border-color: #222;
   border-width: 2px;
@@ -31,4 +31,15 @@
 .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus
 {
   color: #222;
+}
+
+.select
+{
+  border-width: 2.5px;
+  border-color: #222;
+  background-color: #fff;
+  font-family: courier;
+  min-width: 20px;
+  min-height: 16px;
+  font-size: 16px;
 }

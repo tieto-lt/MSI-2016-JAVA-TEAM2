@@ -86,6 +86,13 @@ module.config(function($stateProvider, $urlRouterProvider) {
         role : "ROLE_OPERATOR"
       }
     })
+    .state('root.liveControl', {
+      url: "/liveControl",
+      template: "<live-control></live-control>",
+      data : {
+        role : "ROLE_CUSTOMER"
+      }
+    })
     .state('root.adminPage', {
       url: "/adminPage",
       template: "<admin-page></admin-page>",

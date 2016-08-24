@@ -12,3 +12,4 @@ require('userList/userList_component');
 require('userList/ModalDemoCtrl');
 require('orderPage/orderPage-component');
 require('orderList/orderList-component');
+require('liveControl/liveControl-component');

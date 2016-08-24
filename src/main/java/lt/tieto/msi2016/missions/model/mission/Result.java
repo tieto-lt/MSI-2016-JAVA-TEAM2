@@ -2,8 +2,10 @@ package lt.tieto.msi2016.missions.model.mission;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.joda.time.DateTime;
 
 import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,8 +18,8 @@ public class Result {
     private ArrayList<NavigationData> navigationData;
 
     private ArrayList<Image> images;
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss")
-    private Timestamp missionDate;
+
+    private DateTime missionDate;
 
     public ArrayList<NavigationData> getNavigationData() {
         return navigationData;
@@ -35,11 +37,11 @@ public class Result {
         this.images = images;
     }
 
-    public Timestamp getMissionDate() {
+    public DateTime getMissionDate() {
         return missionDate;
     }
 
-    public void setMissionDate(Timestamp missionDate) {
+    public void setMissionDate(DateTime missionDate) {
         this.missionDate = missionDate;
     }
 }

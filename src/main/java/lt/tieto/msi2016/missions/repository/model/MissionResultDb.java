@@ -2,8 +2,10 @@ package lt.tieto.msi2016.missions.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lt.tieto.msi2016.utils.repository.model.DbModel;
+import org.joda.time.DateTime;
 
 import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 /**
@@ -14,8 +16,8 @@ public class MissionResultDb extends DbModel {
     private Long operatorId;
     private Long missionId;
     private String result;
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss")
-    private Timestamp missionDate;
+
+    private DateTime missionDate;
 
     public Long getOperatorId() {
         return operatorId;
@@ -41,11 +43,11 @@ public class MissionResultDb extends DbModel {
         this.result = result;
     }
 
-    public Timestamp getMissionDate() {
+    public DateTime getMissionDate() {
         return missionDate;
     }
 
-    public void setMissionDate(Timestamp missionDate) {
+    public void setMissionDate(DateTime missionDate) {
         this.missionDate = missionDate;
     }
 }
