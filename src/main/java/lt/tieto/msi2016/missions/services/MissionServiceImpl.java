@@ -1,5 +1,6 @@
 package lt.tieto.msi2016.missions.services;
 
+import com.google.gson.Gson;
 import lt.tieto.msi2016.missions.model.mission.*;
 import lt.tieto.msi2016.missions.repository.MissionRepository;
 import lt.tieto.msi2016.missions.repository.MissionResultRepository;
@@ -9,6 +10,7 @@ import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
 import lt.tieto.msi2016.operator.repository.OperatorRepository;
 import lt.tieto.msi2016.orders.repository.OrderRepository;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectWriter;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,7 +68,14 @@ public class MissionServiceImpl implements MissionService {
     @Override
     public void saveResults(Long missionId, String operatorToken, Result result) {
         MissionResultDb missionResult = new MissionResultDb();
-        missionResult.setResult(result.toString());
+        ObjectWriter ow = new ObjectMapper().writer();
+        String json;
+        try {
+            json = ow.writeValueAsString(result);
+            missionResult.setResult(json.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         missionResult.setMissionId(missionId);
         missionResult.setOperatorId(operatorRepository.findByToken(operatorToken).getId());
         missionResult.setMissionDate(DateTime.now());
@@ -101,6 +110,7 @@ public class MissionServiceImpl implements MissionService {
         MissionResult missionResult = MissionResult.missionResult(missionResultDb);
         Result result = getResultFromBlob(missionResult);
         result.setMissionDate(missionResult.getMissionDate());
+        result.setVideoBase64(missionResult.getVideoUrl());
         return result;
     }
 
