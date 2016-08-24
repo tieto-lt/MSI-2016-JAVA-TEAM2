@@ -40,14 +40,14 @@
                     <td style="max-width:120px; word-wrap:break-word;">{{user.name}}</td>
                     <td style="max-width:120px; word-wrap:break-word;">{{user.email}}</td>
                     <td style="max-width:120px; word-wrap:break-word;">{{user.phone}}</td>
-                    <td id="radio" style=" text-align: center"><input ng-model="user.userRole"
-                      ng-click="$ctrl.executeUpdate(user,'ROLE_ADMIN')" type="radio"
+                    <td style=" text-align: center"><input ng-model="user.userRole"
+                      ng-click="$ctrl.executeUpdate(user,'ROLE_ADMIN')" type="radio" ng-disabled="user.userRole==='ROLE_ADMIN'"
                       value="ROLE_ADMIN"></td>
-                      <td id="radio" style=" text-align: center"><input ng-model="user.userRole"
+                      <td style=" text-align: center"><input ng-model="user.userRole" ng-disabled="user.userRole==='ROLE_CUSTOMER'"
                         ng-click="$ctrl.executeUpdate(user,'ROLE_CUSTOMER')" type="radio"
                         value="ROLE_CUSTOMER"></td>
-                        <td id="radio" style=" text-align: center" class="mylinkclass withanimation"><input ng-model="user.userRole"
-                          ng-click="$ctrl.executeUpdate(user,'ROLE_OPERATOR')"
+                        <td style=" text-align: center" class="mylinkclass withanimation"><input ng-model="user.userRole"
+                          ng-click="$ctrl.executeUpdate(user,'ROLE_OPERATOR')" ng-disabled="user.userRole==='ROLE_OPERATOR'"
                           type="radio" value="ROLE_OPERATOR">
                         </td>
 

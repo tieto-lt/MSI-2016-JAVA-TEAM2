@@ -40,8 +40,9 @@ function Controller(UserServiceImpl, $scope) {
     }
 
     function executeUpdate(user,newRole) {
+
       vm.user = user;
-      user.userRole = newRole;
+
         UserServiceImpl.put(vm.user).then(
             function () {
               $scope.addAlert('success', 'User\'s ' + user.userName + ' role has been changed to ' + newRole + '.');
@@ -56,6 +57,7 @@ function Controller(UserServiceImpl, $scope) {
                 }
                 loadList();
             });
+
     }
 
 }
