@@ -34,17 +34,64 @@ $one-lenght: 50px;
 
 }
 .table1{
-  width: $one-lenght*4;
+  width: $one-lenght*2;
 	height: $one-lenght*2;
   border: 2px solid black;
   background: grey;
   display: block;
   position: absolute;
-  margin: $one-lenght*2 $one-lenght*2;
+  margin: 0 0;
   font-family: courier;
   text-align: center;
 }
 .table1:hover{
+    border: 2px solid yellow;
+}
+.table2{
+  width: $one-lenght*2;
+	height: $one-lenght*2;
+  border: 2px solid black;
+  background: grey;
+  display: block;
+  position: absolute;
+  margin: $one-lenght*4 0;
+  font-family: courier;
+  text-align: center;
+}
+.table2:hover{
+    border: 2px solid yellow;
+}
+
+.table3{
+  width: $one-lenght*2;
+	height: $one-lenght*2;
+  border: 2px solid black;
+  background: grey;
+  display: block;
+  position: absolute;
+  margin: $one-lenght*2 $one-lenght*6;
+  font-family: courier;
+  text-align: center;
+}
+.table3:hover{
+    border: 2px solid yellow;
+}
+.circle1{
+  border-radius: 50%;
+  border: 2px solid black;
+	width: $one-lenght*2;
+	height: $one-lenght*2;
+  background: grey;
+  display: block;
+  position: absolute;
+  margin: $one-lenght*8 $one-lenght*2;
+  font-family: courier;
+  text-align: center;
+  vertical-align: middle;
+  line-height: $one-lenght*2;
+
+}
+.circle1:hover{
     border: 2px solid yellow;
 }
 
@@ -53,4 +100,30 @@ $one-lenght: 50px;
 }
 .ob-passive {
     background: grey;
+}
+.table3{
+  width: $one-lenght*2;
+	height: $one-lenght*2;
+  border: 2px solid black;
+  background: grey;
+  display: block;
+  position: absolute;
+  margin: $one-lenght*2 $one-lenght*6;
+  font-family: courier;
+  text-align: center;
+}
+
+.cross {
+  width: $one-lenght*2;
+	height: $one-lenght*2;
+  display: block;
+  position: absolute;
+  margin: $one-lenght*6 $one-lenght*4;
+  border-radius: 50%;
+  border: 2px solid red;
+  width: $one-lenght*2;
+  height: $one-lenght*2;
+  background: white;
+  background-image:url(https://d30y9cdsu7xlg0.cloudfront.net/png/506823-200.png);
+  background-size: contain;
 }

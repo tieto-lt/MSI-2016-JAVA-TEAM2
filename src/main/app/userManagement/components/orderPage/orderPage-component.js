@@ -8,7 +8,7 @@ function Controller (OrderServiceImpl, Session, UserServiceImpl, $state)
   vm.order = {};
   vm.user = {};
   vm.map={};
-  vm.objectMap=[{}];
+  vm.objectMap=[{isEnabled:false},{isEnabled:false},{isEnabled:false}, {isEnabled:false}];
 
   vm.enableObject=enableObject;
 
@@ -16,6 +16,7 @@ function Controller (OrderServiceImpl, Session, UserServiceImpl, $state)
   vm.errors = [];
 
   vm.enterPressed = enterPressed;
+  vm.isEnabled = isEnabled;
 
   vm.map = [];
   for(vm.i=0; vm.i<96; vm.i++)
@@ -23,18 +24,25 @@ function Controller (OrderServiceImpl, Session, UserServiceImpl, $state)
     vm.map.push({type:"unit", contains: ""});
   }
 
+  function isEnabled(nr)
+  {
+    return vm.objectMap[nr].isEnabled;
+  }
+
   function enableObject(param, nr){
     if(param===false)
     {
-      vm.objectMap.splice(nr,1);
-      console.log(vm.objectMap[nr]);
+      vm.objectMap.splice(nr,1,{isEnabled:false});
     }
     else {
       if(!vm.objectMap[nr].isEnabled)
       {
-      vm.objectMap.splice(nr,0,{});
+      vm.objectMap.splice(nr,1,{isEnabled:true});
     }
+    else {
       vm.objectMap[nr].isEnabled = param;
+    }
+
     }
 
   }
