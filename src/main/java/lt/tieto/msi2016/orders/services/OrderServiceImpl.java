@@ -49,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
     static {
         missionCommands = new MissionCommands[]{
                 MissionCommands.newMission().command("takeoff"),
-            MissionCommands.newMission().command("altitude").withArguments(1.5),
+                MissionCommands.newMission().command("altitude").withArguments(1.5),
                 MissionCommands.newMission().command("forward").withArguments("2"),
                 MissionCommands.newMission().command("takePicture"),
                 MissionCommands.newMission().command("land")
@@ -168,7 +168,7 @@ public class OrderServiceImpl implements OrderService {
         missionCommands.add(index, MissionCommands.newMission().command("forward").withArguments(2)); index++;
         missionCommands.add(index, MissionCommands.newMission().command("hover").withArguments(1000)); index++;
         missionCommands.add(index, MissionCommands.newMission().command("cw").withArguments(30)); index++;
-        
+
         if(objects.get(2).getHow()!= null && objects.get(2).getHow().equals("front")){
             missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
         }
@@ -197,7 +197,14 @@ public class OrderServiceImpl implements OrderService {
         missionDb.setOrderId(newOrder.getId());
         ObjectWriter ow = new ObjectMapper().writer();
         String json;
-        json = ow.writeValueAsString(missionCommands);
+        ArrayList<OrderObject> orderObjects = order.getOrderObjects();
+        if(orderObjects.get(0).getObjectName()!=null||orderObjects.get(1).getObjectName()!=null||orderObjects.get(2).getObjectName()!=null||orderObjects.get(3).getObjectName()!=null){
+
+            json = ow.writeValueAsString(getMissionCommands(orderObjects));
+        }
+        else{
+            json = ow.writeValueAsString(missionCommands);
+        }
 
         missionDb.setMissionJSON(json);
         missionRepository.create(missionDb);
@@ -208,9 +215,9 @@ public class OrderServiceImpl implements OrderService {
     public void createOrderObjects(ArrayList<OrderObject> orderObjects, Long orderId) {
         for (OrderObject orderObject: orderObjects)
         {
-                OrderObjectDb orderObjectDb = OrderObjectDb.valueOf(orderObject);
-                orderObjectDb.setOrderId(orderId);
-                orderObjectRepository.create(orderObjectDb);
+            OrderObjectDb orderObjectDb = OrderObjectDb.valueOf(orderObject);
+            orderObjectDb.setOrderId(orderId);
+            orderObjectRepository.create(orderObjectDb);
         }
     }
 
