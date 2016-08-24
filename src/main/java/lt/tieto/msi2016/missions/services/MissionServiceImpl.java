@@ -15,16 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -72,12 +64,14 @@ public class MissionServiceImpl implements MissionService {
 
     @Transactional
     @Override
-    public void saveResults(Long missionId, String operatorToken, String result) {
+    public void saveResults(Long missionId, String operatorToken, Result result) {
         MissionResultDb missionResult = new MissionResultDb();
-        missionResult.setResult(result);
+        missionResult.setResult(result.toString());
         missionResult.setMissionId(missionId);
         missionResult.setOperatorId(operatorRepository.findByToken(operatorToken).getId());
         missionResult.setMissionDate(DateTime.now());
+        VideoUploadService uv = new VideoUploadService();
+        missionResult.setVideoUrl(uv.getVideoUrl(result.getVideoBase64(), "Mission made on"));
         missionResultRepository.save(missionResult);
     }
 

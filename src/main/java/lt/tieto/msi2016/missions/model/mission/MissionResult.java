@@ -2,6 +2,7 @@ package lt.tieto.msi2016.missions.model.mission;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.joda.time.DateTime;
 
 import java.sql.Time;
@@ -11,6 +12,7 @@ import java.util.Date;
 /**
  * Created by localadmin on 16.8.10.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MissionResult {
 
     private Long id;
@@ -23,6 +25,8 @@ public class MissionResult {
 
     private DateTime missionDate;
 
+    private String videoUrl;
+
     public static MissionResult missionResult (MissionResultDb missionResultDb)
     {
         MissionResult missionResult = new MissionResult();
@@ -31,6 +35,7 @@ public class MissionResult {
         missionResult.setOperatorId(missionResultDb.getOperatorId());
         missionResult.setResult(missionResultDb.getResult());
         missionResult.setMissionDate(missionResultDb.getMissionDate());
+        missionResult.setVideoUrl(missionResultDb.getVideoUrl());
         return missionResult;
     }
 
@@ -73,5 +78,13 @@ public class MissionResult {
 
     public void setMissionDate(DateTime missionDate) {
         this.missionDate = missionDate;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 }

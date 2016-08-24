@@ -1,10 +1,13 @@
 package lt.tieto.msi2016.missions.model.mission;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 /**
  * Created by localadmin on 16.8.9.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MissionPlan {
 
     private Long missionId;

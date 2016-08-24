@@ -216,6 +216,9 @@ databaseChangeLog:
                 - column:
                     name: missionDate
                     type: timestamp
+                - column:
+                    name: videoUrl
+                    type: varchar(255)
           - addForeignKeyConstraint:
               onDelete: CASCADE
               baseColumnNames: operatorId
