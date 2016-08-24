@@ -1,9 +1,18 @@
+
 <nav class="navbar navbar-inverse  navbar-fixed-top">
     <div class="container-fluid">
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+             <li >
+                  <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isItLogin()" >DRONIFY
+              <span class="sr-only">(current)</span></a>
+            </li>
+            <li >
+                 <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isItNewUser()" >DRONIFY
+             <span class="sr-only">(current)</span></a>
+           </li>
                 <li ui-sref-active="active">
                     <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isAdmin()" ui-sref="root.adminPage">
                       DRONIFY
@@ -63,8 +72,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li ng-show="$ctrl.isOperator()">
-                  <a ng-show="$ctrl.isVerified" class="btn btn-default" style="padding:14px 18px;background-color:#58AF50; border-color:#58AF50; color:#FFFFFF; font-weight:bold; font-family:courier;">Verified</a>
-                  <a ng-hide="$ctrl.isVerified" class="btn btn-default" style="padding:14px 18px;background-color:#B21A1A; border-color:#B21A1A; color:#FFFFFF; font-weight:bold; font-family:courier;"> Not Verified </a>
+                  <a ng-show="$ctrl.isVerified" class="btn btn-default" style="border-radius:0; padding:14px 18px;background-color:#58AF50; border-color:#58AF50; color:#FFFFFF; font-weight:bold; font-family:courier;">Verified</a>
+                  <a ng-hide="$ctrl.isVerified" class="btn btn-default" style="border-radius:0; padding:14px 18px;background-color:#B21A1A; border-color:#B21A1A; color:#FFFFFF; font-weight:bold; font-family:courier;"> Not Verified </a>
               </li>
                 <li>
                     <div class="hello" ng-show="$ctrl.isUserName()">Hello, {{$ctrl.userName()}}!</div>
@@ -75,4 +84,6 @@
 
     </ul>
 
+</nav>
+<nav class="navbar navbar-inverse  navbar-fixed-bottom" style="max-height:25px">
 </nav>
