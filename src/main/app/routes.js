@@ -90,7 +90,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
       url: "/liveControl",
       template: "<live-control></live-control>",
       data : {
-        role : "ROLE_OPERATOR"
+        role : "ROLE_CUSTOMER"
       }
     })
     .state('root.adminPage', {
