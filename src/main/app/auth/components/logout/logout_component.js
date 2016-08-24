@@ -85,6 +85,7 @@ function Controller($state, Session, AuthService, $http, OperatorService, $trans
     }
 
 
+
     function isItLogin() {
       if($state.current.name == "root.Login" ){
           return true;
