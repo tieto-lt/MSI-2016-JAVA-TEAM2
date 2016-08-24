@@ -1,5 +1,12 @@
-<div class="container" >
-  <div id="loginbox" style="margin-top:50px; border-color:#222" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+<html>
+<body>
+  <video poster="src/main/app/Images/back4.jpg" id="bgvid" playsinline autoplay muted loop>
+    <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+  <source src="src/main/app/Images/Gif/vilnius.webm" type="video/webm" >
+  <source src="src/main/app/Images/Gif/vilnius.mp4" type="video/mp4">
+  </video>
+<div  class="container">
+  <div id="loginbox" style="margin-top:150px; border-color:#222" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
     <div class="panel panel-info" >
       <div class="panel-heading" style="background-color:#222;border-radius:0" >
         <div class="panel-title" style="font-family: courier; font-weight:bold; color:#FFFFFF; font-size:22px" >Log In</div>
@@ -27,7 +34,7 @@
           <div style="margin-top:10px" class="form-group">
             <!-- Button -->
 
-            <div class="col-sm-12 controls">
+           <div class="col-sm-12 controls">
               <a id="btn-login" href="#" class="btn btn-warning "
               type="submit" ng-click="$ctrl.login()">Sign in  </a>
             </div>
@@ -53,3 +60,5 @@
   </div>
 </div>
 <div class="clearfix"></div>
+</body>
+</html>
