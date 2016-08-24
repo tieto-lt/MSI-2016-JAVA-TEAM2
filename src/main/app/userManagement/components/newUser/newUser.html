@@ -1,12 +1,12 @@
 <div class="container auth">
-  <div id="registrationBox" style="margin-top:50px; border-color:#222; background-color:#FFFFFF" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-    <div class="panel panel-info" style= "border-width: 3px; border-color:#222;">
+  <div id="registrationBox" style="margin-top:50px; border-color:#222;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-info" style= "border-width:0;">
       <div class="panel-heading" style="background-color:#222; border-radius:0" >
         <div class="panel-title" style="font-family: courier; font-weight:bold; color:#FFFFFF; font-size:22px" >New User Registration Form</div>
 
       </div>
 
-      <div id="big-form" class="well auth-box" style="background-color:#FFFFFF; margin-bottom:0">
+      <div id="big-form" class="well auth-box" style=" border:none; border-color: rgba(34, 34, 34, 0.9); border-radius:0; background-color: rgba(34, 34, 34, 0.9); margin-bottom:0">
         <form>
 
           <div ng-form="vm.myCustomForm">
@@ -16,7 +16,7 @@
 
             <!-- Text input-->
             <div class="form-group">
-              <label class=" control-label" for="textinput">UserName<span style="color:#e32;">*</span></label>
+              <label class=" control-label" for="textinput">UserName<span style="color:#F07918;">*</span></label>
               <div class="">
                 <input id="textinput" name="username" class="form-control input-md" type="text"
                 ng-model="$ctrl.user.userName"
@@ -32,7 +32,7 @@
 
             <!-- Password input-->
             <div class="form-group">
-              <label class=" control-label" for="password">Password<span style="color:#e32;">*</span></label>
+              <label class=" control-label" for="password">Password<span style="color:#F07918;">*</span></label>
               <div class="">
                 <input id="passwordinput" name="password" class="form-control input-md" type="password"
                 ng-model="$ctrl.user.password" ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30" >
@@ -45,7 +45,7 @@
 
             <!--  Confirm Password input-->
             <div class="form-group">
-              <label class=" control-label" for="password">Confirm Password<span style="color:#e32;">*</span></label>
+              <label class=" control-label" for="password">Confirm Password<span style="color:#F07918;">*</span></label>
               <div class="">
                 <input id="passwordinput" name="confirmPassword"  class="form-control input-md" type="password"
                 ng-model="$ctrl.user.confirmPassword" ng-minlength="6" required ng-pattern="/^[a-zA-Z0-9_]+$/" ng-maxlength="30" match-Password="$ctrl.user.password" >
@@ -59,7 +59,7 @@
 
             <!-- Text input-->
             <div class="form-group">
-              <label class=" control-label" for="textinput">Name<span style="color:#e32;">*</span></label>
+              <label class=" control-label" for="textinput">Name<span style="color:#F07918;">*</span></label>
               <div class="">
                 <input id="textinput" name="name" class="form-control input-md" type="text"
                 ng-model="$ctrl.user.name" required ng-maxlength="90" >
@@ -70,7 +70,7 @@
 
 
             <div class="form-group">
-              <label class=" control-label" for="textinput">Email<span style="color:#e32;">*</span></label>
+              <label class=" control-label" for="textinput">Email<span style="color:#F07918;">*</span></label>
               <div class="">
                 <input id="textinput" name="email" class="form-control input-md" type="email"
                 ng-model="$ctrl.user.email" required >
@@ -80,7 +80,7 @@
             </div>
 
             <div class="form-group">
-              <label class=" control-label" for="textinput">Phone<span style="color:#e32;">*</span></label>
+              <label class=" control-label" for="textinput">Phone<span style="color:#F07918;">*</span></label>
               <div class="">
                 <input id="textinput" name="phone" class="form-control input-md" type="text"
                 ng-model="$ctrl.user.phone" required pattern="^[\+ | 0-9][0-9]*" ng-maxlength="20">
@@ -93,11 +93,11 @@
 
             <div class="form-group row">
               <button type="submit" class="btn btn-warning" style="margin-left:0.5cm;" ng-click="vm.myCustomForm.$valid && $ctrl.create()" ng-disabled="vm.myCustomForm.$valid == false"> Register</button>
-              <p style="font-family:courier; color: #BC0000; margin-top:0.5cm; margin-left:0.3cm; font-weight: bold; "> * Field is required! </p>
+              <p class="required" > * Field is required! </p>
 
               <div class="form-group">
                 <div class="col-md-12 control">
-                  <div style="margin-top:15px; border-top: 1px solid#888; padding-top:15px; font-family: courier; font-size:16px" >
+                  <div style="margin-top:15px; color:#fff; border-top: 1px solid#888; padding-top:15px; font-family: courier; font-size:16px" >
                     Already registered?
                     <a href="#" ui-sref="root.login" ng-click="$ctrl.logout()">
                       Go back to login

@@ -9,8 +9,15 @@ font-family: courier;
 font-size: 16px;
 }
 
+.required{
+  font-family:courier;
+   color: #F07918;
+    margin-top:0.5cm;
+    margin-left:0.3cm;
+    font-weight: bold;
+}
 .help-block{
-  color: #7C2929;
+  color: #F07918;
   font-style: bold;
   font-family: courier;
 }
@@ -25,12 +32,15 @@ font-size: 16px;
 }
 
 .panel {
-  border-width: 3px;
-  border-color:#222;
+  border-width: 0;
   border-radius:0;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
+.panel-info > .panel-heading {
+     color: #222;
+     background-color: #222;
+     border-color: #222;
+}
 .btn-warning{
   border-radius:0;
   color: white;
@@ -39,9 +49,14 @@ font-size: 16px;
   padding: 10px 22px ;
 }
 
+.control-label{
+  color: #fff;
+  font-weight: normal;;
+}
+
 .btn-warning:hover{
-  background: #eea236;
-  border-color: #eea236;
+  background: #EF951E;
+  border-color: #EF951E;
 }
 
 .form-control{
@@ -50,7 +65,8 @@ font-size: 16px;
   font-family: courier;
   border-width: 1px;
   border-color: #222;
-  background-color: #fff;
+  background-color:#fff;
+  color:#222;
   background-image: none;
   display:block;
   width: 100%;
@@ -75,21 +91,24 @@ transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
 input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px white inset ;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset ;
+
 }
 input:-webkit-autofill:hover{
-  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+
 }
 input:-webkit-autofill:focus{
-  -webkit-box-shadow: 0 0 0px 1000px white inset;
-  border-width: 1px;
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
   border-color: #222;
+  background-color: #fff;
+
 }
 
 .input-group .form-control:first-child, .input-group-addon:first-child, .input-group-btn:first-child > .btn, .input-group-btn:first-child > .btn-group > .btn, .input-group-btn:first-child > .dropdown-toggle, .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle), .input-group-btn:last-child > .btn-group:not(:last-child) > .btn {
   border-radius:0;
-  background-color: #fff;
-  color: #222;
+  background-color: #222;
+  color: #fff;
 
   border-width: 1px;
   border-color: #222;
@@ -159,7 +178,8 @@ a {
   transition: .6s background;
 }
 a:hover{
-  background:rgba(0,0,0,0.9);
+  color:#337ab7;
+
 }
 @media screen and (max-width: 500px) {
   div{width:70%;}
