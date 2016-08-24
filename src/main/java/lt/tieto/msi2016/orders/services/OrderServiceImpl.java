@@ -197,14 +197,7 @@ public class OrderServiceImpl implements OrderService {
         missionDb.setOrderId(newOrder.getId());
         ObjectWriter ow = new ObjectMapper().writer();
         String json;
-        ArrayList<OrderObject> orderObjects = order.getOrderObjects();
-        if(orderObjects.get(0).getObjectName()!=null){
-
-             json = ow.writeValueAsString(getMissionCommands(orderObjects));
-        }
-        else{
-             json = ow.writeValueAsString(missionCommands1);
-        }
+        json = ow.writeValueAsString(missionCommands);
 
         missionDb.setMissionJSON(json);
         missionRepository.create(missionDb);
