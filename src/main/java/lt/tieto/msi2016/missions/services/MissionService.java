@@ -14,7 +14,7 @@ public interface MissionService {
 
     MissionResponse getDefaultMission();
 
-    void saveResults(Long missionId, String operatorToken, String result);
+    void saveResults(Long missionId, String operatorToken, Result result);
 
     Result getResultFromBlob (MissionResult missionResult );
 

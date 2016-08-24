@@ -67,7 +67,7 @@ public class MissionsController extends BaseController {
     }
 
     @RequestMapping(value = "/api/missions/{id}", method = RequestMethod.POST)
-    public ResponseEntity<Void> verifyOperator(@PathVariable("id") Long id, @RequestParam("operatorToken") String operatorToken, @RequestBody String result) {
+    public ResponseEntity<Void> verifyOperator(@PathVariable("id") Long id, @RequestParam("operatorToken") String operatorToken, @RequestBody Result result) {
         if(operatorService.tokenExists(operatorToken)) {
             if(id.equals(-1L)) {
                 operatorService.verifyOperatorService(operatorToken);

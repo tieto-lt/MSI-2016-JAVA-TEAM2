@@ -3,6 +3,7 @@ package lt.tieto.msi2016.missions.repository;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
 import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
 import lt.tieto.msi2016.utils.repository.BaseRepository;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -17,6 +18,7 @@ import java.sql.Timestamp;
  * Created by localadmin on 16.8.9.
  */
 @Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MissionResultRepository extends BaseRepository<MissionResultDb> {
 
     @Autowired
@@ -33,6 +35,7 @@ public class MissionResultRepository extends BaseRepository<MissionResultDb> {
         missionResultDb.setOperatorId(rs.getLong("operatorId"));
         missionResultDb.setResult(rs.getString("result"));
         missionResultDb.setMissionDate(toDateTime(rs.getTimestamp("missionDate")));
+        missionResultDb.setVideoUrl(rs.getString("videoUrl"));
         return missionResultDb;
     };
 
@@ -46,7 +49,8 @@ public class MissionResultRepository extends BaseRepository<MissionResultDb> {
             "missionId", missionResultDb.getMissionId(),
             "operatorId", missionResultDb.getOperatorId(),
             "result", missionResultDb.getResult(),
-            "missionDate", new Timestamp(missionResultDb.getMissionDate().getMillis())
+            "missionDate", new Timestamp(missionResultDb.getMissionDate().getMillis()),
+            "videoUrl", missionResultDb.getVideoUrl()
     );
 
     public MissionResultDb findByOperatorId(Long operatorId)

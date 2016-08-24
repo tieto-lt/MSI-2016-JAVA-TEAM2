@@ -1,7 +1,7 @@
 package lt.tieto.msi2016.missions.model.mission;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.joda.time.DateTime;
 
 import java.sql.Timestamp;
@@ -18,6 +18,8 @@ public class Result {
     private ArrayList<NavigationData> navigationData;
 
     private ArrayList<Image> images;
+
+    private String videoBase64;
 
     private DateTime missionDate;
 
@@ -43,5 +45,13 @@ public class Result {
 
     public void setMissionDate(DateTime missionDate) {
         this.missionDate = missionDate;
+    }
+
+    public String getVideoBase64() {
+        return videoBase64;
+    }
+
+    public void setVideoBase64(String videoBase64) {
+        this.videoBase64 = videoBase64;
     }
 }

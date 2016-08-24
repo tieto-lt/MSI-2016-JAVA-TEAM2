@@ -64,12 +64,14 @@ public class MissionServiceImpl implements MissionService {
 
     @Transactional
     @Override
-    public void saveResults(Long missionId, String operatorToken, String result) {
+    public void saveResults(Long missionId, String operatorToken, Result result) {
         MissionResultDb missionResult = new MissionResultDb();
-        missionResult.setResult(result);
+        missionResult.setResult(result.toString());
         missionResult.setMissionId(missionId);
         missionResult.setOperatorId(operatorRepository.findByToken(operatorToken).getId());
         missionResult.setMissionDate(DateTime.now());
+        VideoUploadService uv = new VideoUploadService();
+        missionResult.setVideoUrl(uv.getVideoUrl(result.getVideoBase64(), "Mission made on"));
         missionResultRepository.save(missionResult);
     }
 
