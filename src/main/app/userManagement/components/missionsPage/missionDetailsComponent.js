@@ -25,7 +25,7 @@ function Controller(missionService,$scope, Session, $filter, $sce) {
 
   function isOperator(){
       return(Session.isSessionActive() && Session.getSession().authorities[0] == "ROLE_OPERATOR");
-  }
+  } 
 
 
   function isCompleted(){

@@ -261,6 +261,9 @@ databaseChangeLog:
                 - column:
                     name: status
                     type: varchar(60)
+                - column:
+                    name: video
+                    type: boolean
           - addForeignKeyConstraint:
               onDelete: CASCADE
               baseColumnNames: userId
