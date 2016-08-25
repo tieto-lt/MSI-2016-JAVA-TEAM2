@@ -23,8 +23,7 @@ function Controller($state, Session, $document, $gamepad, $scope) {
   }
 
   vm.sendCommandForDrone = function sendCommandForDrone(command, speed) {
-    console.log(command,speed);
-    if (webSocket) {
+    if (webSocket.readyState === 1) {
       commandObj = {
         payloadType: "DirectCommand",
         commandType: command,
@@ -34,12 +33,19 @@ function Controller($state, Session, $document, $gamepad, $scope) {
     }
   };
 
-  $document.bind("keyup", function(event) {
+  $document.bind('keyup',function(event) {
       vm.onKeyUp(event);
+    });
+
+  $document.bind('keydown',function(event) {
+    vm.onKeyDown(event);
   });
-  $document.bind("keydown", function(event) {
-      vm.onKeyDown(event);
-  });
+
+  vm.$onDestroy = function(){
+    $document.unbind('keyup');
+    $document.unbind('keydown');
+  };
+
   $scope.$on('gamepad:updated',function(event,gamepad){
 
     if(gamepad.LS.Y > 0) {
@@ -74,8 +80,8 @@ function Controller($state, Session, $document, $gamepad, $scope) {
       vm.sendCommandForDrone("takePicture",undefined);
     } else if (gamepad.LS.Y === 0 && gamepad.LS.X === 0 && gamepad.RS.Y === 0 &&
       gamepad.RS.X === 0 && gamepad.buttons.X === 0 && gamepad.buttons.L1 === 0 &&
-      gamepad.buttons.R1 === 0 && gamepad.buttons.R2 === 0  && gamepad.buttons.L2 === 0
-      && gamepad.buttons.B === 0) {
+      gamepad.buttons.R1 === 0 && gamepad.buttons.R2 === 0  && gamepad.buttons.L2 === 0 &&
+      gamepad.buttons.B === 0) {
        vm.sendCommandForDrone("stop", undefined);
     }
   });
@@ -132,51 +138,65 @@ function Controller($state, Session, $document, $gamepad, $scope) {
    switch (e.which) {
      case vm.KEYBOARD.PLUS:
        vm.setCurrentSpeed(vm.currentSpeed() + speedStep);
+       e.preventDefault();
        break;
      case vm.KEYBOARD.MINUS:
        vm.setCurrentSpeed(vm.currentSpeed() - speedStep);
+        e.preventDefault();
        break;
      case vm.KEYBOARD.UP:
        vm.sendCommandForDrone("up", vm.currentSpeed);
+        e.preventDefault();
        break;
      case vm.KEYBOARD.DOWN:
        vm.sendCommandForDrone("down", vm.currentSpeed);
+        e.preventDefault();
        break;
      case vm.KEYBOARD.RIGHT:
        vm.sendCommandForDrone("clockwise", vm.currentSpeed);
+        e.preventDefault();
        break;
      case vm.KEYBOARD.LEFT:
        vm.sendCommandForDrone("counterClockwise", vm.currentSpeed);
+        e.preventDefault();
        break;
      case vm.KEYBOARD.W_KEY:
        vm.sendCommandForDrone("front", vm.currentSpeed);
+        e.preventDefault();
        break;
      case vm.KEYBOARD.S_KEY:
        vm.sendCommandForDrone("back", vm.currentSpeed);
+        e.preventDefault();
        break;
      case vm.KEYBOARD.A_KEY:
        vm.sendCommandForDrone("left", vm.currentSpeed);
+        e.preventDefault();
        break;
      case vm.KEYBOARD.D_KEY:
        vm.sendCommandForDrone("right", vm.currentSpeed);
+        e.preventDefault();
        break;
      case vm.KEYBOARD.ENTER:
        vm.sendCommandForDrone("takeoff", undefined);
+        e.preventDefault();
        break;
      case vm.KEYBOARD.ESC:
        vm.sendCommandForDrone("land", undefined);
+        e.preventDefault();
        break;
      case vm.KEYBOARD.PAGE_UP:
        vm.sendCommandForDrone("horizontalCamera", undefined);
+        e.preventDefault();
        break;
      case vm.KEYBOARD.PAGE_DOWN:
        vm.sendCommandForDrone("verticalCamera", undefined);
+        e.preventDefault();
        break;
      case vm.KEYBOARD.SHIFT:
        vm.sendCommandForDrone("takePicture",undefined);
+       e.preventDefault();
        break;
    }
-   e.preventDefault();
    return false;
  };
 
