@@ -2,9 +2,11 @@ var module = require('main_module');
 require('style.scss');
 
 function Controller($state, $stateParams, ItemService) {
-
+     var vm = this;
     var vid = document.getElementById("bgvid");
     var pauseButton = document.querySelector("#polina button");
+    var detailsVisible=false;
+    vm.showDetails = showDetails;
 
     function vidFade() {
       vid.classList.add("stopfade");
@@ -18,6 +20,10 @@ function Controller($state, $stateParams, ItemService) {
     vidFade();
     });
 
+    function showDetails(){
+    vm.detailsVisible= !vm.detailsVisible;
+    return  vm.detailsVisible;
+    }
 }
 
 module.component('homePage', {
