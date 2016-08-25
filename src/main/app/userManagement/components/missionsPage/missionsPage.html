@@ -1,4 +1,5 @@
 <h2 style="font-family:courier; margin-top:2cm">Missions page</h2>
+<p ng-hide="$ctrl.missions[0]" style="font-family:courier; margin-top:20px; color:red;">You have not completed any missions yet</p>
 <uib-accordion close-others="true">
     <mission-details-component mission="mission" ng-repeat="mission in $ctrl.missions"></mission-details-component>
 </uib-accordion>
