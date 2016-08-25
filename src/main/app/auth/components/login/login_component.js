@@ -36,11 +36,13 @@ function Controller($state, AuthService, $stateParams, Session, OperatorService)
             });
         } else {
           vm.error = undefined;
-          $state.go('root.itemList');
+          //$state.go('root.Login');
         }
       },
       function(err) {
+        //$state.go('root.Login');
         vm.error = err.data.error_description;
+
       });
 
   }
@@ -66,7 +68,7 @@ function Controller($state, AuthService, $stateParams, Session, OperatorService)
   vidFade();
   });
 
-  // 
+  //
   // pauseButton.addEventListener("click", function() {
   //   vid.classList.toggle("stopfade");
   //   if (vid.paused) {
