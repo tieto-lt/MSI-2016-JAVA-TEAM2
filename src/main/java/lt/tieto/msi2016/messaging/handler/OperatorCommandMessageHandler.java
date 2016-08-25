@@ -19,20 +19,25 @@ public class OperatorCommandMessageHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        System.out.println("connection closed");
-        super.afterConnectionClosed(session, status);
+        String operatorToken = registryService.getPathVariable(session);
+        registryService.removeOperator(operatorToken);
     }
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        System.out.println("connection opened");
-        super.afterConnectionEstablished(session);
+        String operatorToken = registryService.getPathVariable(session);
+        registryService.addOperatorControlSession(operatorToken,session);
+
     }
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        System.out.println("Hello");
-        super.handleTextMessage(session, message);
+        String operatorToken = registryService.getPathVariable(session);
+        WebSocketSession userSocketSession = registryService.getCustomerControlSession(operatorToken);
+        if(userSocketSession != null) {
+            userSocketSession.sendMessage(message);
+        }
+
     }
 
 

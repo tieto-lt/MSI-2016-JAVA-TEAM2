@@ -1,5 +1,6 @@
 package lt.tieto.msi2016.messaging;
 
+import lt.tieto.msi2016.messaging.model.WebSocketSessionHolder;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.util.Map;
@@ -9,10 +10,8 @@ import java.util.Map;
  */
 public interface UserRegistry {
 
-    Map<String, WebSocketSession> getOperatorRegistry();
+    Map<String, WebSocketSessionHolder> getOperatorRegistry();
 
-    Map<String, WebSocketSession> getCustomerRegistry();
-
-    Map<String, WebSocketSession> getReservationRegistry();
+    Map<String, WebSocketSessionHolder> getCustomerRegistry();
 
 }

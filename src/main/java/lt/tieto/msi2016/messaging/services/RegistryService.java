@@ -8,77 +8,50 @@ import org.springframework.web.socket.WebSocketSession;
 public interface RegistryService {
 
     /**
-     * Adds operator session to operator registry
+     * adds customer video session and reserves operator
+     *
+     * @param userId
+     * @param session
+     */
+    void addCustomerVideoSession(String userId,WebSocketSession session);
+
+    /**
+     * adds customer control session and reserves operator
+     *
+     * @param userId
+     * @param session
+     */
+    void addCustomerControlSession(String userId,WebSocketSession session);
+
+    /**
+     * adds operators video session
      *
      * @param operatorToken
      * @param session
      */
-    void addOperator(String operatorToken, WebSocketSession session);
+    void addOperatorVideoSession(String operatorToken,WebSocketSession session);
 
     /**
-     * Adds customer session to customer registry
+     * adds operators controll session
      *
-     * @param userId
+     * @param operatorToken
      * @param session
      */
-    void addCustomer(String userId, WebSocketSession session);
+    void addOperatorControlSession(String operatorToken,WebSocketSession session);
 
     /**
-     * Adds customer {@param userId} as key and operators  {@param session} as value to reservation registry
-     *
-     * @param userId
-     * @param session
-     */
-    void reserveOperator(String userId, WebSocketSession session);
-
-    /**
-     * Removes operator from operator registry
+     * Removes operator cancels user reservation
      *
      * @param operatorToken
      */
     void removeOperator(String operatorToken);
 
     /**
-     * Removes customer from customer registry
+     * Removes customer cancels frees up operator
      *
      * @param userId
      */
     void removeCustomer(String userId);
-
-    /**
-     * Removes customer {@param userId} key {@param operatorToken} value pair from reservation registry
-     *
-     * @param userId
-     */
-    void cancelReservation(String userId);
-
-    /**
-     *
-     * @param operatorToken
-     * @return
-     */
-    WebSocketSession getOperatorSession(String operatorToken);
-
-    /**
-     *
-     * @param userId
-     * @return
-     */
-    WebSocketSession getCustomerSession(String userId);
-
-    /**
-     *
-     * @param userId
-     * @return
-     */
-    WebSocketSession getOperatorSessionFromReservation(String userId);
-
-    /**
-     *
-     * @param session
-     * @return
-     */
-    WebSocketSession getCustomerSessionByOperatorSession(WebSocketSession session);
 
     /**
      * Returns path variable from given session
@@ -88,6 +61,33 @@ public interface RegistryService {
      */
     String getPathVariable(WebSocketSession session);
 
-    WebSocketSession getFreeOperatorsSession();
+    /**
+     *
+     * @param operatorToken
+     * @return customers WebSocketSession
+     */
+    WebSocketSession getCustomerVideoSession(String operatorToken);
+
+    /**
+     *
+     * @param operatorToken
+     * @return customers WebSocketSession
+     */
+    WebSocketSession getCustomerControlSession(String operatorToken);
+
+    /**
+     *
+     * @param userId
+     * @return operators WebSocketSession
+     */
+    WebSocketSession getOperatorVideoSession(String userId);
+
+    /**
+     *
+     * @param userId
+     * @return operators WebSocketSession
+     */
+    WebSocketSession getOperatorControlSession(String userId);
+
 
 }

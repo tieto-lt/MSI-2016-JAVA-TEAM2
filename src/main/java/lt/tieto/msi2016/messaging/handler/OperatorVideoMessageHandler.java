@@ -21,21 +21,22 @@ public class OperatorVideoMessageHandler extends BinaryWebSocketHandler {
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         String operatorToken = registryService.getPathVariable(session);
         registryService.removeOperator(operatorToken);
-        System.out.println("connection closed");
+
     }
 
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         String operatorToken = registryService.getPathVariable(session);
-        registryService.addOperator(operatorToken,session);
-        System.out.println("connection opened");
+        registryService.addOperatorVideoSession(operatorToken,session);
+
 
     }
 
     @Override
     protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message) throws Exception {
-        WebSocketSession userSocketSession = registryService.getCustomerSessionByOperatorSession(session);
+        String operatorToken = registryService.getPathVariable(session);
+        WebSocketSession userSocketSession = registryService.getCustomerVideoSession(operatorToken);
         if(userSocketSession != null) {
             userSocketSession.sendMessage(message);
         }

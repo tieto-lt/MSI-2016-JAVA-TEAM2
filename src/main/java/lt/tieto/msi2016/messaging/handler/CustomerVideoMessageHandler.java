@@ -20,19 +20,14 @@ public class CustomerVideoMessageHandler extends BinaryWebSocketHandler {
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         String userId = registryService.getPathVariable(session);
-        registryService.cancelReservation(userId);
         registryService.removeCustomer(userId);
-        System.out.println("connection closed");
+
     }
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         String userId = registryService.getPathVariable(session);
-        registryService.addCustomer(userId,session);
-        WebSocketSession operatorsSession = registryService.getFreeOperatorsSession();
-        registryService.removeOperator(registryService.getPathVariable(operatorsSession));
-        registryService.reserveOperator(userId,operatorsSession);
-        System.out.println("connection opened");
+        registryService.addCustomerVideoSession(userId,session);
 
     }
 
