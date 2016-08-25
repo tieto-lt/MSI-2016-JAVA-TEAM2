@@ -37,9 +37,9 @@ public interface OperatorService {
 
     /**
      *
-     * @param userName
+     * @param operatorToken
      * @return
      */
-    boolean isVerified(String userName);
+    boolean isVerified(String operatorToken);
 
 }

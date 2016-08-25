@@ -89,5 +89,13 @@ public interface RegistryService {
      */
     WebSocketSession getOperatorControlSession(String userId);
 
+    /**
+     * Finds operator which is already reserved by user or free operator
+     *
+     * @param userId
+     * @return operatorToken
+     */
+    String findOperatorForReservation(String userId);
+
 
 }
