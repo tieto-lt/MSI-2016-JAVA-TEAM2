@@ -21,6 +21,7 @@
                   <tr>
                     <th>#</th>
                     <th>UserName</th>
+                    <th>Status</th>
                     <th>Connect</th>
                   </tr>
                 </thead>
@@ -28,6 +29,7 @@
                   <tr>
                       <td ng-show="$ctrl.isOperator">1</td>
                       <td ng-show="$ctrl.isOperator">operator</td>
+                      <td ng-show="$ctrl.isOperator">ready for live connect</td>
                       <td ng-show="$ctrl.isOperator" style="max-width:50px;"><a class="btn btn-warning" style="margin-left:0.5cm;" ng-click="$ctrl.connectedOperator=true" >Connect</a></td>
                       </tr>
                     </tbody>
