@@ -42,17 +42,28 @@
         </div>
       </fieldset>
 </div>
-<div ng-show="$ctrl.connectedOperator">
+<div><!-- ng-show="$ctrl.connectedOperator"-->
     <div class="container">
         <h3 style="font-family:courier; margin-top:2cm;">You have connected to an operator</h3>
         <div class="col-md-8" id="droneStream"></div>
         <button class="btn btn-warning" style="margin-left:0.5cm;" ng-click="$ctrl.openConnection()">Start </button>
         <button class="btn btn-warning" style="margin-left:0.5cm; " ng-click="$ctrl.closeConnection">Close </button>
+        <div style="font-family:courier;">
+          <h3 >Control information</h3>
+          <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/3473-200.png" style="max-width:40px;max-height:40px;">
+          <img src="https://maxcdn.icons8.com/wp-content/uploads/2015/03/2_circle.png" style="max-width:20px;max-height:20px;"> - takeoff/land<br>
+          <img src="https://maxcdn.icons8.com/Share/icon/Business//registered_trademark1600.png" style="max-width:20px;max-height:20px;"> - move (analog sensitive)<br>
+          <img src="https://maxcdn.icons8.com/Share/icon/Arrows//chevron_left_round1600.png" style=" transform: rotate(318deg); max-width:20px;max-height:20px;"> - rotate (analog sensitive)<br>
+
+          <img src="http://www.iconsplace.com/icons/preview/black/keyboard-256.png" style="max-width:40px;max-height:40px;">
+          <img src="https://maxcdn.icons8.com/iOS7/PNG/50/Computer_Hardware/enter_key-50.png" style="max-width:20px;max-height:20px;"> - takeoff/land<br>
+          <img src="http://i.cdn.turner.com/v5cache/CARTOON/site/Images/i82/gamecontrol_letter_wasd.png" style="max-width:35px;max-height:35px;"> - move<br>
+          <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/302301-200.png" style=" max-width:30px;max-height:30px;"> - rotate<br>
+
+        </div>
     </div>
 
     <div>
-        <h3 style="font-family: courier;">Coordinates</h3>
-        <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
             <h3 style="font-family:courier; margin-top:0.7cm">Battery</h3>
             <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
                 <uib-progressbar class="progress" animate="false" value="$ctrl.batteryPercentage"
