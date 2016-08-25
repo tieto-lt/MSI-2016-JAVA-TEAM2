@@ -6,15 +6,28 @@
 </head>
 
 <body>
+  <div  class="container">
+    <div id="loginbox" style="margin-top:50px; border-color:#222" class="mainbox">
+      <div class="panel panel-info" style="background-color: rgba(34, 34, 34, 0.9)" >
+        <div class="panel-heading" style="background-color:#222; border-radius:0" >
+          <div class="panel-title" style="font-family: courier; text-align:center; font-weight:bold; color:#FFFFFF; font-size:22px" >Live drone control page</div>
 
-    <div class="container">
+        </div>
+
+        <div style="padding-top:30px" class="panel-body" >
+          <div class="col-md-8" id="droneStream"></div>
+          <button class="btn btn-warning" style="margin-left:0.5cm;" ng-click="$ctrl.openConnection()">Start </button>
+          <button class="btn btn-warning" style="margin-left:0.5cm; " ng-click="$ctrl.closeConnection">Close </button>
+
+        </div>
+  </div>
+</div>
+    <!--div class="container">
+       <div class="frame" style="position: relative; width: 70%; background-color: background-color: rgba(34, 34, 34, 0.9)" >
         <h3 style="font-family:courier; margin-top:2cm;">This is the page where you can control your drone live</h3>
         <div class="col-md-8" id="droneStream"></div>
         <button class="btn btn-warning" style="margin-left:0.5cm;" ng-click="$ctrl.openConnection()">Start </button>
         <button class="btn btn-warning" style="margin-left:0.5cm; " ng-click="$ctrl.closeConnection">Close </button>
-    </div>
-
-    <div>
         <h3 style="font-family: courier;">Coordinates</h3>
         <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
             <h3 style="font-family:courier; margin-top:0.7cm">Battery</h3>
@@ -24,7 +37,10 @@
                 </uib-progressbar>
             </div>
         </div>
-    </div>
+      </div>
+    </div-->
+
+
 
 </body>
 

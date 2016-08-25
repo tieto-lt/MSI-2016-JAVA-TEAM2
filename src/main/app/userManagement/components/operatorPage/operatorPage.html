@@ -18,14 +18,14 @@
 
     <div>
       <h4  class=" control-label" style="font-family:courier; margin-left:0.4cm; ">Token:</h4>
-      <pre style="margin-left:0.4cm;  margin-right:0.4cm;">{{$ctrl.operatorState.token}}</pre>
+      <pre style="margin-left:0.4cm;  border-radius:0; margin-right:0.4cm;">{{$ctrl.operatorState.token}}</pre>
       <h4  class=" control-label" style="font-family:courier; margin-left:0.4cm;">Verification: </h4>
-      <pre ng-show="$ctrl.operatorState.verified" style="margin-left:0.4cm;  margin-right:0.4cm;">Verified</pre>
-      <pre ng-hide="$ctrl.operatorState.verified" style="margin-left:0.4cm;  margin-right:0.4cm;">Not verified</pre>
+      <pre ng-show="$ctrl.operatorState.verified" style="margin-left:0.4cm; border-radius:0;  margin-right:0.4cm;">Verified</pre>
+      <pre ng-hide="$ctrl.operatorState.verified" style="margin-left:0.4cm; border-radius:0;   margin-right:0.4cm;">Not verified</pre>
     </div>
 
     <button type="button" class="btn btn-warning"
-    style="margin-left:0.4cm; margin-bottom:0.5cm; margin-top:0.3cm;"
+    style="margin-left:0.4cm;  margin-bottom:0.5cm; margin-top:0.3cm;"
     ng-click="$ctrl.generateToken()">Generate token
   </button>
 
