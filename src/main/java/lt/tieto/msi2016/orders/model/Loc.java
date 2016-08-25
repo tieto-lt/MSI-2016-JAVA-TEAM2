@@ -19,6 +19,8 @@ public class Loc {
     }
 
 
+
+
     public BigDecimal getX() {
             return x;
         }
