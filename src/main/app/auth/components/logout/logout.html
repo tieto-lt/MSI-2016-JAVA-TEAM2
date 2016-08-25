@@ -62,6 +62,12 @@
                 <li>
                     <a class="menu-item" ng-click="$ctrl.logout()" href="#" ng-show="$ctrl.isLogoutVisible()">Logout</a>
                 </li>
+                <!--li>
+                    <a class="menu-item" ui-sref="root.Login" ng-show="$ctrl.isItHome()">Log in</a>
+                </li-->
+                <li>
+                    <a class="menu-item" ui-sref="root.newUser" ng-show="$ctrl.isItHome()">Sign up</a>
+                </li>
 
     </ul>
 
