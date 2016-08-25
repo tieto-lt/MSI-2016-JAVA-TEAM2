@@ -5,36 +5,12 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-        li >
-                  <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isItLogin()" ui-sref="root.homePage">DRONIFY
+        <li >
+                  <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isItLogin()||$ctrl.isItNewUser()||$ctrl.isItHome()||$ctrl.isCustomer()||$ctrl.isAdmin()||$ctrl.isOperator()" ui-sref="root.homePage">DRONIFY
               <span class="sr-only">(current)</span></a>
             </li>
-            <li >
-                 <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isItNewUser()" ui-sref="root.homePage">DRONIFY
-             <span class="sr-only">(current)</span></a>
-           </li>
-           <li >
-                <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isItHome()" ui-sref="root.homePage">DRONIFY
-            <span class="sr-only">(current)</span></a>
-          </li>
-                <li ui-sref-active="active">
-                    <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isAdmin()" ui-sref="root.adminPage">
-                      DRONIFY
-                      <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li ui-sref-active="active">
-                    <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isOperator()" ui-sref="root.operatorHomePage">
-                      DRONIFY
-                      <span class="sr-only">(current)</span>
-                    </a>
-                </li>
                 <li ui-sref-active="active">
                     <a class="menu-item" ng-show="$ctrl.isOperator()" ui-sref="root.operatorPage">Token
-                <span class="sr-only">(current)</span></a>
-                </li>
-                <li >
-                    <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isCustomer()"  href="/#/customerPage">DRONIFY
                 <span class="sr-only">(current)</span></a>
                 </li>
                 <li ui-sref-active="active">
@@ -85,12 +61,6 @@
                 </li>
                 <li>
                     <a class="menu-item" ng-click="$ctrl.logout()" href="#" ng-show="$ctrl.isLogoutVisible()">Logout</a>
-                </li>
-                <!--li>
-                    <a class="menu-item" ui-sref="root.Login" ng-show="$ctrl.isItHome()">Log in</a>
-                </li-->
-                <li>
-                    <a class="menu-item" ui-sref="root.newUser" ng-show="$ctrl.isItHome()">Sign up</a>
                 </li>
 
     </ul>
