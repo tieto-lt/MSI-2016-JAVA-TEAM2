@@ -220,7 +220,6 @@ databaseChangeLog:
                     name: videoUrl
                     type: varchar(255)
           - addForeignKeyConstraint:
-              onDelete: CASCADE
               baseColumnNames: operatorId
               baseTableName: mission_results
               constraintName: fk_id_operators
