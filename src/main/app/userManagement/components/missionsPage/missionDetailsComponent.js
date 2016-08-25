@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller(missionService,$scope, Session, $filter) {
+function Controller(missionService,$scope, Session, $filter, $sce) {
   var vm = this;
 
   vm.oneAtATime = true;
@@ -73,9 +73,16 @@ function Controller(missionService,$scope, Session, $filter) {
       assignNewIndexesToSlides(indexes);
     };
 
+    $scope.trustSrc = function(src) {
+      return $sce.trustAsResourceUrl(src);
+    }
+
     missionService.retrieveMissionDetails(vm.mission.id).then(function(data){
       var images = data.data.images;
       var navigationData = data.data.navigationData;
+      var videoBase64 = "https://www.youtube.com/embed/";
+      videoBase64 += data.data.videoBase64;
+      $scope.movie = {src:videoBase64, title:"Mission video"};
       if(vm.mission.status=="not completed"||vm.mission.status=="declined") {
         vm.missionDate = null;
       } else {
@@ -159,7 +166,7 @@ function Controller(missionService,$scope, Session, $filter) {
 
 }
 
-Controller.$inject = ['MissionService', '$scope', 'Session', '$filter'];
+Controller.$inject = ['MissionService', '$scope', 'Session', '$filter', '$sce'];
 
 module.component('missionDetailsComponent', {
     controller: Controller,
