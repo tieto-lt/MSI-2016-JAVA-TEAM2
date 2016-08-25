@@ -10,6 +10,12 @@ function Controller(missionService,$scope, Session, $filter, $sce) {
   vm.isOrange=isOrange;
   vm.heading= vm.mission.name;
 
+  vm.objectMap=[{isEnabled:false},{isEnabled:false},{isEnabled:false}, {isEnabled:false}];
+  vm.map = [];
+  for(vm.i=0; vm.i<96; vm.i++)
+  {
+    vm.map.push({type:"unit", contains: ""});
+  }
    vm.$onInit = function() {
      if (vm.mission.name.length> 110) {
      vm.heading = vm.mission.name.substr(0, 105) + "...";
@@ -25,7 +31,7 @@ function Controller(missionService,$scope, Session, $filter, $sce) {
 
   function isOperator(){
       return(Session.isSessionActive() && Session.getSession().authorities[0] == "ROLE_OPERATOR");
-  } 
+  }
 
 
   function isCompleted(){

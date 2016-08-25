@@ -3,7 +3,7 @@ $one-lenght: 50px;
 
 .map{
   max-height: $one-lenght*12+20;
-  max-width: $one-lenght*8+20;
+  min-width: $one-lenght*8+20;
   float: left;
   padding-top: 20px;
 
