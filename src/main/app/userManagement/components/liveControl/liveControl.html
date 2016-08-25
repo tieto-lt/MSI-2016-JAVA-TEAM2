@@ -6,9 +6,43 @@
 </head>
 
 <body>
+  <div ng-hide="$ctrl.connectedOperator">
+  <h3 style="font-family:courier; margin-top:2cm;">Live operators</h3>
+  <fieldset>
+    <div>
+      <form action="">
+        <div class="span7">
+          <div class="widget stacked widget-table action-table">
+            <div class="widget-content">
 
+              <table class="table table-striped table-bordered">
+                <thead>
+
+                  <tr>
+                    <th>#</th>
+                    <th>UserName</th>
+                    <th>Connect</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                      <td ng-show="$ctrl.isOperator">1</td>
+                      <td ng-show="$ctrl.isOperator">operator</td>
+                      <td ng-show="$ctrl.isOperator" style="max-width:50px;"><button class="btn btn-warning" style="margin-left:0.5cm;" ng-click="$ctrl.connectedOperator=true">Connect </button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </form>
+          <p style="font-family:courier; text-align:center; color:red; margin-top:10px" ng-hide="$ctrl.isOperator">No live operators</p>
+        </div>
+      </fieldset>
+</div>
+<div ng-show="$ctrl.connectedOperator">
     <div class="container">
-        <h3 style="font-family:courier; margin-top:2cm;">This is the page where you can control your drone live</h3>
+        <h3 style="font-family:courier; margin-top:2cm;">You have connected to an operator</h3>
         <div class="col-md-8" id="droneStream"></div>
         <button class="btn btn-warning" style="margin-left:0.5cm;" ng-click="$ctrl.openConnection()">Start </button>
         <button class="btn btn-warning" style="margin-left:0.5cm; " ng-click="$ctrl.closeConnection">Close </button>
@@ -25,6 +59,7 @@
             </div>
         </div>
     </div>
+  </div>
 
 </body>
 
