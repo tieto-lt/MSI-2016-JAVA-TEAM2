@@ -2,4 +2,12 @@
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #fff;
+  //background-image: url(/src/main/app/Images/drone.jpg);
+
+  background: url(/src/main/app/Images/back1.jpg) no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+
 }

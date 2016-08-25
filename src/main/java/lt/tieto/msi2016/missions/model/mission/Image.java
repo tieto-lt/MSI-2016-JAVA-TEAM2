@@ -1,6 +1,6 @@
 package lt.tieto.msi2016.missions.model.mission;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Created by localadmin on 16.8.10.

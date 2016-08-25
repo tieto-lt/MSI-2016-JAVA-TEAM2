@@ -1,5 +1,6 @@
 package lt.tieto.msi2016.missions.services;
 
+import com.google.gson.Gson;
 import lt.tieto.msi2016.missions.model.mission.*;
 import lt.tieto.msi2016.missions.repository.MissionRepository;
 import lt.tieto.msi2016.missions.repository.MissionResultRepository;
@@ -9,22 +10,15 @@ import lt.tieto.msi2016.missions.repository.model.MissionResultDb;
 import lt.tieto.msi2016.operator.repository.OperatorRepository;
 import lt.tieto.msi2016.orders.repository.OrderRepository;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectWriter;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -72,12 +66,21 @@ public class MissionServiceImpl implements MissionService {
 
     @Transactional
     @Override
-    public void saveResults(Long missionId, String operatorToken, String result) {
+    public void saveResults(Long missionId, String operatorToken, Result result) {
         MissionResultDb missionResult = new MissionResultDb();
-        missionResult.setResult(result);
+        ObjectWriter ow = new ObjectMapper().writer();
+        String json;
+        try {
+            json = ow.writeValueAsString(result);
+            missionResult.setResult(json.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         missionResult.setMissionId(missionId);
         missionResult.setOperatorId(operatorRepository.findByToken(operatorToken).getId());
         missionResult.setMissionDate(DateTime.now());
+        VideoUploadService uv = new VideoUploadService();
+        missionResult.setVideoUrl(uv.getVideoUrl(result.getVideoBase64(), "Mission made on"));
         missionResultRepository.save(missionResult);
     }
 
@@ -107,6 +110,7 @@ public class MissionServiceImpl implements MissionService {
         MissionResult missionResult = MissionResult.missionResult(missionResultDb);
         Result result = getResultFromBlob(missionResult);
         result.setMissionDate(missionResult.getMissionDate());
+        result.setVideoBase64(missionResult.getVideoUrl());
         return result;
     }
 

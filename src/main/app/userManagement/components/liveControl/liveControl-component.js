@@ -8,13 +8,17 @@ function Controller($state, Session, $document, $gamepad, $scope) {
   var vm = this;
   vm.openConnection = openConnection;
   var webSocket;
+  vm.connectionOpened =false;
 
   function openConnection()
   {
+  if(!vm.connectionOpened){
+   vm.connectionOpened = true;
     new NodecopterStream(document.getElementById("droneStream"), { userId: Session.getSession().userId });
     webSocket = new WebSocket('ws://localhost:8080/ws/control/'+Session.getSession().userId);
     webSocket.onmessage = function populateData(event){
     };
+    }
   }
 
   vm.sendCommandForDrone = function sendCommandForDrone(command, speed) {

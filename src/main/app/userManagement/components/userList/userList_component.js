@@ -22,10 +22,7 @@ function Controller(UserServiceImpl, $scope) {
     };
 
     vm.$onInit = function() {
-      UserServiceImpl.all().then(function(response){
-        vm.users = response.data;
-        vm.filter();
-      });
+      loadList();
     };
 
     vm.filter = function filter(){
@@ -35,9 +32,17 @@ function Controller(UserServiceImpl, $scope) {
       vm.slicedUsers = vm.users.slice(begin, end);
     };
 
+    function loadList() {
+      UserServiceImpl.all().then(function(response){
+        vm.users = response.data;
+        vm.filter();
+      });
+    }
+
     function executeUpdate(user,newRole) {
+
       vm.user = user;
-      user.userRole = newRole;
+
         UserServiceImpl.put(vm.user).then(
             function () {
               $scope.addAlert('success', 'User\'s ' + user.userName + ' role has been changed to ' + newRole + '.');
@@ -45,12 +50,14 @@ function Controller(UserServiceImpl, $scope) {
             function (err) {
                 if (err.status === 400) {
                     $scope.addAlert('danger', 'Error: ' + err.data.message);
-
                 } else {
                     console.log('Error', err);
                     $scope.addAlert('danger', 'Error: ' + err.data.message);
+
                 }
+                loadList();
             });
+
     }
 
 }

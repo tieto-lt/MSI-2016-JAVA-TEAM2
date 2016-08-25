@@ -7,9 +7,9 @@
 
 
 
-    <div id="tokenBox" style="margin-top:50px; border-color:#222; background-color:#FFFFFF"
+    <div id="tokenBox" style="margin-top:130px; border-color:#222;"
     class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-    <div class="panel panel-info" style="border-width: 3px; border-color:#222;">
+    <div class="panel panel-info" style=" border:none; border-color: rgba(34, 34, 34, 0.9); border-radius:0; background-color: rgba(34, 34, 34, 0.9); margin-bottom:0">
       <div class="panel-heading" style=" border-radius: 0; background-color:#222;">
         <div class="panel-title"
         style="font-family: courier; font-weight:bold; color:#FFFFFF; font-size:22px">Generate token
@@ -17,15 +17,15 @@
     </div>
 
     <div>
-      <h4 style="font-family:courier; margin-left:0.4cm; ">Token:</h4>
+      <h4  class=" control-label" style="font-family:courier; margin-left:0.4cm; ">Token:</h4>
       <pre style="margin-left:0.4cm;  margin-right:0.4cm;">{{$ctrl.operatorState.token}}</pre>
-      <h4 style="font-family:courier; margin-left:0.4cm;">Verification: </h4>
+      <h4  class=" control-label" style="font-family:courier; margin-left:0.4cm;">Verification: </h4>
       <pre ng-show="$ctrl.operatorState.verified" style="margin-left:0.4cm;  margin-right:0.4cm;">Verified</pre>
       <pre ng-hide="$ctrl.operatorState.verified" style="margin-left:0.4cm;  margin-right:0.4cm;">Not verified</pre>
     </div>
 
     <button type="button" class="btn btn-warning"
-    style="margin-left:0.4cm; margin-bottom:0.5cm; border: double;  font-weight:bold; padding: 7px 20px; color:#222; font-family:courier;"
+    style="margin-left:0.4cm; margin-bottom:0.5cm; margin-top:0.3cm;"
     ng-click="$ctrl.generateToken()">Generate token
   </button>
 

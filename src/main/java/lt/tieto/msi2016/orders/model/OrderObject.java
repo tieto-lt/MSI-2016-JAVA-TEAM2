@@ -1,8 +1,10 @@
 package lt.tieto.msi2016.orders.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lt.tieto.msi2016.orders.repository.model.OrderObjectDb;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderObject {
 
     private Long id;

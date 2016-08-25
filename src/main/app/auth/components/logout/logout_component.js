@@ -10,6 +10,7 @@ function Controller($state, Session, AuthService, $http, OperatorService, $trans
     vm.isLogoutVisible = isLogoutVisible;
     vm.isNavigationVisible = isNavigationVisible;
     vm.isItNewUser = isItNewUser;
+    vm.isItLogin = isItLogin;
     vm.isItHome = isItHome;
     vm.isOperator = isOperator;
     vm.isCustomer = isCustomer;
@@ -74,8 +75,19 @@ function Controller($state, Session, AuthService, $http, OperatorService, $trans
       }
     }
 
+
     function isItNewUser() {
-      if($state.current.name != "root.newUser" ){
+      if($state.current.name == "root.newUser" ){
+          return true;
+      } else {
+          return false;
+      }
+    }
+
+
+
+    function isItLogin() {
+      if($state.current.name == "root.Login" ){
           return true;
       } else {
           return false;

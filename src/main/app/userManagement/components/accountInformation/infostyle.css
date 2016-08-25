@@ -1,8 +1,11 @@
-.btn btn-warning{
+.btn btn-default1{
   background-color: #ffd9b3;
   border-radius: 0;
+
 }
 
 .btn btn-dafault{
-
+  border-radius: 0;
+  color: #222;
+  
 }

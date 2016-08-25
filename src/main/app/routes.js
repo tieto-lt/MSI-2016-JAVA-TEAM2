@@ -4,7 +4,7 @@ var module = angular.module('AngularSpringRestDemo');
 module.config(function($stateProvider, $urlRouterProvider) {
 
   // For any unmatched url, redirect to /
-  $urlRouterProvider.otherwise("/login");
+  $urlRouterProvider.otherwise("/homePage");
   //
   // Now set up the states
   $stateProvider
@@ -90,7 +90,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
       url: "/liveControl",
       template: "<live-control></live-control>",
       data : {
-        role : "ROLE_OPERATOR"
+        role : "ROLE_CUSTOMER"
       }
     })
     .state('root.adminPage', {
@@ -140,7 +140,7 @@ module.run(['$transitions', 'Session', '$state', function($transitions, Session,
       console.log("back to login");
       if (!Session.isSessionActive()) {
 
-        return $state.target("root.Login");
+        return $state.target("root.homePage");
       }
     });
 
@@ -152,7 +152,7 @@ module.run(['$transitions', 'Session', '$state', function($transitions, Session,
   },
   function () {
     console.log("TODO: fix this errror");
-      return $state.go("root.home");
+      return $state.go("root.homePage");
 
   });
 
@@ -164,7 +164,7 @@ module.run(['$transitions', 'Session', '$state', function($transitions, Session,
   },
   function () {
     console.log("TODO: fix this errror");
-      return $state.go("root.home");
+      return $state.go("root.homePage");
 
   });
 

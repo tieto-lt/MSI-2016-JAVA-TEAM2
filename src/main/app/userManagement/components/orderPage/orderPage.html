@@ -15,7 +15,11 @@
             <div class="{{unit.type}}"></div>
 
         </div>
-        <div class="table1" tabindex="1" ng-class="{'ob-active': tab == 2}" ng-click="$ctrl.enableObject(true, 0); tab = 2; $ctrl.objectMap[0].objectName='Table1'"> Table1</div>
+        <div class="table1" tabindex="1" ng-class="{'ob-active': $ctrl.isEnabled(0)}" ng-click="$ctrl.enableObject(true, 0); $ctrl.objectMap[0].objectName='Table1'"> Table1</div>
+        <div class="table2" tabindex="2" ng-class="{'ob-active': $ctrl.isEnabled(1)}" ng-click="$ctrl.enableObject(true, 1); $ctrl.objectMap[1].objectName='Table2'"> Table2</div>
+        <div class="table3" tabindex="3" ng-class="{'ob-active': $ctrl.isEnabled(2)}" ng-click="$ctrl.enableObject(true, 2); $ctrl.objectMap[2].objectName='Table3'"> Table3</div>
+        <div class="circle1" tabindex="4" ng-class="{'ob-active': $ctrl.isEnabled(3)}" ng-click="$ctrl.enableObject(true, 3); $ctrl.objectMap[3].objectName='Circle1'"> Circle1</div>
+        <div class="cross"></div>
         <div class="circle"></div>
     </div>
 
@@ -29,7 +33,7 @@
 
             <!-- Text input-->
             <div class="form-group">
-                <label class=" control-label" for="textinput">Order Name<span style="color:#e32;">*</span></label>
+                <label class=" control-label" for="textinput">Order Name<span style="color:#F07918;">*</span></label>
                 <div class="">
                     <textarea form="orderForm" style="resize: none;" id="textinput" name="name" class="form-control input-md" type="text" ng-model="$ctrl.order.name" required ng-maxlength="255"></textarea>
                     <!--div class="help-block" ng-show="vm.myCustomForm.name.$error.required && vm.myCustomForm.name.$touched">Field Mission
@@ -41,7 +45,7 @@
         </div>
 
         <div class="form-group">
-          <label class=" control-label" for="textinput">Email<span style="color:#e32;">*</span></label>
+          <label class=" control-label" for="textinput">Email<span style="color:#F07918;">*</span></label>
           <div class="">
             <input id="textinput" name="email" class="form-control input-md" type="email"
             ng-model="$ctrl.order.email" required >
@@ -55,7 +59,7 @@
       </div>
 
       <div class="form-group">
-        <label class=" control-label" for="textinput">Phone<span style="color:#e32;">*</span></label>
+        <label class=" control-label" for="textinput">Phone<span style="color:#F07918;">*</span></label>
         <div class="">
           <input id="textinput" name="phone" class="form-control input-md" type="text"
           ng-model="$ctrl.order.phone" required pattern="^[\+ | 0-9][0-9]*">
@@ -70,7 +74,7 @@
 
     <!-- Text input-->
     <div class="form-group">
-      <label class=" control-label" for="textinput">Order Details<span style="color:#e32;">*</span></label>
+      <label class=" control-label" for="textinput">Order Details<span style="color:#F07918;">*</span></label>
       <div class="">
         <textarea rows="6" cols="70" style="resize: none;" form="orderForm" id="textinput" name="details" class="form-control input-md" type="text"
         ng-model="$ctrl.order.details" required ng-maxlength="500"></textarea>
@@ -85,6 +89,9 @@
 </uib-accordion-heading>
 <h3 style="font-family: courier;">Objects</h3>
 <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
+  <p style="font-family: courier;"> Video
+    <input name="video" type="checkbox">
+  </p>
   <div>
     <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-show="$ctrl.objectMap[0].isEnabled"><b>Table1:</b>
       FOTO Camera angle
@@ -92,7 +99,31 @@
         <option value="above">From above</option>
         <option value="front">From front</option>
       </select>
-      <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 0); tab = 0" tabindex="0">
+      <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 0);" tabindex="1">
+    </p>
+    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-show="$ctrl.objectMap[1].isEnabled"><b>Table2:</b>
+      FOTO Camera angle
+      <select ng-model="$ctrl.objectMap[1].how">
+        <option value="above">From above</option>
+        <option value="front">From front</option>
+      </select>
+      <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 1);" tabindex="1">
+    </p>
+    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-show="$ctrl.objectMap[2].isEnabled"><b>Table3:</b>
+      FOTO Camera angle
+      <select ng-model="$ctrl.objectMap[2].how">
+        <option value="above">From above</option>
+        <option value="front">From front</option>
+      </select>
+      <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 2);" tabindex="1">
+    </p>
+    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-show="$ctrl.objectMap[3].isEnabled"><b>Circle1:</b>
+      FOTO Camera angle
+      <select ng-model="$ctrl.objectMap[3].how">
+        <option value="above">From above</option>
+        <option value="front">From front</option>
+      </select>
+      <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 3); tab = 1" tabindex="1">
     </p>
 
   </div>
@@ -100,7 +131,7 @@
 
   <div class="form-group row">
     <button type="submit" class="btn btn-warning"
-    style="margin-left:0.5cm; border: double; font-weight:bold; padding: 7px 20px; color:#222; font-family:courier; margin-top:0.3cm; margin-bottom:0.3cm"
+    style="margin-left:0.5cm; "
     ng-click="vm.myCustomForm.$valid && $ctrl.create()"
     ng-disabled="vm.myCustomForm.$valid == false"> Place an Order
   </button>

@@ -1,83 +1,90 @@
-<div uib-accordion-group class="panel-default" close-others="true" is-open="status.open" >
+<div uib-accordion-group class="panel-default" close-others="true" is-open="status.open">
 
     <uib-accordion-heading style="font-family: courier">
-      <div close-others="true">
-        {{$ctrl.heading}}
-        <i class="pull-right glyphicon"
-           ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"
-           ></i>
-         </div>
+        <div close-others="true">
+            {{$ctrl.heading}}
+            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+        </div>
     </uib-accordion-heading>
     <h3 style="font-family: courier;">Order Information</h3>
     <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
-    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-show="$ctrl.isRed()"><b>Mission status:</b> <i style="color: red;" >{{$ctrl.mission.status}}</i></p>
-    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-show="$ctrl.isOrange()"><b>Mission status:</b> <i style="color: orange;">{{$ctrl.mission.status}}</i></p>
-    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-show="$ctrl.isCompleted()"><b>Mission status:</b> <i style="color: green;">{{$ctrl.mission.status}}</i></p>
-    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Mission name:</b> {{$ctrl.mission.name}}</p>
-    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Email:</b> {{$ctrl.mission.email}}</p>
-    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Phone:</b> {{$ctrl.mission.phone}}</p>
-    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Mission details:</b> {{$ctrl.mission.details}}</p>
-    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Ordering date:</b> {{$ctrl.mission.date}}</p>
-    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Mission completion date:</b> {{$ctrl.missionDate}}</p>
+        <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-show="$ctrl.isRed()"><b>Mission status:</b> <i style="color: red;">{{$ctrl.mission.status}}</i></p>
+        <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-show="$ctrl.isOrange()"><b>Mission status:</b> <i style="color: orange;">{{$ctrl.mission.status}}</i></p>
+        <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-show="$ctrl.isCompleted()"><b>Mission status:</b> <i style="color: green;">{{$ctrl.mission.status}}</i></p>
+        <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Mission name:</b> {{$ctrl.mission.name}}</p>
+        <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Email:</b> {{$ctrl.mission.email}}</p>
+        <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Phone:</b> {{$ctrl.mission.phone}}</p>
+        <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Mission details:</b> {{$ctrl.mission.details}}</p>
+        <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Ordering date:</b> {{$ctrl.mission.date}}</p>
+        <p style="font-family: courier; max-width:1000px; word-wrap:break-word;"><b>Mission completion date:</b> {{$ctrl.missionDate}}</p>
 
     </div>
 
     <h3 style="font-family: courier;">Objects</h3>
     <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
-      <div ng-repeat="object in $ctrl.mission.orderObjects">
-        <p style="font-family: courier;" ng-show="object.objectName"><b >Object name: </b>{{object.objectName}}</p>
-        <p style="font-family: courier;" ng-show="object.how"><b>Camera Angle: </b>{{object.how}}</p>
-      </div>
+        <div ng-repeat="object in $ctrl.mission.orderObjects">
+            <p style="font-family: courier;" ng-show="object.objectName"><b>Object name: </b>{{object.objectName}}</p>
+            <p style="font-family: courier;" ng-show="object.how"><b>Camera Angle: </b>{{object.how}}</p>
+        </div>
 
     </div>
 
     <p style="font-family: courier; color: red;" ng-show="!$ctrl.isCompleted()">
-      No pictures to show
-    <p>
+        No pictures to show
+        <p>
 
-    <div ng-show="$ctrl.isCompleted()">
-    <h3 style="font-family: courier;">Gallery</h3>
-    <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
-        <div uib-carousel active="active" interval="$ctrl.myInterval" no-wrap="noWrapSlides">
-            <div uib-slide ng-repeat="slide in $ctrl.slides track by slide.id" index="slide.id">
-                <img ng-src=" data:image/png;base64,{{slide.image}}" style="margin:auto;">
+            <div ng-show="$ctrl.isCompleted()">
+                <h3 style="font-family: courier;">Gallery</h3>
+                <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
+                    <div uib-carousel active="active" interval="$ctrl.myInterval" no-wrap="noWrapSlides">
+                        <div uib-slide ng-repeat="slide in $ctrl.slides track by slide.id" index="slide.id">
+                            <img ng-src=" data:image/png;base64,{{slide.image}}" style="margin:auto;">
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <div ng-show="$ctrl.isCompleted()">
+                <h3 style="font-family: courier;">Video</h3>
+                <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px" align="center">
+                    <iframe class="youtube-player" type="text/html" width="640" height="385" ng-src="{{trustSrc(movie.src)}}" allowfullscreen frameborder="0"></iframe>
+                </div>
             </div>
-        </div>
-</div>
-        <div ng-show="$ctrl.isOperator()">
-    <h3 style="font-family: courier;">Coordinates</h3>
-    <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
-        <h4 style="font-family: courier;  margin-top:0.3cm">Beginning</h4>
-        <table>
-            <tr>
-                <td>
-                    <input type="text" class="form-control" disabled ng-model="$ctrl.navigationData.startX">
-                </td>
-                <td>
-                    <input type="text" class="form-control" disabled ng-model="$ctrl.navigationData.startY">
-                </td>
-            </tr>
-        </table>
-        <h4>End</h4>
-        <table>
-            <tr>
-                <td>
-                    <input type="text" class="form-control" disabled ng-model="$ctrl.navigationData.endX">
-                </td>
-                <td>
-                    <input type="text" class="form-control" disabled ng-model="$ctrl.navigationData.endY">
-                </td>
-            </tr>
 
-        </table>
-        <h3 style="font-family:courier; margin-top:0.7cm">Battery</h3>
-        <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
-            <uib-progressbar class="progress" animate="false" value="$ctrl.navigationData.battery"
-                             type="{{$ctrl.type}}"><b class="progress-value">{{$ctrl.navigationData.battery}}%</b>
-            </uib-progressbar>
 
-        </div>
-      </div>
-</div>
+            <div ng-show="$ctrl.isOperator()">
+                <h3 style="font-family: courier;">Coordinates</h3>
+                <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
+                    <h4 style="font-family: courier;  margin-top:0.3cm">Beginning</h4>
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="text" class="form-control" disabled ng-model="$ctrl.navigationData.startX">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled ng-model="$ctrl.navigationData.startY">
+                            </td>
+                        </tr>
+                    </table>
+                    <h4>End</h4>
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="text" class="form-control" disabled ng-model="$ctrl.navigationData.endX">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" disabled ng-model="$ctrl.navigationData.endY">
+                            </td>
+                        </tr>
+
+                    </table>
+                    <h3 style="font-family:courier; margin-top:0.7cm">Battery</h3>
+                    <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
+                        <uib-progressbar class="progress" animate="false" value="$ctrl.navigationData.battery"
+                            type="{{$ctrl.type}}"><b class="progress-value">{{$ctrl.navigationData.battery}}%</b>
+                        </uib-progressbar>
+
+                    </div>
+                </div>
+            </div>
 </div>
