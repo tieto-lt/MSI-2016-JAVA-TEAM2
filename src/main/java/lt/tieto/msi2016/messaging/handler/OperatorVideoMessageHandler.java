@@ -1,6 +1,7 @@
 package lt.tieto.msi2016.messaging.handler;
 
 import lt.tieto.msi2016.messaging.services.RegistryService;
+import lt.tieto.msi2016.operator.services.OperatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.BinaryMessage;
@@ -16,6 +17,8 @@ public class OperatorVideoMessageHandler extends BinaryWebSocketHandler {
 
     @Autowired
     private RegistryService registryService;
+    @Autowired
+    private OperatorService operatorService;
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
