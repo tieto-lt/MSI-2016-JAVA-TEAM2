@@ -1,22 +1,21 @@
-
 <nav class="navbar navbar-inverse  navbar-fixed-top">
     <div class="container-fluid">
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-        <li >
-                  <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isItLogin()" ui-sref="root.homePage">DRONIFY
+                <li>
+                    <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isItLogin()" ui-sref="root.homePage">DRONIFY
               <span class="sr-only">(current)</span></a>
-            </li>
-            <li >
-                 <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isItNewUser()" ui-sref="root.homePage">DRONIFY
+                </li>
+                <li>
+                    <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isItNewUser()" ui-sref="root.homePage">DRONIFY
              <span class="sr-only">(current)</span></a>
-           </li>
-           <li >
-                <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isItHome()" ui-sref="root.homePage">DRONIFY
+                </li>
+                <li>
+                    <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isItHome()" ui-sref="root.homePage">DRONIFY
             <span class="sr-only">(current)</span></a>
-          </li>
+                </li>
                 <li ui-sref-active="active">
                     <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isAdmin()" ui-sref="root.adminPage">
                       DRONIFY
@@ -33,12 +32,12 @@
                     <a class="menu-item" ng-show="$ctrl.isOperator()" ui-sref="root.operatorPage">Token
                 <span class="sr-only">(current)</span></a>
                 </li>
-                <li >
-                    <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isCustomer()"  href="/#/customerPage">DRONIFY
+                <li>
+                    <a class="navbar-brand" style="font-family:courier" ng-show="$ctrl.isCustomer()" href="/#/customerPage">DRONIFY
                 <span class="sr-only">(current)</span></a>
                 </li>
                 <li ui-sref-active="active">
-                    <a class="menu-item" ng-show="$ctrl.isCustomer()" ui-sref="root.customerPage" >Orders
+                    <a class="menu-item" ng-show="$ctrl.isCustomer()" ui-sref="root.customerPage">Orders
                 <span class="sr-only">(current)</span></a>
                 </li>
                 <li ui-sref-active="active">
@@ -46,7 +45,7 @@
                 <span class="sr-only">(current)</span></a>
                 </li>
                 <li ui-sref-active="active">
-                    <a class="menu-item" ng-show="$ctrl.isCustomer()" ui-sref="root.accountInformation" >Account
+                    <a class="menu-item" ng-show="$ctrl.isCustomer()" ui-sref="root.accountInformation">Account
                 <span class="sr-only">(current)</span></a>
                 </li>
                 <li ui-sref-active="active">
@@ -59,7 +58,7 @@
                 <span class="sr-only">(current)</span></a>
                 </li>
                 <li ui-sref-active="active">
-                    <a class="menu-item" ng-show="$ctrl.isAdmin()" ui-sref="root.orderList" >
+                    <a class="menu-item" ng-show="$ctrl.isAdmin()" ui-sref="root.orderList">
                       Orders
                       <span class="sr-only">(current)</span>
                     </a>
@@ -76,10 +75,10 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li ng-show="$ctrl.isOperator()">
-                  <a ng-show="$ctrl.isVerified" class="btn btn-default" style="border-radius:0; padding:14px 18px;background-color:#58AF50; border-color:#58AF50; color:#FFFFFF; font-weight:bold; font-family:courier;">Verified</a>
-                  <a ng-hide="$ctrl.isVerified" class="btn btn-default" style="border-radius:0; padding:14px 18px;background-color:#B21A1A; border-color:#B21A1A; color:#FFFFFF; font-weight:bold; font-family:courier;"> Not Verified </a>
-              </li>
+                <li ng-show="$ctrl.isOperator()">
+                    <a ng-show="$ctrl.isVerified" class="btn btn-default" style="border-radius:0; padding:14px 18px;background-color:#58AF50; border-color:#58AF50; color:#FFFFFF; font-weight:bold; font-family:courier;">Verified</a>
+                    <a ng-hide="$ctrl.isVerified" class="btn btn-default" style="border-radius:0; padding:14px 18px;background-color:#B21A1A; border-color:#B21A1A; color:#FFFFFF; font-weight:bold; font-family:courier;"> Not Verified </a>
+                </li>
                 <li>
                     <div class="hello" ng-show="$ctrl.isUserName()">Hello, {{$ctrl.userName()}}!</div>
                 </li>
@@ -93,9 +92,9 @@
                     <a class="menu-item" ui-sref="root.newUser" ng-show="$ctrl.isItHome()">Sign up</a>
                 </li>
 
-    </ul>
+            </ul>
 
 </nav>
 <nav ng-show="$ctrl.isItLogin()" class="navbar navbar-inverse  navbar-fixed-bottom" style="max-height:25px;text-align: center;">
-  <label style=" font-family:courier; color:#fff; font-size:16px;  margin-top:15px; "> Created by DotNec</label>
+    <label style=" font-family:courier; color:#fff; font-size:16px;  margin-top:15px; "> Created by DotNec</label>
 </nav>

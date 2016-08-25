@@ -1,162 +1,147 @@
 <div class="container auth">
-  <div id="loginbox" style="margin-top:60px;  width:1200px; height:1000px;margin-left:0;"
-  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-  <div class="panel panel-info" style="background-color: rgba(34, 34, 34, 0.9)">
-    <div class="panel-heading" style="background-color:#222; border-radius:0">
-      <div class="panel-title" style="font-family: courier; font-weight:bold; color:#FFFFFF; font-size:22px">
-        Place an order
-      </div>
+    <div id="loginbox" style="margin-top:60px;  width:1200px; height:1000px;margin-left:0;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info" style="background-color: rgba(34, 34, 34, 0.9)">
+            <div class="panel-heading" style="background-color:#222; border-radius:0">
+                <div class="panel-title" style="font-family: courier; font-weight:bold; color:#FFFFFF; font-size:22px">
+                    Place an order
+                </div>
 
-    </div>
-
-
-    <div class="map" style="width: 38%; float:right; border-radius:0; background-color: rgba(34, 34, 34, 0)">
-        <div ng-repeat="unit in $ctrl.map">
-            <div class="{{unit.type}}"></div>
-
-        </div>
-        <div class="table1" tabindex="1" ng-class="{'ob-active': $ctrl.isEnabled(0)}" ng-click="$ctrl.enableObject(true, 0); $ctrl.objectMap[0].objectName='Table1'"> Table1</div>
-        <div class="table2" tabindex="2" ng-class="{'ob-active': $ctrl.isEnabled(1)}" ng-click="$ctrl.enableObject(true, 1); $ctrl.objectMap[1].objectName='Table2'"> Table2</div>
-        <div class="table3" tabindex="3" ng-class="{'ob-active': $ctrl.isEnabled(2)}" ng-click="$ctrl.enableObject(true, 2); $ctrl.objectMap[2].objectName='Table3'"> Table3</div>
-        <div class="circle1" tabindex="4" ng-class="{'ob-active': $ctrl.isEnabled(3)}" ng-click="$ctrl.enableObject(true, 3); $ctrl.objectMap[3].objectName='Circle1'"> Circle1</div>
-        <div class="cross"></div>
-        <div class="circle"></div>
-    </div>
-
-<div id="big-form" class="well auth-box" style="margin-bottom:0; border:none; border-radius:0; background-color: rgba(34, 34, 34, 0);  width: 62%; float:left">
-    <form id="orderForm" >
-        <div ng-form="vm.myCustomForm">
-            <div class="container">
-                <div class="msi-content" ui-view ng-cloak></div>
             </div>
 
 
-            <!-- Text input-->
-            <div class="form-group">
-                <label class=" control-label" for="textinput">Order Name<span style="color:#F07918;">*</span></label>
-                <div class="">
-                    <textarea form="orderForm" style="resize: none;" id="textinput" name="name" class="form-control input-md" type="text" ng-model="$ctrl.order.name" required ng-maxlength="255"></textarea>
-                    <!--div class="help-block" ng-show="vm.myCustomForm.name.$error.required && vm.myCustomForm.name.$touched">Field Mission
+            <div class="map" style="width: 38%; float:right; border-radius:0; background-color: rgba(34, 34, 34, 0)">
+                <div ng-repeat="unit in $ctrl.map">
+                    <div class="{{unit.type}}"></div>
+
+                </div>
+                <div class="table1" tabindex="1" ng-class="{'ob-active': $ctrl.isEnabled(0)}" ng-click="$ctrl.enableObject(true, 0); $ctrl.objectMap[0].objectName='Table1'"> Table1</div>
+                <div class="table2" tabindex="2" ng-class="{'ob-active': $ctrl.isEnabled(1)}" ng-click="$ctrl.enableObject(true, 1); $ctrl.objectMap[1].objectName='Table2'"> Table2</div>
+                <div class="table3" tabindex="3" ng-class="{'ob-active': $ctrl.isEnabled(2)}" ng-click="$ctrl.enableObject(true, 2); $ctrl.objectMap[2].objectName='Table3'"> Table3</div>
+                <div class="circle1" tabindex="4" ng-class="{'ob-active': $ctrl.isEnabled(3)}" ng-click="$ctrl.enableObject(true, 3); $ctrl.objectMap[3].objectName='Circle1'"> Circle1</div>
+                <div class="cross"></div>
+                <div class="circle"></div>
+            </div>
+
+            <div id="big-form" class="well auth-box" style="margin-bottom:0; border:none; border-radius:0; background-color: rgba(34, 34, 34, 0);  width: 62%; float:left">
+                <form id="orderForm">
+                    <div ng-form="vm.myCustomForm">
+                        <div class="container">
+                            <div class="msi-content" ui-view ng-cloak></div>
+                        </div>
+
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class=" control-label" for="textinput">Order Name<span style="color:#F07918;">*</span></label>
+                            <div class="">
+                                <textarea form="orderForm" style="resize: none;" id="textinput" name="name" class="form-control input-md" type="text" ng-model="$ctrl.order.name" required ng-maxlength="255"></textarea>
+                                <!--div class="help-block" ng-show="vm.myCustomForm.name.$error.required && vm.myCustomForm.name.$touched">Field Mission
               Name is required!
             </div-->
-                    <div class="help-block" ng-show="vm.myCustomForm.name.$error.maxlength">Maximum length of the order name is 255 symbols.
-                    </div>
-          </div>
-        </div>
+                                <div class="help-block" ng-show="vm.myCustomForm.name.$error.maxlength">Maximum length of the order name is 255 symbols.
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="form-group">
-          <label class=" control-label" for="textinput">Email<span style="color:#F07918;">*</span></label>
-          <div class="">
-            <input id="textinput" name="email" class="form-control input-md" type="email"
-            ng-model="$ctrl.order.email" required >
-            <!--div class="help-block" ng-show="vm.myCustomForm.email.$error.required && vm.myCustomForm.email.$touched">Field Email is
+                        <div class="form-group">
+                            <label class=" control-label" for="textinput">Email<span style="color:#F07918;">*</span></label>
+                            <div class="">
+                                <input id="textinput" name="email" class="form-control input-md" type="email" ng-model="$ctrl.order.email" required>
+                                <!--div class="help-block" ng-show="vm.myCustomForm.email.$error.required && vm.myCustomForm.email.$touched">Field Email is
             required!
           </div-->
-          <div class="help-block" ng-show="vm.myCustomForm.email.$error.email">Invalid email
-            adress
-          </div>
-        </div>
-      </div>
+                                <div class="help-block" ng-show="vm.myCustomForm.email.$error.email">Invalid email adress
+                                </div>
+                            </div>
+                        </div>
 
-      <div class="form-group">
-        <label class=" control-label" for="textinput">Phone<span style="color:#F07918;">*</span></label>
-        <div class="">
-          <input id="textinput" name="phone" class="form-control input-md" type="text"
-          ng-model="$ctrl.order.phone" required pattern="^[\+ | 0-9][0-9]*">
-          <!--div class="help-block" ng-show="vm.myCustomForm.phone.$error.required && vm.myCustomForm.phone.$touched">Field phone is
+                        <div class="form-group">
+                            <label class=" control-label" for="textinput">Phone<span style="color:#F07918;">*</span></label>
+                            <div class="">
+                                <input id="textinput" name="phone" class="form-control input-md" type="text" ng-model="$ctrl.order.phone" required pattern="^[\+ | 0-9][0-9]*">
+                                <!--div class="help-block" ng-show="vm.myCustomForm.phone.$error.required && vm.myCustomForm.phone.$touched">Field phone is
           required!
         </div-->
-        <div class="help-block" ng-show="vm.myCustomForm.phone.$error.pattern">Field phone is
-          only numbers!
-        </div>
-      </div>
-    </div>
+                                <div class="help-block" ng-show="vm.myCustomForm.phone.$error.pattern">Field phone is only numbers!
+                                </div>
+                            </div>
+                        </div>
 
-    <!-- Text input-->
-    <div class="form-group">
-      <label class=" control-label" for="textinput">Order Details<span style="color:#F07918;">*</span></label>
-      <div class="">
-        <textarea rows="6" cols="70" style="resize: none;" form="orderForm" id="textinput" name="details" class="form-control input-md" type="text"
-        ng-model="$ctrl.order.details" required ng-maxlength="500"></textarea>
-        <!--div class="help-block" ng-show="vm.myCustomForm.details.$error.required && vm.myCustomForm.details.$touched">Field Mission
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class=" control-label" for="textinput">Order Details<span style="color:#F07918;">*</span></label>
+                            <div class="">
+                                <textarea rows="6" cols="70" style="resize: none;" form="orderForm" id="textinput" name="details" class="form-control input-md" type="text" ng-model="$ctrl.order.details" required ng-maxlength="500"></textarea>
+                                <!--div class="help-block" ng-show="vm.myCustomForm.details.$error.required && vm.myCustomForm.details.$touched">Field Mission
         Details is required!
       </div-->
-      <div class="help-block" ng-show="vm.myCustomForm.details.$error.maxlength">Maximum
-        length of the Order details is 500 symbols.
-      </div>
+                                <div class="help-block" ng-show="vm.myCustomForm.details.$error.maxlength">Maximum length of the Order details is 500 symbols.
+                                </div>
+                            </div>
+                        </div>
+                        </uib-accordion-heading>
+                        <h3 style="font-family: courier;">Objects</h3>
+                        <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px; color:#fff">
+                            <p style="font-family: courier;"> Video
+                                <input name="video" type="checkbox" ng-model="$ctrl.order.video" form="orderForm">
+                            </p>
+                            <div>
+                                <p style="font-family: courier; max-width:1000px; word-wrap:break-word; color:#fff" ng-show="$ctrl.objectMap[0].isEnabled"><b>Table1:</b> FOTO Camera angle
+                                    <select ng-model="$ctrl.objectMap[0].how">
+                                        <option value="above">From above</option>
+                                        <option value="front">From front</option>
+                                    </select>
+                                    <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 0);" tabindex="1">
+                                </p>
+                                <p style="font-family: courier; max-width:1000px; word-wrap:break-word; color:#fff" ng-show="$ctrl.objectMap[1].isEnabled"><b>Table2:</b> FOTO Camera angle
+                                    <select ng-model="$ctrl.objectMap[1].how">
+                                        <option value="above">From above</option>
+                                        <option value="front">From front</option>
+                                    </select>
+                                    <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 1);" tabindex="1">
+                                </p>
+                                <p style="font-family: courier; max-width:1000px; word-wrap:break-word; color:#fff" ng-show="$ctrl.objectMap[2].isEnabled"><b>Table3:</b> FOTO Camera angle
+                                    <select ng-model="$ctrl.objectMap[2].how">
+                                        <option value="above">From above</option>
+                                        <option value="front">From front</option>
+                                    </select>
+                                    <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 2);" tabindex="1">
+                                </p>
+                                <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-show="$ctrl.objectMap[3].isEnabled"><b>Circle1:</b> FOTO Camera angle
+                                    <select ng-model="$ctrl.objectMap[3].how">
+                                        <option value="above">From above</option>
+                                        <option value="front">From front</option>
+                                    </select>
+                                    <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 3); tab = 1" tabindex="1">
+                                </p>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <button type="submit" class="btn btn-warning" style="margin-left:0.5cm; " ng-click="vm.myCustomForm.$valid && $ctrl.create()" ng-disabled="vm.myCustomForm.$valid == false"> Place an Order
+                            </button>
+                            <p style="font-family:courier; color: #F07918; margin-top:0.4cm; margin-left:0.3cm; margin-bottom:0; font-weight: bold; "> * Field is required! </p>
+                            <div class="form-group">
+
+
+                                <div class="alert alert-danger" role="alert" ng-repeat="error in $ctrl.errors">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    <span class="sr-only">Error:</span> Field '{{error.name}}' : {{error.message}}
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+
+        </div>
+
     </div>
-  </div>
-</uib-accordion-heading>
-<h3 style="font-family: courier;">Objects</h3>
-<div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px; color:#fff">
-  <p style="font-family: courier;"> Video
-    <input name="video" type="checkbox" ng-model="$ctrl.order.video" form="orderForm" >
-  </p>
-  <div>
-    <p style="font-family: courier; max-width:1000px; word-wrap:break-word; color:#fff" ng-show="$ctrl.objectMap[0].isEnabled"><b>Table1:</b>
-      FOTO Camera angle
-      <select ng-model="$ctrl.objectMap[0].how">
-        <option value="above">From above</option>
-        <option value="front">From front</option>
-      </select>
-      <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 0);" tabindex="1">
-    </p>
-    <p style="font-family: courier; max-width:1000px; word-wrap:break-word; color:#fff" ng-show="$ctrl.objectMap[1].isEnabled"><b>Table2:</b>
-      FOTO Camera angle
-      <select ng-model="$ctrl.objectMap[1].how">
-        <option value="above">From above</option>
-        <option value="front">From front</option>
-      </select>
-      <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 1);" tabindex="1">
-    </p>
-    <p style="font-family: courier; max-width:1000px; word-wrap:break-word; color:#fff" ng-show="$ctrl.objectMap[2].isEnabled"><b>Table3:</b>
-      FOTO Camera angle
-      <select ng-model="$ctrl.objectMap[2].how">
-        <option value="above">From above</option>
-        <option value="front">From front</option>
-      </select>
-      <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 2);" tabindex="1">
-    </p>
-    <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-show="$ctrl.objectMap[3].isEnabled"><b>Circle1:</b>
-      FOTO Camera angle
-      <select ng-model="$ctrl.objectMap[3].how">
-        <option value="above">From above</option>
-        <option value="front">From front</option>
-      </select>
-      <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 3); tab = 1" tabindex="1">
-    </p>
-
-  </div>
-</div>
-
-  <div class="form-group row">
-    <button type="submit" class="btn btn-warning"
-    style="margin-left:0.5cm; "
-    ng-click="vm.myCustomForm.$valid && $ctrl.create()"
-    ng-disabled="vm.myCustomForm.$valid == false"> Place an Order
-  </button>
-  <p style="font-family:courier; color: #F07918; margin-top:0.4cm; margin-left:0.3cm; margin-bottom:0; font-weight: bold; "> * Field is required! </p>
-  <div class="form-group">
-
-
-    <div class="alert alert-danger" role="alert" ng-repeat="error in $ctrl.errors">
-      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-      <span class="sr-only">Error:</span>
-      Field '{{error.name}}' : {{error.message}}
-    </div>
-
-
-  </div>
-
-</div>
-</div>
-</form>
-</div>
-<div class="clearfix"></div>
-
-</div>
-
-</div>
 
 
 </div>
