@@ -86,29 +86,29 @@
                                 <input name="video" type="checkbox" ng-model="$ctrl.order.video" form="orderForm">
                             </p>
                             <div>
-                                <p style="font-family: courier; max-width:1000px; word-wrap:break-word; color:#fff" ng-show="$ctrl.objectMap[0].isEnabled"><b>Table1:</b> FOTO Camera angle
-                                    <select ng-model="$ctrl.objectMap[0].how">
+                                <p style="font-family: courier; max-width:1000px; word-wrap:break-word; color:#fff" ng-if="$ctrl.objectMap[0].isEnabled"><b>Table1:</b> FOTO Camera angle
+                                    <select id="select0"  class="select" ng-model="$ctrl.objectMap[0].how" required>
                                         <option value="above">From above</option>
                                         <option value="front">From front</option>
                                     </select>
                                     <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 0);" tabindex="1">
                                 </p>
-                                <p style="font-family: courier; max-width:1000px; word-wrap:break-word; color:#fff" ng-show="$ctrl.objectMap[1].isEnabled"><b>Table2:</b> FOTO Camera angle
-                                    <select ng-model="$ctrl.objectMap[1].how">
+                                <p style="font-family: courier; max-width:1000px; word-wrap:break-word; color:#fff" ng-if="$ctrl.objectMap[1].isEnabled"><b>Table2:</b> FOTO Camera angle
+                                    <select id="select1"  class="select" ng-model="$ctrl.objectMap[1].how" required>
                                         <option value="above">From above</option>
                                         <option value="front">From front</option>
                                     </select>
                                     <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 1);" tabindex="1">
                                 </p>
-                                <p style="font-family: courier; max-width:1000px; word-wrap:break-word; color:#fff" ng-show="$ctrl.objectMap[2].isEnabled"><b>Table3:</b> FOTO Camera angle
-                                    <select ng-model="$ctrl.objectMap[2].how">
+                                <p style="font-family: courier; max-width:1000px; word-wrap:break-word; color:#fff" ng-if="$ctrl.objectMap[2].isEnabled"><b>Table3:</b> FOTO Camera angle
+                                    <select id="select2"   class="select" ng-model="$ctrl.objectMap[2].how" required>
                                         <option value="above">From above</option>
                                         <option value="front">From front</option>
                                     </select>
                                     <img src="http://3.bp.blogspot.com/-JmXb2rvxz10/VOfrTK4uf2I/AAAAAAAAAGI/lzvTYQeDO_M/s1600/red_x_small.png" ng-click="$ctrl.enableObject(false, 2);" tabindex="1">
                                 </p>
-                                <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-show="$ctrl.objectMap[3].isEnabled"><b>Circle1:</b> FOTO Camera angle
-                                    <select ng-model="$ctrl.objectMap[3].how">
+                                <p style="font-family: courier; max-width:1000px; word-wrap:break-word;" ng-if="$ctrl.objectMap[3].isEnabled"><b>Circle1:</b> FOTO Camera angle
+                                    <select id="select3"  class="select" ng-model="$ctrl.objectMap[3].how" required>
                                         <option value="above">From above</option>
                                         <option value="front">From front</option>
                                     </select>

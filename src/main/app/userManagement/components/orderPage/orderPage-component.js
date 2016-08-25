@@ -34,6 +34,7 @@ function Controller(OrderServiceImpl, Session, UserServiceImpl, $state) {
     }
 
     function isEnabled(nr) {
+      
         return vm.objectMap[nr].isEnabled;
     }
 
@@ -47,6 +48,7 @@ function Controller(OrderServiceImpl, Session, UserServiceImpl, $state) {
                 vm.objectMap.splice(nr, 1, {
                     isEnabled: true
                 });
+
             } else {
                 vm.objectMap[nr].isEnabled = param;
             }
