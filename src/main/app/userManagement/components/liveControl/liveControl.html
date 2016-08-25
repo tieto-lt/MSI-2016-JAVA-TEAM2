@@ -1,21 +1,31 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Control Page</title>
 </head>
+
 <body>
 
-<div class="container">
-    <h3 style="font-family:courier; margin-top:2cm;">This is the page where you can control your drone live</h3>
-   <div class="col-md-8" id="droneStream"></div>
-    <button class= "btn btn-warning"
-    style="margin-left:0.5cm;"
-    ng-click="$ctrl.openConnection()"> Start </button>
-    <button class= "btn btn-warning"
-    style="margin-left:0.5cm; "
-    ng-click="$ctrl.closeConnection"> Close </button>
-</div>
+    <div class="container">
+        <h3 style="font-family:courier; margin-top:2cm;">This is the page where you can control your drone live</h3>
+        <div class="col-md-8" id="droneStream"></div>
+        <button class="btn btn-warning" style="margin-left:0.5cm;" ng-click="$ctrl.openConnection()">Start </button>
+        <button class="btn btn-warning" style="margin-left:0.5cm; " ng-click="$ctrl.closeConnection">Close </button>
+    </div>
 
+    <div>
+        <h3 style="font-family: courier;">Coordinates</h3>
+        <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
+            <h3 style="font-family:courier; margin-top:0.7cm">Battery</h3>
+            <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
+                <uib-progressbar class="progress" animate="false" value="$ctrl.batteryPercentage"
+                    type="{{$ctrl.type}}"><b class="progress-value">{{$ctrl.batteryPercentage}} %</b>
+                </uib-progressbar>
+            </div>
+        </div>
+    </div>
 
 </body>
+
 </html>

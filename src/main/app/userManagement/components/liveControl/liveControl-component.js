@@ -8,15 +8,21 @@ function Controller($state, Session, $document, $gamepad, $scope) {
   var vm = this;
   vm.openConnection = openConnection;
   var webSocket;
-  vm.connectionOpened =false;
-
+  vm.connectionOpened = false;
+  vm.batteryPercentage = undefined;
+  var inAir = false;
+  vm.currentSpeed = 0.8;
   function openConnection()
   {
   if(!vm.connectionOpened){
    vm.connectionOpened = true;
     new NodecopterStream(document.getElementById("droneStream"), { userId: Session.getSession().userId });
     webSocket = new WebSocket('ws://localhost:8080/ws/control/'+Session.getSession().userId);
-    webSocket.onmessage = function populateData(event){
+    webSocket.onmessage = function (event){
+      var batteryPercentage = JSON.parse(event.data).droneState.demo.batteryPercentage;
+      vm.batteryPercentage = batteryPercentage;
+      $scope.$apply();
+      console.log(batteryPercentage);
     };
     }
   }
@@ -40,21 +46,43 @@ function Controller($state, Session, $document, $gamepad, $scope) {
       vm.onKeyDown(event);
   });
   $scope.$on('gamepad:updated',function(event,gamepad){
-    console.log(gamepad);
-  /*  if(gamepad.LS.X >= 0) {
-         vm.sendCommandForDrone("right", Math.abs(-gamepad.LS.X));
-    } else if (gamepad.LS.X <= 0) {
-        vm.sendCommandForDrone("left", Math.abs(gamepad.LS.X));
-    }
-    else*/ if(gamepad.RS.Y <= 0) {
-      console.log("front", Math.abs(gamepad.RS.Y) * 2);
-       vm.sendCommandForDrone("front", Math.abs(gamepad.RS.Y) * 2);
-    } else if(gamepad.RS.Y >= 0){
-      console.log("back", Math.abs(-gamepad.RS.Y) * 1.5);
-       vm.sendCommandForDrone("back", Math.abs(-gamepad.RS.Y) * 1.5);
-    }
 
-
+    if(gamepad.LS.Y > 0) {
+       vm.sendCommandForDrone("right", Math.abs(-gamepad.LS.Y));
+    } else if(gamepad.LS.Y < 0)  {
+      vm.sendCommandForDrone("left", Math.abs(gamepad.LS.Y));
+    } else if(gamepad.RS.Y < 0) {
+       vm.sendCommandForDrone("front", Math.abs(gamepad.RS.Y));
+    } else if(gamepad.RS.Y > 0){
+       vm.sendCommandForDrone("back", Math.abs(-gamepad.RS.Y));
+    } else if(gamepad.LS.X > 0) {
+       vm.sendCommandForDrone("clockwise", Math.abs(-gamepad.LS.X));
+    } else if (gamepad.LS.X < 0) {
+       vm.sendCommandForDrone("counterClockwise", Math.abs(gamepad.LS.X));
+    } else if (gamepad.buttons.B === 1) {
+      if(inAir) {
+        vm.sendCommandForDrone("land", undefined);
+        inAir = false;
+      } else {
+        vm.sendCommandForDrone("takeoff", undefined);
+        inAir = true;
+      }
+    } else if (gamepad.buttons.R2 === 1) {
+      vm.sendCommandForDrone("up", vm.currentSpeed);
+    } else if (gamepad.buttons.L2 === 1) {
+      vm.sendCommandForDrone("down", vm.currentSpeed);
+    } else if (gamepad.buttons.L1 === 1) {
+      vm.sendCommandForDrone("horizontalCamera", undefined);
+    } else if (gamepad.buttons.R1 === 1) {
+      vm.sendCommandForDrone("verticalCamera", undefined);
+    } else if (gamepad.buttons.X === 1) {
+      vm.sendCommandForDrone("takePicture",undefined);
+    } else if (gamepad.LS.Y === 0 && gamepad.LS.X === 0 && gamepad.RS.Y === 0 &&
+      gamepad.RS.X === 0 && gamepad.buttons.X === 0 && gamepad.buttons.L1 === 0 &&
+      gamepad.buttons.R1 === 0 && gamepad.buttons.R2 === 0  && gamepad.buttons.L2 === 0
+      && gamepad.buttons.B === 0) {
+       vm.sendCommandForDrone("stop", undefined);
+    }
   });
 
 
@@ -93,7 +121,7 @@ function Controller($state, Session, $document, $gamepad, $scope) {
    }
  };
 
- vm.currentSpeed = 0.8;
+
 
  vm.setCurrentSpeed = function setCurrentSpeed(increasedSpeed){
    vm.currentSpeed = increasedSpeed;

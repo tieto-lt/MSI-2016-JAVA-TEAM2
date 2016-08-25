@@ -72,12 +72,9 @@ public class RegistryServiceImpl implements RegistryService {
     }
 
     /**
-     * Finds operator which is already reserved by user or free operator
-     *
-     * @param userId
-     * @return operatorToken
+     * {@inheritDoc}
      */
-    private String findOperatorForReservation(String userId){
+    public synchronized String findOperatorForReservation(String userId){
         String freeOperatorToken = null;
 
         for(Map.Entry<String,WebSocketSessionHolder> entry :  userRegistry.getOperatorRegistry()
@@ -124,7 +121,10 @@ public class RegistryServiceImpl implements RegistryService {
      */
     @Override
     public synchronized void removeOperator(String operatorToken){
-        userRegistry.getCustomerRegistry().get(userRegistry.getOperatorRegistry().get(operatorToken).getMapKey()).setMapKey(null);
+        WebSocketSessionHolder customersSessionHolder = userRegistry.getCustomerRegistry().get(userRegistry.getOperatorRegistry().get(operatorToken).getMapKey());
+        if(customersSessionHolder != null) {
+            customersSessionHolder.setMapKey(null);
+        }
         userRegistry.getOperatorRegistry().remove(operatorToken);
     }
 
@@ -133,7 +133,10 @@ public class RegistryServiceImpl implements RegistryService {
      */
     @Override
     public synchronized void removeCustomer(String userId){
-        userRegistry.getOperatorRegistry().get(userRegistry.getCustomerRegistry().get(userId).getMapKey()).setMapKey(null);
+        WebSocketSessionHolder operatorsSessionHolder = userRegistry.getOperatorRegistry().get(userRegistry.getCustomerRegistry().get(userId).getMapKey());
+        if(operatorsSessionHolder != null) {
+            operatorsSessionHolder.setMapKey(null);
+        }
         userRegistry.getCustomerRegistry().remove(userId);
     }
 
