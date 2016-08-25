@@ -1,17 +1,13 @@
 package lt.tieto.msi2016.messaging.services;
 
 import lt.tieto.msi2016.messaging.UserRegistry;
-import lt.tieto.msi2016.messaging.exceptions.NoFreeOperatorsException;
+import lt.tieto.msi2016.messaging.model.WebSocketSessionHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.WebSocketSession;
 
 import javax.annotation.PostConstruct;
-import javax.xml.ws.WebServiceException;
-import java.nio.channels.NotYetConnectedException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by localadmin on 16.8.22.
@@ -25,99 +21,165 @@ public class RegistryServiceImpl implements RegistryService {
     private void initRegistryService(){
         userRegistry = new UserRegistry() {
 
-            final Map<String,WebSocketSession> operatorRegistry = new ConcurrentHashMap<>();
+            private final Map<String,WebSocketSessionHolder> operatorRegistry = new HashMap<>();
 
-            final Map<String,WebSocketSession> customerRegistry = new ConcurrentHashMap<>();
-
-            final Map<String,WebSocketSession> reservationRegistry = new ConcurrentHashMap<>();
+            private final Map<String,WebSocketSessionHolder> customerRegistry = new HashMap<>();
 
             @Override
-            public Map<String, WebSocketSession> getOperatorRegistry() {
+            public Map<String, WebSocketSessionHolder> getOperatorRegistry() {
                 return operatorRegistry;
             }
 
             @Override
-            public Map<String, WebSocketSession> getCustomerRegistry() {
+            public Map<String, WebSocketSessionHolder> getCustomerRegistry() {
                 return customerRegistry;
             }
 
-            @Override
-            public Map<String, WebSocketSession> getReservationRegistry() {
-                return reservationRegistry;
-            }
         };
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
-    public void addOperator(String operatorToken, WebSocketSession session){
-        userRegistry.getOperatorRegistry().put(operatorToken,session);
-
+    public synchronized void addCustomerVideoSession(String userId, WebSocketSession session) {
+        WebSocketSessionHolder userSessionHolder = findUserSessionHolder(userId);
+        String operatorToken = findOperatorForReservation(userId);
+        userSessionHolder.setVideoSession(session);
+        userSessionHolder.setMapKey(operatorToken);
+        userRegistry.getOperatorRegistry().get(operatorToken).setMapKey(userId);
     }
 
-    @Override
-    public void addCustomer(String customerId, WebSocketSession session) {
-       userRegistry.getCustomerRegistry().put(customerId,session);
+    private WebSocketSessionHolder findUserSessionHolder(String userId) {
+        WebSocketSessionHolder userSessionHolder = userRegistry.getCustomerRegistry().get(userId);
+        if(userSessionHolder == null) {
+            userSessionHolder =  new WebSocketSessionHolder();
+            userRegistry.getCustomerRegistry().put(userId,userSessionHolder);
+        }
+        return userSessionHolder;
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
-    public void reserveOperator(String userId, WebSocketSession session) {
-        userRegistry.getReservationRegistry().put(userId,session);
+    public synchronized void addCustomerControlSession(String userId, WebSocketSession session) {
+        WebSocketSessionHolder userSessionHolder = findUserSessionHolder(userId);
+        String operatorToken = findOperatorForReservation(userId);
+        userSessionHolder.setControlSession(session);
+        userSessionHolder.setMapKey(operatorToken);
+        userRegistry.getOperatorRegistry().get(operatorToken).setMapKey(userId);
     }
 
+    /**
+     * Finds operator which is already reserved by user or free operator
+     *
+     * @param userId
+     * @return operatorToken
+     */
+    private String findOperatorForReservation(String userId){
+        String freeOperatorToken = null;
+
+        for(Map.Entry<String,WebSocketSessionHolder> entry :  userRegistry.getOperatorRegistry()
+                .entrySet()){
+            if(userId.equals(entry.getValue().getMapKey())){
+                return entry.getKey();
+            } else if(freeOperatorToken == null && entry.getValue().getMapKey() == null) {
+                freeOperatorToken = entry.getKey();
+            }
+
+        }
+        return freeOperatorToken;
+    }
+
+    private WebSocketSessionHolder findOperatorSessionHolder(String operatorToken) {
+        WebSocketSessionHolder operatorSessionHolder = userRegistry.getOperatorRegistry().get(operatorToken);
+        if(operatorSessionHolder == null) {
+            operatorSessionHolder =  new WebSocketSessionHolder();
+            userRegistry.getOperatorRegistry().put(operatorToken,operatorSessionHolder);
+        }
+        return operatorSessionHolder;
+    }
+
+    /**
+     *{@inheritDoc}
+     */
     @Override
-    public void removeOperator(String operatorToken) {
+    public synchronized void addOperatorVideoSession(String operatorToken, WebSocketSession session) {
+        WebSocketSessionHolder operatorSessionHolder = findOperatorSessionHolder(operatorToken);
+        operatorSessionHolder.setVideoSession(session);
+    }
+
+    /**
+     *{@inheritDoc}
+     */
+    @Override
+    public synchronized void addOperatorControlSession(String operatorToken, WebSocketSession session) {
+        WebSocketSessionHolder operatorSessionHolder = findOperatorSessionHolder(operatorToken);
+        operatorSessionHolder.setControlSession(session);
+    }
+
+    /**
+     *{@inheritDoc}
+     */
+    @Override
+    public synchronized void removeOperator(String operatorToken){
+        userRegistry.getCustomerRegistry().get(userRegistry.getOperatorRegistry().get(operatorToken).getMapKey()).setMapKey(null);
         userRegistry.getOperatorRegistry().remove(operatorToken);
-        removeOperatorFromReservationRegistry(operatorToken);
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
-    public void removeCustomer(String userId) {
+    public synchronized void removeCustomer(String userId){
+        userRegistry.getOperatorRegistry().get(userRegistry.getCustomerRegistry().get(userId).getMapKey()).setMapKey(null);
         userRegistry.getCustomerRegistry().remove(userId);
-        cancelReservation(userId);
     }
 
-    @Override
-    public void cancelReservation(String userId) {
-        WebSocketSession operatorsSession = userRegistry.getReservationRegistry().get("userId");
-        userRegistry.getOperatorRegistry().put(getPathVariable(operatorsSession),operatorsSession);
-        userRegistry.getReservationRegistry().remove(userId);
-    }
-
-    @Override
-    public WebSocketSession getOperatorSession(String operatorToken) {
-        return userRegistry.getOperatorRegistry().get(operatorToken);
-    }
-
-    @Override
-    public WebSocketSession getCustomerSession(String userId) {
-        return userRegistry.getCustomerRegistry().get(userId);
-    }
-
-    @Override
-    public WebSocketSession getOperatorSessionFromReservation(String userId) {
-        return userRegistry.getReservationRegistry().get(userId);
-    }
-
-    @Override
-    public WebSocketSession getCustomerSessionByOperatorSession(WebSocketSession session) {
-        Optional<String> userId = userRegistry.getReservationRegistry().entrySet().stream().filter(entry -> userRegistry.getReservationRegistry().get(entry.getKey()).equals(session)).map(Map.Entry::getKey).findFirst();
-        return userRegistry.getCustomerRegistry().get(userId.equals(Optional.empty()) ? userId : userId.get());
-    }
-
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public String getPathVariable(WebSocketSession session) {
         return session.getUri().getPath().substring(session.getUri().getPath().lastIndexOf("/")).substring(1);
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
-    public WebSocketSession getFreeOperatorsSession() {
-        return userRegistry.getOperatorRegistry().values().stream().findFirst().get();
+    public WebSocketSession getCustomerVideoSession(String operatorToken) {
+        WebSocketSessionHolder customerSessionHolder = userRegistry.getCustomerRegistry().get(userRegistry.getOperatorRegistry().get(operatorToken).getMapKey());
+        return customerSessionHolder == null ? null : customerSessionHolder.getVideoSession();
     }
 
-    private void removeOperatorFromReservationRegistry(String operatorToken){
-        userRegistry.getReservationRegistry().entrySet().removeIf(key -> userRegistry.getOperatorRegistry().get(key).equals(userRegistry.getOperatorRegistry().get(operatorToken)));
+    /**
+     *{@inheritDoc}
+     */
+    @Override
+    public WebSocketSession getCustomerControlSession(String operatorToken) {
+        WebSocketSessionHolder customerSessionHolder =  userRegistry.getCustomerRegistry().get(userRegistry.getOperatorRegistry().get(operatorToken).getMapKey());
+        return customerSessionHolder == null ? null : customerSessionHolder.getControlSession();
     }
 
+    /**
+     *{@inheritDoc}
+     */
+    @Override
+    public WebSocketSession getOperatorVideoSession(String userId) {
+        WebSocketSessionHolder operatorSessionHolder = userRegistry.getOperatorRegistry().get(userRegistry.getCustomerRegistry().get(userId).getMapKey());
+        return operatorSessionHolder == null ? null : operatorSessionHolder.getVideoSession();
+    }
+
+    /**
+     *{@inheritDoc}
+     */
+    @Override
+    public WebSocketSession getOperatorControlSession(String userId) {
+        WebSocketSessionHolder operatorSessionHolder = userRegistry.getOperatorRegistry().get(userRegistry.getCustomerRegistry().get(userId).getMapKey());
+        return operatorSessionHolder == null ? null : operatorSessionHolder.getControlSession();
+    }
 
 
 }
