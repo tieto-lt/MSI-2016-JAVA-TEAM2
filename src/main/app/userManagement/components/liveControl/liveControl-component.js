@@ -5,10 +5,14 @@ require('./nodecopter-stream.js');
 function Controller($state, Session) {
   var vm = this;
   vm.openConnection = openConnection;
-
+  vm.connectionOpened =false;
   function openConnection()
   {
+    if(!vm.connectionOpened){
     new NodecopterStream(document.getElementById("droneStream"), { userId: Session.getSession().userId });
+    vm.connectionOpened = true;
+    }
+    
   }
 }
 
