@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller(missionService,$scope, Session, $filter, $sce) {
+function Controller(missionService, $scope, Session, $filter, $sce) {
   var vm = this;
 
   vm.oneAtATime = true;
@@ -9,6 +9,7 @@ function Controller(missionService,$scope, Session, $filter, $sce) {
   vm.isRed=isRed;
   vm.isOrange=isOrange;
   vm.heading= vm.mission.name;
+
 
   vm.objectMap=[{isEnabled:false},{isEnabled:false},{isEnabled:false}, {isEnabled:false}];
   vm.map = [];
@@ -86,9 +87,6 @@ function Controller(missionService,$scope, Session, $filter, $sce) {
     missionService.retrieveMissionDetails(vm.mission.id).then(function(data){
       var images = data.data.images;
       var navigationData = data.data.navigationData;
-      var videoBase64 = "https://www.youtube.com/embed/";
-      videoBase64 += data.data.videoBase64;
-      $scope.movie = {src:videoBase64, title:"Mission video"};
       if(vm.mission.status=="not completed"||vm.mission.status=="declined") {
         vm.missionDate = null;
       } else {

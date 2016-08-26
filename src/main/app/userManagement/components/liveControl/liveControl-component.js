@@ -25,11 +25,15 @@ function Controller($state, Session, $document, $gamepad, $scope, missionService
    vm.connectionOpened = true;
     new NodecopterStream(document.getElementById("droneStream"), { userId: Session.getSession().userId });
     webSocket = new WebSocket('ws://localhost:8080/ws/control/'+Session.getSession().userId);
+
     webSocket.onmessage = function (event){
       var batteryPercentage = JSON.parse(event.data).droneState.demo.batteryPercentage;
       vm.batteryPercentage = batteryPercentage;
       $scope.$apply();
-      console.log(batteryPercentage);
+    };
+
+    webSocket.onclose = function(event) {
+      $state.go('root.liveControl');
     };
     }
   }
@@ -50,7 +54,7 @@ function Controller($state, Session, $document, $gamepad, $scope, missionService
     });
 
   $document.bind('keydown',function(event) {
-    vm.onKeyDown(event);
+      vm.onKeyDown(event);
   });
 
   vm.$onDestroy = function(){
@@ -88,10 +92,8 @@ function Controller($state, Session, $document, $gamepad, $scope, missionService
       vm.sendCommandForDrone("horizontalCamera", undefined);
     } else if (gamepad.buttons.R1 === 1) {
       vm.sendCommandForDrone("verticalCamera", undefined);
-    } else if (gamepad.buttons.X === 1) {
-      vm.sendCommandForDrone("takePicture",undefined);
     } else if (gamepad.LS.Y === 0 && gamepad.LS.X === 0 && gamepad.RS.Y === 0 &&
-      gamepad.RS.X === 0 && gamepad.buttons.X === 0 && gamepad.buttons.L1 === 0 &&
+      gamepad.RS.X === 0 && gamepad.buttons.L1 === 0 &&
       gamepad.buttons.R1 === 0 && gamepad.buttons.R2 === 0  && gamepad.buttons.L2 === 0 &&
       gamepad.buttons.B === 0) {
        vm.sendCommandForDrone("stop", undefined);

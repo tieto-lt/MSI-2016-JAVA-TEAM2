@@ -34,7 +34,6 @@ public class OrderRepository extends BaseRepository<OrderDb>{
         order.setPhone(rs.getString("phone"));
         order.setDate(rs.getString("date"));
         order.setStatus(rs.getString("status"));
-        order.setVideo(rs.getBoolean("video"));
         return  order;
     };
 
@@ -46,15 +45,14 @@ public class OrderRepository extends BaseRepository<OrderDb>{
       "email", orderDb.getEmail(),
       "phone",orderDb.getPhone(),
       "date",orderDb.getDate(),
-      "status", orderDb.getStatus(),
-            "video", orderDb.isVideo()
+      "status", orderDb.getStatus()
     );
 
 
     public Collection<OrderDb> getCompletedOrdersWithMissionIdByUsername(String username){
         try {
              return jdbcTemplate.query("select " +
-                     "missions.id,orders.userId,COALESCE(orders.name,'default') as name,COALESCE(orders.details,'default') as details,orders.email,orders.phone,orders.date,COALESCE(orders.status,'done') as status, orders.video, missionDate" +
+                     "missions.id,orders.userId,COALESCE(orders.name,'default') as name,COALESCE(orders.details,'default') as details,orders.email,orders.phone,orders.date,COALESCE(orders.status,'done') as status, missionDate" +
                      " from mission_results " +
                      "inner join missions on missions.id = mission_results.missionId " +
                      "inner join operators on operators.id = mission_results.operatorId " +

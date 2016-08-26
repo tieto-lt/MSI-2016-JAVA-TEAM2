@@ -40,8 +40,6 @@ public class Order {
 
     private ArrayList<OrderObject> orderObjects;
 
-    private boolean video;
-
     public static Order valueOf (OrderDb orderDb)
     {
         Order order = new Order();
@@ -53,7 +51,6 @@ public class Order {
         order.setPhone(orderDb.getPhone());
         order.setDate(orderDb.getDate());
         order.setStatus(orderDb.getStatus());
-        order.setVideo(orderDb.isVideo());
         return order;
     }
 
@@ -127,13 +124,5 @@ public class Order {
 
     public void setOrderObjects(ArrayList<OrderObject> orderObjects) {
         this.orderObjects = orderObjects;
-    }
-
-    public boolean isVideo() {
-        return video;
-    }
-
-    public void setVideo(boolean video) {
-        this.video = video;
     }
 }

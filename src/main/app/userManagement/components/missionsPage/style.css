@@ -1,10 +1,12 @@
 
 .panel-default >.panel-heading {
-    background-color: #222;
+
     color: #FFFFFF;
     font-family: courier;
     font-weight: bold;
-
+    
+    background-color: rgba(34, 34, 34, 0.9);
+    border-radius: 0;
 }
 .panel-default >.panel-inside{
   border-width: 2px;

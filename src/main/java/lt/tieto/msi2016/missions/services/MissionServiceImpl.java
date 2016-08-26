@@ -79,8 +79,6 @@ public class MissionServiceImpl implements MissionService {
         missionResult.setMissionId(missionId);
         missionResult.setOperatorId(operatorRepository.findByToken(operatorToken).getId());
         missionResult.setMissionDate(DateTime.now());
-        VideoUploadService uv = new VideoUploadService();
-        missionResult.setVideoUrl(uv.getVideoUrl(result.getVideoBase64(), "Mission made on"));
         missionResultRepository.save(missionResult);
     }
 
@@ -110,7 +108,6 @@ public class MissionServiceImpl implements MissionService {
         MissionResult missionResult = MissionResult.missionResult(missionResultDb);
         Result result = getResultFromBlob(missionResult);
         result.setMissionDate(missionResult.getMissionDate());
-        result.setVideoBase64(missionResult.getVideoUrl());
         return result;
     }
 
