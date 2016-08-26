@@ -3,7 +3,7 @@ var module = require('main_module');
 require('./nodecopter-stream.js');
 
 
-function Controller($state, Session, $document, $gamepad, $scope, missionService) {
+function Controller($state, Session, $document, $gamepad, $scope, missionService, $location) {
 
   var vm = this;
   vm.openConnection = openConnection;
@@ -33,10 +33,15 @@ function Controller($state, Session, $document, $gamepad, $scope, missionService
     };
 
     webSocket.onclose = function(event) {
+      vm.connectedOperator = false;
       $state.go('root.liveControl');
     };
     }
   }
+
+  vm.closeConnection = function closeConnection() {
+     webSocket.close();
+  };
 
   vm.sendCommandForDrone = function sendCommandForDrone(command, speed) {
     if (webSocket.readyState === 1) {
@@ -222,7 +227,7 @@ function populateData(){
 }
 
 
-Controller.$inject = ['$state', 'Session','$document','$gamepad','$scope', 'MissionService'];
+Controller.$inject = ['$state', 'Session','$document','$gamepad','$scope', 'MissionService', '$location'];
 
 module.component('liveControl', {
   controller: Controller,

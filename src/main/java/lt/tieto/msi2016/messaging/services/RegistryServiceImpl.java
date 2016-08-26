@@ -121,11 +121,14 @@ public class RegistryServiceImpl implements RegistryService {
      */
     @Override
     public synchronized void removeOperator(String operatorToken){
-        WebSocketSessionHolder customersSessionHolder = userRegistry.getCustomerRegistry().get(userRegistry.getOperatorRegistry().get(operatorToken).getMapKey());
-        if(customersSessionHolder != null) {
-            customersSessionHolder.setMapKey(null);
+        WebSocketSessionHolder operatorsSessionHolder = userRegistry.getOperatorRegistry().get(operatorToken);
+        if(operatorsSessionHolder != null) {
+            WebSocketSessionHolder customersSessionHolder = userRegistry.getCustomerRegistry().get(operatorsSessionHolder.getMapKey());
+            if (customersSessionHolder != null) {
+                customersSessionHolder.setMapKey(null);
+            }
+            userRegistry.getOperatorRegistry().remove(operatorToken);
         }
-        userRegistry.getOperatorRegistry().remove(operatorToken);
     }
 
     /**
@@ -133,11 +136,14 @@ public class RegistryServiceImpl implements RegistryService {
      */
     @Override
     public synchronized void removeCustomer(String userId){
-        WebSocketSessionHolder operatorsSessionHolder = userRegistry.getOperatorRegistry().get(userRegistry.getCustomerRegistry().get(userId).getMapKey());
-        if(operatorsSessionHolder != null) {
-            operatorsSessionHolder.setMapKey(null);
+        WebSocketSessionHolder customerSessionHolder = userRegistry.getCustomerRegistry().get(userId);
+        if(customerSessionHolder != null) {
+            WebSocketSessionHolder operatorsSessionHolder = userRegistry.getOperatorRegistry().get(customerSessionHolder.getMapKey());
+            if (operatorsSessionHolder != null) {
+                operatorsSessionHolder.setMapKey(null);
+            }
+            userRegistry.getCustomerRegistry().remove(userId);
         }
-        userRegistry.getCustomerRegistry().remove(userId);
     }
 
     /**
