@@ -26,17 +26,25 @@
             <div class="{{unit.type}}"></div>
 
         </div>
-        <div class="table1" tabindex="1" ng-class="{'ob-active': $ctrl.mission.orderObjects[0].how}"> Table1</div>
-        <div class="table2" tabindex="2" ng-class="{'ob-active': $ctrl.mission.orderObjects[1].how}" > Table2</div>
-        <div class="table3" tabindex="3" ng-class="{'ob-active': $ctrl.mission.orderObjects[2].how}"> Table3</div>
-        <div class="circle1" tabindex="4" ng-class="{'ob-active': $ctrl.mission.orderObjects[3].how}"> Circle1</div>
+        <div class="table1" tabindex="1" ng-class="{'ob-active': $ctrl.mission.orderObjects[0].how}">Forest</div>
+        <div class="table2" tabindex="2" ng-class="{'ob-active': $ctrl.mission.orderObjects[1].how}" >Garden</div>
+        <div class="table3" tabindex="3" ng-class="{'ob-active': $ctrl.mission.orderObjects[2].how}">House </div>
+        <div class="circle1" tabindex="4" ng-class="{'ob-active': $ctrl.mission.orderObjects[3].how}">River </div>
         <div class="cross"></div>
         <div class="circle"></div>
     </div>
     <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
-        <div ng-repeat="object in $ctrl.mission.orderObjects">
-            <p style="font-family: courier;" ng-show="object.objectName"><b>Object name: </b>{{object.objectName}}</p>
-            <p style="font-family: courier;" ng-show="object.how"><b>Camera Angle: </b>{{object.how}}</p>
+        <div>
+            <!--p style="font-family: courier;" ng-show="object.objectName"><b>Object name: </b>{{object.objectName}}</p>
+            <p style="font-family: courier;" ng-show="object.how"><b>Camera Angle: </b>{{object.how}}</p-->
+            <p style="font-family: courier;" ng-show="$ctrl.mission.orderObjects[0].how"><b>Object name: </b>Forest</p>
+            <p style="font-family: courier;" ng-show="$ctrl.mission.orderObjects[0].how"><b>Camera Angle: </b>{{$ctrl.mission.orderObjects[0].how}}</p>
+            <p style="font-family: courier;" ng-show="$ctrl.mission.orderObjects[1].how"><b>Object name: </b>Garden</p>
+            <p style="font-family: courier;" ng-show="$ctrl.mission.orderObjects[1].how"><b>Camera Angle: </b>{{$ctrl.mission.orderObjects[1].how}}</p>
+            <p style="font-family: courier;" ng-show="$ctrl.mission.orderObjects[2].how"><b>Object name: </b>House</p>
+            <p style="font-family: courier;" ng-show="$ctrl.mission.orderObjects[2].how"><b>Camera Angle: </b>{{$ctrl.mission.orderObjects[2].how}}</p>
+            <p style="font-family: courier;" ng-show="$ctrl.mission.orderObjects[3].how"><b>Object name: </b>River</p>
+            <p style="font-family: courier;" ng-show="$ctrl.mission.orderObjects[3].how"><b>Camera Angle: </b>{{$ctrl.mission.orderObjects[3].how}}</p>
         </div>
 
     </div>
