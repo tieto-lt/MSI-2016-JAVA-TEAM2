@@ -6,30 +6,64 @@
 </head>
 
 <body>
-  <div  class="container">
-    <div id="loginbox" style="margin-top:50px; border-color:#222" class="mainbox">
-      <div class="panel panel-info" style="background-color: rgba(34, 34, 34, 0.9)" >
-        <div class="panel-heading" style="background-color:#222; border-radius:0" >
-          <div class="panel-title" style="font-family: courier; text-align:center; font-weight:bold; color:#FFFFFF; font-size:22px" >Live drone control page</div>
+  <div ng-hide="$ctrl.connectedOperator">
+  <h3 style="font-family:courier; margin-top:2cm;">Live operators</h3>
+  <fieldset>
+    <div>
+      <form action="">
+        <div class="span7">
+          <div class="widget stacked widget-table action-table">
+            <div class="widget-content">
 
+              <table class="table table-striped table-bordered">
+                <thead>
+
+                  <tr>
+                    <th>#</th>
+                    <th>UserName</th>
+                    <th>Status</th>
+                    <th>Connect</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                      <td ng-show="$ctrl.isOperator">1</td>
+                      <td ng-show="$ctrl.isOperator">operator</td>
+                      <td ng-show="$ctrl.isOperator">ready for live connect</td>
+                      <td ng-show="$ctrl.isOperator" style="max-width:50px;"><a class="btn btn-warning" style="margin-left:0.5cm;" ng-click="$ctrl.connectedOperator=true" >Connect</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </form>
+          <p style="font-family:courier; text-align:center; color:red; margin-top:10px" ng-hide="$ctrl.isOperator">No live operators</p>
         </div>
-
-        <div style="padding-top:30px" class="panel-body" >
-          <div class="col-md-8" id="droneStream"></div>
-          <button class="btn btn-warning" style="margin-left:0.5cm;" ng-click="$ctrl.openConnection()">Start </button>
-          <button class="btn btn-warning" style="margin-left:0.5cm; " ng-click="$ctrl.closeConnection">Close </button>
-
-        </div>
-  </div>
+      </fieldset>
 </div>
-    <!--div class="container">
-       <div class="frame" style="position: relative; width: 70%; background-color: background-color: rgba(34, 34, 34, 0.9)" >
-        <h3 style="font-family:courier; margin-top:2cm;">This is the page where you can control your drone live</h3>
+<div><!-- ng-show="$ctrl.connectedOperator"-->
+    <div class="container">
+        <h3 style="font-family:courier; margin-top:2cm;">You have connected to an operator</h3>
         <div class="col-md-8" id="droneStream"></div>
         <button class="btn btn-warning" style="margin-left:0.5cm;" ng-click="$ctrl.openConnection()">Start </button>
         <button class="btn btn-warning" style="margin-left:0.5cm; " ng-click="$ctrl.closeConnection">Close </button>
-        <h3 style="font-family: courier;">Coordinates</h3>
-        <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
+        <div style="font-family:courier;">
+          <h3 >Control information</h3>
+          <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/3473-200.png" style="max-width:40px;max-height:40px;">
+          <img src="https://maxcdn.icons8.com/wp-content/uploads/2015/03/2_circle.png" style="max-width:20px;max-height:20px;"> - takeoff/land<br>
+          <img src="https://maxcdn.icons8.com/Share/icon/Business//registered_trademark1600.png" style="max-width:20px;max-height:20px;"> - move (analog sensitive)<br>
+          <img src="https://maxcdn.icons8.com/Share/icon/Arrows//chevron_left_round1600.png" style=" transform: rotate(318deg); max-width:20px;max-height:20px;"> - rotate (analog sensitive)<br>
+
+          <img src="http://www.iconsplace.com/icons/preview/black/keyboard-256.png" style="max-width:40px;max-height:40px;">
+          <img src="https://maxcdn.icons8.com/iOS7/PNG/50/Computer_Hardware/enter_key-50.png" style="max-width:20px;max-height:20px;"> - takeoff/land<br>
+          <img src="http://i.cdn.turner.com/v5cache/CARTOON/site/Images/i82/gamecontrol_letter_wasd.png" style="max-width:35px;max-height:35px;"> - move<br>
+          <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/302301-200.png" style=" max-width:30px;max-height:30px;"> - rotate<br>
+
+        </div>
+    </div>
+
+    <div>
             <h3 style="font-family:courier; margin-top:0.7cm">Battery</h3>
             <div style="border-top: 2.5px solid#888; padding-top:15px; font-family: courier; font-size:16px">
                 <uib-progressbar class="progress" animate="false" value="$ctrl.batteryPercentage"
@@ -37,10 +71,8 @@
                 </uib-progressbar>
             </div>
         </div>
-      </div>
-    </div-->
-
-
+    </div>
+  </div>
 
 </body>
 

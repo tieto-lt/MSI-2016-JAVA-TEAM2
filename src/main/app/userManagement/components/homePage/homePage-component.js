@@ -5,7 +5,7 @@ function Controller($state, $stateParams, ItemService) {
     var vm = this;
     var vid = document.getElementById("bgvid");
     var pauseButton = document.querySelector("#polina button");
-    var detailsVisible = false;
+    vm.detailsVisible = false;
     vm.showDetails = showDetails;
 
     function vidFade() {
