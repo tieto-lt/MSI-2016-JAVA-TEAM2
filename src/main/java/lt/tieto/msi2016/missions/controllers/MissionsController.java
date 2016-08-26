@@ -1,6 +1,7 @@
 package lt.tieto.msi2016.missions.controllers;
 
 import lt.tieto.msi2016.auth.services.UserService;
+import lt.tieto.msi2016.messaging.services.RegistryService;
 import lt.tieto.msi2016.missions.model.mission.Result;
 import lt.tieto.msi2016.missions.services.MissionService;
 import lt.tieto.msi2016.operator.services.OperatorService;
@@ -32,6 +33,8 @@ public class MissionsController extends BaseController {
     private UserService userService;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private RegistryService registryService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/api/missions")
     public ResponseEntity<?> getMissions(@RequestParam("operatorToken") String operatorToken) {
@@ -42,6 +45,17 @@ public class MissionsController extends BaseController {
         } else {
              return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/api/getOperators/{userId}")
+    public ResponseEntity<?> getOperators(@PathVariable("userId") String userId) {
+        if(registryService.findOperatorForReservation(userId)!=null){
+            return ResponseEntity.ok(true);
+        }
+        else{
+            return ResponseEntity.ok(false);
+        }
+
     }
 
 

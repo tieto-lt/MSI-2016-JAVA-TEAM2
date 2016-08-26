@@ -13,6 +13,9 @@ function Service ($http,Session) {
     this.retrieveMissionDetails = function retrieveMissionDetails(missionId){
       return $http.get('/api/int/missions/'+missionId);
     };
+    this.isLiveOperators = function isLiveOperators(userId){
+      return $http.get('/api/getOperators/'+ userId);
+    };
 
 
 

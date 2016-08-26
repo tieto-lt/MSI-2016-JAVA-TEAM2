@@ -1,12 +1,18 @@
 var module = require('main_module');
 require('style.scss');
 
-function Controller($state, $stateParams, ItemService) {
+function Controller($state, $stateParams, ItemService, Session) {
     var vm = this;
     var vid = document.getElementById("bgvid");
     var pauseButton = document.querySelector("#polina button");
     vm.detailsVisible = false;
     vm.showDetails = showDetails;
+    vm.showSing = true;
+
+    if(Session.getSession().authorities[0])
+    {
+      vm.showSing = false;
+    }
 
     function vidFade() {
         vid.classList.add("stopfade");
