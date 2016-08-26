@@ -9,7 +9,7 @@ function Controller($state, $stateParams, ItemService, Session) {
     vm.showDetails = showDetails;
     vm.showSing = true;
 
-    if(Session.getSession().authorities[0])
+    if(Session.isSessionActive() && Session.getSession().authorities[0])
     {
       vm.showSing = false;
     }
