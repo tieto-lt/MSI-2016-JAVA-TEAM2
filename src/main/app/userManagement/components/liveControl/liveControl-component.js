@@ -24,7 +24,7 @@ function Controller($state, Session, $document, $gamepad, $scope, missionService
   if(!vm.connectionOpened){
    vm.connectionOpened = true;
     new NodecopterStream(document.getElementById("droneStream"), { userId: Session.getSession().userId });
-    webSocket = new WebSocket('ws://localhost:8080/ws/control/'+Session.getSession().userId);
+    webSocket = new WebSocket('ws://'+$location.$$host+':'+$location.$$port+'/ws/control/'+Session.getSession().userId);
 
     webSocket.onmessage = function (event){
       var batteryPercentage = JSON.parse(event.data).droneState.demo.batteryPercentage;
