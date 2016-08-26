@@ -19,8 +19,6 @@ public class Result {
 
     private ArrayList<Image> images;
 
-    private String videoBase64;
-
     private DateTime missionDate;
 
     public ArrayList<NavigationData> getNavigationData() {
@@ -45,13 +43,5 @@ public class Result {
 
     public void setMissionDate(DateTime missionDate) {
         this.missionDate = missionDate;
-    }
-
-    public String getVideoBase64() {
-        return videoBase64;
-    }
-
-    public void setVideoBase64(String videoBase64) {
-        this.videoBase64 = videoBase64;
     }
 }
