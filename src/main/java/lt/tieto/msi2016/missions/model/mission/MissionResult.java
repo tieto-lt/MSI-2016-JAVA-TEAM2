@@ -25,8 +25,6 @@ public class MissionResult {
 
     private DateTime missionDate;
 
-    private String videoUrl;
-
     public static MissionResult missionResult (MissionResultDb missionResultDb)
     {
         MissionResult missionResult = new MissionResult();
@@ -35,7 +33,6 @@ public class MissionResult {
         missionResult.setOperatorId(missionResultDb.getOperatorId());
         missionResult.setResult(missionResultDb.getResult());
         missionResult.setMissionDate(missionResultDb.getMissionDate());
-        missionResult.setVideoUrl(missionResultDb.getVideoUrl());
         return missionResult;
     }
 
@@ -80,11 +77,4 @@ public class MissionResult {
         this.missionDate = missionDate;
     }
 
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
-    }
 }

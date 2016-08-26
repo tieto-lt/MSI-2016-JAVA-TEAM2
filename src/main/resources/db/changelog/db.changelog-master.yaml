@@ -216,9 +216,6 @@ databaseChangeLog:
                 - column:
                     name: missionDate
                     type: timestamp
-                - column:
-                    name: videoUrl
-                    type: varchar(255)
           - addForeignKeyConstraint:
               baseColumnNames: operatorId
               baseTableName: mission_results
@@ -260,9 +257,6 @@ databaseChangeLog:
                 - column:
                     name: status
                     type: varchar(60)
-                - column:
-                    name: video
-                    type: boolean
           - addForeignKeyConstraint:
               onDelete: CASCADE
               baseColumnNames: userId

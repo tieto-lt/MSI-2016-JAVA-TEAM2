@@ -23,8 +23,6 @@ public class OrderDb extends DbModel {
 
     private String status;
 
-    private boolean video;
-
     public static OrderDb valueOf(Order order) {
         OrderDb orderDb = new OrderDb();
         orderDb.setId(order.getId());
@@ -35,7 +33,6 @@ public class OrderDb extends DbModel {
         orderDb.setPhone(order.getPhone());
         orderDb.setDate(order.getDate());
         orderDb.setStatus(order.getStatus());
-        orderDb.setVideo(order.isVideo());
         return orderDb;
     }
 
@@ -94,13 +91,5 @@ public class OrderDb extends DbModel {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public boolean isVideo() {
-        return video;
-    }
-
-    public void setVideo(boolean video) {
-        this.video = video;
     }
 }
