@@ -1,6 +1,6 @@
 var module = require('main_module');
 
-function Controller(missionService,$scope, Session, $filter, $sce) {
+function Controller(missionService, $scope, Session, $filter, $sce) {
   var vm = this;
 
   vm.oneAtATime = true;
@@ -9,6 +9,7 @@ function Controller(missionService,$scope, Session, $filter, $sce) {
   vm.isRed=isRed;
   vm.isOrange=isOrange;
   vm.heading= vm.mission.name;
+
 
   vm.objectMap=[{isEnabled:false},{isEnabled:false},{isEnabled:false}, {isEnabled:false}];
   vm.map = [];

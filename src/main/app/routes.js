@@ -140,7 +140,7 @@ module.run(['$transitions', 'Session', '$state', function($transitions, Session,
       console.log("back to login");
       if (!Session.isSessionActive()) {
 
-        return $state.target("root.homePage");
+        return $state.target("root.Login");
       }
     });
 

@@ -5,11 +5,11 @@ function Controller($state, $stateParams, ItemService, Session) {
     var vm = this;
     var vid = document.getElementById("bgvid");
     var pauseButton = document.querySelector("#polina button");
-    var detailsVisible = false;
+    vm.detailsVisible = false;
     vm.showDetails = showDetails;
     vm.showSing = true;
 
-    if(Session.getSession().authorities[0])
+    if(Session.isSessionActive() && Session.getSession().authorities[0])
     {
       vm.showSing = false;
     }
