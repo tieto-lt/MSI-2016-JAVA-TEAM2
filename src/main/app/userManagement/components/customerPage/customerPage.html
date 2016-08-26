@@ -7,6 +7,7 @@
 
 <div class="container">
     <h2 style="font-family:courier; margin-top:2cm" >Your orders:</h2>
+    <p ng-hide="$ctrl.missions[0]" style="font-family:courier; margin-top:20px; color:red;">You have no orders yet</p>
     <div class="msi-content" ui-view ng-cloak></div>
 </div>
 <uib-accordion close-others="true">

@@ -55,8 +55,8 @@ module.config(function($stateProvider, $urlRouterProvider) {
       }
     })
     .state('root.customerHomePage', {
-      url: "/customerHomePage",
-      template: "<customer-home-page></customer-home-page>",
+      url: "/homePage",
+      template: "<home-page></home-page>",
       data : {
         role : "ROLE_CUSTOMER"
       }
@@ -73,8 +73,8 @@ module.config(function($stateProvider, $urlRouterProvider) {
       }
     })
     .state('root.operatorHomePage', {
-      url: "/operatorHomePage",
-      template: "<operator-home-page></operator-home-page>",
+      url: "/homePage",
+      template: "<home-page></home-page>",
       data : {
         role : "ROLE_OPERATOR"
       }
@@ -94,8 +94,8 @@ module.config(function($stateProvider, $urlRouterProvider) {
       }
     })
     .state('root.adminPage', {
-      url: "/adminPage",
-      template: "<admin-page></admin-page>",
+      url: "/homePage",
+      template: "<home-page></home-page>",
       data : {
         role: "ROLE_ADMIN"
       }
@@ -176,7 +176,7 @@ module.run(['$transitions', 'Session', '$state', function($transitions, Session,
    },
    function () {
       if (Session.getSession().authorities[0] != "ROLE_ADMIN") {
-        return $state.target('root.home');
+        return $state.target('root.homePage');
       }
    });
 
@@ -188,7 +188,7 @@ module.run(['$transitions', 'Session', '$state', function($transitions, Session,
     },
     function () {
        if (Session.getSession().authorities[0] != "ROLE_CUSTOMER") {
-         return $state.target('root.home');
+         return $state.target('root.homePage');
        }
     });
 
@@ -200,7 +200,7 @@ module.run(['$transitions', 'Session', '$state', function($transitions, Session,
      },
      function () {
         if (Session.getSession().authorities[0] != "ROLE_OPERATOR") {
-          return $state.target('root.home');
+          return $state.target('root.homePage');
         }
      });
 
