@@ -132,18 +132,18 @@ public class OrderServiceImpl implements OrderService {
         if(objects.get(2).getHow()!=null&&objects.get(2).getHow().equals("front")){
             missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
         }
-        missionCommands.add(index, MissionCommands.newMission().command("ccw").withArguments(70));
+        missionCommands.add(index, MissionCommands.newMission().command("ccw").withArguments(70));index++;
 
         if(objects.get(0).getHow()!=null&&objects.get(0).getHow().equals("front")){
             missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
         }
-        missionCommands.add(index, MissionCommands.newMission().command("ccw").withArguments(60));
+        missionCommands.add(index, MissionCommands.newMission().command("ccw").withArguments(60));index++;
 
         if(objects.get(1).getHow()!=null&&objects.get(1).getHow().equals("front")){
             missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
 
         }
-        missionCommands.add(index, MissionCommands.newMission().command("ccw").withArguments(70));
+        missionCommands.add(index, MissionCommands.newMission().command("ccw").withArguments(70));index++;
         if(objects.get(3).getHow()!=null&&objects.get(3).getHow().equals("front")){
             missionCommands.add(index, MissionCommands.newMission().command("takePicture")); index++;
         }
