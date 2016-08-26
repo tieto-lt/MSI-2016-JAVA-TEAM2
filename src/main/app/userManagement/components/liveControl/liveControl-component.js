@@ -3,7 +3,7 @@ var module = require('main_module');
 require('./nodecopter-stream.js');
 
 
-function Controller($state, Session, $document, $gamepad, $scope, missionService) {
+function Controller($state, Session, $document, $gamepad, $scope, missionService, $location) {
 
   var vm = this;
   vm.openConnection = openConnection;
@@ -24,7 +24,7 @@ function Controller($state, Session, $document, $gamepad, $scope, missionService
   if(!vm.connectionOpened){
    vm.connectionOpened = true;
     new NodecopterStream(document.getElementById("droneStream"), { userId: Session.getSession().userId });
-    webSocket = new WebSocket('ws://localhost:8080/ws/control/'+Session.getSession().userId);
+    webSocket = new WebSocket('ws://'+$location.$$host+':'+$location.$$port+'/ws/control/'+Session.getSession().userId);
 
     webSocket.onmessage = function (event){
       var batteryPercentage = JSON.parse(event.data).droneState.demo.batteryPercentage;
@@ -33,10 +33,15 @@ function Controller($state, Session, $document, $gamepad, $scope, missionService
     };
 
     webSocket.onclose = function(event) {
+      vm.connectedOperator = false;
       $state.go('root.liveControl');
     };
     }
   }
+
+  vm.closeConnection = function closeConnection() {
+     webSocket.close();
+  };
 
   vm.sendCommandForDrone = function sendCommandForDrone(command, speed) {
     if (webSocket.readyState === 1) {
@@ -222,7 +227,7 @@ function populateData(){
 }
 
 
-Controller.$inject = ['$state', 'Session','$document','$gamepad','$scope', 'MissionService'];
+Controller.$inject = ['$state', 'Session','$document','$gamepad','$scope', 'MissionService', '$location'];
 
 module.component('liveControl', {
   controller: Controller,

@@ -21,6 +21,7 @@ function Controller(missionService, $scope, Session, $filter, $sce) {
      if (vm.mission.name.length> 110) {
      vm.heading = vm.mission.name.substr(0, 105) + "...";
      }
+
    };
 
   function isRed(){
@@ -82,7 +83,7 @@ function Controller(missionService, $scope, Session, $filter, $sce) {
 
     $scope.trustSrc = function(src) {
       return $sce.trustAsResourceUrl(src);
-    }
+    };
 
     missionService.retrieveMissionDetails(vm.mission.id).then(function(data){
       var images = data.data.images;
